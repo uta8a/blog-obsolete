@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Home on kaito_tateyama&#39;s blog</title>
-    <link>http://127.0.0.1:1313/</link>
+    <link>https://tmasaaa.github.io/blog/</link>
     <description>Recent content in Home on kaito_tateyama&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 13 Aug 2019 06:48:42 +0900</lastBuildDate>
     
-	<atom:link href="http://127.0.0.1:1313/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tmasaaa.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>InterKosenCTF 2019 Writeup</title>
-      <link>http://127.0.0.1:1313/posts/2018-08-13-interkosenctf2019/</link>
+      <link>https://tmasaaa.github.io/blog/posts/2018-08-13-interkosenctf2019/</link>
       <pubDate>Tue, 13 Aug 2019 07:12:48 +0900</pubDate>
       
-      <guid>http://127.0.0.1:1313/posts/2018-08-13-interkosenctf2019/</guid>
+      <guid>https://tmasaaa.github.io/blog/posts/2018-08-13-interkosenctf2019/</guid>
       <description>InterKosenCTF2019にmitsuさんと二人で、チーム StarrySky として参加しました。成績はチームで13位/91人が正の得点、個人では12位でした。得点は、4332ptsのうち2944ptsを入れました。
 勝手にライバルだと思っている おたまこうせん, Wani Hackase, 生活習慣崩壊ズ, Contrailには完敗です。今回Contrail強かったですね&amp;hellip;
 PwnとWebが課題ですね

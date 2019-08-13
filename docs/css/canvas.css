@@ -45,3 +45,6 @@ code {
     white-space: -o-pre-wrap;
     word-wrap: break-word;
 }
+pre {
+    border: #07a solid 4px;
+}

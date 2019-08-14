@@ -37,12 +37,22 @@ hogeフォルダの中に、いろいろ画像とかのリソースを入れて�
 <li><a href="https://wassan128.github.io/croissant/2019/08/12/1/">https://wassan128.github.io/croissant/2019/08/12/1/</a></li>
 <li><a href="https://ox0xo.github.io/ctf/kosenctf2019">https://ox0xo.github.io/ctf/kosenctf2019</a></li>
 <li><a href="https://scrapbox.io/sei0opub/InterKosenCTF_2019_Summer">https://scrapbox.io/sei0opub/InterKosenCTF_2019_Summer</a></li>
+<li><a href="https://pomo-mhskmq.hatenablog.com/entry/2019/08/13/110232">https://pomo-mhskmq.hatenablog.com/entry/2019/08/13/110232</a></li>
+<li><a href="https://blog.shpik.kr/2019/InterKosenCTF/">https://blog.shpik.kr/2019/InterKosenCTF/</a></li>
+<li><a href="https://yoshiking.hatenablog.jp/entry/2019/08/14/085654">https://yoshiking.hatenablog.jp/entry/2019/08/14/085654</a></li>
+<li><a href="https://kinako-mochimochi.hatenablog.com/entry/2019/08/14/070000">https://kinako-mochimochi.hatenablog.com/entry/2019/08/14/070000</a></li>
+<li><a href="https://ptr-yudai.hatenablog.com/entry/2019/08/13/235606">https://ptr-yudai.hatenablog.com/entry/2019/08/13/235606</a></li>
+<li><a href="https://hackmd.io/@theoldmoon0602/H1QJUrgVr">https://hackmd.io/@theoldmoon0602/H1QJUrgVr</a></li>
+<li><a href="https://furutsuki.hatenablog.com/entry/2019/08/13/235356">https://furutsuki.hatenablog.com/entry/2019/08/13/235356</a></li>
+<li><a href="http://nannmoshitenai.hatenablog.com/entry/2019/08/13/195342">http://nannmoshitenai.hatenablog.com/entry/2019/08/13/195342</a></li>
 </ul>
 
     </article>
 
     <footer>
     
+    
+        
     
         
     
@@ -67,7 +77,7 @@ Slackでflagがアナウンスされました
 KosenCTF{g3t_r34dy_f0r_InterKosenCTF_2019}
 Kurukuru Shuffle [200pts, 53solved, easy, crypto]
 shuffle.pyを見ると、ランダムに0からL-1の数字を3つ作り、それをもとにしてflagの2つの文字のswapをL回繰り返しています。ランダムが出てきたときは、全探索するか、ランダムな数値をいっぱいとってきて次が予測できないか、結果からのエスパーのどれかを考えるとよさそうなので、全探索を考えます。
-L=53とsecret.pyから分かるので、O(L^3)をしても大丈夫です。a, b,kの値を全探索していきましょう。
+L=53とsecret.pyから分かるので、$O(L^3)$をしても大丈夫です。a, b,kの値を全探索していきましょう。
 また、iの値はk-&gt;2k-&gt;3k-&gt;...-&gt;(L+1)k(mod L)と変化し、最後の(L+1)kは使われないので、Lkからこれを逆順にたどればよいと分かります。
 for k in range(1,L): for a in range(0,L): for b in range(0,L): e = list(&quot;1m__s4sk_s3np41m1r_836lly_cut3_34799u14}1osenCTF{5sKm&quot;) # secret i = 0 for s in range(L): i = ((L-s)*k) % L s = (i + a) % L t = (i + b) % L e[s], e[t] = e[t], e[s] # swap # encrypted = &quot;&quot;.
             <nav>
@@ -96,5 +106,11 @@ for k in range(1,L): for a in range(0,L): for b in range(0,L): e = list(&quot;1m
         <li><a href="https://github.com/mdhender/canvas">Github</a></li>
     </ul>
 </footer>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+</script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

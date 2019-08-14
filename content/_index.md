@@ -20,3 +20,11 @@ hogeフォルダの中に、いろいろ画像とかのリソースを入れて�
 - https://wassan128.github.io/croissant/2019/08/12/1/
 - https://ox0xo.github.io/ctf/kosenctf2019
 - https://scrapbox.io/sei0opub/InterKosenCTF_2019_Summer
+- https://pomo-mhskmq.hatenablog.com/entry/2019/08/13/110232
+- https://blog.shpik.kr/2019/InterKosenCTF/
+- https://yoshiking.hatenablog.jp/entry/2019/08/14/085654
+- https://kinako-mochimochi.hatenablog.com/entry/2019/08/14/070000
+- https://ptr-yudai.hatenablog.com/entry/2019/08/13/235606
+- https://hackmd.io/@theoldmoon0602/H1QJUrgVr
+- https://furutsuki.hatenablog.com/entry/2019/08/13/235356
+- http://nannmoshitenai.hatenablog.com/entry/2019/08/13/195342

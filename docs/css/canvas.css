@@ -1,0 +1,88 @@
+@import url(https://fonts.googleapis.com/earlyaccess/notosansjp.css);
+
+/* Mobile first queries */
+
+/* Larger than mobile */
+@media (min-width: 400px) {
+    body {
+        font-size: 30px;
+    }
+}
+
+/* Larger than phablet */
+@media (min-width: 550px) {
+    body {
+        font-size: 30px;
+    }
+}
+
+/* Larger than tablet */
+@media (min-width: 750px) {
+    body {
+        font-size: 30px;
+    }
+}
+
+/* Larger than desktop */
+@media (min-width: 1000px) {
+    body {
+        font-size: 20px;
+    }
+}
+
+/* Larger than Desktop HD */
+@media (min-width: 1200px) {
+    body {
+        font-size: 20px;
+    }
+}
+
+
+html {
+    background-color: #fefefe
+}
+
+body {
+    color: #454545;
+    font-size: 18px;
+    margin: 2em auto;
+    max-width: 800px;
+    padding: 1em;
+    line-height: 1.6;
+    font-family: 'Gentium Book Basic', 'Noto Sans JP','游明朝', 'ヒラギノ明朝 Pro W3', 'Hiragino Mincho ProN', 'MS P 明朝', 'MS PMincho', serif;
+}
+
+h1, h2, h3 {
+    line-height:1.2
+}
+
+a {
+    color: #07a
+}
+
+a:visited {
+    color: #941352
+}
+pre > code {
+    /* background: #07a; */
+    /* overflow: scroll; */
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
+code {
+    /* background: #07a; */
+    /* overflow: scroll; */
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
+pre {
+    border: #07a solid 4px;
+}

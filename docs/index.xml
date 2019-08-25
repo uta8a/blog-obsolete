@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home on kaito_tateyama&#39;s blog</title>
+    <link>https://tmasaaa.github.io/blog/</link>
+    <description>Recent content in Home on kaito_tateyama&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 13 Aug 2019 06:48:42 +0900</lastBuildDate>
+    
+	<atom:link href="https://tmasaaa.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>LTに向けた資料たち</title>
+      <link>https://tmasaaa.github.io/blog/posts/2019-08-25-lt/</link>
+      <pubDate>Sun, 25 Aug 2019 21:51:45 +0900</pubDate>
+      
+      <guid>https://tmasaaa.github.io/blog/posts/2019-08-25-lt/</guid>
+      <description> そろそろブログの整理をしないといけない
+今回は、PowerPointでいい感じのスライドを作ろうとしたお話
+デザイン デザイン能力がないので、シンプルでいい感じのテンプレートを探した -&amp;gt; AZUSA COLORS
+これこれ！エンジニアのLTスライドで見たことある！
+でもKeynoteかぁ…
+AZUSA COLORS 改
+うおお！PowerPointでできる！
+下のようになりました
+(ここに完成スライド(公表用)が入る)
+こんなのを作って上下に雑に貼った
+後で見る  https://github.com/webslides/webslides/ Web技術を使ったスライド。reveal.jsを使っていたけど、今どきだとMarpなのかな？と思いつつ触ってない
+ https://stocker.jp/diary/keynote/ なんか大事なことが書いてそう
+ https://sanographix.net azusaの原作者。konel.mag issue 5がポートフォリオの話で200円と安いので後で買う。
+ https://jp.stanby.com/media/howto-lightningtalks/ これも後で見る。話し方
+ https://qiita.com/moomooya/items/45398e06f189d4a26227 LTの周りのリソース集
+  </description>
+    </item>
+    
+    <item>
+      <title>木の作り方</title>
+      <link>https://tmasaaa.github.io/blog/posts/2019-08-19-tree-creation/</link>
+      <pubDate>Mon, 19 Aug 2019 17:44:24 +0900</pubDate>
+      
+      <guid>https://tmasaaa.github.io/blog/posts/2019-08-19-tree-creation/</guid>
+      <description>ABC138D Kiを本番で嘘解法で通してしまった(after_contestで気づいた)ので、ACコードと自分のコードにランダムにケースを入れてHackケースを探そう！と思いました。このとき、木のテストケースの作り方が分からなかったのでTwitterで教えてもらいました。以下、それらをまとめておきます。意見をくださった方、ありがとうございます。
+便利なツール グラフの可視化にはGRAPH×GRAPH が便利です。
+木を順に構成する Python3で書きました。
+import itertools, random N = 11 R = 10 l = list(range(1,N)) h = list(itertools.permutations(l)) seed = list(h[R]) graph = [] edge = [] for i in seed: if len(graph) != 0: edge.append([i, graph[random.randrange(len(graph))]]) graph.append(i) print(edge) for i in edge: print(&amp;quot;{} {}&amp;quot;.format(i[0], i[1]))  output
+[[2, 1], [3, 1], [4, 2], [5, 3], [6, 2], [8, 4], [10, 4], [7, 2], [9, 2]] 2 1 3 1 4 2 5 3 6 2 8 4 10 4 7 2 9 2  GRAPH×GRAPHでの結果</description>
+    </item>
+    
+    <item>
+      <title>InterKosenCTF 2019 Writeup</title>
+      <link>https://tmasaaa.github.io/blog/posts/2019-08-13-interkosenctf2019/</link>
+      <pubDate>Tue, 13 Aug 2019 07:12:48 +0900</pubDate>
+      
+      <guid>https://tmasaaa.github.io/blog/posts/2019-08-13-interkosenctf2019/</guid>
+      <description>InterKosenCTF2019にmitsuさんと二人で、チーム StarrySky として参加しました。成績はチームで13位/91人が正の得点、個人では12位でした。得点は、4332ptsのうち2944ptsを入れました。
+勝手にライバルだと思っている おたまこうせん, Wani Hackase, 生活習慣崩壊ズ, Contrailには完敗です。今回Contrail強かったですね&amp;hellip;
+PwnとWebが課題ですね
+safermとE-Sequel-Injectionが通せたのは嬉しかったです
+うごくペンギンさんかわいいです
+Writeup Welcome [200pts, 77solved, warmup, welcome]
+Slackでflagがアナウンスされました
+KosenCTF{g3t_r34dy_f0r_InterKosenCTF_2019}
+Kurukuru Shuffle [200pts, 53solved, easy, crypto]
+shuffle.pyを見ると、ランダムに0からL-1の数字を3つ作り、それをもとにしてflagの2つの文字のswapをL回繰り返しています。ランダムが出てきたときは、全探索するか、ランダムな数値をいっぱいとってきて次が予測できないか、結果からのエスパーのどれかを考えるとよさそうなので、全探索を考えます。
+L=53とsecret.pyから分かるので、$O(L^3)$をしても大丈夫です。a, b,kの値を全探索していきましょう。
+また、iの値はk-&amp;gt;2k-&amp;gt;3k-&amp;gt;...-&amp;gt;(L+1)k(mod L)と変化し、最後の(L+1)kは使われないので、Lkからこれを逆順にたどればよいと分かります。
+for k in range(1,L): for a in range(0,L): for b in range(0,L): e = list(&amp;quot;1m__s4sk_s3np41m1r_836lly_cut3_34799u14}1osenCTF{5sKm&amp;quot;) # secret i = 0 for s in range(L): i = ((L-s)*k) % L s = (i + a) % L t = (i + b) % L e[s], e[t] = e[t], e[s] # swap # encrypted = &amp;quot;&amp;quot;.</description>
+    </item>
+    
+    <item>
+      <title>My First Post</title>
+      <link>https://tmasaaa.github.io/blog/posts/2019-08-14-test/my-first-post/</link>
+      <pubDate>Tue, 13 Aug 2019 06:46:09 +0900</pubDate>
+      
+      <guid>https://tmasaaa.github.io/blog/posts/2019-08-14-test/my-first-post/</guid>
+      <description>post
+$$ O(N^3) $$
+$1+1=2$</description>
+    </item>
+    
+  </channel>
+</rss>

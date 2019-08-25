@@ -10,21 +10,4 @@ https://gist.github.com/jeremybise/a6afea2d4c7f9044180ffeb663a617cf これその
 hogeフォルダの中に、いろいろ画像とかのリソースを入れておくとよさそう。
 記事の管理のため、`Date-Name`な感じにする。
 後ろスペース二個以上で改行っぽい
-
-
-# あとで読む
-- https://qiita.com/mikecat_mixc/items/471c110ae2228915c88b
-- https://betit0919.hatenablog.com/entry/2019/08/13/020933
-- https://kurenaif.hatenablog.com/entry/2019/08/12/235845
-- https://qiita.com/DoranekoSystems/items/699973e7ab75a73d6c3d
-- https://wassan128.github.io/croissant/2019/08/12/1/
-- https://ox0xo.github.io/ctf/kosenctf2019
-- https://scrapbox.io/sei0opub/InterKosenCTF_2019_Summer
-- https://pomo-mhskmq.hatenablog.com/entry/2019/08/13/110232
-- https://blog.shpik.kr/2019/InterKosenCTF/
-- https://yoshiking.hatenablog.jp/entry/2019/08/14/085654
-- https://kinako-mochimochi.hatenablog.com/entry/2019/08/14/070000
-- https://ptr-yudai.hatenablog.com/entry/2019/08/13/235606
-- https://hackmd.io/@theoldmoon0602/H1QJUrgVr
-- https://furutsuki.hatenablog.com/entry/2019/08/13/235356
-- http://nannmoshitenai.hatenablog.com/entry/2019/08/13/195342
+`cp -r public/* docs/`

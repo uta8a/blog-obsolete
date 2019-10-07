@@ -3,14 +3,19 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://tmasaaa.github.io/blog/posts/2019-08-25-lt/</loc>
-    <lastmod>2019-08-25T21:51:45+09:00</lastmod>
+    <loc>https://tmasaaa.github.io/blog/posts/</loc>
+    <lastmod>2019-10-07T03:27:50+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://tmasaaa.github.io/blog/posts/</loc>
+    <loc>https://tmasaaa.github.io/blog/posts/2019-10-07-yamanashi-minicamp/</loc>
+    <lastmod>2019-10-07T03:27:50+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tmasaaa.github.io/blog/posts/2019-08-25-lt/</loc>
     <lastmod>2019-08-25T21:51:45+09:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

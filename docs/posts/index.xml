@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on kaito_tateyama&#39;s blog</title>
-    <link>https://tmasaaa.github.io/blog/posts/</link>
+    <link>https://blog.uta8a.net/posts/</link>
     <description>Recent content in Posts on kaito_tateyama&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 07 Oct 2019 03:27:50 +0900</lastBuildDate>
     
-	<atom:link href="https://tmasaaa.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.uta8a.net/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>セキュリティ・ミニキャンプ in 山梨 2019 専門講座 参加記</title>
-      <link>https://tmasaaa.github.io/blog/posts/2019-10-07-yamanashi-minicamp/</link>
+      <link>https://blog.uta8a.net/posts/2019-10-07-yamanashi-minicamp/</link>
       <pubDate>Mon, 07 Oct 2019 03:27:50 +0900</pubDate>
       
-      <guid>https://tmasaaa.github.io/blog/posts/2019-10-07-yamanashi-minicamp/</guid>
+      <guid>https://blog.uta8a.net/posts/2019-10-07-yamanashi-minicamp/</guid>
       <description>2019/9/29(日)に開催された、セキュリティ・ミニキャンプ in 山梨 2019 専門講座 に参加してきました。これから、応募するまでの流れと選考課題に対する僕なりの回答、参加して僕がどう変化したのかという話を書きます。技術的な内容は薄く、気持ちの話がメインになります。
 以下の結論が言いたいことで、後は自分の備忘録みたいなものです。
 結論: 22歳未満の方はセキュリティ・キャンプ全国へ、25歳以下の方はセキュリティ・ミニキャンプ地方へ行きましょう。
@@ -59,10 +59,10 @@ UEFIの方はかなり時間を費やして苦戦しました。低レイヤ特�
     
     <item>
       <title>LTに向けた資料たち</title>
-      <link>https://tmasaaa.github.io/blog/posts/2019-08-25-lt/</link>
+      <link>https://blog.uta8a.net/posts/2019-08-25-lt/</link>
       <pubDate>Sun, 25 Aug 2019 21:51:45 +0900</pubDate>
       
-      <guid>https://tmasaaa.github.io/blog/posts/2019-08-25-lt/</guid>
+      <guid>https://blog.uta8a.net/posts/2019-08-25-lt/</guid>
       <description> そろそろブログの整理をしないといけない
 今回は、PowerPointでいい感じのスライドを作ろうとしたお話
 デザイン デザイン能力がないので、シンプルでいい感じのテンプレートを探した -&amp;gt; AZUSA COLORS
@@ -83,10 +83,10 @@ AZUSA COLORS 改
     
     <item>
       <title>木の作り方</title>
-      <link>https://tmasaaa.github.io/blog/posts/2019-08-19-tree-creation/</link>
+      <link>https://blog.uta8a.net/posts/2019-08-19-tree-creation/</link>
       <pubDate>Mon, 19 Aug 2019 17:44:24 +0900</pubDate>
       
-      <guid>https://tmasaaa.github.io/blog/posts/2019-08-19-tree-creation/</guid>
+      <guid>https://blog.uta8a.net/posts/2019-08-19-tree-creation/</guid>
       <description>ABC138D Kiを本番で嘘解法で通してしまった(after_contestで気づいた)ので、ACコードと自分のコードにランダムにケースを入れてHackケースを探そう！と思いました。このとき、木のテストケースの作り方が分からなかったのでTwitterで教えてもらいました。以下、それらをまとめておきます。意見をくださった方、ありがとうございます。
 便利なツール グラフの可視化にはGRAPH×GRAPH が便利です。
 木を順に構成する Python3で書きました。
@@ -96,10 +96,10 @@ import itertools, random N = 11 R = 10 l = list(range(1,N)) h = list(itertools.p
     
     <item>
       <title>InterKosenCTF 2019 Writeup</title>
-      <link>https://tmasaaa.github.io/blog/posts/2019-08-13-interkosenctf2019/</link>
+      <link>https://blog.uta8a.net/posts/2019-08-13-interkosenctf2019/</link>
       <pubDate>Tue, 13 Aug 2019 07:12:48 +0900</pubDate>
       
-      <guid>https://tmasaaa.github.io/blog/posts/2019-08-13-interkosenctf2019/</guid>
+      <guid>https://blog.uta8a.net/posts/2019-08-13-interkosenctf2019/</guid>
       <description>InterKosenCTF2019にmitsuさんと二人で、チーム StarrySky として参加しました。成績はチームで13位/91人が正の得点、個人では12位でした。得点は、4332ptsのうち2944ptsを入れました。
 勝手にライバルだと思っている おたまこうせん, Wani Hackase, 生活習慣崩壊ズ, Contrailには完敗です。今回Contrail強かったですね&amp;hellip;
 PwnとWebが課題ですね
@@ -117,10 +117,10 @@ for k in range(1,L): for a in range(0,L): for b in range(0,L): e = list(&amp;quo
     
     <item>
       <title>My First Post</title>
-      <link>https://tmasaaa.github.io/blog/posts/2019-08-14-test/my-first-post/</link>
+      <link>https://blog.uta8a.net/posts/2019-08-14-test/my-first-post/</link>
       <pubDate>Tue, 13 Aug 2019 06:46:09 +0900</pubDate>
       
-      <guid>https://tmasaaa.github.io/blog/posts/2019-08-14-test/my-first-post/</guid>
+      <guid>https://blog.uta8a.net/posts/2019-08-14-test/my-first-post/</guid>
       <description>post
 $$ O(N^3) $$
 $1+1=2$</description>

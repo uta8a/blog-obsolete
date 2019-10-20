@@ -6,10 +6,22 @@
     <description>Recent content in Posts on kaito_tateyama&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 07 Oct 2019 03:27:50 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 20 Oct 2019 15:32:17 +0900</lastBuildDate>
     
 	<atom:link href="https://www.blog.uta8a.net/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SECCON CTF 2019 qual Writeup</title>
+      <link>https://www.blog.uta8a.net/posts/2019-10-20-seccon2019qual/</link>
+      <pubDate>Sun, 20 Oct 2019 15:32:17 +0900</pubDate>
+      
+      <guid>https://www.blog.uta8a.net/posts/2019-10-20-seccon2019qual/</guid>
+      <description>2019/10/19(土)15:00-2019/10/20(日)15:00まで開催されていた、SECCON CTF 2019 qualにチームStarrySkyで参加していました。今回はmitsuさんが基本情報を受けるのでお休みで、一人チームでの参加となりました。 結果はWelcome, Thank you for playing!, coffee_break, Sandstorm, ZKPayの5問を解いて743ポイントを獲得し102位(正の得点を取った人数は799人)でした。以下、解いたもののWriteupを書きます。
+Welcome Welcome to the SECCON CTF. Read rules and check the IRC topic.  IRCに行くとflagが書かれています。 SECCON{Welcome to the SECCON 2019 Online CTF}
+Thank you for playing! SECCON{We have done all the challenges. Thank you!}  そのままです SECCON{We have done all the challenges. Thank you!}
+coffee_break The program &amp;quot;encrypt.py&amp;quot; gets one string argument and outputs ciphertext. Example: $ python encrypt.</description>
+    </item>
     
     <item>
       <title>セキュリティ・ミニキャンプ in 山梨 2019 専門講座 参加記</title>

@@ -12,3 +12,4 @@ hogeフォルダの中に、いろいろ画像とかのリソースを入れて�
 後ろスペース二個以上で改行っぽい  
 `cp -r public/* docs/`  
 listがうまく機能してない→empty cache and reloadで治った
+CNAMEを忘れずに

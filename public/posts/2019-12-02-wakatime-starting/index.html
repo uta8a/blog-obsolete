@@ -25,7 +25,7 @@
 
 <p>(写真は2019-12-02時点のもの)<br />
 Weekly development breakdownという項目で、どうやら1週間に書いたコードの時間となんの言語で書いたかが示されているようです。<br />
-僕もこれやってみたい！というわけで、この記事で、はこの表をpinnedに表示することを目標としてやっていきましょう。</p>
+僕もこれやってみたい！というわけで、この記事では、この表をpinnedに表示することを目標としてやっていきましょう。</p>
 
 <h1 id="仕組み">仕組み</h1>
 
@@ -38,11 +38,14 @@ Weekly development breakdownという項目で、どうやら1週間に書いた
 
 <h2 id="準備">準備</h2>
 
-<p>!. gistを作る(GitHub) -&gt; gistのURLをメモしておく このときのgistはdescription以外上書きされるので、gistの中身はなんでもよいです。<br />
-1. gistだけにチェックを入れたtokenを発行(GitHub) -&gt; メモしておく<br />
-2. WakaTimeのアカウントを作る(wakatime)<br />
-3. wakatimeのsecret keyを手に入れる -&gt; メモしておく<br />
-今3つメモしたと思います。1のgistのURLは公開してもよく、<strong>2,4は公開してはいけません！</strong>取り扱いに注意しましょう。</p>
+<ol>
+<li>gistを作る(GitHub) -&gt; gistのURLをメモしておく このときのgistはdescription以外上書きされるので、gistの中身はなんでもよいです。<br /></li>
+<li>gistだけにチェックを入れたtokenを発行(GitHub) -&gt; メモしておく<br /></li>
+<li>WakaTimeのアカウントを作る(wakatime)<br /></li>
+<li>wakatimeのsecret keyを手に入れる -&gt; メモしておく<br />
+今3つメモしたと思います。1のgistのURLは公開してもよく、<strong>2,4は公開してはいけません！</strong>取り扱いに注意しましょう。<br />
+<br /></li>
+</ol>
 
 <h2 id="waka-box-を入れる"><a href="https://github.com/matchai/waka-box">waka-box</a> を入れる</h2>
 
@@ -71,7 +74,7 @@ gist tokenとwakatime secret keyは</p>
 
 <h3 id="gistに反映されない">gistに反映されない！</h3>
 
-<p>APIからデータをとってくるときは前日から7日間のデータをとってきているようです。僕の場合は、最初gistに何も書き込まれずファイルが消滅して、次の日00:00以降最初のActionでデータが反映されました。</p>
+<p>APIからデータをとってくるときは<strong>前日から7日間のデータをとってきているようです。</strong>僕の場合は、最初gistに何も書き込まれずファイルが消滅して、次の日00:00以降最初のActionでデータが反映されました。</p>
 
 <h1 id="終わりに">終わりに</h1>
 

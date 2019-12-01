@@ -22,16 +22,16 @@
 さて、そんな感じでフロントエンド周りの方々を調べていると (egoistさん) のpinnedに不思議なものを見つけました。
 (写真は2019-12-02時点のもの)
 Weekly development breakdownという項目で、どうやら1週間に書いたコードの時間となんの言語で書いたかが示されているようです。
-僕もこれやってみたい！というわけで、この記事で、はこの表をpinnedに表示することを目標としてやっていきましょう。
+僕もこれやってみたい！というわけで、この記事では、この表をpinnedに表示することを目標としてやっていきましょう。
 仕組み この表は waka-box を使っています。自分のエディタにプラグインを入れておくと一週間のうち何時間コードを書いたか、を示してくれる、&amp;rdquo;WakaTime&amp;rdquo;というWebサービスがあり、そのAPIを利用して、gistに表を作っています。
 例えば僕の場合、VSCodeにExtensionで WakaTime を入れています。APIを利用するためのsecret keyを入れたら後は何もせずコードを書けば大丈夫です。
 waka-box の導入 基本的に waka-box のREADMEに従えばできます。自分が詰まったところを捕捉しながら書きます。
-準備 !. gistを作る(GitHub) -&amp;gt; gistのURLをメモしておく このときのgistはdescription以外上書きされるので、gistの中身はなんでもよいです。
-1. gistだけにチェックを入れたtokenを発行(GitHub) -&amp;gt; メモしておく
-2. WakaTimeのアカウントを作る(wakatime)
-3. wakatimeのsecret keyを手に入れる -&amp;gt; メモしておく
+準備  gistを作る(GitHub) -&amp;gt; gistのURLをメモしておく このときのgistはdescription以外上書きされるので、gistの中身はなんでもよいです。
+ gistだけにチェックを入れたtokenを発行(GitHub) -&amp;gt; メモしておく
+ WakaTimeのアカウントを作る(wakatime)
+ wakatimeのsecret keyを手に入れる -&amp;gt; メモしておく
 今3つメモしたと思います。1のgistのURLは公開してもよく、2,4は公開してはいけません！取り扱いに注意しましょう。
-waka-box を入れる https://github.com/matchai/waka-box を自分のGitHubへとforkします。
+  waka-box を入れる https://github.com/matchai/waka-box を自分のGitHubへとforkします。
 準備で手に入れた3つの値を入れていきます。gistのidは .github/workflows/schedule.yml にすでにある値を書き換えます。
 gist tokenとwakatime secret keyは
 Settingsの
@@ -39,8 +39,7 @@ Secretsに書き込みます。2つの値を書き込むと上の図のように
 そして、gistをpinnedに置きます。完成です！
 動作確認 GitHub Actions GitHub ActionsでWakaTime APIから情報をとってきてgistに書き込みを行うので、きちんとActionsが動いているか確かめる必要があります。
 上の図のように、Workflowsに表示があればOKです。10分ほど待つと、gistが変化するはずです
-gistに反映されない！ APIからデータをとってくるときは前日から7日間のデータをとってきているようです。僕の場合は、最初gistに何も書き込まれずファイルが消滅して、次の日00:00以降最初のActionでデータが反映されました。
-終わりに 以上です！意外とコードを書いているつもりでも書いていなかったりするので、目安にして精進していきたい&amp;hellip;！</description>
+gistに反映されない！ APIからデータをとってくるときは前日から7日間のデータをとってきているようです。僕の場合は、最初gistに何も書き込まれずファイルが消滅して、次の日00:00以降最初のActionでデータが反映されました。</description>
     </item>
     
     <item>

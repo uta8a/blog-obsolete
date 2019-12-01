@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>kaito_tateyama's blog</title>
+<link rel="stylesheet" href="https://www.blog.uta8a.net/css/canvas.css" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<main>
+<section>
+    <header>
+    <h1>waka-boxを使ってみる 広島大学ITエンジニアアドベントカレンダー</h1>
+    </header>
+
+    <article>
+    
+
+<p>この記事は <a href="https://adventar.org/calendars/4481">広島大学ITエンジニアアドベントカレンダー</a> の4日目です。<br />
+僕はOSS界隈で活躍している人のGitHubを見るのが好きです。contributionの数も、有名なOSSへ送ったissueやpull requestの数も僕とは桁違いで、こうなれたらなあと思います。また、そういった方々は中規模のプロジェクトを作っていることが多いので、プロジェクトのディレクトリ構成とか、どのツールを使っているのか？といった状況を学べます。また、コードを書いて生活する人にとって、GitHubは仕事場のひとつのようなものだと思います。その人の仕事場へのこだわりのようなものをpinnedやprofile, 所属団体から感じるのは楽しいことで、眺めるだけで時間があっという間に過ぎていきます。<br />
+さて、そんな感じでフロントエンド周りの方々を調べていると (<a href="https://github.com/egoist">egoistさん</a>) のpinnedに不思議なものを見つけました。</p>
+
+<p><img src="./p-1.png" alt="" /></p>
+
+<p>(写真は2019-12-02時点のもの)<br />
+Weekly development breakdownという項目で、どうやら1週間に書いたコードの時間となんの言語で書いたかが示されているようです。<br />
+僕もこれやってみたい！というわけで、この記事で、はこの表をpinnedに表示することを目標としてやっていきましょう。</p>
+
+<h1 id="仕組み">仕組み</h1>
+
+<p>この表は <a href="https://github.com/matchai/waka-box">waka-box</a> を使っています。自分のエディタにプラグインを入れておくと一週間のうち何時間コードを書いたか、を示してくれる、&rdquo;WakaTime&rdquo;というWebサービスがあり、そのAPIを利用して、gistに表を作っています。<br />
+例えば僕の場合、VSCodeにExtensionで <a href="https://wakatime.com/vs-code">WakaTime</a> を入れています。APIを利用するためのsecret keyを入れたら後は何もせずコードを書けば大丈夫です。</p>
+
+<h1 id="waka-box-の導入"><a href="https://github.com/matchai/waka-box">waka-box</a> の導入</h1>
+
+<p>基本的に <a href="https://github.com/matchai/waka-box">waka-box</a> のREADMEに従えばできます。自分が詰まったところを捕捉しながら書きます。</p>
+
+<h2 id="準備">準備</h2>
+
+<p>!. gistを作る(GitHub) -&gt; gistのURLをメモしておく このときのgistはdescription以外上書きされるので、gistの中身はなんでもよいです。<br />
+1. gistだけにチェックを入れたtokenを発行(GitHub) -&gt; メモしておく<br />
+2. WakaTimeのアカウントを作る(wakatime)<br />
+3. wakatimeのsecret keyを手に入れる -&gt; メモしておく<br />
+今3つメモしたと思います。1のgistのURLは公開してもよく、<strong>2,4は公開してはいけません！</strong>取り扱いに注意しましょう。</p>
+
+<h2 id="waka-box-を入れる"><a href="https://github.com/matchai/waka-box">waka-box</a> を入れる</h2>
+
+<p><a href="https://github.com/matchai/waka-box">https://github.com/matchai/waka-box</a> を自分のGitHubへとforkします。<br />
+準備で手に入れた3つの値を入れていきます。gistのidは <code>.github/workflows/schedule.yml</code> にすでにある値を書き換えます。<br />
+gist tokenとwakatime secret keyは</p>
+
+<p><img src="./p-2.png" alt="" /></p>
+
+<p>Settingsの</p>
+
+<p><img src="./p-3.png" alt="" /></p>
+
+<p>Secretsに書き込みます。2つの値を書き込むと上の図のようになります。<br />
+そして、gistをpinnedに置きます。完成です！</p>
+
+<h2 id="動作確認">動作確認</h2>
+
+<h3 id="github-actions">GitHub Actions</h3>
+
+<p>GitHub ActionsでWakaTime APIから情報をとってきてgistに書き込みを行うので、きちんとActionsが動いているか確かめる必要があります。</p>
+
+<p><img src="./p-4.png" alt="" /></p>
+
+<p>上の図のように、Workflowsに表示があればOKです。10分ほど待つと、gistが変化するはずです</p>
+
+<h3 id="gistに反映されない">gistに反映されない！</h3>
+
+<p>APIからデータをとってくるときは前日から7日間のデータをとってきているようです。僕の場合は、最初gistに何も書き込まれずファイルが消滅して、次の日00:00以降最初のActionでデータが反映されました。</p>
+
+<h1 id="終わりに">終わりに</h1>
+
+<p>以上です！意外とコードを書いているつもりでも書いていなかったりするので、目安にして精進していきたい&hellip;！</p>
+
+<p><img src="./p-5.png" alt="" /></p>
+
+<!-- link -->  
+
+    </article>
+
+    <footer>
+            <ul>
+                <li><a href="https://www.blog.uta8a.net/posts/2019-10-20-seccon2019qual/">&laquo; SECCON CTF 2019 qual Writeup</a></li>
+                
+            </ul>
+    </footer>
+</section>
+<aside>
+    <ul>
+    <li><a href="https://www.blog.uta8a.net">Home</a></p>
+    <li><a href="https://www.blog.uta8a.net/posts/">Posts</a></p>
+    <li><a href="https://www.blog.uta8a.net/articles/">Articles</a></p>
+    </ul>
+</aside>
+</main>
+
+<footer>
+    <ul>
+        <li><a href="https://github.com/mdhender/canvas">Github</a></li>
+    </ul>
+</footer>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+</script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+</html>

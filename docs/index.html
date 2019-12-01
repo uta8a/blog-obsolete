@@ -17,21 +17,28 @@
     </header>
 
     <article>
-    <p>I like home pages.<br />
-localhostではうまく行かないので、127.0.0.1:1313を使う必要がある。<br />
-<code>hugo new posts/hoge/index.md</code>でいける<br />
-<a href="https://gist.github.com/jeremybise/a6afea2d4c7f9044180ffeb663a617cf">https://gist.github.com/jeremybise/a6afea2d4c7f9044180ffeb663a617cf</a> これそのうち役立ちそう<br />
-hogeフォルダの中に、いろいろ画像とかのリソースを入れておくとよさそう。<br />
-記事の管理のため、<code>Date-Name</code>な感じにする。<br />
-後ろスペース二個以上で改行っぽい<br />
-<code>cp -r public/* docs/</code><br />
-listがうまく機能してない→empty cache and reloadで治った
-CNAMEを忘れずに</p>
+    
+
+<h1 id="まだ改修中">まだ改修中。</h1>
+
+<ul>
+<li>localhostではうまく行かないので、127.0.0.1:1313を使う必要がある。<br /></li>
+<li><code>hugo new posts/hoge/index.md</code>でいける<br /></li>
+<li><a href="https://gist.github.com/jeremybise/a6afea2d4c7f9044180ffeb663a617cf">https://gist.github.com/jeremybise/a6afea2d4c7f9044180ffeb663a617cf</a> これそのうち役立ちそう<br /></li>
+<li>hogeフォルダの中に、いろいろ画像とかのリソースを入れておくとよさそう。<br /></li>
+<li>記事の管理のため、<code>Date-Name</code>な感じにする。<br /></li>
+<li>後ろスペース二個以上で改行っぽい<br /></li>
+<li><code>cp -r public/* docs/</code><br /></li>
+<li>listがうまく機能してない→empty cache and reloadで治った</li>
+<li>CNAMEを忘れずに</li>
+</ul>
 
     </article>
 
     <footer>
     
+    
+        
     
         
     
@@ -53,19 +60,36 @@ CNAMEを忘れずに</p>
     
         <article>
             <header>
-            <h2>SECCON CTF 2019 qual Writeup</h2>
-            <p><time datetime="2019-10-20 15:32:17 &#43;0900 JST">Sun, Oct 20, 2019</time></p>
+            <h2>waka-boxを使ってみる 広島大学ITエンジニアアドベントカレンダー</h2>
+            <p><time datetime="2019-12-02 04:38:30 &#43;0900 JST">Mon, Dec 2, 2019</time></p>
             </header>
-            2019/10/19(土)15:00-2019/10/20(日)15:00まで開催されていた、SECCON CTF 2019 qualにチームStarrySkyで参加していました。今回はmitsuさんが基本情報を受けるのでお休みで、一人チームでの参加となりました。
-結果はWelcome, Thank you for playing!, coffee_break, Sandstorm, ZKPayの5問を解いて743ポイントを獲得し102位(正の得点を取った人数は799人)でした。以下、解いたもののWriteupを書きます。
-Welcome Welcome to the SECCON CTF. Read rules and check the IRC topic.  IRCに行くとflagが書かれています。
-SECCON{Welcome to the SECCON 2019 Online CTF}
-Thank you for playing! SECCON{We have done all the challenges. Thank you!}  そのままです
-SECCON{We have done all the challenges. Thank you!}
-coffee_break The program &quot;encrypt.py&quot; gets one string argument and outputs ciphertext. Example: $ python encrypt.
+            この記事は 広島大学ITエンジニアアドベントカレンダー の4日目です。
+僕はOSS界隈で活躍している人のGitHubを見るのが好きです。contributionの数も、有名なOSSへ送ったissueやpull requestの数も僕とは桁違いで、こうなれたらなあと思います。また、そういった方々は中規模のプロジェクトを作っていることが多いので、プロジェクトのディレクトリ構成とか、どのツールを使っているのか？といった状況を学べます。また、コードを書いて生活する人にとって、GitHubは仕事場のひとつのようなものだと思います。その人の仕事場へのこだわりのようなものをpinnedやprofile, 所属団体から感じるのは楽しいことで、眺めるだけで時間があっという間に過ぎていきます。
+さて、そんな感じでフロントエンド周りの方々を調べていると (egoistさん) のpinnedに不思議なものを見つけました。
+(写真は2019-12-02時点のもの)
+Weekly development breakdownという項目で、どうやら1週間に書いたコードの時間となんの言語で書いたかが示されているようです。
+僕もこれやってみたい！というわけで、この記事で、はこの表をpinnedに表示することを目標としてやっていきましょう。
+仕組み この表は waka-box を使っています。自分のエディタにプラグインを入れておくと一週間のうち何時間コードを書いたか、を示してくれる、&rdquo;WakaTime&rdquo;というWebサービスがあり、そのAPIを利用して、gistに表を作っています。
+例えば僕の場合、VSCodeにExtensionで WakaTime を入れています。APIを利用するためのsecret keyを入れたら後は何もせずコードを書けば大丈夫です。
+waka-box の導入 基本的に waka-box のREADMEに従えばできます。自分が詰まったところを捕捉しながら書きます。
+準備 !. gistを作る(GitHub) -&gt; gistのURLをメモしておく このときのgistはdescription以外上書きされるので、gistの中身はなんでもよいです。
+1. gistだけにチェックを入れたtokenを発行(GitHub) -&gt; メモしておく
+2. WakaTimeのアカウントを作る(wakatime)
+3. wakatimeのsecret keyを手に入れる -&gt; メモしておく
+今3つメモしたと思います。1のgistのURLは公開してもよく、2,4は公開してはいけません！取り扱いに注意しましょう。
+waka-box を入れる https://github.com/matchai/waka-box を自分のGitHubへとforkします。
+準備で手に入れた3つの値を入れていきます。gistのidは .github/workflows/schedule.yml にすでにある値を書き換えます。
+gist tokenとwakatime secret keyは
+Settingsの
+Secretsに書き込みます。2つの値を書き込むと上の図のようになります。
+そして、gistをpinnedに置きます。完成です！
+動作確認 GitHub Actions GitHub ActionsでWakaTime APIから情報をとってきてgistに書き込みを行うので、きちんとActionsが動いているか確かめる必要があります。
+上の図のように、Workflowsに表示があればOKです。10分ほど待つと、gistが変化するはずです
+gistに反映されない！ APIからデータをとってくるときは前日から7日間のデータをとってきているようです。僕の場合は、最初gistに何も書き込まれずファイルが消滅して、次の日00:00以降最初のActionでデータが反映されました。
+終わりに 以上です！意外とコードを書いているつもりでも書いていなかったりするので、目安にして精進していきたい&hellip;！
             <nav>
             <ul>
-                <li><a href="/posts/2019-10-20-seccon2019qual/">Read More &raquo;</a></li>
+                <li><a href="/posts/2019-12-02-wakatime-starting/">Read More &raquo;</a></li>
             </ul>
             </nav>
         </article>

@@ -53,11 +53,18 @@ GitHub ActionsでWakaTime APIから情報をとってきてgistに書き込み�
 ### gistに反映されない！  
 APIからデータをとってくるときは**前日から7日間のデータをとってきているようです。**僕の場合は、最初gistに何も書き込まれずファイルが消滅して、次の日00:00以降最初のActionでデータが反映されました。  
   
+### Actionが動かない！  
+2019/12/20時点では、waka-boxをcloneした後に、`.github/workflows/schedule.yml` を一旦削除し、commitしてgithubへpushした後に再度同じ内容の `.github/workflows/schedule.yml` を作り直さないとActionが動かないようです。  
+  
+参考(私のcommit logです)  
+delete https://github.com/uta8a/waka-box/commit/64e351d872941cca0b92245929e10a5b20fb2f34  
+re-add https://github.com/uta8a/waka-box/commit/079eb1d7d425b4f45b5cfc7aca89c6e1ac4e2a66  
+  
 # 終わりに  
 以上です！意外とコードを書いているつもりでも書いていなかったりするので、目安にして精進していきたい...！  
   
-![](./p-5.png)
-
+![](./p-5.png)  
+  
 <!-- link -->  
 [広島大学ITエンジニアアドベントカレンダー]:https://adventar.org/calendars/4481  
 [egoistさん]:https://github.com/egoist  

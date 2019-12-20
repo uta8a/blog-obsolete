@@ -76,6 +76,14 @@ gist tokenとwakatime secret keyは</p>
 
 <p>APIからデータをとってくるときは<strong>前日から7日間のデータをとってきているようです。</strong>僕の場合は、最初gistに何も書き込まれずファイルが消滅して、次の日00:00以降最初のActionでデータが反映されました。</p>
 
+<h3 id="actionが動かない">Actionが動かない！</h3>
+
+<p>2019/12/20時点では、waka-boxをcloneした後に、<code>.github/workflows/schedule.yml</code> を一旦削除し、commitしてgithubへpushした後に再度同じ内容の <code>.github/workflows/schedule.yml</code> を作り直さないとActionが動かないようです。</p>
+
+<p>参考(私のcommit logです)<br />
+delete <a href="https://github.com/uta8a/waka-box/commit/64e351d872941cca0b92245929e10a5b20fb2f34">https://github.com/uta8a/waka-box/commit/64e351d872941cca0b92245929e10a5b20fb2f34</a><br />
+re-add <a href="https://github.com/uta8a/waka-box/commit/079eb1d7d425b4f45b5cfc7aca89c6e1ac4e2a66">https://github.com/uta8a/waka-box/commit/079eb1d7d425b4f45b5cfc7aca89c6e1ac4e2a66</a></p>
+
 <h1 id="終わりに">終わりに</h1>
 
 <p>以上です！意外とコードを書いているつもりでも書いていなかったりするので、目安にして精進していきたい&hellip;！</p>

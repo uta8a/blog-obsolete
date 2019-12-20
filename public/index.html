@@ -52,6 +52,8 @@
     
         
     
+        
+    
     </footer>
 </section>
 
@@ -60,35 +62,37 @@
     
         <article>
             <header>
-            <h2>waka-boxを使ってみる 広島大学ITエンジニアアドベントカレンダー</h2>
-            <p><time datetime="2019-12-02 04:38:30 &#43;0900 JST">Mon, Dec 2, 2019</time></p>
+            <h2>開発環境メモ: VSCodeでローカルの仮想環境にRemote SSH</h2>
+            <p><time datetime="2019-12-20 12:04:56 &#43;0900 JST">Fri, Dec 20, 2019</time></p>
             </header>
-            この記事は 広島大学ITエンジニアアドベントカレンダー の4日目です。
-僕はOSS界隈で活躍している人のGitHubを見るのが好きです。contributionの数も、有名なOSSへ送ったissueやpull requestの数も僕とは桁違いで、こうなれたらなあと思います。また、そういった方々は中規模のプロジェクトを作っていることが多いので、プロジェクトのディレクトリ構成とか、どのツールを使っているのか？といった状況を学べます。また、コードを書いて生活する人にとって、GitHubは仕事場のひとつのようなものだと思います。その人の仕事場へのこだわりのようなものをpinnedやprofile, 所属団体から感じるのは楽しいことで、眺めるだけで時間があっという間に過ぎていきます。
-さて、そんな感じでフロントエンド周りの方々を調べていると (egoistさん) のpinnedに不思議なものを見つけました。
-(写真は2019-12-02時点のもの)
-Weekly development breakdownという項目で、どうやら1週間に書いたコードの時間となんの言語で書いたかが示されているようです。
-僕もこれやってみたい！というわけで、この記事では、この表をpinnedに表示することを目標としてやっていきましょう。
-仕組み この表は waka-box を使っています。自分のエディタにプラグインを入れておくと一週間のうち何時間コードを書いたか、を示してくれる、&rdquo;WakaTime&rdquo;というWebサービスがあり、そのAPIを利用して、gistに表を作っています。
-例えば僕の場合、VSCodeにExtensionで WakaTime を入れています。APIを利用するためのsecret keyを入れたら後は何もせずコードを書けば大丈夫です。
-waka-box の導入 基本的に waka-box のREADMEに従えばできます。自分が詰まったところを捕捉しながら書きます。
-準備  gistを作る(GitHub) -&gt; gistのURLをメモしておく このときのgistはdescription以外上書きされるので、gistの中身はなんでもよいです。
- gistだけにチェックを入れたtokenを発行(GitHub) -&gt; メモしておく
- WakaTimeのアカウントを作る(wakatime)
- wakatimeのsecret keyを手に入れる -&gt; メモしておく
-今3つメモしたと思います。1のgistのURLは公開してもよく、2,4は公開してはいけません！取り扱いに注意しましょう。
-  waka-box を入れる https://github.com/matchai/waka-box を自分のGitHubへとforkします。
-準備で手に入れた3つの値を入れていきます。gistのidは .github/workflows/schedule.yml にすでにある値を書き換えます。
-gist tokenとwakatime secret keyは
-Settingsの
-Secretsに書き込みます。2つの値を書き込むと上の図のようになります。
-そして、gistをpinnedに置きます。完成です！
-動作確認 GitHub Actions GitHub ActionsでWakaTime APIから情報をとってきてgistに書き込みを行うので、きちんとActionsが動いているか確かめる必要があります。
-上の図のように、Workflowsに表示があればOKです。10分ほど待つと、gistが変化するはずです
-gistに反映されない！ APIからデータをとってくるときは前日から7日間のデータをとってきているようです。僕の場合は、最初gistに何も書き込まれずファイルが消滅して、次の日00:00以降最初のActionでデータが反映されました。
+            この記事は 広島大学ITエンジニアアドベントカレンダー の9日目です。
+私は大学にWindows機とLinux(Ubuntu)機の2台のlaptopを持っていっています。空きコマにさあコード書くぞ〜！と思ったときに開くのはいつもUbuntu。Linux機の方が貧弱なスペックなのですが、コード書くまでにかかる時間はWindowsよりLinuxの方が速いのです。(私はWindowsでは仮想環境でUbuntuを立ち上げてその中で開発するのでそれはそう)
+しかしWindowsでも快適に開発したい！というわけで、自分なりに快適だと思った環境をメモしておきます。
+目標  仮想環境でSVGをwgetして、それをVSCodeからファイルクリックすると見れる！という環境を構築する(なぜこれが目標なのかというと、@imiko さんが仮想環境で生成したsvgを楽に見たいと言っていたので)
+  環境 以下の環境で確認しています。
+Windows 10 Home Vagrant 2.2.6 VirtualBox 6.0.14 VSCode 1.41.0   仮想環境はbento/ubuntu-18.04を使用しています。   ホストでインストールするもの
+ VirtualBox
+ Vagrant
+ VSCode
+  VSCodeで必要なExtension
+ Remote-SSH
+  手順 Vagrantから仮想環境の立ち上げ
+VSCodeを立ち上げます。
+Open CodeでVagrantfileのあるフォルダを開き、Ctrl+`でVSCode内でターミナルを開き、Windowsのターミナルからvagrant upします。
+SSH Configuration
+はじめてのときはSSH接続するためにconfigを書いておく必要があります。
+Ctrl+Shift+pでcommand paletteを開き、Remote-SSH: Open Configuration FIle...を開きます。
+次に、Windowsのターミナルでvagrant ssh-configと打ち込みます(vagrant upした状態で、vagrantfileが存在するディレクトリで行ってください)
+以下のような内容が出てくると思います。それをRemote-SSHで開いたファイルC:\Users\$UserName\.ssh\configにコピペします。
+これでSSHの設定はできました。
+SSHで仮想環境に接続する
+以下の2点が達成できているでしょうか。
+- vagrant upしている
+- SSH Config周りが設定できている
+それでは、SSH接続していきましょう。
             <nav>
             <ul>
-                <li><a href="/posts/2019-12-02-wakatime-starting/">Read More &raquo;</a></li>
+                <li><a href="/posts/2019-12-20-vscode-remote-ssh-dev/">Read More &raquo;</a></li>
             </ul>
             </nav>
         </article>

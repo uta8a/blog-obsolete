@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>kaito_tateyama's blog</title>
+<link rel="stylesheet" href="https://www.blog.uta8a.net/css/canvas.css" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<main>
+<section>
+    <header>
+    <h1>開発環境メモ: VSCodeでローカルの仮想環境にRemote SSH</h1>
+    </header>
+
+    <article>
+    
+
+<p>この記事は <a href="https://adventar.org/calendars/4481">広島大学ITエンジニアアドベントカレンダー</a> の9日目です。<br />
+私は大学にWindows機とLinux(Ubuntu)機の2台のlaptopを持っていっています。空きコマにさあコード書くぞ〜！と思ったときに開くのはいつもUbuntu。Linux機の方が貧弱なスペックなのですが、コード書くまでにかかる時間はWindowsよりLinuxの方が速いのです。(私はWindowsでは仮想環境でUbuntuを立ち上げてその中で開発するのでそれはそう)<br />
+しかしWindowsでも快適に開発したい！というわけで、自分なりに快適だと思った環境をメモしておきます。</p>
+
+<h1 id="目標">目標</h1>
+
+<ul>
+<li>仮想環境でSVGをwgetして、それをVSCodeからファイルクリックすると見れる！という環境を構築する(なぜこれが目標なのかというと、<a href="https://twitter.com/es__135">@imiko</a> さんが仮想環境で生成したsvgを楽に見たいと言っていたので)<br />
+<br /></li>
+</ul>
+
+<h1 id="環境">環境</h1>
+
+<p>以下の環境で確認しています。</p>
+
+<pre><code>Windows 10 Home  
+Vagrant 2.2.6  
+VirtualBox 6.0.14  
+VSCode 1.41.0  
+</code></pre>
+
+<ul>
+<li>仮想環境は<code>bento/ubuntu-18.04</code>を使用しています。
+<br /></li>
+</ul>
+
+<p><strong>ホストでインストールするもの</strong></p>
+
+<ul>
+<li>VirtualBox<br /></li>
+<li>Vagrant<br /></li>
+<li>VSCode<br /></li>
+</ul>
+
+<p>VSCodeで必要なExtension</p>
+
+<ul>
+<li>Remote-SSH<br />
+<img src="./p-1.png" alt="Remote-SSH" /><br />
+<br /></li>
+</ul>
+
+<h1 id="手順">手順</h1>
+
+<p><strong>Vagrantから仮想環境の立ち上げ</strong><br />
+VSCodeを立ち上げます。<br />
+<img src="./p-2.png" alt="File" /><br />
+<code>Open Code</code>でVagrantfileのあるフォルダを開き、<code>Ctrl+`</code>でVSCode内でターミナルを開き、Windowsのターミナルから<code>vagrant up</code>します。</p>
+
+<p><strong>SSH Configuration</strong><br />
+はじめてのときはSSH接続するためにconfigを書いておく必要があります。<br />
+<img src="p-3.png" alt="SSH Config" /><br />
+<code>Ctrl+Shift+p</code>でcommand paletteを開き、<code>Remote-SSH: Open Configuration FIle...</code>を開きます。<br />
+次に、Windowsのターミナルで<code>vagrant ssh-config</code>と打ち込みます(vagrant upした状態で、vagrantfileが存在するディレクトリで行ってください)<br />
+以下のような内容が出てくると思います。それをRemote-SSHで開いたファイル<code>C:\Users\$UserName\.ssh\config</code>にコピペします。<br />
+<img src="./p-4.png" alt="Config File" /><br />
+これでSSHの設定はできました。</p>
+
+<p><strong>SSHで仮想環境に接続する</strong><br />
+以下の2点が達成できているでしょうか。<br />
+- <code>vagrant up</code>している<br />
+- SSH Config周りが設定できている<br />
+それでは、SSH接続していきましょう。<br />
+<img src="./p-5.png" alt="" /><br />
+SSH接続できるアイコンがあるのでそれを押して、SSH TARGETSを選びます。今回はsandboxを選びました。<br />
+<img src="./p-6.png" alt="" /><br />
+sandboxを選択したときに出現する、右のアイコンをクリックしてください。VSCodeの新しいWindowがポップアップしたと思います。たぶん何か警告が出てくると思うのですがYesでOKです。<br />
+これで接続ができました。<code>Ctrl + `</code>でターミナルに接続すると、仮想環境のターミナルになっていると思います。<br />
+今回は<code>mkdir sandbox</code>して、Open Folderでは<code>sandbox</code>を選択しました。<br />
+<img src="./p-7.png" alt="" /></p>
+
+<p><strong>SVGを表示する</strong><br />
+今回はテストなので、wgetでSVGファイルを引っ張ってきましょう。<a href="https://gist.github.com/AmeliaBR/193a8f36eb637af1684201821afd5f66">Testing SVG files in GitHub Gists</a>を利用しました。<br />
+仮想環境上のターミナルで、以下を実行します。</p>
+
+<pre><code class="language-bash">wget https://gist.githubusercontent.com/AmeliaBR/193a8f36eb637af1684201821afd5f66/raw/2f695692701db7be18333926b41b7e9c15944d73/basic-marker.svg  
+</code></pre>
+
+<p><code>sandbox/</code>以下にファイルが保存されました。<br />
+VSCodeのExtensionを入れます。<a href="https://marketplace.visualstudio.com/items?itemName=cssho.vscode-svgviewer">SVG Viewer</a>を入れました。このとき、SSHで接続した仮想環境上で開いているVSCodeでインストールすることが重要です。(どうやらHost環境とSSH接続した先ではExtensionの共有がされないようです)<br />
+これでファイルを開いてからsvg viewerの機能を使えばSVGが見れるようになりました。VSCodeのファイル上で右クリックしてSVG Viewerの機能を選択すればよいです。</p>
+
+<p><strong>終了時</strong><br />
+終わる時はSSH接続を切って、<code>vagrant halt</code>を忘れずに。</p>
+
+<h1 id="tips">Tips</h1>
+
+<p><strong>ファイル管理はどうする？</strong><br />
+Windowsでは共有フォルダを作ってやるとnpm installとかでうまくいかないことが多かったので、今は共有フォルダは作っているけどそこはほしいファイルを<code>mv ./hoge ../host_directory/</code>して移すために使っています。開発は共有フォルダではやらずに、gitで管理するという感じです。</p>
+
+<p><strong>ブラウザとかどうする？</strong><br />
+vagrantfileで<code>config.vm.network</code>あたりを設定してあげるとそれほど困りません。<br />
+あと、Nuxt.jsで開発しているとき<code>localhost:3000</code>で立ち上げてLinuxターミナルのリンクをクリックしたら自動でホスト側のリンクに変換されてchromeで開いたのですがこの機能はなんですか&hellip;</p>
+
+<p><strong>ホスト→仮想環境上にファイルを送りたい！</strong><br />
+エクスプローラを開いてVSCodeのEXPLORERにドラッグアンドドロップでファイルを送信できます。なんだこの便利機能&hellip;</p>
+
+<h1 id="終わりに">終わりに</h1>
+
+<p>以上です。便利なのでVSCodeを使いましょう！<br />
+何か間違いや指摘などあれば、お手数ですがTwitter: <a href="https://twitter.com/kaito_tateyama">@kaito_tateyama</a>までお願いします。</p>
+
+<!-- link -->    
+
+    </article>
+
+    <footer>
+            <ul>
+                <li><a href="https://www.blog.uta8a.net/posts/2019-12-02-wakatime-starting/">&laquo; waka-boxを使ってみる 広島大学ITエンジニアアドベントカレンダー</a></li>
+                
+            </ul>
+    </footer>
+</section>
+<aside>
+    <ul>
+    <li><a href="https://www.blog.uta8a.net">Home</a></p>
+    <li><a href="https://www.blog.uta8a.net/posts/">Posts</a></p>
+    <li><a href="https://www.blog.uta8a.net/articles/">Articles</a></p>
+    </ul>
+</aside>
+</main>
+
+<footer>
+    <ul>
+        <li><a href="https://github.com/mdhender/canvas">Github</a></li>
+    </ul>
+</footer>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+</script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+</html>

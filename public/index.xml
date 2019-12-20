@@ -19,7 +19,7 @@
       <guid>https://www.blog.uta8a.net/posts/2019-12-20-vscode-remote-ssh-dev/</guid>
       <description>この記事は 広島大学ITエンジニアアドベントカレンダー の9日目です。
 私は大学にWindows機とLinux(Ubuntu)機の2台のlaptopを持っていっています。空きコマにさあコード書くぞ〜！と思ったときに開くのはいつもUbuntu。Linux機の方が貧弱なスペックなのですが、コード書くまでにかかる時間はWindowsよりLinuxの方が速いのです。(私はWindowsでは仮想環境でUbuntuを立ち上げてその中で開発するのでそれはそう)
-しかしWindowsでも快適に開発したい！というわけで、自分なりに快適だと思った環境をメモしておきます。
+しかしWindowsでも快適に開発したい！というわけで、自分なりに快適だと思った環境をメモしておきます。 Remote Development using SSHを見ると詳しくちゃんとしたことが書いてあるので、こちらも参考にしてください。
 目標  仮想環境でSVGをwgetして、それをVSCodeからファイルクリックすると見れる！という環境を構築する(なぜこれが目標なのかというと、@imiko さんが仮想環境で生成したsvgを楽に見たいと言っていたので)
   環境 以下の環境で確認しています。
 Windows 10 Home Vagrant 2.2.6 VirtualBox 6.0.14 VSCode 1.41.0   仮想環境はbento/ubuntu-18.04を使用しています。   ホストでインストールするもの
@@ -39,9 +39,7 @@ Ctrl+Shift+pでcommand paletteを開き、Remote-SSH: Open Configuration FIle...
 これでSSHの設定はできました。
 SSHで仮想環境に接続する
 以下の2点が達成できているでしょうか。
-- vagrant upしている
-- SSH Config周りが設定できている
-それでは、SSH接続していきましょう。</description>
+- vagrant upしている</description>
     </item>
     
     <item>

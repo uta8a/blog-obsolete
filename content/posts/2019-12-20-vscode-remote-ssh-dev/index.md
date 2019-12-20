@@ -7,7 +7,8 @@ draft: false
   
 この記事は [広島大学ITエンジニアアドベントカレンダー] の9日目です。  
 私は大学にWindows機とLinux(Ubuntu)機の2台のlaptopを持っていっています。空きコマにさあコード書くぞ〜！と思ったときに開くのはいつもUbuntu。Linux機の方が貧弱なスペックなのですが、コード書くまでにかかる時間はWindowsよりLinuxの方が速いのです。(私はWindowsでは仮想環境でUbuntuを立ち上げてその中で開発するのでそれはそう)  
-しかしWindowsでも快適に開発したい！というわけで、自分なりに快適だと思った環境をメモしておきます。  
+しかしWindowsでも快適に開発したい！というわけで、自分なりに快適だと思った環境をメモしておきます。
+[Remote Development using SSH](https://code.visualstudio.com/docs/remote/ssh)を見ると詳しくちゃんとしたことが書いてあるので、こちらも参考にしてください。
   
 # 目標  
 - 仮想環境でSVGをwgetして、それをVSCodeからファイルクリックすると見れる！という環境を構築する(なぜこれが目標なのかというと、[@imiko](https://twitter.com/es__135) さんが仮想環境で生成したsvgを楽に見たいと言っていたので)  
@@ -56,7 +57,7 @@ VSCodeを立ち上げます。
 ![](./p-5.png)  
 SSH接続できるアイコンがあるのでそれを押して、SSH TARGETSを選びます。今回はsandboxを選びました。  
 ![](./p-6.png)  
-sandboxを選択したときに出現する、右のアイコンをクリックしてください。VSCodeの新しいWindowがポップアップしたと思います。たぶん何か警告が出てくると思うのですがYesでOKです。  
+sandboxを選択したときに出現する、右のアイコンをクリックしてください。VSCodeの新しいWindowがポップアップしたと思います。おそらく初めて接続した時ははRSA finger printについての警告が出てくると思うのですがYesでOKです。  
 これで接続ができました。`` Ctrl + ` ``でターミナルに接続すると、仮想環境のターミナルになっていると思います。  
 今回は`mkdir sandbox`して、Open Folderでは`sandbox`を選択しました。  
 ![](./p-7.png)  
@@ -68,7 +69,7 @@ sandboxを選択したときに出現する、右のアイコンをクリック�
 wget https://gist.githubusercontent.com/AmeliaBR/193a8f36eb637af1684201821afd5f66/raw/2f695692701db7be18333926b41b7e9c15944d73/basic-marker.svg  
 ```  
 `sandbox/`以下にファイルが保存されました。  
-VSCodeのExtensionを入れます。[SVG Viewer](https://marketplace.visualstudio.com/items?itemName=cssho.vscode-svgviewer)を入れました。このとき、SSHで接続した仮想環境上で開いているVSCodeでインストールすることが重要です。(どうやらHost環境とSSH接続した先ではExtensionの共有がされないようです)  
+VSCodeのExtensionを入れます。[SVG Viewer](https://marketplace.visualstudio.com/items?itemName=cssho.vscode-svgviewer)を入れました。このとき、SSHで接続した仮想環境上で開いているVSCodeでインストールすることが重要です。 <!-- (どうやらHost環境とSSH接続した先ではExtensionの共有がされないようです) --> Extensionが`SSH:UBUNTU-Installed`のようになっていればSSH接続先でそのExtensionが使えます。詳しくは [Managing Extensions](https://code.visualstudio.com/docs/remote/ssh#_managing-extensions)を見てください。
 これでファイルを開いてからsvg viewerの機能を使えばSVGが見れるようになりました。VSCodeのファイル上で右クリックしてSVG Viewerの機能を選択すればよいです。  
 
   

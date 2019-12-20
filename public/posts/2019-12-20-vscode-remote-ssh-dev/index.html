@@ -19,7 +19,8 @@
 
 <p>この記事は <a href="https://adventar.org/calendars/4481">広島大学ITエンジニアアドベントカレンダー</a> の9日目です。<br />
 私は大学にWindows機とLinux(Ubuntu)機の2台のlaptopを持っていっています。空きコマにさあコード書くぞ〜！と思ったときに開くのはいつもUbuntu。Linux機の方が貧弱なスペックなのですが、コード書くまでにかかる時間はWindowsよりLinuxの方が速いのです。(私はWindowsでは仮想環境でUbuntuを立ち上げてその中で開発するのでそれはそう)<br />
-しかしWindowsでも快適に開発したい！というわけで、自分なりに快適だと思った環境をメモしておきます。</p>
+しかしWindowsでも快適に開発したい！というわけで、自分なりに快適だと思った環境をメモしておきます。
+<a href="https://code.visualstudio.com/docs/remote/ssh">Remote Development using SSH</a>を見ると詳しくちゃんとしたことが書いてあるので、こちらも参考にしてください。</p>
 
 <h1 id="目標">目標</h1>
 
@@ -83,7 +84,7 @@ VSCodeを立ち上げます。<br />
 <img src="./p-5.png" alt="" /><br />
 SSH接続できるアイコンがあるのでそれを押して、SSH TARGETSを選びます。今回はsandboxを選びました。<br />
 <img src="./p-6.png" alt="" /><br />
-sandboxを選択したときに出現する、右のアイコンをクリックしてください。VSCodeの新しいWindowがポップアップしたと思います。たぶん何か警告が出てくると思うのですがYesでOKです。<br />
+sandboxを選択したときに出現する、右のアイコンをクリックしてください。VSCodeの新しいWindowがポップアップしたと思います。おそらく初めて接続した時ははRSA finger printについての警告が出てくると思うのですがYesでOKです。<br />
 これで接続ができました。<code>Ctrl + `</code>でターミナルに接続すると、仮想環境のターミナルになっていると思います。<br />
 今回は<code>mkdir sandbox</code>して、Open Folderでは<code>sandbox</code>を選択しました。<br />
 <img src="./p-7.png" alt="" /></p>
@@ -96,7 +97,7 @@ sandboxを選択したときに出現する、右のアイコンをクリック�
 </code></pre>
 
 <p><code>sandbox/</code>以下にファイルが保存されました。<br />
-VSCodeのExtensionを入れます。<a href="https://marketplace.visualstudio.com/items?itemName=cssho.vscode-svgviewer">SVG Viewer</a>を入れました。このとき、SSHで接続した仮想環境上で開いているVSCodeでインストールすることが重要です。(どうやらHost環境とSSH接続した先ではExtensionの共有がされないようです)<br />
+VSCodeのExtensionを入れます。<a href="https://marketplace.visualstudio.com/items?itemName=cssho.vscode-svgviewer">SVG Viewer</a>を入れました。このとき、SSHで接続した仮想環境上で開いているVSCodeでインストールすることが重要です。 <!-- (どうやらHost環境とSSH接続した先ではExtensionの共有がされないようです) --> Extensionが<code>SSH:UBUNTU-Installed</code>のようになっていればSSH接続先でそのExtensionが使えます。詳しくは <a href="https://code.visualstudio.com/docs/remote/ssh#_managing-extensions">Managing Extensions</a>を見てください。
 これでファイルを開いてからsvg viewerの機能を使えばSVGが見れるようになりました。VSCodeのファイル上で右クリックしてSVG Viewerの機能を選択すればよいです。</p>
 
 <p><strong>終了時</strong><br />

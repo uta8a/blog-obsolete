@@ -1,0 +1,15 @@
+/* foot.html */
+#icons {
+    display: flex;
+    justify-content: center; 
+    align-items: center;  
+}
+.wrapper {
+    width: 10%;
+}
+.github {
+    right: 30%;
+}
+.twitter {
+    right: 60%;
+}

@@ -3,6 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.blog.uta8a.net/diaries/2020-01-01-new-year/</loc>
+    <lastmod>2020-01-01T08:08:01+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.blog.uta8a.net/diaries/</loc>
+    <lastmod>2020-01-01T08:08:01+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://www.blog.uta8a.net/posts/</loc>
     <lastmod>2019-12-20T12:04:56+09:00</lastmod>
     <priority>0</priority>

@@ -42,7 +42,7 @@
 
 <section>
     <!-- this section is populated by pulling articles from the site -->
-    {{ range first 1 (where .Pages.ByPublishDate.Reverse "Section" "articles") }}
+    {{ range first 1 (where .Pages.ByPublishDate.Reverse "Section" "diaries") }}
         <article>
             <header>
             <h2>{{ .Title }}</h2>
@@ -57,7 +57,7 @@
         </article>
     {{ end }}
     <footer>
-    <a href="{{ "articles/" | absURL }}">All articles...</a>
+    <a href="{{ "diaries/" | absURL }}">All diaries...</a>
     </footer>
 </section>
 </main>

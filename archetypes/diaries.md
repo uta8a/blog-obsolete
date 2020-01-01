@@ -1,8 +1,8 @@
 ---
 date: "{{ .Date }}"
 title: "{{ replace .Name "-" " " | title }}"
-type: "article"
+type: "diary"
 draft: true
 ---
 
-Article
+Diaries

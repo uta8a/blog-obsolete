@@ -86,3 +86,11 @@ code {
 pre {
     border: #07a solid 4px;
 }
+
+.no-style {
+    text-decoration: none;
+}
+.no-style:visited {
+    text-decoration: none;
+    color: inherit;
+}

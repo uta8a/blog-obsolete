@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Diaries on kaito_tateyama&#39;s blog</title>
+    <link>https://www.blog.uta8a.net/diaries/</link>
+    <description>Recent content in Diaries on kaito_tateyama&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 01 Jan 2020 08:08:01 +0900</lastBuildDate>
+    
+	<atom:link href="https://www.blog.uta8a.net/diaries/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>2019年振り返りと2020年の目標</title>
+      <link>https://www.blog.uta8a.net/diaries/2020-01-01-new-year/</link>
+      <pubDate>Wed, 01 Jan 2020 08:08:01 +0900</pubDate>
+      
+      <guid>https://www.blog.uta8a.net/diaries/2020-01-01-new-year/</guid>
+      <description>2019年は体調管理と単位をとることに集中していました。大学での生活基盤を固めたので、2020年は外に出て評価される体験を積みたいと思っています。
+2019年振り返り 1~3月
+ センター試験を受けた
+ 二次試験を受けた
+ 広島大学に受かった
+ 東京大学を退学した
+ アセンブリの記事を書いた
+ CTFチームStarrySkyをmitsuさんと組んだ
+  このときから2019年の目標を意識していることが、ヴァネロピさんとの会話から分かる。
+ですね、大学入ったら1年の前期はおとなしく大学に集中して、だんだんギア上げていくつもりです(お心遣い痛み入ります、ありがたい🙏) 健康が一番効率に直結していることを身をもって知ったので…(それはそう) https://twitter.com/kaito_tateyama/status/1102555151179558912  実際前期はかなりおとなしくしていた。
+アセンブリの記事がかなり好評だったみたい。このときからうーちゃんさんと仲良くさせていただいているので、今考えるとここが転機だったと思います。ここまではなんとなく競技プログラミング、CTFをする競技志向だったのですが、セキュリティミニキャンプへの参加など、CS(コンピュータ・サイエンス)志向になっていきました。
+また、東京大学を退学しました。このことについてはいつかまとめようと思っています(はてなブログに書いた記事(現在非公開)もそのうち再公開したいなと考えています。)
+4~6月
+ けんしんさんの記事を読んで、本格的にCSを独学で学ぶ決意をする
+ 広島大学に通い始めた
+ うーちゃんさんが広島に来てくださって、広島大学勢でお好み焼きを食べた
+ VuePressを触った→Vuejsを触った
+ セキュリティネクストキャンプへの応募をあきらめた
+ Archの環境構築をした(喜んでいる様子)
+ このあたりでHiCoderCTFのサーバーサイドとデザインを書いていた(後に挫折)
+  このあたりは新しい環境への慣れを目指していました。したがって、ネクストキャンプや夏のインターンなど応募をあきらめたものも多かったです。
+Arch Linuxはいいぞ。
+7~9月
+ ICTトラブルシューティングコンテスト夏に出てボロ負けする
+ ISUCONに出てボロ負けする
+ オープンソースカンファレンス広島に参加(様子)
+ SECCON Workshop 広島に参加
+ 低レイヤを知りたい人のためのCコンパイラ入門で電卓程度まで実装する
+ お絵描き(DeepLearningでフレーム補完)
+ TSGCTFの復習でWriteupを眺めていて、型理論に興味が湧く
+ ツカモさんとお話して自分はまだ未熟というか、考えていないことを知る
+ 山梨ミニキャンプに行く
+ 前期の単位をすべて取得する
+  ここは前期の総決算でした。</description>
+    </item>
+    
+  </channel>
+</rss>

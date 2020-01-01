@@ -8,7 +8,7 @@
 
     <article>
     <ul>
-        {{ range where .Pages.ByPublishDate.Reverse "Section" "articles" }}
+        {{ range where .Pages.ByPublishDate.Reverse "Section" "diaries" }}
         <li><a href="{{ .RelPermalink }}">{{ .Title }} - <time datetime="{{.Date}}">{{ .Date.Format "2006/01/02 15:04:05" }}</time></a></li>
         {{ end }}
     </ul>
@@ -19,7 +19,7 @@
     <ul>
     <li><a href="{{ .Site.BaseURL }}">Home</a></p>
     <li><a href="{{ "posts/" | absURL }}">Posts</a></p>
-    <li><a href="{{ "articles/" | absURL }}">Articles</a></p>
+    <li><a href="{{ "diaries/" | absURL }}">Diaries</a></p>
     </ul>
 </aside>
 </main>

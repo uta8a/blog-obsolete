@@ -60,6 +60,8 @@
     
         
     
+        
+    
     </footer>
 </section>
 
@@ -68,35 +70,18 @@
     
         <article>
             <header>
-            <h2>開発環境メモ: VSCodeでローカルの仮想環境にRemote SSH</h2>
-            <p><time datetime="2019-12-20 12:04:56 &#43;0900 JST">Fri, Dec 20, 2019</time></p>
+            <h2>ContrailCTF Writeup</h2>
+            <p><time datetime="2020-01-04 01:08:12 &#43;0900 JST">Sat, Jan 4, 2020</time></p>
             </header>
-            この記事は 広島大学ITエンジニアアドベントカレンダー の9日目です。
-私は大学にWindows機とLinux(Ubuntu)機の2台のlaptopを持っていっています。空きコマにさあコード書くぞ〜！と思ったときに開くのはいつもUbuntu。Linux機の方が貧弱なスペックなのですが、コード書くまでにかかる時間はWindowsよりLinuxの方が速いのです。(私はWindowsでは仮想環境でUbuntuを立ち上げてその中で開発するのでそれはそう)
-しかしWindowsでも快適に開発したい！というわけで、自分なりに快適だと思った環境をメモしておきます。 Remote Development using SSHを見ると詳しくちゃんとしたことが書いてあるので、こちらも参考にしてください。
-目標  仮想環境でSVGをwgetして、それをVSCodeからファイルクリックすると見れる！という環境を構築する(なぜこれが目標なのかというと、@imiko さんが仮想環境で生成したsvgを楽に見たいと言っていたので)
-  環境 以下の環境で確認しています。
-Windows 10 Home Vagrant 2.2.6 VirtualBox 6.0.14 VSCode 1.41.0   仮想環境はbento/ubuntu-18.04を使用しています。   ホストでインストールするもの
- VirtualBox
- Vagrant
- VSCode
-  VSCodeで必要なExtension
- Remote-SSH
-  手順 Vagrantから仮想環境の立ち上げ
-VSCodeを立ち上げます。
-Open CodeでVagrantfileのあるフォルダを開き、Ctrl+`でVSCode内でターミナルを開き、Windowsのターミナルからvagrant upします。
-SSH Configuration
-はじめてのときはSSH接続するためにconfigを書いておく必要があります。
-Ctrl+Shift+pでcommand paletteを開き、Remote-SSH: Open Configuration FIle...を開きます。
-次に、Windowsのターミナルでvagrant ssh-configと打ち込みます(vagrant upした状態で、vagrantfileが存在するディレクトリで行ってください)
-以下のような内容が出てくると思います。それをRemote-SSHで開いたファイルC:\Users\$UserName\.ssh\configにコピペします。
-これでSSHの設定はできました。
-SSHで仮想環境に接続する
-以下の2点が達成できているでしょうか。
-- vagrant upしている
+            チームStarrySkyは正の点数を得た78チーム中、2126点を獲得して4位でした。うち僕は504点を獲得しました。
+僕が解いたLets_Connct、Persistence、alice&rsquo;s passwordについてのWriteupです。
+Lets_Connct[misc] ncでつなぐよう指示があるのでつなぎ、flagの中身を見ます。
+❯ nc &lt;問題サーバ&gt; 2999 bash: cannot set terminal process group (-1): Inappropriate ioctl for device bash: no job control in this shell bash-4.4$ ls ls bash bin dev flag lib lib32 lib64 bash-4.4$ echo &quot;$(&lt;flag)&quot; echo &quot;$(&lt;flag)&quot; Flag has moved to 3000 port on 172.17.0.10.  別の場所にflagが移されたようです。ncでつなごうとしますがncはないと言われてしまいます。
+bash-4.4$ nc 172.17.0.10 3000 nc 172.17.0.10 3000 bash: nc: command not found  そこで、bash nc alternativeと検索をかけると、以下の記事がヒットします
+https://stackoverflow.com/questions/20661320/alternative-to-cat-out-of-a-bash-script
             <nav>
             <ul>
-                <li><a href="/posts/2019-12-20-vscode-remote-ssh-dev/">Read More &raquo;</a></li>
+                <li><a href="/posts/2020-01-04-contrailctf/">Read More &raquo;</a></li>
             </ul>
             </nav>
         </article>

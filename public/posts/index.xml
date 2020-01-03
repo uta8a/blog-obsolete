@@ -6,10 +6,24 @@
     <description>Recent content in Posts on kaito_tateyama&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 20 Dec 2019 12:04:56 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 04 Jan 2020 01:08:12 +0900</lastBuildDate>
     
 	<atom:link href="https://www.blog.uta8a.net/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ContrailCTF Writeup</title>
+      <link>https://www.blog.uta8a.net/posts/2020-01-04-contrailctf/</link>
+      <pubDate>Sat, 04 Jan 2020 01:08:12 +0900</pubDate>
+      
+      <guid>https://www.blog.uta8a.net/posts/2020-01-04-contrailctf/</guid>
+      <description>チームStarrySkyは正の点数を得た78チーム中、2126点を獲得して4位でした。うち僕は504点を獲得しました。
+僕が解いたLets_Connct、Persistence、alice&amp;rsquo;s passwordについてのWriteupです。
+Lets_Connct[misc] ncでつなぐよう指示があるのでつなぎ、flagの中身を見ます。
+❯ nc &amp;lt;問題サーバ&amp;gt; 2999 bash: cannot set terminal process group (-1): Inappropriate ioctl for device bash: no job control in this shell bash-4.4$ ls ls bash bin dev flag lib lib32 lib64 bash-4.4$ echo &amp;quot;$(&amp;lt;flag)&amp;quot; echo &amp;quot;$(&amp;lt;flag)&amp;quot; Flag has moved to 3000 port on 172.17.0.10.  別の場所にflagが移されたようです。ncでつなごうとしますがncはないと言われてしまいます。
+bash-4.4$ nc 172.17.0.10 3000 nc 172.17.0.10 3000 bash: nc: command not found  そこで、bash nc alternativeと検索をかけると、以下の記事がヒットします
+https://stackoverflow.com/questions/20661320/alternative-to-cat-out-of-a-bash-script</description>
+    </item>
     
     <item>
       <title>開発環境メモ: VSCodeでローカルの仮想環境にRemote SSH</title>

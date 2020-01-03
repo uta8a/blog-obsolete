@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>kaito_tateyama's blog</title>
+<link rel="stylesheet" href="https://www.blog.uta8a.net/css/canvas.css" type="text/css">
+<link rel="stylesheet" href="https://www.blog.uta8a.net/css/foot.css" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a class="no-style" href="https://www.blog.uta8a.net">
+        <h2>kaito_tateyama's blog</h2>
+    </a>
+
+<main>
+<section>
+    <header>
+    <h1>ContrailCTF Writeup</h1>
+    </header>
+
+    <article>
+    
+
+<p>チームStarrySkyは正の点数を得た78チーム中、2126点を獲得して4位でした。うち僕は504点を獲得しました。<br />
+僕が解いたLets_Connct、Persistence、alice&rsquo;s passwordについてのWriteupです。</p>
+
+<p><img src="./p-1.png" alt="" /></p>
+
+<h1 id="lets-connct-misc">Lets_Connct[misc]</h1>
+
+<p>ncでつなぐよう指示があるのでつなぎ、flagの中身を見ます。</p>
+
+<pre><code>❯ nc &lt;問題サーバ&gt; 2999  
+bash: cannot set terminal process group (-1): Inappropriate ioctl for device  
+bash: no job control in this shell  
+bash-4.4$ ls  
+ls  
+bash  
+bin  
+dev  
+flag  
+lib  
+lib32  
+lib64  
+bash-4.4$ echo &quot;$(&lt;flag)&quot;  
+echo &quot;$(&lt;flag)&quot;  
+Flag has moved to 3000 port on 172.17.0.10.  
+</code></pre>
+
+<p>別の場所にflagが移されたようです。ncでつなごうとしますがncはないと言われてしまいます。</p>
+
+<pre><code>bash-4.4$ nc 172.17.0.10 3000  
+nc 172.17.0.10 3000  
+bash: nc: command not found  
+</code></pre>
+
+<p>そこで、<code>bash nc alternative</code>と検索をかけると、以下の記事がヒットします<br />
+<a href="https://stackoverflow.com/questions/20661320/alternative-to-cat-out-of-a-bash-script">https://stackoverflow.com/questions/20661320/alternative-to-cat-out-of-a-bash-script</a><br />
+<a href="https://github.com/solusipse/fiche#useful-aliases">https://github.com/solusipse/fiche#useful-aliases</a><br />
+catがないのでそのまま使うことができません。よく分からないのですが、以下のような手順でflagを得ました。</p>
+
+<pre><code>bash-4.4$ exec 3&lt;&gt;/dev/tcp/172.17.0.10/3000  
+exec 3&lt;&gt;/dev/tcp/172.17.0.10/3000  
+bash-4.4$ while read -t 5 line &lt;&amp;3; do  
+    echo &quot;$line&quot;  
+    (( Lines++ ))  
+donewhile read -t 5 line &lt;&amp;3; do  
+&gt;     echo &quot;$line&quot;  
+&gt;     (( Lines++ ))  
+&gt;  
+done  
+ctrctf{b4sh_1s_a_mul7ifuncti0n_sh3ll}  
+</code></pre>
+
+<p>flag: <code>ctrctf{b4sh_1s_a_mul7ifuncti0n_sh3ll}</code></p>
+
+<h1 id="persistence-forensics">Persistence[forensics]</h1>
+
+<p>forensics_persistence.arnというファイルが渡されます。mitsuさんからAutorunで開けると聞いたのでこれはハッキングラボの作り方という本でやったやつだ！！(進研ゼミ感)でテンションを上げました。VMで動かしているWindows10で<a href="https://docs.microsoft.com/ja-jp/sysinternals/downloads/sysinternals-suite">Sysinternals Suite</a>をダウンロードして、Autorun64.exeを使っていきます。今回は、素の状態で一度Autorunを動かしorigin.arnを生成してからforensics_persistence.arnと比較を行いました。<a href="https://www.atmarkit.co.jp/ait/articles/1407/28/news021.html">こちらの記事</a>が参考になります。比較すると緑色のところが差分になるので、そこを見ていくとEvilという項目があり、flagが書いてありました。<br />
+flag: <code>ctrctf{P3rs1st3nc3_5ch3dul3d_Ta3ks}</code></p>
+
+<h1 id="alice-s-password-forensics">alice&rsquo;s password[forensics]</h1>
+
+<p>Volatilityの使い方が試されます。そもそもインストールチャレンジで失敗したのでインストール方法を書いておきます。<br />
+<a href="https://github.com/volatilityfoundation/volatility">https://github.com/volatilityfoundation/volatility</a> にアクセスしてダウンロードします。vol.pyが本体なので、<code>python path/to/vol.py -f &lt;file&gt; imageinfo</code>のように使うことができます。mimikatzのような外部プラグインのダウンロードの仕方が分からなかった&hellip;(plugins/以下に入れればいけるやろと思ったらうまくいかない)<br />
+<code>python path/to/vol.py</code>を<code>vol</code>とaliasした状態で以下のようにコマンドを打ちました。参考にしたのは<a href="https://www.andreafortuna.org/2017/11/15/how-to-retrieve-users-passwords-from-a-windows-memory-dump-using-volatility/">この記事</a>と<a href="https://github.com/volatilityfoundation/volatility/wiki/Command-Reference">公式のWiki</a>です</p>
+
+<pre><code>vol -f memdump.mem imageinfo  
+vol -f memdump.mem hivelist  
+# 0xfffff8a0063fa010 sam  
+# 0xfffff8a000024010 system  
+#   
+vol -f memdump.mem --profile=Win7SP1x64 hashdump -y 0xfffff8a000024010 -s 0xfffff8a0063fa010 &gt; hashes.txt  
+</code></pre>
+
+<p>これでhashが手に入ります。</p>
+
+<pre><code>Administrator:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::  
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::  
+Aqua:1000:aad3b435b51404eeaad3b435b51404ee:813ea107eccdab91a1b9c15b67693cb4:::  
+Alice:1001:aad3b435b51404eeaad3b435b51404ee:19bf8c07d19ea196464115e443854654:::  
+</code></pre>
+
+<p><code>19bf8c07d19ea196464115e443854654</code>を<a href="https://crackstation.net/">https://crackstation.net/</a>にかけると<code>i&lt;3orange.</code>と解読されるので、これのmd5hashがZIPのパスワードになります。(うまくいかなかったので最後のmd5からmitsuさんにやってもらった)<br />
+flag: <code>ctrctf{Y0u_c4n_dump_4nd_cr4ck_hash!}</code></p>
+
+<h1 id="解けなかった問題">解けなかった問題</h1>
+
+<h1 id="once-again">once_again</h1>
+
+<h1 id="hacking-battler">Hacking Battler</h1>
+
+<h1 id="legacyblog">LegacyBlog</h1>
+
+<h1 id="終わりに">終わりに</h1>
+
+<p>毎度思うけど段階が一個しかない簡単なものしか解けてない。2020年は勉強して本質が解けるようになりたいです。あと毎回そうだけど今回もmitsuさんが無双していた。<br />
+Contrailの皆さん、年末年始お疲れさまでした。楽しかったです。</p>
+
+    </article>
+
+    <footer>
+            <ul>
+                <li><a href="https://www.blog.uta8a.net/posts/2019-12-20-vscode-remote-ssh-dev/">&laquo; 開発環境メモ: VSCodeでローカルの仮想環境にRemote SSH</a></li>
+                
+            </ul>
+    </footer>
+</section>
+<aside>
+    <ul>
+    <li><a href="https://www.blog.uta8a.net">Home</a></p>
+    <li><a href="https://www.blog.uta8a.net/posts/">Posts</a></p>
+    </ul>
+</aside>
+</main>
+
+<footer>
+    <div id="icons">
+        <div class="wrapper github">
+            <a href="https://github.com/uta8a">
+                <img src="https://www.blog.uta8a.net/assets/github.svg" alt="github-icon">
+            </a>
+        </div>
+        <div class="wrapper twitter">
+            <a href="https://twitter.com/kaito_tateyama">
+                <img src="https://www.blog.uta8a.net/assets/twitter.svg" alt="twitter-icon" href="">
+            </a>
+        </div>
+    </div>
+</footer>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+</script>
+<script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+
+</html>

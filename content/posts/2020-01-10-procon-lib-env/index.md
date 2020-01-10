@@ -199,10 +199,12 @@ workflows:
 - workflowsのversionは、全体のversionが2.1のときは記述がいらないのですが、2.0では必須です。  
 - circleciのデバッグ作業はローカルのCLIツールを用いましょう。`circleci config validate`でyamlが正しいかどうか判定でき、`circleci local execute --job build_and_test`で特定のjobを実際に回せます(dockerを使います)  
   
+## status badgeをGitHubにつける  
+  
+[公式のdocument](https://circleci.com/docs/2.0/status-badges/)を読むと簡単に導入できます。Different Styleの方が好みだったのでそうしました。  
   
 # 今後の展望  
   
-## status badgeをGitHubにつける  
 ## Logoを作ってやる気を高める  
 ## Verifyしてみる  
 ## snippetの導入  

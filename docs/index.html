@@ -73,10 +73,31 @@
             <h2>競プロ用ライブラリuta8alibの環境構築</h2>
             <p><time datetime="2020-01-10 08:13:00 &#43;0900 JST">Fri, Jan 10, 2020</time></p>
             </header>
-            uta8alibという競技プログラミング用ライブラリの環境構築について書きます。 今回環境を作るに当たって、ngtkanaさんのngtlibを参考にした部分が大きいです。ありがとうございました。
-やりたいこと  C++とRustで競プロをする example/main.rsのように、ファイル名をmain.[rs|cpp|hpp]で統一したい testを行い、CIでcheckする ライブラリのコピペを行いたいので、コードとテストは別ファイルにしたい(特にRust) あとでdocument(html)を生成することを考えて、コメントを各ファイルとテストに書けるようにしておく git submoduleを使ってみる(C++テストフレームワークCatch2の使用)  今後の展望
- status badgeをGitHubにつける How to run CI on your library for competitive programmingを参考に、今後Verifyを導入してCIを回す Git-Flowを参考に、featureブランチでライブラリ単体を開発してC++とRustが揃ったらdevelopブランチに統合、masterにまとめてマージするときにCIを走らせる snippetの導入。コードからコメントを抜いたものをsnippetファイルとして自動生成したい。(VSCode, neovim(dein.vim, UltiSnip)) ライブラリの種類を増やす(たくさん問題を解きましょう)  開発の流れ  ディレクトリ構成を決める 自分用の競プロCLIツール、chanを使う git submoduleを使う Rustのテスト方法を考える C++のテスト方法を考える Gitの開発手順を見直す CIでテストを回す  ディレクトリ構成を決める ディレクトリ構成は以下のようになっています。 srcの下にcppとrustがあり、その下にディレクトリが存在していてexampleなどがライブラリの名前になります。コードはそのディレクトリの中のmain.[rs|hpp]に書きます。 testはテストコードです。srcと同様の構成になっています。
-❯ tree -I 'Catch2|chan|cpp-test|rust-test' . ├── CMakeLists.txt ├── Dockerfile ├── libtest.sh ├── README.md ├── src │ ├── cpp │ │ ├── example │ │ │ └── main.
+            uta8alibという競技プログラミング用ライブラリの環境構築について書きます。
+今回環境を作るに当たって、ngtkanaさんのngtlibを参考にした部分が大きいです。ありがとうございました。
+やりたいこと  C++とRustで競プロをする
+ example/main.rsのように、ファイル名をmain.[rs|cpp|hpp]で統一したい
+ testを行い、CIでcheckする
+ ライブラリのコピペを行いたいので、コードとテストは別ファイルにしたい(特にRust)
+ あとでdocument(html)を生成することを考えて、コメントを各ファイルとテストに書けるようにしておく
+ git submoduleを使ってみる(C++テストフレームワークCatch2の使用)
+  今後の展望
+ status badgeをGitHubにつける
+ How to run CI on your library for competitive programmingを参考に、今後Verifyを導入してCIを回す
+ Git-Flowを参考に、featureブランチでライブラリ単体を開発してC++とRustが揃ったらdevelopブランチに統合、masterにまとめてマージするときにCIを走らせる
+ snippetの導入。コードからコメントを抜いたものをsnippetファイルとして自動生成したい。(VSCode, neovim(dein.vim, UltiSnip))
+ ライブラリの種類を増やす(たくさん問題を解きましょう)
+  開発の流れ  ディレクトリ構成を決める
+ 自分用の競プロCLIツール、chanを使う
+ git submoduleを使う
+ Rustのテスト方法を考える
+ C++のテスト方法を考える
+ Gitの開発手順を見直す
+ CIでテストを回す
+  ディレクトリ構成を決める ディレクトリ構成は以下のようになっています。
+srcの下にcppとrustがあり、その下にディレクトリが存在していてexampleなどがライブラリの名前になります。コードはそのディレクトリの中のmain.[rs|hpp]に書きます。
+testはテストコードです。srcと同様の構成になっています。
+❯ tree -I 'Catch2|chan|cpp-test|rust-test' .
             <nav>
             <ul>
                 <li><a href="/posts/2020-01-10-procon-lib-env/">Read More &raquo;</a></li>

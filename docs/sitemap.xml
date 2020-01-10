@@ -3,14 +3,19 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.blog.uta8a.net/posts/2020-01-04-contrailctf/</loc>
-    <lastmod>2020-01-04T01:08:12+09:00</lastmod>
+    <loc>https://www.blog.uta8a.net/posts/</loc>
+    <lastmod>2020-01-10T08:13:00+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.blog.uta8a.net/posts/</loc>
+    <loc>https://www.blog.uta8a.net/posts/2020-01-10-procon-lib-env/</loc>
+    <lastmod>2020-01-10T08:13:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.blog.uta8a.net/posts/2020-01-04-contrailctf/</loc>
     <lastmod>2020-01-04T01:08:12+09:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

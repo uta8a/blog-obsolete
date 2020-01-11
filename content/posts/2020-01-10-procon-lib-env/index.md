@@ -203,6 +203,10 @@ workflows:
   
 [公式のdocument](https://circleci.com/docs/2.0/status-badges/)を読むと簡単に導入できます。Different Styleの方が好みだったのでそうしました。  
   
+## LICENSEを加える  
+  
+加えました。MIT。  
+  
 # 今後の展望  
   
 ## Logoを作ってやる気を高める  

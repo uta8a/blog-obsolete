@@ -6,10 +6,36 @@
     <description>Recent content in Posts on kaito_tateyama&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 Jan 2020 06:44:01 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 12 Jan 2020 08:33:49 +0900</lastBuildDate>
     
 	<atom:link href="https://www.blog.uta8a.net/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>AtCoder ドワンゴからの挑戦状 予選</title>
+      <link>https://www.blog.uta8a.net/posts/2020-01-12-atcoder-dwango-6/</link>
+      <pubDate>Sun, 12 Jan 2020 08:33:49 +0900</pubDate>
+      
+      <guid>https://www.blog.uta8a.net/posts/2020-01-12-atcoder-dwango-6/</guid>
+      <description>B問題のみ書きます。
+ドワンゴからの挑戦状 予選 B Fusing Slimes 問題
+スライムが規則に従い左から右に流れるので、スライムが移動した距離の期待値に$(N-1)!$を掛けたものを求めよ。
+解法
+こういう問題では、区間に注目するのが典型らしい。(けんちょんさんのブログ)
+確かに、$O(N)$で解こうと思うと[xi,xi+1)に注目して$O(N)$が妥当な気がする。
+[xi,xi+1)を通るスライムの数を$ci$とおく。このとき、i+1の位置にあるスライムより左側のi個のスライムのみ考えればよい。
+iの位置にあるスライムが選ばれた場合、選ばれる確率は$\frac{1}{i}$である。この後は$c{i-1}$個のスライムが通るのと、iの位置にあるスライムが通るのを考えて期待値は$\frac{1}{i} (1 + c{i-1})$になる。
+残りの位置にあるスライムを選ぶとi+1の位置の左側にはi-1個のスライムがあることになるので、期待値は$\frac{n-1}{n}c{i-1}$となる。以上により、$ci = c{i-1} + \frac{1}{i}$となり、個数は調和級数になると分かる。
+求めるものは、$(N-1)! \times \sum{1\leq i \leq N-1}(x{i+1} - x{i}) \times c_i$となる。
+実装
+区間ごとの足し合わせで計算量は$O(N)$である。MODでの逆数テーブル、factorialテーブルを前計算して持っておけば区間に対し$O(1)$で求まる。
+前計算$O(N)$で全体で$O(N)$になる。
+コード
+https://atcoder.jp/contests/dwacon6th-prelims/submissions/9431284
+感想
+競技中は$x_j - x_i$について考えていて、$O(N^2)$の解法が浮かんだのでそこから計算量を落とそうとしていた。区間について考える。覚えておきます。
+ModIntほしい。あとModInvもほしい。</description>
+    </item>
     
     <item>
       <title>Codeforces Hello 2020 Writeup</title>

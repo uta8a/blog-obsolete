@@ -19,33 +19,25 @@
     </header>
 
     <article>
-    
-
-<p>InterKosenCTF2019にmitsuさんと二人で、チーム StarrySky として参加しました。成績はチームで13位/91人が正の得点、個人では12位でした。得点は、4332ptsのうち2944ptsを入れました。<br />
-<img src="p-1.png" alt="p-1" /><br />
-勝手にライバルだと思っている おたまこうせん, Wani Hackase, 生活習慣崩壊ズ,  Contrailには完敗です。今回Contrail強かったですね&hellip;<br />
-<img src="p-2.png" alt="p-2" /><br />
-PwnとWebが課題ですね<br />
-<img src="p-3.png" alt="p-3" /><br />
-safermとE-Sequel-Injectionが通せたのは嬉しかったです<br />
-<img src="p-4.png" alt="p-4" /><br />
+    <p>InterKosenCTF2019にmitsuさんと二人で、チーム StarrySky として参加しました。成績はチームで13位/91人が正の得点、個人では12位でした。得点は、4332ptsのうち2944ptsを入れました。         <br>
+<img src="p-1.png" alt="p-1">         <br>
+勝手にライバルだと思っている おたまこうせん, Wani Hackase, 生活習慣崩壊ズ,  Contrailには完敗です。今回Contrail強かったですね&hellip;         <br>
+<img src="p-2.png" alt="p-2">         <br>
+PwnとWebが課題ですね         <br>
+<img src="p-3.png" alt="p-3">         <br>
+safermとE-Sequel-Injectionが通せたのは嬉しかったです         <br>
+<img src="p-4.png" alt="p-4">         <br>
 うごくペンギンさんかわいいです</p>
-
 <h2 id="writeup">Writeup</h2>
-
 <h3 id="welcome">Welcome</h3>
-
-<p>[200pts, 77solved, warmup, welcome]<br />
-Slackでflagがアナウンスされました<br />
+<p>[200pts, 77solved, warmup, welcome]         <br>
+Slackでflagがアナウンスされました         <br>
 <code>KosenCTF{g3t_r34dy_f0r_InterKosenCTF_2019}</code></p>
-
 <h3 id="kurukuru-shuffle">Kurukuru Shuffle</h3>
-
-<p>[200pts, 53solved, easy, crypto]<br />
-<code>shuffle.py</code>を見ると、ランダムに<code>0</code>から<code>L-1</code>の数字を3つ作り、それをもとにしてflagの2つの文字のswapを<code>L</code>回繰り返しています。ランダムが出てきたときは、全探索するか、ランダムな数値をいっぱいとってきて次が予測できないか、結果からのエスパーのどれかを考えるとよさそうなので、全探索を考えます。<br />
-<code>L=53</code>と<code>secret.py</code>から分かるので、$O(L^3)$をしても大丈夫です。<code>a</code>, <code>b</code>,<code>k</code>の値を全探索していきましょう。<br />
+<p>[200pts, 53solved, easy, crypto]                 <br>
+<code>shuffle.py</code>を見ると、ランダムに<code>0</code>から<code>L-1</code>の数字を3つ作り、それをもとにしてflagの2つの文字のswapを<code>L</code>回繰り返しています。ランダムが出てきたときは、全探索するか、ランダムな数値をいっぱいとってきて次が予測できないか、結果からのエスパーのどれかを考えるとよさそうなので、全探索を考えます。       <br>
+<code>L=53</code>と<code>secret.py</code>から分かるので、$O(L^3)$をしても大丈夫です。<code>a</code>, <code>b</code>,<code>k</code>の値を全探索していきましょう。      <br>
 また、<code>i</code>の値は<code>k-&gt;2k-&gt;3k-&gt;...-&gt;(L+1)k(mod L)</code>と変化し、最後の<code>(L+1)k</code>は使われないので、<code>Lk</code>からこれを逆順にたどればよいと分かります。</p>
-
 <pre><code>for k in range(1,L):        
     for a in range(0,L):        
         for b in range(0,L):        
@@ -59,10 +51,7 @@ Slackでflagがアナウンスされました<br />
         
             # encrypted = &quot;&quot;.join(encrypted)        
             print(&quot;&quot;.join(e))        
-</code></pre>
-
-<p>実際はこれでたくさんの候補がでてきてしまいます。</p>
-
+</code></pre><p>実際はこれでたくさんの候補がでてきてしまいます。</p>
 <pre><code>$ python3 shuffle.py | grep ^KosenCTF{        
 KosenCTF{5s4m1m1_m4rk_s3np41_1s_s38l9y_cut3_34769l1u}        
 KosenCTF{5s4m1m1_m4rk_s3np41_1s_s38l9y_cut3_34769l1u}        
@@ -70,43 +59,28 @@ KosenCTF{5s4m1m1_m4sk_s3np41_1s_r34l9y_cut3_38769l1u}
 KosenCTF{5s4m1m1_m4sk_s3np41_1s_r34l9y_cut3_38769l1u}        
 KosenCTF{us4m1m1_m4sk_s3np41_1s_r34lly_cut3_38769915}        
 KosenCTF{us4m1m1_m4sk_s3np41_1s_r34lly_cut3_38769915}        
-</code></pre>
-
-<p>これらを順にsubmitしていくと、当たりました。<br />
+</code></pre><p>これらを順にsubmitしていくと、当たりました。     <br>
 <code>KosenCTF{us4m1m1_m4sk_s3np41_1s_r34lly_cut3_38769915}</code></p>
-
 <h3 id="uploader">uploader</h3>
-
-<p>[227pts, 34solved, warmup, web]<br />
+<p>[227pts, 34solved, warmup, web]       <br>
 ソースコードが与えられているので読んでみると、以下の2点に気づきます</p>
-
-<p>1.SQLiteなので、SQL Injectionができそう。特にsearch<br />
+<p>1.SQLiteなので、SQL Injectionができそう。特にsearch       <br>
 2.<code>if (count($rows) == 1 &amp;&amp; $rows[0][0] === $name &amp;&amp; $rows[0][1] == $_GET['passcode'])</code>が、passcodeのところで<code>==</code>が使われていて怪しい。</p>
-
-<p>ここで、2番に時間を使ってしまったのですが間違いでした。<code>==</code>の両端がユーザー入力に起因するものであれば話が早いのですが、今回は片方が固定されているので難しいようです。例えば、passcodeが<code>0e123</code>なら<code>0e123==0</code>がTrueになるのですが、今回は違いました。<br />
-1.を考えていきます。searchboxに<code>') --</code>を入れてみるとうまく動いたので、<code>UNION</code>してpasscodeも一緒に抜き出せばよさそうです。<br />
-<code>') UNION SELECT passcode FROM files --</code>とsearchboxに入力して、色々出てくるものを片っ端から入力していきましょう。今回はユーザーがアップロード可能なのでハズレもたくさんあります。<br />
-<code>&quot;the_longer_the_stronger_than_more_complicated&quot;</code>が<code>secret_file</code>のpasscodeになることが分かりました。これで<code>secret_file</code>がダウンロードできます。<br />
+<p>ここで、2番に時間を使ってしまったのですが間違いでした。<code>==</code>の両端がユーザー入力に起因するものであれば話が早いのですが、今回は片方が固定されているので難しいようです。例えば、passcodeが<code>0e123</code>なら<code>0e123==0</code>がTrueになるのですが、今回は違いました。       <br>
+1.を考えていきます。searchboxに<code>') -- </code>を入れてみるとうまく動いたので、<code>UNION</code>してpasscodeも一緒に抜き出せばよさそうです。     <br>
+<code>') UNION SELECT passcode FROM files --</code>とsearchboxに入力して、色々出てくるものを片っ端から入力していきましょう。今回はユーザーがアップロード可能なのでハズレもたくさんあります。     <br>
+<code>&quot;the_longer_the_stronger_than_more_complicated&quot;</code>が<code>secret_file</code>のpasscodeになることが分かりました。これで<code>secret_file</code>がダウンロードできます。     <br>
 <code>KosenCTF{y0u_sh0u1d_us3_th3_p1ac3h01d3r}</code></p>
-
 <h3 id="temple-of-time">Temple of Time</h3>
-
-<p>[285pts, 25solved, medium, forensics, web]<br />
-pcapngファイルが与えられています。Network問ですね！<br />
-wiresharkで開くと、パケットの量が多いのでとりあえず一つ<code>TCP follows</code>します<br />
+<p>[285pts, 25solved, medium, forensics, web]       <br>
+pcapngファイルが与えられています。Network問ですね！ <br>
+wiresharkで開くと、パケットの量が多いのでとりあえず一つ<code>TCP follows</code>します <br>
 すると、どうやら以下のようなpayloadを送っていることが分かります。</p>
-
 <pre><code>/index.php?portal='OR(SELECT(IF(ORD(SUBSTR((SELECT+password+FROM+Users+WHERE+username='admin'),1,1))=57,SLEEP(1),'')))#    
-</code></pre>
-
-<p>Blind SQL Injectionですね。パスワードを復元しましょう。<br />
+</code></pre><p>Blind SQL Injectionですね。パスワードを復元しましょう。 <br>
 &hellip;wiresharkの使い方が分からないので以下のように<code>string| grep</code>してtextファイルに出力し、それをpythonで処理しました。</p>
-
 <pre><code>$ strings 40142c592afd88a78682234e2d5cada9.pcapng | grep GET &gt; text.txt    
-</code></pre>
-
-<p>python code</p>
-
+</code></pre><p>python code</p>
 <pre><code>import urllib.parse    
 f = open('./text.txt', 'r')    
 string = f.readline()    
@@ -126,10 +100,7 @@ while string:
     string = f.readline()    
 for i in range(40):    
     print(chr(ans[i]), end=&quot;&quot;)    
-</code></pre>
-
-<p>出力</p>
-
+</code></pre><p>出力</p>
 <pre><code>...    
 37 92    
 37 93    
@@ -141,16 +112,11 @@ for i in range(40):
 37 125    
 37 126    
 KosenCTF{t1m3_b4s3d_4tt4ck_v31ls_1t}    
-</code></pre>
-
-<p>flagが得られました。<br />
+</code></pre><p>flagが得られました。 <br>
 <code>KosenCTF{t1m3_b4s3d_4tt4ck_v31ls_1t}</code></p>
-
 <h3 id="lost-world">lost world</h3>
-
-<p>[303pts, 23solved, easy, forensics]<br />
+<p>[303pts, 23solved, easy, forensics]     <br>
 最初にVirtualBoxで入ってみると<code>root</code>で入れなかったので、もしかしてと思ってvdi自体を<code>strings | grep</code>しました</p>
-
 <pre><code>$ strings lost_world.vdi| grep KosenCTF{      
 Jul 30 21:54:58 interkosenctf kernel: [  384.221654] KosenCTF{???????????????????????????????}^      
 Jul 30 21:56:03 interkosenctf kernel: [    7.089636] KosenCTF{???????????????????????????????}^      
@@ -163,27 +129,17 @@ Aug 11 12:26:37 interkosenctf kernel: [    1.134291] KosenCTF{u_c4n_r3s3t_r00t_p
 MESSAGE=KosenCTF{???????????????????????????????}^      
 MESSAGE=KosenCTF{???????????????????????????????}^      
 MESSAGE=KosenCTF{u_c4n_r3s3t_r00t_p4ssw0rd_1n_VM}^      
-</code></pre>
-
-<p>一回起動したおかげで、stringsで解けるようになってしまったみたい。<br />
+</code></pre><p>一回起動したおかげで、stringsで解けるようになってしまったみたい。 <br>
 <code>KosenCTF{u_c4n_r3s3t_r00t_p4ssw0rd_1n_VM}</code></p>
-
 <h3 id="fastbin-tutorial">fastbin tutorial</h3>
-
-<p>[250pts, 30solved, easy, pwn]<br />
-面白い問題でした。が、適当にmallocとfreeを繰り返しreadすると解けてしまった&hellip;偶然ガチャを引いてしまった気分なので復習したいです(手順も覚えてません、すみません&hellip;)<br />
+<p>[250pts, 30solved, easy, pwn]       <br>
+面白い問題でした。が、適当にmallocとfreeを繰り返しreadすると解けてしまった&hellip;偶然ガチャを引いてしまった気分なので復習したいです(手順も覚えてません、すみません&hellip;)   <br>
 <code>KosenCTF{y0ur_n3xt_g0al_is_t0_und3rst4nd_fastbin_corruption_attack_m4yb3}</code></p>
-
 <h3 id="pascal-homomorphicity">pascal homomorphicity</h3>
-
-<p>[333pts, 20solved, hard, crypto]<br />
+<p>[333pts, 20solved, hard, crypto]       <br>
 まずは手元で与えられたものを動かして感覚を掴みます。よくみると、<code>pow</code>のとり方が変なことに気づきます。</p>
-
 <pre><code>c = pow(1 + n, key, n * n)      
-</code></pre>
-
-<p>今知りたいのはkeyです。二項定理で展開すると、$k=key$として$c = (1+n)^k = 1 + nk \mod n^2 $となります。ここで、<code>c-1</code>はkeyを因数に持つこと、<code>n</code>はとても大きな2つの素数の積であることを考えると、<code>c</code>を問題サーバから2つとってきて、そのgcdを求めてやればよいとわかります(<code>p</code>,<code>q</code>がかぶる可能性がゼロではないので、実際には3つとって3パターン試しました)</p>
-
+</code></pre><p>今知りたいのはkeyです。二項定理で展開すると、$k=key$として$c = (1+n)^k = 1 + nk \mod n^2 $となります。ここで、<code>c-1</code>はkeyを因数に持つこと、<code>n</code>はとても大きな2つの素数の積であることを考えると、<code>c</code>を問題サーバから2つとってきて、そのgcdを求めてやればよいとわかります(<code>p</code>,<code>q</code>がかぶる可能性がゼロではないので、実際には3つとって3パターン試しました)</p>
 <pre><code>enc = 1117592785756945002738587405183374707997236278832876752382077257896599451757365415136677068649202271625728711821443802541774251719291043243174615118338499367764139108608978912484729674259016683702441635510210410592886340310951498663601956453368016849654044425358486660239829076023396143385365334100325762893863056704023424484236267267163330075803211115662510582831949315847282719696491488496688402066546770670414750388491616 # とってきた値      
 enc2 = 1426474518666386316952373644886367601067639538435511328875578111313507804333236413595323851672437342906978654624082015584969147016118358685644525710591604212444576378649957985369742169965571282944581336873961524078849506868840212988217246723168750947170868834263585239768592166304488082428998836788690037084234273668740247284858651061564029780768978530663053893783468283981333638372026457086457504452676555823252793501250656 # とってきた値      
 def gcd(a, b):      
@@ -193,29 +149,18 @@ def gcd(a, b):
 key = gcd(enc-1, enc2-1)      
 ans = key.to_bytes(200,'big')      
 print(ans)      
-</code></pre>
-
-<p>得られた結果は以下の通りです。gcdは高速なのでそれほど時間はかかりませんでした。</p>
-
+</code></pre><p>得られた結果は以下の通りです。gcdは高速なのでそれほど時間はかかりませんでした。</p>
 <pre><code>b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00KosenCTF{Th15_15_t00_we4k_p41ll1er_crypt05y5tem}'      
-</code></pre>
-
-<p>flagが得られました。<br />
-flagから推察するに、<a href="https://ja.wikipedia.org/wiki/Paillier%E6%9A%97%E5%8F%B7">Paillier暗号</a>なるものがあるそうです。flagを得る前に、mitsuさんが問題で扱われている暗号に加法準同型性があることを指摘していました。流石mitsuさんだ&hellip;<br />
+</code></pre><p>flagが得られました。   <br>
+flagから推察するに、<a href="https://ja.wikipedia.org/wiki/Paillier%E6%9A%97%E5%8F%B7">Paillier暗号</a>なるものがあるそうです。flagを得る前に、mitsuさんが問題で扱われている暗号に加法準同型性があることを指摘していました。流石mitsuさんだ&hellip;   <br>
 <code>KosenCTF{Th15_15_t00_we4k_p41ll1er_crypt05y5tem}</code></p>
-
 <h3 id="saferm">saferm</h3>
-
-<p>[434pts, 13solved, medium, forensics, reversing]<br />
+<p>[434pts, 13solved, medium, forensics, reversing]       <br>
 ディスクイメージが与えられるので、調べてみます</p>
-
 <pre><code>$ file disk.img  
 disk.img: DOS/MBR boot sector; partition 1 : ID=0x83, start-CHS (0x0,0,2), end-CHS (0x1,70,5), startsector 1, 20479 sectors  
-</code></pre>
-
-<p>USBデバイスとのことなので、ファイルシステムがFATかな？と思って <a href="https://github.com/Gregwar/fatcat">fatcat</a> を試しましたがうまく行かず。<br />
+</code></pre><p>USBデバイスとのことなので、ファイルシステムがFATかな？と思って <a href="https://github.com/Gregwar/fatcat">fatcat</a> を試しましたがうまく行かず。<br>
 そこで、7zipで無理やり解凍してみました。</p>
-
 <pre><code>$ 7z x disk.img  
   
 7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21  
@@ -256,12 +201,9 @@ Alternate Streams: 2
 Alternate Streams Size: 262428  
 Size:       2319696  
 Compressed: 10485760  
-</code></pre>
-
-<p><code>File System = NTFS 3.1</code>が見えますね。どうやらNTFSのようなので、別のツールを探します。<br />
-探してみると、<a href="https://github.com/Lazza/RecuperaBit">RecuperaBit</a>が見つかりました。このツールを使って、<code>document.zip</code>というファイルが復元できました。<br />
+</code></pre><p><code>File System = NTFS 3.1</code>が見えますね。どうやらNTFSのようなので、別のツールを探します。<br>
+探してみると、<a href="https://github.com/Lazza/RecuperaBit">RecuperaBit</a>が見つかりました。このツールを使って、<code>document.zip</code>というファイルが復元できました。<br>
 しかし、zipは開けません。7zipで展開した時の<code>saferm</code>というファイルに注目します。ためしに適当に<code>a.txt</code>というファイルを作って<code>saferm</code>を使ってみます。</p>
-
 <pre><code>$ ltrace ./saferm a.txt  
 fopen(&quot;a.txt&quot;, &quot;rb+&quot;)                                      = 0x5653ddbd4260  
 fopen(&quot;/dev/urandom&quot;, &quot;rb&quot;)                                = 0x5653ddbd4490  
@@ -271,21 +213,12 @@ fread(0x7fff8571acd8, 1, 8, 0x5653ddbd4260)                = 0
 fclose(0x5653ddbd4260)                                     = 0  
 unlink(&quot;a.txt&quot;)                                            = 0  
 +++ exited (status 0) +++  
-</code></pre>
-
-<p>unlink(削除処理)の前になにかしているようです。どうなっているのか知るために、<a href="https://github.com/radare/radare2">radare2</a>を用いてunlink部分を<code>ff</code>で潰します。safermを実行するとSEGVしますが、unlink以降の流れは無視して良いのでOKです。ltraceを見るに、8byte区切りで何かが行われてそうなので、8文字区切りでわかりやすくなるようa.txtを作り、<code>$ ./saferm a.txt</code>します。</p>
-
+</code></pre><p>unlink(削除処理)の前になにかしているようです。どうなっているのか知るために、<a href="https://github.com/radare/radare2">radare2</a>を用いてunlink部分を<code>ff</code>で潰します。safermを実行するとSEGVしますが、unlink以降の流れは無視して良いのでOKです。ltraceを見るに、8byte区切りで何かが行われてそうなので、8文字区切りでわかりやすくなるようa.txtを作り、<code>$ ./saferm a.txt</code>します。</p>
 <pre><code>12345678876543219  
-</code></pre>
-
-<p>が、</p>
-
+</code></pre><p>が、</p>
 <pre><code>����7,)����2) 9  
-</code></pre>
-
-<p>のように変化しました。<br />
+</code></pre><p>のように変化しました。<br>
 Ghidraで見てやると、以下のような関数<code>saferm</code>を発見します。</p>
-
 <pre><code>​  
 void saferm(EVP_PKEY_CTX *pEParm1)  
 ​  
@@ -330,10 +263,7 @@ void saferm(EVP_PKEY_CTX *pEParm1)
   }  
   return;  
 }  
-</code></pre>
-
-<p>本質的には</p>
-
+</code></pre><p>本質的には</p>
 <pre><code>while( true ) {  
       local_18 = fread(&amp;local_30,1,8,local_28);  
       if (local_18 != 8) break;  
@@ -341,23 +271,14 @@ void saferm(EVP_PKEY_CTX *pEParm1)
       fseek(local_28,-8,1);  
       fwrite(&amp;local_30,8,1,local_28);  
     }  
-</code></pre>
-
-<p>ここが大事で、要はある定数local_20(=<code>C</code>とおく)と、消したいファイルから8byteとってきたものをXORして元のファイルを書き換えているという処理がされています。<br />
-この定数がわかれば、<code>X xor C xor C = X</code>より、元のzipが復元できそうです。<br />
-定数はランダムなので全探索を考えましたが、計算量は<code>256^8</code>と厳しいので、推測できないか考えます。<br />
+</code></pre><p>ここが大事で、要はある定数local_20(=<code>C</code>とおく)と、消したいファイルから8byteとってきたものをXORして元のファイルを書き換えているという処理がされています。<br>
+この定数がわかれば、<code>X xor C xor C = X</code>より、元のzipが復元できそうです。<br>
+定数はランダムなので全探索を考えましたが、計算量は<code>256^8</code>と厳しいので、推測できないか考えます。<br>
 いくつかの種類のファイルでzipを作り前の8byteを見たところ、</p>
-
 <pre><code>50 4b 03 04 14 00 08 00  
-</code></pre>
-
-<p>となっていたので、これになるような定数を探すことにしました。前の8byteだけ見ればよくて、定数<code>C</code>は</p>
-
+</code></pre><p>となっていたので、これになるような定数を探すことにしました。前の8byteだけ見ればよくて、定数<code>C</code>は</p>
 <pre><code>C = [46, 87, 173, 46, 255, 200, 194, 73]  
-</code></pre>
-
-<p>となります。これを用いて8byteずつ読み込んでXORして新しいファイルに書き込むスクリプトを書きましたが、それでもうまくいきません。<code>hexdump -C edit.zip</code>とみてやると、<code>locument</code>などの文字が見えたのでこれが<code>document</code>となるように<code>C</code>を修正しました。(以下のスクリプトの<code>xor_vec</code>にあたります)</p>
-
+</code></pre><p>となります。これを用いて8byteずつ読み込んでXORして新しいファイルに書き込むスクリプトを書きましたが、それでもうまくいきません。<code>hexdump -C edit.zip</code>とみてやると、<code>locument</code>などの文字が見えたのでこれが<code>document</code>となるように<code>C</code>を修正しました。(以下のスクリプトの<code>xor_vec</code>にあたります)</p>
 <pre><code>xor_vec = [46, 87, 173, 46, 255, 200, 202, 73]  
 import struct  
 f = open(&quot;document.zip&quot;, &quot;rb&quot;)  
@@ -374,33 +295,23 @@ f.close()
 outfile = open(&quot;outfile.zip&quot;, &quot;wb&quot;)  
 outfile.write(outdata)  
 outfile.close()  
-</code></pre>
-
-<p>zipを解凍すると、ねこちゃんがいるpdfが出てきました。<br />
+</code></pre><p>zipを解凍すると、ねこちゃんがいるpdfが出てきました。<br>
 <code>KosenCTF{p00r_shr3dd3r}</code></p>
-
 <h3 id="survey">Survey</h3>
-
-<p>[212pts, 37solved, warmup, survey]<br />
-Surveyが時間によらないとアナウンスされていたので、ゆっくり埋めることができました。終わった後だと埋める気にならないので、競技中にアンケートをフェアに行うのはとても良いシステムだと思います。<br />
+<p>[212pts, 37solved, warmup, survey]       <br>
+Surveyが時間によらないとアナウンスされていたので、ゆっくり埋めることができました。終わった後だと埋める気にならないので、競技中にアンケートをフェアに行うのはとても良いシステムだと思います。   <br>
 <code>KosenCTF{th4nk_y0u_f0r_pl4y1ng_InterKosenCTF_2019}</code></p>
-
 <h3 id="e-sequel-injection">E-Sequel-Injection</h3>
-
-<p>[500pts, 10solved, hard, web]<br />
-個人的に好きな分野です。いくつかの単語が使用禁止されているときに、それをBypassしてください。というjail escape系と解釈しています。(自分の中では)<br />
-まず、方針を考えると、adminとしてログインするのが最終目標なので、<br />
-1.adminのpasswordのleak-&gt;usernameでリークさせられないだろうか？<br />
-2.adminとして、後ろでなんとかする<br />
-の2つが思い浮かびました。<br />
+<p>[500pts, 10solved, hard, web]       <br>
+個人的に好きな分野です。いくつかの単語が使用禁止されているときに、それをBypassしてください。というjail escape系と解釈しています。(自分の中では)<br>
+まず、方針を考えると、adminとしてログインするのが最終目標なので、<br>
+1.adminのpasswordのleak-&gt;usernameでリークさせられないだろうか？<br>
+2.adminとして、後ろでなんとかする<br>
+の2つが思い浮かびました。<br>
 次に、与えられたソースコードをよく眺めます。</p>
-
 <pre><code>$pattern = '/(\s|UNION|OR|=|TRUE|FALSE|&gt;|&lt;|IS|LIKE|BETWEEN|REGEXP|--|#|;|\/|\*|\|)/i';  
-</code></pre>
-
-<p>ここで禁止される単語がわかりますね。ORが潰されているのでpassw&rdquo;or&rdquo;dもダメです。というわけで、1.の方針はやばそうです。<br />
+</code></pre><p>ここで禁止される単語がわかりますね。ORが潰されているのでpassw&quot;or&quot;dもダメです。というわけで、1.の方針はやばそうです。<br>
 passwordだけでなんとかしてみます。<a href="https://medium.com/@gregIT/ringzer0team-ctf-sqli-challenges-part-1-6ceff556f4a8">SQLiについての記事</a>を見ると、比較系は以下のようになっています</p>
-
 <pre><code>= (comparison), &lt;=&gt;, &gt;=, &gt;, &lt;=, &lt;, &lt;&gt;, !=, IS, LIKE, REGEXP, IN  
 BETWEEN, CASE, WHEN, THEN, ELSE  
 NOT  
@@ -408,22 +319,17 @@ AND, &amp;&amp;
 XOR  
 OR, ||  
 = (assignment), :=  
-</code></pre>
-
-<p><code>IN</code>, <code>NOT</code>あたりが使えそうですね。<br />
+</code></pre><p><code>IN</code>, <code>NOT</code>あたりが使えそうですね。<br>
 実際にいろいろ打ち込んでいきます。</p>
-
-<p><code>' or 1=1 #</code> 定番。スペースとシャープとイコールとORで引っかかります。<br />
-<code>'or(1=1)#</code> スペースなしで出来ました<br />
-<code>'IN('Tokyo')#</code> #だけでできるようになりました<br />
-<code>'IN('Tokyo')order by 'Tokyo'</code> orが入っています<br />
-<code>'IN('Tokyo')and!'0'</code> これで通りました。 -&gt; <code>SELECT username from users where username='admin' and password=''IN('Tokyo')and!'0'</code><br />
-流れとしては、まずは禁止文字を使って、徐々に禁止文字の種類を減らすように頑張っていくとよさそうです。<br />
+<p><code>' or 1=1 #</code> 定番。スペースとシャープとイコールとORで引っかかります。<br>
+<code>'or(1=1)#</code> スペースなしで出来ました<br>
+<code>'IN('Tokyo')#</code> #だけでできるようになりました<br>
+<code>'IN('Tokyo')order by 'Tokyo'</code> orが入っています<br>
+<code>'IN('Tokyo')and!'0'</code> これで通りました。 -&gt; <code>SELECT username from users where username='admin' and password=''IN('Tokyo')and!'0'</code><br>
+流れとしては、まずは禁止文字を使って、徐々に禁止文字の種類を減らすように頑張っていくとよさそうです。<br>
 <code>KosenCTF{Smash_the_holy_barrier_and_follow_me_in_the_covenant_of_blood_and_blood}</code></p>
-
 <h1 id="最後に">最後に</h1>
-
-<p>もっともっと精進して、一つでも多くのflagを速く通せるようにがんばりたいです。悔しいです。<br />
+<p>もっともっと精進して、一つでも多くのflagを速く通せるようにがんばりたいです。悔しいです。<br>
 作問者はすごい人々だなあと思いました。ツールゲーではなく、頭をひねるものが多くてとても楽しかったです。ありがとうございました。</p>
 
     </article>

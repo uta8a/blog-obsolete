@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on kaito_tateyama&#39;s blog</title>
@@ -6,10 +6,28 @@
     <description>Recent content in Posts on kaito_tateyama&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 Jan 2020 08:33:49 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 03 May 2020 23:42:39 +0000</lastBuildDate>
     
 	<atom:link href="https://www.blog.uta8a.net/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ICTSC 2019 一次予選 コンテナが作れない 復習</title>
+      <link>https://www.blog.uta8a.net/posts/2020-05-04-ictsc-container/</link>
+      <pubDate>Sun, 03 May 2020 23:42:39 +0000</pubDate>
+      
+      <guid>https://www.blog.uta8a.net/posts/2020-05-04-ictsc-container/</guid>
+      <description>復習する問題は コンテナがつくれない です。
+目標 本質的に、Dockerfileの修正が求められているので、以下のような問題を作りました。
+ 問題 https://github.com/uta8a/ictsc/tree/master/repo-2019-pre-1/container-1 Dockerfileを変更して、ホストPCからhttp://192.168.33.10/indexにアクセスしてテーブルが以下のように表示されればOK  環境  ブラウザ: Chrome - nginx/index.htmlでhtml templateを使っています VirtualBox Vagrant - Ubuntu18.04を動かして、その上でDockerなどを動かしています  遊び方 ホストからUbuntu18.04環境に入る まず、git clone https://github.com/uta8a/ictscで問題リポジトリを持ってきます。
+ictsc/repo-2019-pre-1/container-1でvagrant up, vagrant sshでubuntu18.04環境に入る。以降はUbuntu18.04内でのコマンドになります。
+setup 以下のように権限をinstall/以下のシェルスクリプトに与えて実行し環境を作ります。ここは時間がかかるので気長に待ちましょう。
+vagrant@vagrant $ chmod +x ~/src/install/*.sh cd ~/src/install/ sudo ./root.sh # update &amp;amp; install sudo ./install.docker.sh # docker install sudo ./install.docker-compose.sh # docker-compose install source ~/.bashrc dockerコマンドやdocker-composeコマンドが動いたらOKです
+dev: トラブルシューティングのやり方 基本的にはdocker-composeコマンドを打つ -&amp;gt; 立ち上がらなければ原因を調べるという方針です。僕は以下のように、buildしてupしてexecでコンテナ内に入り調べました。
+想定解においてはbackend/Dockerfileのみを変更すればOKです。
+ref. docker-compose https://docs.docker.com/compose/
+sudo docker-compose build sudo docker-compose up -d sudo docker-compose exec backend /bin/sh ## down sudo docker-compose down check: 合っているかどうかの判定 ホストPCからブラウザでhttp://192.</description>
+    </item>
     
     <item>
       <title>AtCoder ドワンゴからの挑戦状 予選</title>
@@ -23,10 +41,10 @@
 解法
 こういう問題では、区間に注目するのが典型らしい。(けんちょんさんのブログ)
 確かに、$O(N)$で解こうと思うと[xi,xi+1)に注目して$O(N)$が妥当な気がする。
-[xi,xi+1)を通るスライムの数を$ci$とおく。このとき、i+1の位置にあるスライムより左側のi個のスライムのみ考えればよい。
-iの位置にあるスライムが選ばれた場合、選ばれる確率は$\frac{1}{i}$である。この後は$c{i-1}$個のスライムが通るのと、iの位置にあるスライムが通るのを考えて期待値は$\frac{1}{i} (1 + c{i-1})$になる。
-残りの位置にあるスライムを選ぶとi+1の位置の左側にはi-1個のスライムがあることになるので、期待値は$\frac{n-1}{n}c{i-1}$となる。以上により、$ci = c{i-1} + \frac{1}{i}$となり、個数は調和級数になると分かる。
-求めるものは、$(N-1)! \times \sum{1\leq i \leq N-1}(x{i+1} - x{i}) \times c_i$となる。
+[xi,xi+1)を通るスライムの数を$c_i$とおく。このとき、i+1の位置にあるスライムより左側のi個のスライムのみ考えればよい。
+iの位置にあるスライムが選ばれた場合、選ばれる確率は$\frac{1}{i}$である。この後は$c_{i-1}$個のスライムが通るのと、iの位置にあるスライムが通るのを考えて期待値は$\frac{1}{i} (1 + c_{i-1})$になる。
+残りの位置にあるスライムを選ぶとi+1の位置の左側にはi-1個のスライムがあることになるので、期待値は$\frac{n-1}{n}c_{i-1}$となる。以上により、$c_i = c_{i-1} + \frac{1}{i}$となり、個数は調和級数になると分かる。
+求めるものは、$(N-1)! \times \sum{1\leq i \leq N-1}(x_{i+1} - x_{i}) \times c_i$となる。
 実装
 区間ごとの足し合わせで計算量は$O(N)$である。MODでの逆数テーブル、factorialテーブルを前計算して持っておけば区間に対し$O(1)$で求まる。
 前計算$O(N)$で全体で$O(N)$になる。
@@ -56,9 +74,11 @@ $1 \leq k \leq n$よりこれらを足し合わせて$m$で割れば答えが得
 実装
 最後の足し合わせるところで$O(N)$であるので、$N \leq 250000$から各framed segmentのサイズごとは$O(\log N)$以下の計算量である必要がある。
 ここで、factorialは$f(n) = f(n-1) \times n$であることを考えると、これは配列と非常に相性がよく、前計算をしてその配列を使えばよいとわかる。
-vector&amp;lt;i64&amp;gt; fact(n+1); fact[0] = 1; for(i64 i=1;i&amp;lt;=n;i++)fact[i] = fact[i-1]*i%m; for (k=1;k&amp;lt;=n;k++){ res += (サイズkのframed segmentの数) }  注意としては、サイズkのframed segmentの数を求める時のoverflowである。一つ掛けるごとにMODをとらなければ違う答えになってしまった。
+vector&amp;lt;i64&amp;gt; fact(n+1); fact[0] = 1; for(i64 i=1;i&amp;lt;=n;i++)fact[i] = fact[i-1]*i%m; for (k=1;k&amp;lt;=n;k++){ res += (サイズkのframed segmentの数) } 注意としては、サイズkのframed segmentの数を求める時のoverflowである。一つ掛けるごとにMODをとらなければ違う答えになってしまった。
 計算量は前計算$O(N)$, resに足し合わせて$O(N)$で全体で$O(N)$である。
-コード</description>
+コード
+https://codeforces.com/contest/1284/submission/68567949
+感想</description>
     </item>
     
     <item>
@@ -69,29 +89,11 @@ vector&amp;lt;i64&amp;gt; fact(n+1); fact[0] = 1; for(i64 i=1;i&amp;lt;=n;i++)fa
       <guid>https://www.blog.uta8a.net/posts/2020-01-10-procon-lib-env/</guid>
       <description>uta8alibという競技プログラミング用ライブラリの環境構築について書きます。
 今回環境を作るに当たって、ngtkanaさんのngtlibを参考にした部分が大きいです。ありがとうございました。
-やりたいこと  C++とRustで競プロをする
- example/main.rsのように、ファイル名をmain.[rs|cpp|hpp]で統一したい
- testを行い、CIでcheckする
- ライブラリのコピペを行いたいので、コードとテストは別ファイルにしたい(特にRust)
- あとでdocument(html)を生成することを考えて、コメントを各ファイルとテストに書けるようにしておく
- git submoduleを使ってみる(C++テストフレームワークCatch2の使用)
-  今後の展望
- status badgeをGitHubにつける
- How to run CI on your library for competitive programmingを参考に、今後Verifyを導入してCIを回す
- Git-Flowを参考に、featureブランチでライブラリ単体を開発してC++とRustが揃ったらdevelopブランチに統合、masterにまとめてマージするときにCIを走らせる
- snippetの導入。コードからコメントを抜いたものをsnippetファイルとして自動生成したい。(VSCode, neovim(dein.vim, UltiSnip))
- ライブラリの種類を増やす(たくさん問題を解きましょう)
-  開発の流れ  ディレクトリ構成を決める
- 自分用の競プロCLIツール、chanを使う
- git submoduleを使う
- Rustのテスト方法を考える
- C++のテスト方法を考える
- Gitの開発手順を見直す
- CIでテストを回す
-  ディレクトリ構成を決める ディレクトリ構成は以下のようになっています。
+やりたいこと  C++とRustで競プロをする example/main.rsのように、ファイル名をmain.[rs|cpp|hpp]で統一したい testを行い、CIでcheckする ライブラリのコピペを行いたいので、コードとテストは別ファイルにしたい(特にRust) あとでdocument(html)を生成することを考えて、コメントを各ファイルとテストに書けるようにしておく git submoduleを使ってみる(C++テストフレームワークCatch2の使用)  今後の展望
+ status badgeをGitHubにつける How to run CI on your library for competitive programmingを参考に、今後Verifyを導入してCIを回す Git-Flowを参考に、featureブランチでライブラリ単体を開発してC++とRustが揃ったらdevelopブランチに統合、masterにまとめてマージするときにCIを走らせる snippetの導入。コードからコメントを抜いたものをsnippetファイルとして自動生成したい。(VSCode, neovim(dein.vim, UltiSnip)) ライブラリの種類を増やす(たくさん問題を解きましょう)  開発の流れ  ディレクトリ構成を決める 自分用の競プロCLIツール、chanを使う git submoduleを使う Rustのテスト方法を考える C++のテスト方法を考える Gitの開発手順を見直す CIでテストを回す  ディレクトリ構成を決める ディレクトリ構成は以下のようになっています。
 srcの下にcppとrustがあり、その下にディレクトリが存在していてexampleなどがライブラリの名前になります。コードはそのディレクトリの中のmain.[rs|hpp]に書きます。
 testはテストコードです。srcと同様の構成になっています。
-❯ tree -I &#39;Catch2|chan|cpp-test|rust-test&#39; .</description>
+❯ tree -I &#39;Catch2|chan|cpp-test|rust-test&#39; . ├── CMakeLists.txt ├── Dockerfile ├── libtest.sh ├── README.md ├── src │ ├── cpp │ │ ├── example │ │ │ └── main.</description>
     </item>
     
     <item>
@@ -103,9 +105,12 @@ testはテストコードです。srcと同様の構成になっています。
       <description>チームStarrySkyは正の点数を得た78チーム中、2126点を獲得して4位でした。うち僕は504点を獲得しました。
 僕が解いたLets_Connct、Persistence、alice&amp;rsquo;s passwordについてのWriteupです。
 Lets_Connct[misc] ncでつなぐよう指示があるのでつなぎ、flagの中身を見ます。
-❯ nc &amp;lt;問題サーバ&amp;gt; 2999 bash: cannot set terminal process group (-1): Inappropriate ioctl for device bash: no job control in this shell bash-4.4$ ls ls bash bin dev flag lib lib32 lib64 bash-4.4$ echo &amp;quot;$(&amp;lt;flag)&amp;quot; echo &amp;quot;$(&amp;lt;flag)&amp;quot; Flag has moved to 3000 port on 172.17.0.10.  別の場所にflagが移されたようです。ncでつなごうとしますがncはないと言われてしまいます。
-bash-4.4$ nc 172.17.0.10 3000 nc 172.17.0.10 3000 bash: nc: command not found  そこで、bash nc alternativeと検索をかけると、以下の記事がヒットします
-https://stackoverflow.com/questions/20661320/alternative-to-cat-out-of-a-bash-script</description>
+❯ nc &amp;lt;問題サーバ&amp;gt; 2999 bash: cannot set terminal process group (-1): Inappropriate ioctl for device bash: no job control in this shell bash-4.4$ ls ls bash bin dev flag lib lib32 lib64 bash-4.4$ echo &amp;quot;$(&amp;lt;flag)&amp;quot; echo &amp;quot;$(&amp;lt;flag)&amp;quot; Flag has moved to 3000 port on 172.17.0.10. 別の場所にflagが移されたようです。ncでつなごうとしますがncはないと言われてしまいます。
+bash-4.4$ nc 172.17.0.10 3000 nc 172.17.0.10 3000 bash: nc: command not found そこで、bash nc alternativeと検索をかけると、以下の記事がヒットします
+https://stackoverflow.com/questions/20661320/alternative-to-cat-out-of-a-bash-script
+https://github.com/solusipse/fiche#useful-aliases
+catがないのでそのまま使うことができません。よく分からないのですが、以下のような手順でflagを得ました。
+bash-4.4$ exec 3&amp;lt;&amp;gt;/dev/tcp/172.</description>
     </item>
     
     <item>
@@ -117,13 +122,9 @@ https://stackoverflow.com/questions/20661320/alternative-to-cat-out-of-a-bash-sc
       <description>この記事は 広島大学ITエンジニアアドベントカレンダー の9日目です。
 私は大学にWindows機とLinux(Ubuntu)機の2台のlaptopを持っていっています。空きコマにさあコード書くぞ〜！と思ったときに開くのはいつもUbuntu。Linux機の方が貧弱なスペックなのですが、コード書くまでにかかる時間はWindowsよりLinuxの方が速いのです。(私はWindowsでは仮想環境でUbuntuを立ち上げてその中で開発するのでそれはそう)
 しかしWindowsでも快適に開発したい！というわけで、自分なりに快適だと思った環境をメモしておきます。 Remote Development using SSHを見ると詳しくちゃんとしたことが書いてあるので、こちらも参考にしてください。
-目標  仮想環境でSVGをwgetして、それをVSCodeからファイルクリックすると見れる！という環境を構築する(なぜこれが目標なのかというと、@imiko さんが仮想環境で生成したsvgを楽に見たいと言っていたので)
-  環境 以下の環境で確認しています。
-Windows 10 Home Vagrant 2.2.6 VirtualBox 6.0.14 VSCode 1.41.0   仮想環境はbento/ubuntu-18.04を使用しています。   ホストでインストールするもの
- VirtualBox
- Vagrant
- VSCode
-  VSCodeで必要なExtension
+目標  仮想環境でSVGをwgetして、それをVSCodeからファイルクリックすると見れる！という環境を構築する(なぜこれが目標なのかというと、@imiko さんが仮想環境で生成したsvgを楽に見たいと言っていたので)  環境 以下の環境で確認しています。
+Windows 10 Home Vagrant 2.2.6 VirtualBox 6.0.14 VSCode 1.41.0  仮想環境はbento/ubuntu-18.04を使用しています。  ホストでインストールするもの
+ VirtualBox Vagrant VSCode  VSCodeで必要なExtension
  Remote-SSH
   手順 Vagrantから仮想環境の立ち上げ
 VSCodeを立ち上げます。
@@ -136,7 +137,10 @@ Ctrl+Shift+pでcommand paletteを開き、Remote-SSH: Open Configuration FIle...
 これでSSHの設定はできました。
 SSHで仮想環境に接続する
 以下の2点が達成できているでしょうか。
-- vagrant upしている</description>
+ vagrant upしている SSH Config周りが設定できている
+それでは、SSH接続していきましょう。
+SSH接続できるアイコンがあるのでそれを押して、SSH TARGETSを選びます。今回はsandboxを選びました。
+sandboxを選択したときに出現する、右のアイコンをクリックしてください。VSCodeの新しいWindowがポップアップしたと思います。おそらく初めて接続した時ははRSA finger printについての警告が出てくると思うのですがYesでOKです。</description>
     </item>
     
     <item>
@@ -151,15 +155,11 @@ SSHで仮想環境に接続する
 (写真は2019-12-02時点のもの)
 Weekly development breakdownという項目で、どうやら1週間に書いたコードの時間となんの言語で書いたかが示されているようです。
 僕もこれやってみたい！というわけで、この記事では、この表をpinnedに表示することを目標としてやっていきましょう。
-仕組み この表は waka-box を使っています。自分のエディタにプラグインを入れておくと一週間のうち何時間コードを書いたか、を示してくれる、&amp;rdquo;WakaTime&amp;rdquo;というWebサービスがあり、そのAPIを利用して、gistに表を作っています。
+仕組み この表は waka-box を使っています。自分のエディタにプラグインを入れておくと一週間のうち何時間コードを書いたか、を示してくれる、&amp;ldquo;WakaTime&amp;quot;というWebサービスがあり、そのAPIを利用して、gistに表を作っています。
 例えば僕の場合、VSCodeにExtensionで WakaTime を入れています。APIを利用するためのsecret keyを入れたら後は何もせずコードを書けば大丈夫です。
 waka-box の導入 基本的に waka-box のREADMEに従えばできます。自分が詰まったところを捕捉しながら書きます。
-準備  gistを作る(GitHub) -&amp;gt; gistのURLをメモしておく このときのgistはdescription以外上書きされるので、gistの中身はなんでもよいです。
- gistだけにチェックを入れたtokenを発行(GitHub) -&amp;gt; メモしておく
- WakaTimeのアカウントを作る(wakatime)
- wakatimeのsecret keyを手に入れる -&amp;gt; メモしておく
-今3つメモしたと思います。1のgistのURLは公開してもよく、2,4は公開してはいけません！取り扱いに注意しましょう。
-  waka-box を入れる https://github.com/matchai/waka-box を自分のGitHubへとforkします。
+準備  gistを作る(GitHub) -&amp;gt; gistのURLをメモしておく このときのgistはdescription以外上書きされるので、gistの中身はなんでもよいです。 gistだけにチェックを入れたtokenを発行(GitHub) -&amp;gt; メモしておく WakaTimeのアカウントを作る(wakatime) wakatimeのsecret keyを手に入れる -&amp;gt; メモしておく
+今3つメモしたと思います。1のgistのURLは公開してもよく、**2,4は公開してはいけません！**取り扱いに注意しましょう。  waka-box を入れる https://github.com/matchai/waka-box を自分のGitHubへとforkします。
 準備で手に入れた3つの値を入れていきます。gistのidは .github/workflows/schedule.yml にすでにある値を書き換えます。
 gist tokenとwakatime secret keyは
 Settingsの
@@ -167,7 +167,8 @@ Secretsに書き込みます。2つの値を書き込むと上の図のように
 そして、gistをpinnedに置きます。完成です！
 動作確認 GitHub Actions GitHub ActionsでWakaTime APIから情報をとってきてgistに書き込みを行うので、きちんとActionsが動いているか確かめる必要があります。
 上の図のように、Workflowsに表示があればOKです。10分ほど待つと、gistが変化するはずです
-gistに反映されない！ APIからデータをとってくるときは前日から7日間のデータをとってきているようです。僕の場合は、最初gistに何も書き込まれずファイルが消滅して、次の日00:00以降最初のActionでデータが反映されました。</description>
+gistに反映されない！ APIからデータをとってくるときは**前日から7日間のデータをとってきているようです。**僕の場合は、最初gistに何も書き込まれずファイルが消滅して、次の日00:00以降最初のActionでデータが反映されました。
+Actionが動かない！ 2019/12/20時点では、waka-boxをcloneした後に、.github/workflows/schedule.yml を一旦削除し、commitしてgithubへpushした後に再度同じ内容の .github/workflows/schedule.yml を作り直さないとActionが動かないようです。</description>
     </item>
     
     <item>
@@ -178,11 +179,11 @@ gistに反映されない！ APIからデータをとってくるときは前日
       <guid>https://www.blog.uta8a.net/posts/2019-10-20-seccon2019qual/</guid>
       <description>2019/10/19(土)15:00-2019/10/20(日)15:00まで開催されていた、SECCON CTF 2019 qualにチームStarrySkyで参加していました。今回はmitsuさんが基本情報を受けるのでお休みで、一人チームでの参加となりました。
 結果はWelcome, Thank you for playing!, coffee_break, Sandstorm, ZKPayの5問を解いて743ポイントを獲得し102位(正の得点を取った人数は799人)でした。以下、解いたもののWriteupを書きます。
-Welcome Welcome to the SECCON CTF. Read rules and check the IRC topic.  IRCに行くとflagが書かれています。
+Welcome Welcome to the SECCON CTF. Read rules and check the IRC topic. IRCに行くとflagが書かれています。
 SECCON{Welcome to the SECCON 2019 Online CTF}
-Thank you for playing! SECCON{We have done all the challenges. Thank you!}  そのままです
+Thank you for playing! SECCON{We have done all the challenges. Thank you!} そのままです
 SECCON{We have done all the challenges. Thank you!}
-coffee_break The program &amp;quot;encrypt.py&amp;quot; gets one string argument and outputs ciphertext. Example: $ python encrypt.</description>
+coffee_break The program &amp;quot;encrypt.py&amp;quot; gets one string argument and outputs ciphertext. Example: $ python encrypt.py &amp;quot;test_text&amp;quot; gYYpbhlXwuM59PtV1qctnQ== The following text is ciphertext with &amp;quot;encrypt.</description>
     </item>
     
     <item>
@@ -224,11 +225,7 @@ UEFIの方はかなり時間を費やして苦戦しました。低レイヤ特�
 次に、「低レイヤで何かひとつのものを作り上げるのはとても難しい」という気持ちですが、これは今も変わりません。しかし、今回の事前課題を通して、今の自分ならある程度何かを作ることができる、という自信がつきました。仕様書を読むことへの抵抗感がなくなり、手探りでも低レイヤ特有のデバッグの仕方が(雰囲気)分かるようになりました。今度はきっと挫折しないと思います。挫折は様々なことに時間を割くから生じるのであって、自分の自由な時間はとりあえずこれをやる、と決めてずっとそのことを考えればうまくいくということも知りました。また「成功体験を得たい」と書いたのですが、講師の方に褒められたり、発展課題をやりきったことによる喜び、自信が成功体験になったと思います。
 役立てたいことについては、セキュリティキャンプの運営の方が言っていたことが心に残っていて、「講師を生み出すことも目標」というのがいいなあと思いました。僕も何か自分の知識の一部をまだそれを知らない人に届ける活動がしたいと思いました。
 というわけで、具体的には次のようなことをやっていこうと思っています。
-- 学内/学外で勉強会を開く: 今回の体験を通してやはり人間に会うことや、発表する、教えるために周辺知識を学ぶことの重要性を実感しました。今週から実際に学内で2つ、初心者向けWeb勉強会と、コンテストに向けての少人数での勉強会を始めます。
-- 低レイヤのための～のCコンパイラを進める。: やりきった感じが味わえるのはきっとセルフホストとかなんでしょうけど、僕には難しそうです。でも少しずつやっていきます。
-- LLVMなどの大規模なソースコードを読む: 大規模なプロジェクトに興味が湧きました。Servo, V8なども読んでみたいです。
-- UEFI超発展課題をやる: 今は仕様書を読んでいるところです。ソースコードがきれいではないのでリファクタリングもしたいし、OpenProtocolを使っての実装もやりたいです。
-- 海外のインターンに応募だけしてみる: GSoCなどもこれに含めます。Yuka Takahashiさんが「海外のインターンに応募してみましょう！」と言っていて、いや～俺には無理だと思っていましたが、よくよく考えてみると応募するだけなら準備は大変ですができそうです。僕は普段田舎民なのでこんなところにはIT企業への切符は落ちてないとよく嘆くのですが、海外ならきっと東京であろうが田舎であろうが実力で見てくれるはずです(想像ですが)。とりあえず募集を探してみようと思います。</description>
+ 学内/学外で勉強会を開く: 今回の体験を通してやはり人間に会うことや、発表する、教えるために周辺知識を学ぶことの重要性を実感しました。今週から実際に学内で2つ、初心者向けWeb勉強会と、コンテストに向けての少人数での勉強会を始めます。 低レイヤのための～のCコンパイラを進める。: やりきった感じが味わえるのはきっとセルフホストとかなんでしょうけど、僕には難しそうです。でも少しずつやっていきます。 LLVMなどの大規模なソースコードを読む: 大規模なプロジェクトに興味が湧きました。Servo, V8なども読んでみたいです。 UEFI超発展課題をやる: 今は仕様書を読んでいるところです。ソースコードがきれいではないのでリファクタリングもしたいし、OpenProtocolを使っての実装もやりたいです。 海外のインターンに応募だけしてみる: GSoCなどもこれに含めます。Yuka Takahashiさんが「海外のインターンに応募してみましょう！」と言っていて、いや～俺には無理だと思っていましたが、よくよく考えてみると応募するだけなら準備は大変ですができそうです。僕は普段田舎民なのでこんなところにはIT企業への切符は落ちてないとよく嘆くのですが、海外ならきっと東京であろうが田舎であろうが実力で見てくれるはずです(想像ですが)。とりあえず募集を探してみようと思います。  最後に 自分は気づいたときにはセキュキャン全国に行ける年齢を通り過ぎていたので、今までTwitterで見かけるセキュキャン勢に対しうらやましさやコンプレックスを抱いていました。しかし、今回のミニキャンプは課題の量が多かったのもあり、全国のレベル感を想像することができました。全国はきっとこれより難しいのだろうけど、それでも僕にもできそう、みたいな気持ちが生まれて、そんなに全国の人と自分を比べて実力差とかにへこむ必要はないな、それよりコード書いて本読んで仕様書読んでの方が大事だという気持ちに切り替わりました。(これは驕りかもしれません)</description>
     </item>
     
     <item>
@@ -237,7 +234,7 @@ UEFIの方はかなり時間を費やして苦戦しました。低レイヤ特�
       <pubDate>Sun, 25 Aug 2019 21:51:45 +0900</pubDate>
       
       <guid>https://www.blog.uta8a.net/posts/2019-08-25-lt/</guid>
-      <description> そろそろブログの整理をしないといけない
+      <description>そろそろブログの整理をしないといけない
 今回は、PowerPointでいい感じのスライドを作ろうとしたお話
 デザイン デザイン能力がないので、シンプルでいい感じのテンプレートを探した -&amp;gt; AZUSA COLORS
 これこれ！エンジニアのLTスライドで見たことある！
@@ -247,12 +244,7 @@ AZUSA COLORS 改
 下のようになりました
 (ここに完成スライド(公表用)が入る)
 こんなのを作って上下に雑に貼った
-後で見る  https://github.com/webslides/webslides/ Web技術を使ったスライド。reveal.jsを使っていたけど、今どきだとMarpなのかな？と思いつつ触ってない
- https://stocker.jp/diary/keynote/ なんか大事なことが書いてそう
- https://sanographix.net azusaの原作者。konel.mag issue 5がポートフォリオの話で200円と安いので後で買う。
- https://jp.stanby.com/media/howto-lightningtalks/ これも後で見る。話し方
- https://qiita.com/moomooya/items/45398e06f189d4a26227 LTの周りのリソース集
-  </description>
+後で見る  https://github.com/webslides/webslides/ Web技術を使ったスライド。reveal.jsを使っていたけど、今どきだとMarpなのかな？と思いつつ触ってない https://stocker.jp/diary/keynote/ なんか大事なことが書いてそう https://sanographix.net azusaの原作者。konel.mag issue 5がポートフォリオの話で200円と安いので後で買う。 https://jp.stanby.com/media/howto-lightningtalks/ これも後で見る。話し方 https://qiita.com/moomooya/items/45398e06f189d4a26227 LTの周りのリソース集  </description>
     </item>
     
     <item>
@@ -264,8 +256,8 @@ AZUSA COLORS 改
       <description>ABC138D Kiを本番で嘘解法で通してしまった(after_contestで気づいた)ので、ACコードと自分のコードにランダムにケースを入れてHackケースを探そう！と思いました。このとき、木のテストケースの作り方が分からなかったのでTwitterで教えてもらいました。以下、それらをまとめておきます。意見をくださった方、ありがとうございます。
 便利なツール グラフの可視化にはGRAPH×GRAPH が便利です。
 木を順に構成する Python3で書きました。
-import itertools, random N = 11 R = 10 l = list(range(1,N)) h = list(itertools.permutations(l)) seed = list(h[R]) graph = [] edge = [] for i in seed: if len(graph) != 0: edge.append([i, graph[random.randrange(len(graph))]]) graph.append(i) print(edge) for i in edge: print(&amp;quot;{} {}&amp;quot;.format(i[0], i[1]))  output
-[[2, 1], [3, 1], [4, 2], [5, 3], [6, 2], [8, 4], [10, 4], [7, 2], [9, 2]] 2 1 3 1 4 2 5 3 6 2 8 4 10 4 7 2 9 2  GRAPH×GRAPHでの結果</description>
+import itertools, random N = 11 R = 10 l = list(range(1,N)) h = list(itertools.permutations(l)) seed = list(h[R]) graph = [] edge = [] for i in seed: if len(graph) != 0: edge.append([i, graph[random.randrange(len(graph))]]) graph.append(i) print(edge) for i in edge: print(&amp;quot;{} {}&amp;quot;.format(i[0], i[1])) output
+[[2, 1], [3, 1], [4, 2], [5, 3], [6, 2], [8, 4], [10, 4], [7, 2], [9, 2]] 2 1 3 1 4 2 5 3 6 2 8 4 10 4 7 2 9 2 GRAPH×GRAPHでの結果</description>
     </item>
     
     <item>
@@ -274,18 +266,9 @@ import itertools, random N = 11 R = 10 l = list(range(1,N)) h = list(itertools.p
       <pubDate>Tue, 13 Aug 2019 07:12:48 +0900</pubDate>
       
       <guid>https://www.blog.uta8a.net/posts/2019-08-13-interkosenctf2019/</guid>
-      <description>InterKosenCTF2019にmitsuさんと二人で、チーム StarrySky として参加しました。成績はチームで13位/91人が正の得点、個人では12位でした。得点は、4332ptsのうち2944ptsを入れました。
-勝手にライバルだと思っている おたまこうせん, Wani Hackase, 生活習慣崩壊ズ, Contrailには完敗です。今回Contrail強かったですね&amp;hellip;
-PwnとWebが課題ですね
-safermとE-Sequel-Injectionが通せたのは嬉しかったです
-うごくペンギンさんかわいいです
-Writeup Welcome [200pts, 77solved, warmup, welcome]
-Slackでflagがアナウンスされました
-KosenCTF{g3t_r34dy_f0r_InterKosenCTF_2019}
-Kurukuru Shuffle [200pts, 53solved, easy, crypto]
-shuffle.pyを見ると、ランダムに0からL-1の数字を3つ作り、それをもとにしてflagの2つの文字のswapをL回繰り返しています。ランダムが出てきたときは、全探索するか、ランダムな数値をいっぱいとってきて次が予測できないか、結果からのエスパーのどれかを考えるとよさそうなので、全探索を考えます。
-L=53とsecret.pyから分かるので、$O(L^3)$をしても大丈夫です。a, b,kの値を全探索していきましょう。
-また、iの値はk-&amp;gt;2k-&amp;gt;3k-&amp;gt;...-&amp;gt;(L+1)k(mod L)と変化し、最後の(L+1)kは使われないので、Lkからこれを逆順にたどればよいと分かります。
+      <description>InterKosenCTF2019にmitsuさんと二人で、チーム StarrySky として参加しました。成績はチームで13位/91人が正の得点、個人では12位でした。得点は、4332ptsのうち2944ptsを入れました。 勝手にライバルだと思っている おたまこうせん, Wani Hackase, 生活習慣崩壊ズ, Contrailには完敗です。今回Contrail強かったですね&amp;hellip; PwnとWebが課題ですね safermとE-Sequel-Injectionが通せたのは嬉しかったです うごくペンギンさんかわいいです
+Writeup Welcome [200pts, 77solved, warmup, welcome] Slackでflagがアナウンスされました KosenCTF{g3t_r34dy_f0r_InterKosenCTF_2019}
+Kurukuru Shuffle [200pts, 53solved, easy, crypto] shuffle.pyを見ると、ランダムに0からL-1の数字を3つ作り、それをもとにしてflagの2つの文字のswapをL回繰り返しています。ランダムが出てきたときは、全探索するか、ランダムな数値をいっぱいとってきて次が予測できないか、結果からのエスパーのどれかを考えるとよさそうなので、全探索を考えます。 L=53とsecret.pyから分かるので、$O(L^3)$をしても大丈夫です。a, b,kの値を全探索していきましょう。 また、iの値はk-&amp;gt;2k-&amp;gt;3k-&amp;gt;...-&amp;gt;(L+1)k(mod L)と変化し、最後の(L+1)kは使われないので、Lkからこれを逆順にたどればよいと分かります。
 for k in range(1,L): for a in range(0,L): for b in range(0,L): e = list(&amp;quot;1m__s4sk_s3np41m1r_836lly_cut3_34799u14}1osenCTF{5sKm&amp;quot;) # secret i = 0 for s in range(L): i = ((L-s)*k) % L s = (i + a) % L t = (i + b) % L e[s], e[t] = e[t], e[s] # swap # encrypted = &amp;quot;&amp;quot;.</description>
     </item>
     

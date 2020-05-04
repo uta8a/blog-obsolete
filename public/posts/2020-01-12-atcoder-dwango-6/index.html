@@ -19,38 +19,24 @@
     </header>
 
     <article>
-    
-
-<p>B問題のみ書きます。</p>
-
+    <p>B問題のみ書きます。</p>
 <h1 id="ドワンゴからの挑戦状-予選-b-fusing-slimes">ドワンゴからの挑戦状 予選 B Fusing Slimes</h1>
-
 <p><strong><a href="https://atcoder.jp/contests/dwacon6th-prelims/tasks/dwacon6th_prelims_b">問題</a></strong></p>
-
 <p>スライムが規則に従い左から右に流れるので、スライムが移動した距離の期待値に$(N-1)!$を掛けたものを求めよ。</p>
-
 <p><strong>解法</strong></p>
-
-<p>こういう問題では、区間に注目するのが典型らしい。(<a href="http://drken1215.hatenablog.com/entry/2020/01/12/014200">けんちょんさんのブログ</a>)<br />
+<p>こういう問題では、区間に注目するのが典型らしい。(<a href="http://drken1215.hatenablog.com/entry/2020/01/12/014200">けんちょんさんのブログ</a>)<br>
 確かに、$O(N)$で解こうと思うと<code>[xi,xi+1)</code>に注目して$O(N)$が妥当な気がする。</p>
-
-<p><code>[xi,xi+1)</code>を通るスライムの数を$c<em>i$とおく。このとき、<code>i+1</code>の位置にあるスライムより左側の<code>i</code>個のスライムのみ考えればよい。<br />
-<code>i</code>の位置にあるスライムが選ばれた場合、選ばれる確率は$\frac{1}{i}$である。この後は$c</em>{i-1}$個のスライムが通るのと、<code>i</code>の位置にあるスライムが通るのを考えて期待値は$\frac{1}{i} (1 + c<em>{i-1})$になる。<br />
-残りの位置にあるスライムを選ぶと<code>i+1</code>の位置の左側には<code>i-1</code>個のスライムがあることになるので、期待値は$\frac{n-1}{n}c</em>{i-1}$となる。以上により、$c<em>i = c</em>{i-1} + \frac{1}{i}$となり、個数は調和級数になると分かる。<br />
-求めるものは、$(N-1)! \times \sum{1\leq i \leq N-1}(x<em>{i+1} - x</em>{i}) \times c_i$となる。</p>
-
+<p><code>[xi,xi+1)</code>を通るスライムの数を$c_i$とおく。このとき、<code>i+1</code>の位置にあるスライムより左側の<code>i</code>個のスライムのみ考えればよい。<br>
+<code>i</code>の位置にあるスライムが選ばれた場合、選ばれる確率は$\frac{1}{i}$である。この後は$c_{i-1}$個のスライムが通るのと、<code>i</code>の位置にあるスライムが通るのを考えて期待値は$\frac{1}{i} (1 + c_{i-1})$になる。<br>
+残りの位置にあるスライムを選ぶと<code>i+1</code>の位置の左側には<code>i-1</code>個のスライムがあることになるので、期待値は$\frac{n-1}{n}c_{i-1}$となる。以上により、$c_i = c_{i-1} + \frac{1}{i}$となり、個数は調和級数になると分かる。<br>
+求めるものは、$(N-1)! \times \sum{1\leq i \leq N-1}(x_{i+1} - x_{i}) \times c_i$となる。</p>
 <p><strong>実装</strong></p>
-
-<p>区間ごとの足し合わせで計算量は$O(N)$である。MODでの逆数テーブル、factorialテーブルを前計算して持っておけば区間に対し$O(1)$で求まる。<br />
+<p>区間ごとの足し合わせで計算量は$O(N)$である。MODでの逆数テーブル、factorialテーブルを前計算して持っておけば区間に対し$O(1)$で求まる。<br>
 前計算$O(N)$で全体で$O(N)$になる。</p>
-
 <p><strong>コード</strong></p>
-
 <p><a href="https://atcoder.jp/contests/dwacon6th-prelims/submissions/9431284">https://atcoder.jp/contests/dwacon6th-prelims/submissions/9431284</a></p>
-
 <p><strong>感想</strong></p>
-
-<p>競技中は$x_j - x_i$について考えていて、$O(N^2)$の解法が浮かんだのでそこから計算量を落とそうとしていた。区間について考える。覚えておきます。<br />
+<p>競技中は$x_j - x_i$について考えていて、$O(N^2)$の解法が浮かんだのでそこから計算量を落とそうとしていた。区間について考える。覚えておきます。<br>
 ModIntほしい。あとModInvもほしい。</p>
 
     </article>
@@ -58,7 +44,7 @@ ModIntほしい。あとModInvもほしい。</p>
     <footer>
             <ul>
                 <li><a href="https://www.blog.uta8a.net/posts/2020-01-12-codeforces-hello-2020/">&laquo; Codeforces Hello 2020 Writeup</a></li>
-                
+                <li><a href="https://www.blog.uta8a.net/posts/2020-05-04-ictsc-container/">ICTSC 2019 一次予選 コンテナが作れない 復習 &raquo;</a></li>
             </ul>
     </footer>
 </section>

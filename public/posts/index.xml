@@ -18,9 +18,34 @@
       
       <guid>https://www.blog.uta8a.net/posts/2020-09-07-interkosenctf2020/</guid>
       <description>note まずは解いたやつを書いておく。
-目次 Welcome Survey matsushima2 limited babysort harmagedon in question ciphertexts trilemma authme bitcrypto padding oracle Fables of aeSOP No pressure stratum Tip Toe miniblog readme pash just sqli ochazuke confusing padrsa graphviz++ maze
+目次 Welcome
+Survey
+matsushima2
+limited
+babysort
+harmagedon
+in question
+ciphertexts
+trilemma
+authme
+bitcrypto
+padding oracle
+Fables of aeSOP
+No pressure
+stratum
+Tip Toe
+miniblog
+readme
+pash
+just sqli
+ochazuke
+confusing
+padrsa
+graphviz++
+maze
 (解いたもの)
-Welcome Welcome to InterKosenCTF 2020! All announcement, support, and the welcome flag are available in our Discord. discordの#announcementにflagが貼ってあった。 KosenCTF{w31c0m3_and_13ts_3nj0y_the_party!!} Survey Please give us your feedback here. アンケートに答えるとflagが手に入る。解いた問題が少ないとまともなフィードバックが送れなくて悲しみになるので強くなりたい。
+Welcome Welcome to InterKosenCTF 2020! All announcement, support, and the welcome flag are available in our Discord. discordの#announcementにflagが貼ってあった。
+KosenCTF{w31c0m3_and_13ts_3nj0y_the_party!!} Survey Please give us your feedback here. アンケートに答えるとflagが手に入る。解いた問題が少ないとまともなフィードバックが送れなくて悲しみになるので強くなりたい。
 KosenCTF{w4s_th1s_ch4ll3ng3_h4rd_4_u?} matsushima2 Do you like poker? I like blackjack!</description>
     </item>
     

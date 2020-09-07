@@ -22,382 +22,382 @@
     <h1 id="note">note</h1>
 <p>まずは解いたやつを書いておく。</p>
 <h1 id="目次">目次</h1>
-<p><a href="#welcome">Welcome</a>
-<a href="#survey">Survey</a>
-<a href="#matsushima2">matsushima2</a>
-<a href="#limited">limited</a>
-<a href="#babysort">babysort</a>
-<a href="#harmagedon">harmagedon</a>
-<a href="#in-question">in question</a>
-<a href="#ciphertexts">ciphertexts</a>
-<a href="#trilemma">trilemma</a>
-<a href="#authme">authme</a>
-<a href="#bitcrypto">bitcrypto</a>
-<a href="#padding-oracle">padding oracle</a>
-<a href="#fables-of-aesop">Fables of aeSOP</a>
-<a href="#no-pressure">No pressure</a>
-<a href="#stratum">stratum</a>
-<a href="#tip-toe">Tip Toe</a>
-<a href="#miniblog">miniblog</a>
-<a href="#readme">readme</a>
-<a href="#pash">pash</a>
-<a href="#just-sqli">just sqli</a>
-<a href="#ochazuke">ochazuke</a>
-<a href="#confusing">confusing</a>
-<a href="#padrsa">padrsa</a>
-<a href="#graphviz">graphviz++</a>
+<p><a href="#welcome">Welcome</a><br>
+<a href="#survey">Survey</a><br>
+<a href="#matsushima2">matsushima2</a><br>
+<a href="#limited">limited</a><br>
+<a href="#babysort">babysort</a><br>
+<a href="#harmagedon">harmagedon</a><br>
+<a href="#in-question">in question</a><br>
+<a href="#ciphertexts">ciphertexts</a><br>
+<a href="#trilemma">trilemma</a><br>
+<a href="#authme">authme</a><br>
+<a href="#bitcrypto">bitcrypto</a><br>
+<a href="#padding-oracle">padding oracle</a><br>
+<a href="#fables-of-aesop">Fables of aeSOP</a><br>
+<a href="#no-pressure">No pressure</a><br>
+<a href="#stratum">stratum</a><br>
+<a href="#tip-toe">Tip Toe</a><br>
+<a href="#miniblog">miniblog</a><br>
+<a href="#readme">readme</a><br>
+<a href="#pash">pash</a><br>
+<a href="#just-sqli">just sqli</a><br>
+<a href="#ochazuke">ochazuke</a><br>
+<a href="#confusing">confusing</a><br>
+<a href="#padrsa">padrsa</a><br>
+<a href="#graphviz">graphviz++</a><br>
 <a href="#mazeu">maze</a></p>
 <p>(解いたもの)</p>
 <h1 id="welcome">Welcome</h1>
-<pre><code>Welcome to InterKosenCTF 2020! All announcement, support, and the welcome flag are available in our Discord.
-</code></pre><p>discordの#announcementにflagが貼ってあった。
+<pre><code>Welcome to InterKosenCTF 2020! All announcement, support, and the welcome flag are available in our Discord.  
+</code></pre><p>discordの#announcementにflagが貼ってあった。<br>
 <img src="./p-1.png" alt="Welcome"></p>
-<pre><code>KosenCTF{w31c0m3_and_13ts_3nj0y_the_party!!}
+<pre><code>KosenCTF{w31c0m3_and_13ts_3nj0y_the_party!!}  
 </code></pre><h1 id="survey">Survey</h1>
-<pre><code>Please give us your feedback here.
+<pre><code>Please give us your feedback here.  
 </code></pre><p>アンケートに答えるとflagが手に入る。解いた問題が少ないとまともなフィードバックが送れなくて悲しみになるので強くなりたい。</p>
-<pre><code>KosenCTF{w4s_th1s_ch4ll3ng3_h4rd_4_u?}
+<pre><code>KosenCTF{w4s_th1s_ch4ll3ng3_h4rd_4_u?}  
 </code></pre><h1 id="matsushima2">matsushima2</h1>
-<pre><code>Do you like poker? I like blackjack! Let's play it here.
-
-matsushima2_a8f90b2a9cff5f0aa8d62010385ffc0c.tar.gz
+<pre><code>Do you like poker? I like blackjack! Let's play it here.  
+  
+matsushima2_a8f90b2a9cff5f0aa8d62010385ffc0c.tar.gz  
 </code></pre><p><img src="./p-2.png" alt="matsushima2"></p>
-<p>blackjackで遊べる。カードがふるつきさん、ptr-yudaiさん、yoshikingさんになっていてかわいい。
+<p>blackjackで遊べる。カードがふるつきさん、ptr-yudaiさん、yoshikingさんになっていてかわいい。<br>
 おそらくmatsushima2の意味は SECCON 2018 国内決勝 で出題された松島が元になってそう。<a href="https://st98.github.io/diary/posts/2018-12-24-seccon-2018-domestic-finals.html#%E6%9D%BE%E5%B3%B6">参考</a></p>
 <p>サーバ側のソースコード(main.py)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask, send_file, request, make_response, jsonify, abort
-<span style="color:#f92672">import</span> random
-<span style="color:#f92672">import</span> jwt
-<span style="color:#f92672">import</span> secret
-
-app <span style="color:#f92672">=</span> Flask(__name__)
-key <span style="color:#f92672">=</span> secret<span style="color:#f92672">.</span>key
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">blackjack</span>(cards):
-    score <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-    aces <span style="color:#f92672">=</span> []
-    <span style="color:#66d9ef">for</span> card <span style="color:#f92672">in</span> cards:
-        card2 <span style="color:#f92672">=</span> card <span style="color:#f92672">%</span> <span style="color:#ae81ff">13</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
-        <span style="color:#66d9ef">if</span> card2 <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
-            aces<span style="color:#f92672">.</span>append(card2)
-        <span style="color:#66d9ef">elif</span> card2 <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">10</span>:
-            score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">10</span>
-        <span style="color:#66d9ef">else</span>:
-            score <span style="color:#f92672">+=</span> card2
-
-    <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> aces:
-        <span style="color:#66d9ef">if</span> score <span style="color:#f92672">+</span> <span style="color:#ae81ff">11</span> <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">21</span>:
-            score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">11</span>
-        <span style="color:#66d9ef">else</span>:
-            score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-
-    <span style="color:#66d9ef">if</span> score <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">21</span>:
-        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
-    <span style="color:#66d9ef">return</span> score
-
-
-<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/&#34;</span>)
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>():
-    <span style="color:#66d9ef">return</span> send_file(<span style="color:#e6db74">&#34;index.html&#34;</span>)
-
-
-<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/card/&lt;int:card_id&gt;.png&#34;</span>)
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">card</span>(card_id):
-    <span style="color:#66d9ef">return</span> send_file(<span style="color:#e6db74">&#39;images/{}.png&#39;</span><span style="color:#f92672">.</span>format(card_id))
-
-
-<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/initialize&#34;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;POST&#34;</span>])
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">initialize</span>():
-    cards <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">13</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">4</span>))
-    random<span style="color:#f92672">.</span>shuffle(cards)
-
-    player_cards <span style="color:#f92672">=</span> [cards[<span style="color:#ae81ff">0</span>]]
-    dealer_cards <span style="color:#f92672">=</span> [cards[<span style="color:#ae81ff">1</span>]]
-    player_score <span style="color:#f92672">=</span> blackjack(player_cards)
-    dealer_score <span style="color:#f92672">=</span> blackjack(dealer_cards)
-    state <span style="color:#f92672">=</span> {
-        <span style="color:#e6db74">&#39;player&#39;</span>: player_cards,
-        <span style="color:#e6db74">&#39;dealer&#39;</span>: dealer_cards,
-        <span style="color:#e6db74">&#39;chip&#39;</span>: <span style="color:#ae81ff">100</span>,
-        <span style="color:#e6db74">&#39;player_score&#39;</span>: player_score,
-        <span style="color:#e6db74">&#39;dealer_score&#39;</span>: dealer_score,
-    }
-
-    response <span style="color:#f92672">=</span> make_response(jsonify(state))
-    state[<span style="color:#e6db74">&#39;cards&#39;</span>] <span style="color:#f92672">=</span> cards[<span style="color:#ae81ff">2</span>:]
-    response<span style="color:#f92672">.</span>set_cookie(<span style="color:#e6db74">&#39;matsushima&#39;</span>, jwt<span style="color:#f92672">.</span>encode(state, key, algorithm<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;HS256&#39;</span>), httponly<span style="color:#f92672">=</span>True, samesite<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;strict&#39;</span>)
-    <span style="color:#66d9ef">return</span> response
-
-
-<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/hit&#34;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;POST&#34;</span>])
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hit</span>():
-    state <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>cookies<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;matsushima&#39;</span>, None)
-    <span style="color:#66d9ef">if</span> state <span style="color:#f92672">is</span> None:
-        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)
-
-    state <span style="color:#f92672">=</span> jwt<span style="color:#f92672">.</span>decode(state, key, algorithms<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;HS256&#39;</span>])
-    <span style="color:#66d9ef">if</span> state[<span style="color:#e6db74">&#39;chip&#39;</span>] <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>:
-        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)
-
-    next_card <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randrange(<span style="color:#ae81ff">0</span>, len(state[<span style="color:#e6db74">&#39;cards&#39;</span>]))
-    card <span style="color:#f92672">=</span> state[<span style="color:#e6db74">&#39;cards&#39;</span>][next_card]
-    state[<span style="color:#e6db74">&#39;cards&#39;</span>] <span style="color:#f92672">=</span> state[<span style="color:#e6db74">&#39;cards&#39;</span>][:next_card] <span style="color:#f92672">+</span> state[<span style="color:#e6db74">&#39;cards&#39;</span>][next_card<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>:]
-
-    state[<span style="color:#e6db74">&#39;player&#39;</span>] <span style="color:#f92672">=</span> state[<span style="color:#e6db74">&#39;player&#39;</span>] <span style="color:#f92672">+</span> [card]
-    state[<span style="color:#e6db74">&#39;player_score&#39;</span>] <span style="color:#f92672">=</span> blackjack(state[<span style="color:#e6db74">&#39;player&#39;</span>])
-    <span style="color:#66d9ef">if</span> state[<span style="color:#e6db74">&#39;player_score&#39;</span>] <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
-        state[<span style="color:#e6db74">&#39;chip&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-
-    response <span style="color:#f92672">=</span> make_response(jsonify({
-        <span style="color:#e6db74">&#39;player&#39;</span>: state[<span style="color:#e6db74">&#39;player&#39;</span>],
-        <span style="color:#e6db74">&#39;dealer&#39;</span>: state[<span style="color:#e6db74">&#39;dealer&#39;</span>],
-        <span style="color:#e6db74">&#39;chip&#39;</span>: state[<span style="color:#e6db74">&#39;chip&#39;</span>],
-        <span style="color:#e6db74">&#39;player_score&#39;</span>: state[<span style="color:#e6db74">&#39;player_score&#39;</span>],
-        <span style="color:#e6db74">&#39;dealer_score&#39;</span>: state[<span style="color:#e6db74">&#39;dealer_score&#39;</span>],
-    }))
-
-    response<span style="color:#f92672">.</span>set_cookie(<span style="color:#e6db74">&#39;matsushima&#39;</span>, jwt<span style="color:#f92672">.</span>encode(state, key, algorithm<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;HS256&#39;</span>), httponly<span style="color:#f92672">=</span>True, samesite<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;strict&#39;</span>)
-    <span style="color:#66d9ef">return</span> response
-
-
-<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/stand&#34;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;POST&#34;</span>])
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">stand</span>():
-    state <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>cookies<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;matsushima&#39;</span>, None)
-    <span style="color:#66d9ef">if</span> state <span style="color:#f92672">is</span> None:
-        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)
-
-    state <span style="color:#f92672">=</span> jwt<span style="color:#f92672">.</span>decode(state, key, algorithms<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;HS256&#39;</span>])
-    <span style="color:#66d9ef">if</span> state[<span style="color:#e6db74">&#39;chip&#39;</span>] <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>:
-        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)
-
-    <span style="color:#66d9ef">while</span> True:
-        next_card <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randrange(<span style="color:#ae81ff">0</span>, len(state[<span style="color:#e6db74">&#39;cards&#39;</span>]))
-        card <span style="color:#f92672">=</span> state[<span style="color:#e6db74">&#39;cards&#39;</span>][next_card]
-        state[<span style="color:#e6db74">&#39;cards&#39;</span>] <span style="color:#f92672">=</span> state[<span style="color:#e6db74">&#39;cards&#39;</span>][:next_card] <span style="color:#f92672">+</span> state[<span style="color:#e6db74">&#39;cards&#39;</span>][next_card<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>:]
-
-        state[<span style="color:#e6db74">&#39;dealer&#39;</span>] <span style="color:#f92672">=</span> state[<span style="color:#e6db74">&#39;dealer&#39;</span>] <span style="color:#f92672">+</span> [card]
-        state[<span style="color:#e6db74">&#39;dealer_score&#39;</span>] <span style="color:#f92672">=</span> blackjack(state[<span style="color:#e6db74">&#39;dealer&#39;</span>])
-        <span style="color:#66d9ef">if</span> state[<span style="color:#e6db74">&#39;dealer_score&#39;</span>] <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> state[<span style="color:#e6db74">&#39;dealer_score&#39;</span>] <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">17</span>:
-            <span style="color:#66d9ef">break</span>
-
-    <span style="color:#66d9ef">if</span> state[<span style="color:#e6db74">&#39;dealer_score&#39;</span>] <span style="color:#f92672">&lt;</span> state[<span style="color:#e6db74">&#39;player_score&#39;</span>]:
-        state[<span style="color:#e6db74">&#39;chip&#39;</span>] <span style="color:#f92672">=</span> state[<span style="color:#e6db74">&#39;chip&#39;</span>] <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>
-    <span style="color:#66d9ef">else</span>:
-        state[<span style="color:#e6db74">&#39;chip&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-
-    response <span style="color:#f92672">=</span> make_response(jsonify({
-        <span style="color:#e6db74">&#39;player&#39;</span>: state[<span style="color:#e6db74">&#39;player&#39;</span>],
-        <span style="color:#e6db74">&#39;dealer&#39;</span>: state[<span style="color:#e6db74">&#39;dealer&#39;</span>],
-        <span style="color:#e6db74">&#39;chip&#39;</span>: state[<span style="color:#e6db74">&#39;chip&#39;</span>],
-        <span style="color:#e6db74">&#39;player_score&#39;</span>: state[<span style="color:#e6db74">&#39;player_score&#39;</span>],
-        <span style="color:#e6db74">&#39;dealer_score&#39;</span>: state[<span style="color:#e6db74">&#39;dealer_score&#39;</span>],
-    }))
-
-    response<span style="color:#f92672">.</span>set_cookie(<span style="color:#e6db74">&#39;matsushima&#39;</span>, jwt<span style="color:#f92672">.</span>encode(state, key, algorithm<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;HS256&#39;</span>), httponly<span style="color:#f92672">=</span>True, samesite<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;strict&#39;</span>)
-    <span style="color:#66d9ef">return</span> response
-
-
-<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/nextgame&#34;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;POST&#34;</span>])
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">nextgame</span>():
-    state <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>cookies<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;matsushima&#39;</span>, None)
-    <span style="color:#66d9ef">if</span> state <span style="color:#f92672">is</span> None:
-        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)
-
-    state <span style="color:#f92672">=</span> jwt<span style="color:#f92672">.</span>decode(state, key, algorithms<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;HS256&#39;</span>])
-    <span style="color:#66d9ef">if</span> state[<span style="color:#e6db74">&#39;chip&#39;</span>] <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>:
-        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)
-
-    <span style="color:#66d9ef">if</span> len(state[<span style="color:#e6db74">&#39;dealer&#39;</span>]) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>:
-        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)
-
-    <span style="color:#66d9ef">if</span> state[<span style="color:#e6db74">&#39;dealer_score&#39;</span>] <span style="color:#f92672">&gt;=</span> state[<span style="color:#e6db74">&#39;player_score&#39;</span>]:
-        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)
-
-    cards <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">13</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">4</span>))
-    random<span style="color:#f92672">.</span>shuffle(cards)
-    state[<span style="color:#e6db74">&#39;player&#39;</span>] <span style="color:#f92672">=</span> [cards[<span style="color:#ae81ff">0</span>]]
-    state[<span style="color:#e6db74">&#39;dealer&#39;</span>] <span style="color:#f92672">=</span> [cards[<span style="color:#ae81ff">1</span>]]
-    state[<span style="color:#e6db74">&#39;cards&#39;</span>] <span style="color:#f92672">=</span> cards[<span style="color:#ae81ff">2</span>:]
-    state[<span style="color:#e6db74">&#39;player_score&#39;</span>] <span style="color:#f92672">=</span> blackjack(state[<span style="color:#e6db74">&#39;player&#39;</span>])
-    state[<span style="color:#e6db74">&#39;dealer_score&#39;</span>] <span style="color:#f92672">=</span> blackjack(state[<span style="color:#e6db74">&#39;dealer&#39;</span>])
-
-    response <span style="color:#f92672">=</span> make_response(jsonify({
-        <span style="color:#e6db74">&#39;player&#39;</span>: state[<span style="color:#e6db74">&#39;player&#39;</span>],
-        <span style="color:#e6db74">&#39;dealer&#39;</span>: state[<span style="color:#e6db74">&#39;dealer&#39;</span>],
-        <span style="color:#e6db74">&#39;chip&#39;</span>: state[<span style="color:#e6db74">&#39;chip&#39;</span>],
-        <span style="color:#e6db74">&#39;player_score&#39;</span>: state[<span style="color:#e6db74">&#39;player_score&#39;</span>],
-        <span style="color:#e6db74">&#39;dealer_score&#39;</span>: state[<span style="color:#e6db74">&#39;dealer_score&#39;</span>],
-    }))
-
-    response<span style="color:#f92672">.</span>set_cookie(<span style="color:#e6db74">&#39;matsushima&#39;</span>, jwt<span style="color:#f92672">.</span>encode(state, key, algorithm<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;HS256&#39;</span>), httponly<span style="color:#f92672">=</span>True, samesite<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;strict&#39;</span>)
-    <span style="color:#66d9ef">return</span> response
-
-
-<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/flag&#39;</span>)
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">flag</span>():
-    state <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>cookies<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;matsushima&#39;</span>, None)
-    <span style="color:#66d9ef">if</span> state <span style="color:#f92672">is</span> None:
-        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)
-
-    state <span style="color:#f92672">=</span> jwt<span style="color:#f92672">.</span>decode(state, key, algorithms<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;HS256&#39;</span>])
-    <span style="color:#66d9ef">if</span> state[<span style="color:#e6db74">&#39;chip&#39;</span>] <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">999999</span>:
-        <span style="color:#66d9ef">return</span> jsonify({
-            <span style="color:#e6db74">&#39;flag&#39;</span>: secret<span style="color:#f92672">.</span>flag,
-        })
-    <span style="color:#66d9ef">else</span>:
-        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)
-
-
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
-    <span style="color:#f92672">from</span> gevent <span style="color:#f92672">import</span> monkey
-    monkey<span style="color:#f92672">.</span>patch_all()
-
-    <span style="color:#f92672">from</span> gevent.pywsgi <span style="color:#f92672">import</span> WSGIServer
-
-    http_server <span style="color:#f92672">=</span> WSGIServer((<span style="color:#e6db74">&#39;0.0.0.0&#39;</span>, <span style="color:#ae81ff">5000</span>), app)
-    http_server<span style="color:#f92672">.</span>serve_forever()
-
-</code></pre></div><p>コードを読むと、初期値100chips, 勝てば倍になっていき、999999chipsを超えるとflagが手に入る仕組み。
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask, send_file, request, make_response, jsonify, abort  
+<span style="color:#f92672">import</span> random  
+<span style="color:#f92672">import</span> jwt  
+<span style="color:#f92672">import</span> secret  
+  
+app <span style="color:#f92672">=</span> Flask(__name__)  
+key <span style="color:#f92672">=</span> secret<span style="color:#f92672">.</span>key  
+  
+  
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">blackjack</span>(cards):  
+    score <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>  
+    aces <span style="color:#f92672">=</span> []  
+    <span style="color:#66d9ef">for</span> card <span style="color:#f92672">in</span> cards:  
+        card2 <span style="color:#f92672">=</span> card <span style="color:#f92672">%</span> <span style="color:#ae81ff">13</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>  
+        <span style="color:#66d9ef">if</span> card2 <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:  
+            aces<span style="color:#f92672">.</span>append(card2)  
+        <span style="color:#66d9ef">elif</span> card2 <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">10</span>:  
+            score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">10</span>  
+        <span style="color:#66d9ef">else</span>:  
+            score <span style="color:#f92672">+=</span> card2  
+  
+    <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> aces:  
+        <span style="color:#66d9ef">if</span> score <span style="color:#f92672">+</span> <span style="color:#ae81ff">11</span> <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">21</span>:  
+            score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">11</span>  
+        <span style="color:#66d9ef">else</span>:  
+            score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>  
+  
+    <span style="color:#66d9ef">if</span> score <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">21</span>:  
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>  
+    <span style="color:#66d9ef">return</span> score  
+  
+  
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/&#34;</span>)  
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>():  
+    <span style="color:#66d9ef">return</span> send_file(<span style="color:#e6db74">&#34;index.html&#34;</span>)  
+  
+  
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/card/&lt;int:card_id&gt;.png&#34;</span>)  
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">card</span>(card_id):  
+    <span style="color:#66d9ef">return</span> send_file(<span style="color:#e6db74">&#39;images/{}.png&#39;</span><span style="color:#f92672">.</span>format(card_id))  
+  
+  
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/initialize&#34;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;POST&#34;</span>])  
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">initialize</span>():  
+    cards <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">13</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">4</span>))  
+    random<span style="color:#f92672">.</span>shuffle(cards)  
+  
+    player_cards <span style="color:#f92672">=</span> [cards[<span style="color:#ae81ff">0</span>]]  
+    dealer_cards <span style="color:#f92672">=</span> [cards[<span style="color:#ae81ff">1</span>]]  
+    player_score <span style="color:#f92672">=</span> blackjack(player_cards)  
+    dealer_score <span style="color:#f92672">=</span> blackjack(dealer_cards)  
+    state <span style="color:#f92672">=</span> {  
+        <span style="color:#e6db74">&#39;player&#39;</span>: player_cards,  
+        <span style="color:#e6db74">&#39;dealer&#39;</span>: dealer_cards,  
+        <span style="color:#e6db74">&#39;chip&#39;</span>: <span style="color:#ae81ff">100</span>,  
+        <span style="color:#e6db74">&#39;player_score&#39;</span>: player_score,  
+        <span style="color:#e6db74">&#39;dealer_score&#39;</span>: dealer_score,  
+    }  
+  
+    response <span style="color:#f92672">=</span> make_response(jsonify(state))  
+    state[<span style="color:#e6db74">&#39;cards&#39;</span>] <span style="color:#f92672">=</span> cards[<span style="color:#ae81ff">2</span>:]  
+    response<span style="color:#f92672">.</span>set_cookie(<span style="color:#e6db74">&#39;matsushima&#39;</span>, jwt<span style="color:#f92672">.</span>encode(state, key, algorithm<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;HS256&#39;</span>), httponly<span style="color:#f92672">=</span>True, samesite<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;strict&#39;</span>)  
+    <span style="color:#66d9ef">return</span> response  
+  
+  
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/hit&#34;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;POST&#34;</span>])  
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hit</span>():  
+    state <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>cookies<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;matsushima&#39;</span>, None)  
+    <span style="color:#66d9ef">if</span> state <span style="color:#f92672">is</span> None:  
+        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)  
+  
+    state <span style="color:#f92672">=</span> jwt<span style="color:#f92672">.</span>decode(state, key, algorithms<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;HS256&#39;</span>])  
+    <span style="color:#66d9ef">if</span> state[<span style="color:#e6db74">&#39;chip&#39;</span>] <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>:  
+        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)  
+  
+    next_card <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randrange(<span style="color:#ae81ff">0</span>, len(state[<span style="color:#e6db74">&#39;cards&#39;</span>]))  
+    card <span style="color:#f92672">=</span> state[<span style="color:#e6db74">&#39;cards&#39;</span>][next_card]  
+    state[<span style="color:#e6db74">&#39;cards&#39;</span>] <span style="color:#f92672">=</span> state[<span style="color:#e6db74">&#39;cards&#39;</span>][:next_card] <span style="color:#f92672">+</span> state[<span style="color:#e6db74">&#39;cards&#39;</span>][next_card<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>:]  
+  
+    state[<span style="color:#e6db74">&#39;player&#39;</span>] <span style="color:#f92672">=</span> state[<span style="color:#e6db74">&#39;player&#39;</span>] <span style="color:#f92672">+</span> [card]  
+    state[<span style="color:#e6db74">&#39;player_score&#39;</span>] <span style="color:#f92672">=</span> blackjack(state[<span style="color:#e6db74">&#39;player&#39;</span>])  
+    <span style="color:#66d9ef">if</span> state[<span style="color:#e6db74">&#39;player_score&#39;</span>] <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:  
+        state[<span style="color:#e6db74">&#39;chip&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>  
+  
+    response <span style="color:#f92672">=</span> make_response(jsonify({  
+        <span style="color:#e6db74">&#39;player&#39;</span>: state[<span style="color:#e6db74">&#39;player&#39;</span>],  
+        <span style="color:#e6db74">&#39;dealer&#39;</span>: state[<span style="color:#e6db74">&#39;dealer&#39;</span>],  
+        <span style="color:#e6db74">&#39;chip&#39;</span>: state[<span style="color:#e6db74">&#39;chip&#39;</span>],  
+        <span style="color:#e6db74">&#39;player_score&#39;</span>: state[<span style="color:#e6db74">&#39;player_score&#39;</span>],  
+        <span style="color:#e6db74">&#39;dealer_score&#39;</span>: state[<span style="color:#e6db74">&#39;dealer_score&#39;</span>],  
+    }))  
+  
+    response<span style="color:#f92672">.</span>set_cookie(<span style="color:#e6db74">&#39;matsushima&#39;</span>, jwt<span style="color:#f92672">.</span>encode(state, key, algorithm<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;HS256&#39;</span>), httponly<span style="color:#f92672">=</span>True, samesite<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;strict&#39;</span>)  
+    <span style="color:#66d9ef">return</span> response  
+  
+  
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/stand&#34;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;POST&#34;</span>])  
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">stand</span>():  
+    state <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>cookies<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;matsushima&#39;</span>, None)  
+    <span style="color:#66d9ef">if</span> state <span style="color:#f92672">is</span> None:  
+        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)  
+  
+    state <span style="color:#f92672">=</span> jwt<span style="color:#f92672">.</span>decode(state, key, algorithms<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;HS256&#39;</span>])  
+    <span style="color:#66d9ef">if</span> state[<span style="color:#e6db74">&#39;chip&#39;</span>] <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>:  
+        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)  
+  
+    <span style="color:#66d9ef">while</span> True:  
+        next_card <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randrange(<span style="color:#ae81ff">0</span>, len(state[<span style="color:#e6db74">&#39;cards&#39;</span>]))  
+        card <span style="color:#f92672">=</span> state[<span style="color:#e6db74">&#39;cards&#39;</span>][next_card]  
+        state[<span style="color:#e6db74">&#39;cards&#39;</span>] <span style="color:#f92672">=</span> state[<span style="color:#e6db74">&#39;cards&#39;</span>][:next_card] <span style="color:#f92672">+</span> state[<span style="color:#e6db74">&#39;cards&#39;</span>][next_card<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>:]  
+  
+        state[<span style="color:#e6db74">&#39;dealer&#39;</span>] <span style="color:#f92672">=</span> state[<span style="color:#e6db74">&#39;dealer&#39;</span>] <span style="color:#f92672">+</span> [card]  
+        state[<span style="color:#e6db74">&#39;dealer_score&#39;</span>] <span style="color:#f92672">=</span> blackjack(state[<span style="color:#e6db74">&#39;dealer&#39;</span>])  
+        <span style="color:#66d9ef">if</span> state[<span style="color:#e6db74">&#39;dealer_score&#39;</span>] <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> state[<span style="color:#e6db74">&#39;dealer_score&#39;</span>] <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">17</span>:  
+            <span style="color:#66d9ef">break</span>  
+  
+    <span style="color:#66d9ef">if</span> state[<span style="color:#e6db74">&#39;dealer_score&#39;</span>] <span style="color:#f92672">&lt;</span> state[<span style="color:#e6db74">&#39;player_score&#39;</span>]:  
+        state[<span style="color:#e6db74">&#39;chip&#39;</span>] <span style="color:#f92672">=</span> state[<span style="color:#e6db74">&#39;chip&#39;</span>] <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>  
+    <span style="color:#66d9ef">else</span>:  
+        state[<span style="color:#e6db74">&#39;chip&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>  
+  
+    response <span style="color:#f92672">=</span> make_response(jsonify({  
+        <span style="color:#e6db74">&#39;player&#39;</span>: state[<span style="color:#e6db74">&#39;player&#39;</span>],  
+        <span style="color:#e6db74">&#39;dealer&#39;</span>: state[<span style="color:#e6db74">&#39;dealer&#39;</span>],  
+        <span style="color:#e6db74">&#39;chip&#39;</span>: state[<span style="color:#e6db74">&#39;chip&#39;</span>],  
+        <span style="color:#e6db74">&#39;player_score&#39;</span>: state[<span style="color:#e6db74">&#39;player_score&#39;</span>],  
+        <span style="color:#e6db74">&#39;dealer_score&#39;</span>: state[<span style="color:#e6db74">&#39;dealer_score&#39;</span>],  
+    }))  
+  
+    response<span style="color:#f92672">.</span>set_cookie(<span style="color:#e6db74">&#39;matsushima&#39;</span>, jwt<span style="color:#f92672">.</span>encode(state, key, algorithm<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;HS256&#39;</span>), httponly<span style="color:#f92672">=</span>True, samesite<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;strict&#39;</span>)  
+    <span style="color:#66d9ef">return</span> response  
+  
+  
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/nextgame&#34;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;POST&#34;</span>])  
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">nextgame</span>():  
+    state <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>cookies<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;matsushima&#39;</span>, None)  
+    <span style="color:#66d9ef">if</span> state <span style="color:#f92672">is</span> None:  
+        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)  
+  
+    state <span style="color:#f92672">=</span> jwt<span style="color:#f92672">.</span>decode(state, key, algorithms<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;HS256&#39;</span>])  
+    <span style="color:#66d9ef">if</span> state[<span style="color:#e6db74">&#39;chip&#39;</span>] <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>:  
+        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)  
+  
+    <span style="color:#66d9ef">if</span> len(state[<span style="color:#e6db74">&#39;dealer&#39;</span>]) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>:  
+        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)  
+  
+    <span style="color:#66d9ef">if</span> state[<span style="color:#e6db74">&#39;dealer_score&#39;</span>] <span style="color:#f92672">&gt;=</span> state[<span style="color:#e6db74">&#39;player_score&#39;</span>]:  
+        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)  
+  
+    cards <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">13</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">4</span>))  
+    random<span style="color:#f92672">.</span>shuffle(cards)  
+    state[<span style="color:#e6db74">&#39;player&#39;</span>] <span style="color:#f92672">=</span> [cards[<span style="color:#ae81ff">0</span>]]  
+    state[<span style="color:#e6db74">&#39;dealer&#39;</span>] <span style="color:#f92672">=</span> [cards[<span style="color:#ae81ff">1</span>]]  
+    state[<span style="color:#e6db74">&#39;cards&#39;</span>] <span style="color:#f92672">=</span> cards[<span style="color:#ae81ff">2</span>:]  
+    state[<span style="color:#e6db74">&#39;player_score&#39;</span>] <span style="color:#f92672">=</span> blackjack(state[<span style="color:#e6db74">&#39;player&#39;</span>])  
+    state[<span style="color:#e6db74">&#39;dealer_score&#39;</span>] <span style="color:#f92672">=</span> blackjack(state[<span style="color:#e6db74">&#39;dealer&#39;</span>])  
+  
+    response <span style="color:#f92672">=</span> make_response(jsonify({  
+        <span style="color:#e6db74">&#39;player&#39;</span>: state[<span style="color:#e6db74">&#39;player&#39;</span>],  
+        <span style="color:#e6db74">&#39;dealer&#39;</span>: state[<span style="color:#e6db74">&#39;dealer&#39;</span>],  
+        <span style="color:#e6db74">&#39;chip&#39;</span>: state[<span style="color:#e6db74">&#39;chip&#39;</span>],  
+        <span style="color:#e6db74">&#39;player_score&#39;</span>: state[<span style="color:#e6db74">&#39;player_score&#39;</span>],  
+        <span style="color:#e6db74">&#39;dealer_score&#39;</span>: state[<span style="color:#e6db74">&#39;dealer_score&#39;</span>],  
+    }))  
+  
+    response<span style="color:#f92672">.</span>set_cookie(<span style="color:#e6db74">&#39;matsushima&#39;</span>, jwt<span style="color:#f92672">.</span>encode(state, key, algorithm<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;HS256&#39;</span>), httponly<span style="color:#f92672">=</span>True, samesite<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;strict&#39;</span>)  
+    <span style="color:#66d9ef">return</span> response  
+  
+  
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/flag&#39;</span>)  
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">flag</span>():  
+    state <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>cookies<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;matsushima&#39;</span>, None)  
+    <span style="color:#66d9ef">if</span> state <span style="color:#f92672">is</span> None:  
+        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)  
+  
+    state <span style="color:#f92672">=</span> jwt<span style="color:#f92672">.</span>decode(state, key, algorithms<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;HS256&#39;</span>])  
+    <span style="color:#66d9ef">if</span> state[<span style="color:#e6db74">&#39;chip&#39;</span>] <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">999999</span>:  
+        <span style="color:#66d9ef">return</span> jsonify({  
+            <span style="color:#e6db74">&#39;flag&#39;</span>: secret<span style="color:#f92672">.</span>flag,  
+        })  
+    <span style="color:#66d9ef">else</span>:  
+        <span style="color:#66d9ef">return</span> abort(<span style="color:#ae81ff">400</span>)  
+  
+  
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:  
+    <span style="color:#f92672">from</span> gevent <span style="color:#f92672">import</span> monkey  
+    monkey<span style="color:#f92672">.</span>patch_all()  
+  
+    <span style="color:#f92672">from</span> gevent.pywsgi <span style="color:#f92672">import</span> WSGIServer  
+  
+    http_server <span style="color:#f92672">=</span> WSGIServer((<span style="color:#e6db74">&#39;0.0.0.0&#39;</span>, <span style="color:#ae81ff">5000</span>), app)  
+    http_server<span style="color:#f92672">.</span>serve_forever()  
+  
+</code></pre></div><p>コードを読むと、初期値100chips, 勝てば倍になっていき、999999chipsを超えるとflagが手に入る仕組み。<br>
 2つ方針を考えた。1つは、jwtの脆弱性を利用するもの。algでNoneとか、間違ってsecretが手に入っちゃうとか、jwtを発行するときに値を好き放題入れられるとかを考えたけどうまくいかなかった。理由としては、すべてサーバ側で処理していることが挙げられる。2つめは、ブラックジャックで次に来るカードをすべて予測して勝利するもの。(乱数に脆弱性のある暗号問でよくあるやつ)さて、jwtの中身は、以下のようになっている。(jwt.ioを用いた)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">{
-  <span style="color:#e6db74">&#34;player&#34;</span><span style="color:#f92672">:</span> [
-    <span style="color:#ae81ff">1</span>
-  ],
-  <span style="color:#e6db74">&#34;dealer&#34;</span><span style="color:#f92672">:</span> [
-    <span style="color:#ae81ff">7</span>
-  ],
-  <span style="color:#e6db74">&#34;chip&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">200</span>,
-  <span style="color:#e6db74">&#34;player_score&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">2</span>,
-  <span style="color:#e6db74">&#34;dealer_score&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">8</span>,
-  <span style="color:#e6db74">&#34;cards&#34;</span><span style="color:#f92672">:</span> [
-    <span style="color:#ae81ff">45</span>,
-    <span style="color:#ae81ff">24</span>,
-    <span style="color:#ae81ff">40</span>,
-    <span style="color:#ae81ff">15</span>,
-    <span style="color:#ae81ff">18</span>,
-    <span style="color:#ae81ff">21</span>,
-    <span style="color:#ae81ff">6</span>,
-    <span style="color:#ae81ff">42</span>,
-    <span style="color:#ae81ff">49</span>,
-    <span style="color:#ae81ff">46</span>,
-    <span style="color:#ae81ff">5</span>,
-    <span style="color:#ae81ff">11</span>,
-    <span style="color:#ae81ff">44</span>,
-    <span style="color:#ae81ff">33</span>,
-    <span style="color:#ae81ff">47</span>,
-    <span style="color:#ae81ff">32</span>,
-    <span style="color:#ae81ff">22</span>,
-    <span style="color:#ae81ff">25</span>,
-    <span style="color:#ae81ff">38</span>,
-    <span style="color:#ae81ff">41</span>,
-    <span style="color:#ae81ff">28</span>,
-    <span style="color:#ae81ff">23</span>,
-    <span style="color:#ae81ff">39</span>,
-    <span style="color:#ae81ff">13</span>,
-    <span style="color:#ae81ff">16</span>,
-    <span style="color:#ae81ff">27</span>,
-    <span style="color:#ae81ff">2</span>,
-    <span style="color:#ae81ff">48</span>,
-    <span style="color:#ae81ff">26</span>,
-    <span style="color:#ae81ff">4</span>,
-    <span style="color:#ae81ff">14</span>,
-    <span style="color:#ae81ff">3</span>,
-    <span style="color:#ae81ff">17</span>,
-    <span style="color:#ae81ff">19</span>,
-    <span style="color:#ae81ff">36</span>,
-    <span style="color:#ae81ff">50</span>,
-    <span style="color:#ae81ff">0</span>,
-    <span style="color:#ae81ff">31</span>,
-    <span style="color:#ae81ff">43</span>,
-    <span style="color:#ae81ff">12</span>,
-    <span style="color:#ae81ff">34</span>,
-    <span style="color:#ae81ff">30</span>,
-    <span style="color:#ae81ff">9</span>,
-    <span style="color:#ae81ff">37</span>,
-    <span style="color:#ae81ff">51</span>,
-    <span style="color:#ae81ff">8</span>,
-    <span style="color:#ae81ff">10</span>,
-    <span style="color:#ae81ff">29</span>,
-    <span style="color:#ae81ff">35</span>,
-    <span style="color:#ae81ff">20</span>
-  ]
-}
-</code></pre></div><p>cardsが書いてあるじゃん！！2つめの方針いける！！と思ったが、<code>/stand</code>や<code>/hit</code>の処理を見るとわかるように結局randrangeしているので予測はできない。
-うんうん悩んでいたら、そもそもcookieだけでしかやりとりしていないことに気づいた。これはjwtはブラックボックスのままで、負けたら手前の状態のcookieを保存しておいてそれをもう一度セットすれば負ける前の状態に戻れるのでは？→できた！死に戻りできる！(アニメの見すぎ)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">{  
+  <span style="color:#e6db74">&#34;player&#34;</span><span style="color:#f92672">:</span> [  
+    <span style="color:#ae81ff">1</span>  
+  ],  
+  <span style="color:#e6db74">&#34;dealer&#34;</span><span style="color:#f92672">:</span> [  
+    <span style="color:#ae81ff">7</span>  
+  ],  
+  <span style="color:#e6db74">&#34;chip&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">200</span>,  
+  <span style="color:#e6db74">&#34;player_score&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">2</span>,  
+  <span style="color:#e6db74">&#34;dealer_score&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">8</span>,  
+  <span style="color:#e6db74">&#34;cards&#34;</span><span style="color:#f92672">:</span> [  
+    <span style="color:#ae81ff">45</span>,  
+    <span style="color:#ae81ff">24</span>,  
+    <span style="color:#ae81ff">40</span>,  
+    <span style="color:#ae81ff">15</span>,  
+    <span style="color:#ae81ff">18</span>,  
+    <span style="color:#ae81ff">21</span>,  
+    <span style="color:#ae81ff">6</span>,  
+    <span style="color:#ae81ff">42</span>,  
+    <span style="color:#ae81ff">49</span>,  
+    <span style="color:#ae81ff">46</span>,  
+    <span style="color:#ae81ff">5</span>,  
+    <span style="color:#ae81ff">11</span>,  
+    <span style="color:#ae81ff">44</span>,  
+    <span style="color:#ae81ff">33</span>,  
+    <span style="color:#ae81ff">47</span>,  
+    <span style="color:#ae81ff">32</span>,  
+    <span style="color:#ae81ff">22</span>,  
+    <span style="color:#ae81ff">25</span>,  
+    <span style="color:#ae81ff">38</span>,  
+    <span style="color:#ae81ff">41</span>,  
+    <span style="color:#ae81ff">28</span>,  
+    <span style="color:#ae81ff">23</span>,  
+    <span style="color:#ae81ff">39</span>,  
+    <span style="color:#ae81ff">13</span>,  
+    <span style="color:#ae81ff">16</span>,  
+    <span style="color:#ae81ff">27</span>,  
+    <span style="color:#ae81ff">2</span>,  
+    <span style="color:#ae81ff">48</span>,  
+    <span style="color:#ae81ff">26</span>,  
+    <span style="color:#ae81ff">4</span>,  
+    <span style="color:#ae81ff">14</span>,  
+    <span style="color:#ae81ff">3</span>,  
+    <span style="color:#ae81ff">17</span>,  
+    <span style="color:#ae81ff">19</span>,  
+    <span style="color:#ae81ff">36</span>,  
+    <span style="color:#ae81ff">50</span>,  
+    <span style="color:#ae81ff">0</span>,  
+    <span style="color:#ae81ff">31</span>,  
+    <span style="color:#ae81ff">43</span>,  
+    <span style="color:#ae81ff">12</span>,  
+    <span style="color:#ae81ff">34</span>,  
+    <span style="color:#ae81ff">30</span>,  
+    <span style="color:#ae81ff">9</span>,  
+    <span style="color:#ae81ff">37</span>,  
+    <span style="color:#ae81ff">51</span>,  
+    <span style="color:#ae81ff">8</span>,  
+    <span style="color:#ae81ff">10</span>,  
+    <span style="color:#ae81ff">29</span>,  
+    <span style="color:#ae81ff">35</span>,  
+    <span style="color:#ae81ff">20</span>  
+  ]  
+}  
+</code></pre></div><p>cardsが書いてあるじゃん！！2つめの方針いける！！と思ったが、<code>/stand</code>や<code>/hit</code>の処理を見るとわかるように結局randrangeしているので予測はできない。<br>
+うんうん悩んでいたら、そもそもcookieだけでしかやりとりしていないことに気づいた。これはjwtはブラックボックスのままで、負けたら手前の状態のcookieを保存しておいてそれをもう一度セットすれば負ける前の状態に戻れるのでは？→できた！死に戻りできる！(アニメの見すぎ)<br>
 というわけで勝ったらnext gameを押し、cookieをメモしておいて負けたらcookieをセットして&hellip;という形で手作業でやっていった。14回勝てば目標額を超えるので、手作業でも間に合う。cookieの変更はchrome devtools &gt; applicationsからやった。</p>
 <p><img src="./p-3.png" alt="matsushima2"></p>
-<pre><code>KosenCTF{r3m3mb3r_m475u5him4}
+<pre><code>KosenCTF{r3m3mb3r_m475u5him4}  
 </code></pre><p>こういうときサッと自動化できたら強いんだろうな&hellip;</p>
 <h1 id="limited">limited</h1>
-<pre><code>Our website had been attacked by someone. Did the attacker successfully steal the admin's secret?
-
-limited_2a6f6c5f14589179b1ce3e73937cae45.tar.gz
-</code></pre><p>pcapファイルが渡されて、それを見ていく問題。こういうのって、pcapファイルのみで完結する場合と、その中で指定されたIPのサーバが生きててそこと通信する場合の2つがあると思うんだけど、今回はpcapファイルのみで完結するものだった。
-Network問はHTTP Streamを抜き出して、どんなやりとりがなされたかが分かればあとはプログラミングコンテストになりがちな気がするので工夫が大変そう。かといって、CTFではないけど<a href="https://jovi0608.hatenablog.com/entry/2020/06/13/104905">求む！TLS1.3の再接続を完全に理解した方(Challenge CVE-2020-13777)</a>みたいなやつだとえげつなくて解けないのでうーんという感じ。でもNetwork問でこれからもHTTP Stream抜き出してホイみたいな問題が出続けるとも限らないので、ちゃんと暗号化された通信の勉強もしないとなぁ&hellip;うう
-本題に入ります。
+<pre><code>Our website had been attacked by someone. Did the attacker successfully steal the admin's secret?  
+  
+limited_2a6f6c5f14589179b1ce3e73937cae45.tar.gz  
+</code></pre><p>pcapファイルが渡されて、それを見ていく問題。こういうのって、pcapファイルのみで完結する場合と、その中で指定されたIPのサーバが生きててそこと通信する場合の2つがあると思うんだけど、今回はpcapファイルのみで完結するものだった。<br>
+Network問はHTTP Streamを抜き出して、どんなやりとりがなされたかが分かればあとはプログラミングコンテストになりがちな気がするので工夫が大変そう。かといって、CTFではないけど<a href="https://jovi0608.hatenablog.com/entry/2020/06/13/104905">求む！TLS1.3の再接続を完全に理解した方(Challenge CVE-2020-13777)</a>みたいなやつだとえげつなくて解けないのでうーんという感じ。でもNetwork問でこれからもHTTP Stream抜き出してホイみたいな問題が出続けるとも限らないので、ちゃんと暗号化された通信の勉強もしないとなぁ&hellip;うう<br>
+本題に入ります。<br>
 wiresharkを用いていくつかのパケットでfollow HTTP streamして中身をみていくと、 <code>GET /search.php?keyword=&amp;search_max=%28SELECT+unicode%28substr%28secret%2C+1%2C+1%29%29+FROM+account+WHERE+name%3D%22admin%22%29+%25+13 HTTP/1.1</code> みたいなクエリがたくさんみつかります。これはSQL injectionをしているなと思ったので、これらを個別に処理したくなり、wiresharkの左上の方のボタンを押して、それぞれのHTTP Streamをすべてファイルにしました。</p>
 <p><img src="./p-4.png" alt="limited"></p>
 <p>search.php, クエリが関係なさそうないくつかいらないファイルを消して以下のコードを書きました。(<code>00main.py</code>)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> glob
-<span style="color:#f92672">from</span> urllib.parse <span style="color:#f92672">import</span> parse_qs
-<span style="color:#f92672">import</span> re
-a <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;search*&#34;</span>)
-<span style="color:#66d9ef">print</span>(a)
-arr <span style="color:#f92672">=</span> []
-secret <span style="color:#f92672">=</span> []
-<span style="color:#66d9ef">for</span> path <span style="color:#f92672">in</span> a:
-    p <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://example.com?&#34;</span> <span style="color:#f92672">+</span> path
-    q <span style="color:#f92672">=</span> parse_qs(p)
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> <span style="color:#e6db74">&#39;search_max&#39;</span> <span style="color:#f92672">in</span> q<span style="color:#f92672">.</span>keys():
-        <span style="color:#66d9ef">continue</span> 
-    qq <span style="color:#f92672">=</span> q[<span style="color:#e6db74">&#39;search_max&#39;</span>][<span style="color:#ae81ff">0</span>] <span style="color:#75715e">#regex</span>
-    <span style="color:#75715e"># print(qq)</span>
-    m <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;secret, (\d{1,2}),&#39;</span>, qq)
-    mm <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;% (\d{1,2})&#39;</span>, qq)
-    A <span style="color:#f92672">=</span> m<span style="color:#f92672">.</span>groups()[<span style="color:#ae81ff">0</span>]
-    B <span style="color:#f92672">=</span> mm<span style="color:#f92672">.</span>groups()[<span style="color:#ae81ff">0</span>]
-    b <span style="color:#f92672">=</span> open(path, <span style="color:#e6db74">&#34;r&#34;</span>)<span style="color:#f92672">.</span>read() <span style="color:#75715e">#regex</span>
-    n <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;php\?id=(\d{1,2})&#39;</span>, b)
-    C <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> [] <span style="color:#66d9ef">else</span> max([int(i) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> n])
-    arr<span style="color:#f92672">.</span>append([int(A),int(B),C])
-<span style="color:#75715e"># secret get</span>
-arr<span style="color:#f92672">.</span>sort(key<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> x:x[<span style="color:#ae81ff">0</span>])
-<span style="color:#66d9ef">print</span>(arr)
-index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-prob <span style="color:#f92672">=</span> [<span style="color:#ae81ff">65</span>]
-<span style="color:#66d9ef">for</span> elem <span style="color:#f92672">in</span> arr:
-    A <span style="color:#f92672">=</span> elem[<span style="color:#ae81ff">0</span>]
-    B <span style="color:#f92672">=</span> elem[<span style="color:#ae81ff">1</span>]
-    C <span style="color:#f92672">=</span> elem[<span style="color:#ae81ff">2</span>]
-
-    <span style="color:#66d9ef">if</span> index <span style="color:#f92672">!=</span> A:
-        <span style="color:#75715e"># init</span>
-        index <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-        secret<span style="color:#f92672">.</span>append(prob)
-        prob <span style="color:#f92672">=</span> []
-        j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-        <span style="color:#66d9ef">while</span> B<span style="color:#f92672">*</span>j<span style="color:#f92672">+</span>C <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">123</span>:
-            prob<span style="color:#f92672">.</span>append(B<span style="color:#f92672">*</span>j <span style="color:#f92672">+</span> C)
-            j<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
-    <span style="color:#66d9ef">else</span>:
-        rem <span style="color:#f92672">=</span> []
-        <span style="color:#66d9ef">for</span> k <span style="color:#f92672">in</span> prob:
-            <span style="color:#66d9ef">if</span> k<span style="color:#f92672">%</span>B <span style="color:#f92672">!=</span> C:
-                rem<span style="color:#f92672">.</span>append(k)
-        <span style="color:#66d9ef">for</span> ii <span style="color:#f92672">in</span> rem:
-            prob<span style="color:#f92672">.</span>remove(ii)
-<span style="color:#66d9ef">print</span>(secret)
-<span style="color:#66d9ef">for</span> sec <span style="color:#f92672">in</span> secret:
-    <span style="color:#66d9ef">if</span> len(sec) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
-        <span style="color:#66d9ef">print</span>(chr(sec[<span style="color:#ae81ff">0</span>]), end<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)
-<span style="color:#75715e"># KosenCTFu_c4n_us3_CRT_f0r_LIMIT_1nj3ct10n_p01nt</span>
-<span style="color:#75715e"># KosenCTF{u_c4n_us3_CRT_f0r_LIMIT_1nj3ct10n_p01nt}</span>
-</code></pre></div><p>それぞれのクエリでは、secretのA番目の文字をXとしたとき、
-<code>ord(X)%B == C</code>・・・(1)
-となるようなA,B,Cが得られます。Aは1~50まで動くので、各Aに対するXが分かればflagが得られます。複数の式(1)が与えられるのでCRT(中華剰余定理)でもいいのですが、範囲が狭いので最初の式で候補を絞って、次の式でその候補から除外していくという方法をとっています。
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> glob  
+<span style="color:#f92672">from</span> urllib.parse <span style="color:#f92672">import</span> parse_qs  
+<span style="color:#f92672">import</span> re  
+a <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;search*&#34;</span>)  
+<span style="color:#66d9ef">print</span>(a)  
+arr <span style="color:#f92672">=</span> []  
+secret <span style="color:#f92672">=</span> []  
+<span style="color:#66d9ef">for</span> path <span style="color:#f92672">in</span> a:  
+    p <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://example.com?&#34;</span> <span style="color:#f92672">+</span> path  
+    q <span style="color:#f92672">=</span> parse_qs(p)  
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> <span style="color:#e6db74">&#39;search_max&#39;</span> <span style="color:#f92672">in</span> q<span style="color:#f92672">.</span>keys():  
+        <span style="color:#66d9ef">continue</span>   
+    qq <span style="color:#f92672">=</span> q[<span style="color:#e6db74">&#39;search_max&#39;</span>][<span style="color:#ae81ff">0</span>] <span style="color:#75715e">#regex  </span>
+    <span style="color:#75715e"># print(qq)  </span>
+    m <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;secret, (\d{1,2}),&#39;</span>, qq)  
+    mm <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;% (\d{1,2})&#39;</span>, qq)  
+    A <span style="color:#f92672">=</span> m<span style="color:#f92672">.</span>groups()[<span style="color:#ae81ff">0</span>]  
+    B <span style="color:#f92672">=</span> mm<span style="color:#f92672">.</span>groups()[<span style="color:#ae81ff">0</span>]  
+    b <span style="color:#f92672">=</span> open(path, <span style="color:#e6db74">&#34;r&#34;</span>)<span style="color:#f92672">.</span>read() <span style="color:#75715e">#regex  </span>
+    n <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;php\?id=(\d{1,2})&#39;</span>, b)  
+    C <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> [] <span style="color:#66d9ef">else</span> max([int(i) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> n])  
+    arr<span style="color:#f92672">.</span>append([int(A),int(B),C])  
+<span style="color:#75715e"># secret get  </span>
+arr<span style="color:#f92672">.</span>sort(key<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> x:x[<span style="color:#ae81ff">0</span>])  
+<span style="color:#66d9ef">print</span>(arr)  
+index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>  
+prob <span style="color:#f92672">=</span> [<span style="color:#ae81ff">65</span>]  
+<span style="color:#66d9ef">for</span> elem <span style="color:#f92672">in</span> arr:  
+    A <span style="color:#f92672">=</span> elem[<span style="color:#ae81ff">0</span>]  
+    B <span style="color:#f92672">=</span> elem[<span style="color:#ae81ff">1</span>]  
+    C <span style="color:#f92672">=</span> elem[<span style="color:#ae81ff">2</span>]  
+  
+    <span style="color:#66d9ef">if</span> index <span style="color:#f92672">!=</span> A:  
+        <span style="color:#75715e"># init  </span>
+        index <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>  
+        secret<span style="color:#f92672">.</span>append(prob)  
+        prob <span style="color:#f92672">=</span> []  
+        j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>  
+        <span style="color:#66d9ef">while</span> B<span style="color:#f92672">*</span>j<span style="color:#f92672">+</span>C <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">123</span>:  
+            prob<span style="color:#f92672">.</span>append(B<span style="color:#f92672">*</span>j <span style="color:#f92672">+</span> C)  
+            j<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>  
+    <span style="color:#66d9ef">else</span>:  
+        rem <span style="color:#f92672">=</span> []  
+        <span style="color:#66d9ef">for</span> k <span style="color:#f92672">in</span> prob:  
+            <span style="color:#66d9ef">if</span> k<span style="color:#f92672">%</span>B <span style="color:#f92672">!=</span> C:  
+                rem<span style="color:#f92672">.</span>append(k)  
+        <span style="color:#66d9ef">for</span> ii <span style="color:#f92672">in</span> rem:  
+            prob<span style="color:#f92672">.</span>remove(ii)  
+<span style="color:#66d9ef">print</span>(secret)  
+<span style="color:#66d9ef">for</span> sec <span style="color:#f92672">in</span> secret:  
+    <span style="color:#66d9ef">if</span> len(sec) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:  
+        <span style="color:#66d9ef">print</span>(chr(sec[<span style="color:#ae81ff">0</span>]), end<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)  
+<span style="color:#75715e"># KosenCTFu_c4n_us3_CRT_f0r_LIMIT_1nj3ct10n_p01nt  </span>
+<span style="color:#75715e"># KosenCTF{u_c4n_us3_CRT_f0r_LIMIT_1nj3ct10n_p01nt}  </span>
+</code></pre></div><p>それぞれのクエリでは、secretのA番目の文字をXとしたとき、<br>
+<code>ord(X)%B == C</code>・・・(1)<br>
+となるようなA,B,Cが得られます。Aは1~50まで動くので、各Aに対するXが分かればflagが得られます。複数の式(1)が与えられるのでCRT(中華剰余定理)でもいいのですが、範囲が狭いので最初の式で候補を絞って、次の式でその候補から除外していくという方法をとっています。<br>
 これでflagが得られました。</p>
-<pre><code>KosenCTF{u_c4n_us3_CRT_f0r_LIMIT_1nj3ct10n_p01nt}
+<pre><code>KosenCTF{u_c4n_us3_CRT_f0r_LIMIT_1nj3ct10n_p01nt}  
 </code></pre><p>(後追い)</p>
 <h1 id="babysort">babysort</h1>
 <h1 id="harmagedon">harmagedon</h1>
@@ -409,6 +409,90 @@ prob <span style="color:#f92672">=</span> [<span style="color:#ae81ff">65</span>
 <h1 id="padding-oracle">padding oracle</h1>
 <h1 id="fables-of-aesop">Fables of aeSOP</h1>
 <h1 id="no-pressure">No pressure</h1>
+<pre><code>nc misc.kosenctf.com 10002  
+  
+No pressure_1cbec3179ffae85c628143284fef23c5.tar.gz  
+</code></pre><p>与えられたソースコードは以下のようになっています</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> ARC4  
+<span style="color:#f92672">from</span> hashlib <span style="color:#f92672">import</span> sha256  
+<span style="color:#f92672">from</span> base64 <span style="color:#f92672">import</span> b64encode  
+<span style="color:#f92672">import</span> zlib  
+<span style="color:#f92672">import</span> os  
+  
+flag <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#34;./flag.txt&#34;</span>, <span style="color:#e6db74">&#34;rb&#34;</span>)<span style="color:#f92672">.</span>read()  
+  
+nonce <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>urandom(<span style="color:#ae81ff">32</span>)  
+<span style="color:#66d9ef">while</span> True:  
+    m <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;message: &#34;</span>)  
+    arc4 <span style="color:#f92672">=</span> ARC4<span style="color:#f92672">.</span>new(sha256(nonce <span style="color:#f92672">+</span> m<span style="color:#f92672">.</span>encode())<span style="color:#f92672">.</span>digest())  
+    c <span style="color:#f92672">=</span> arc4<span style="color:#f92672">.</span>encrypt(zlib<span style="color:#f92672">.</span>compress(flag <span style="color:#f92672">+</span> m<span style="color:#f92672">.</span>encode()))  
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;encrypted! :&#34;</span>, b64encode(c)<span style="color:#f92672">.</span>decode())  
+</code></pre></div><p>&hellip;Crypto?とりあえずpoetryでpycryptoをいれるなどしました。ARC4ってなんだろうと思って調べてみたところ、RC4だと商標にひっかかる？らしく、Alleged-RC4ということで、実質RC4です。<br>
+さて、RC4はストリーム暗号なので、padding oracle系のが刺さるのかな、2文字目は特定できるという話を聞いたこともあるな、といろいろやっていたが全く当たらないので、zlibになにか仕掛けがあるんじゃないか、特にLZ77,ハフマン符号だとflagと似た文字列をmessageに置けば短くなるはずなので&hellip;と思いましたが特にわからなかったです。<br>
+答えを見ます。 <a href="https://yoshiking.hatenablog.jp/entry/2020/09/07/101829">yoshikingさんの作問者writeup</a><br>
+zlibでした。ストリーム暗号なので暗号前と後で長さが不変、それはそう&hellip;解けたじゃんつらい&hellip;<br>
+<a href="https://blog.albina.cc/2020/09/interkosenctf-2020-writeup.html">LaikaさんのWriteup</a> を参考に書いた(というかほぼコピー)<br>
+どんな処理をしているかというと、encryptが帰ってきたらb64decodeして比較できるようにしておいて、短い長さが来たらありうる文字を更新するという感じ。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>  
+<span style="color:#f92672">from</span> base64 <span style="color:#f92672">import</span> b64decode  
+<span style="color:#f92672">from</span> string <span style="color:#f92672">import</span> ascii_letters, digits, punctuation  
+  
+<span style="color:#75715e">### --- サーバが閉じているようなので手元で検証しました ---  </span>
+<span style="color:#75715e"># s = remote(&#39;misc.kosenctf.com&#39;, 10002)  </span>
+s <span style="color:#f92672">=</span> process([<span style="color:#e6db74">&#39;poetry&#39;</span>, <span style="color:#e6db74">&#39;run&#39;</span>, <span style="color:#e6db74">&#39;python3&#39;</span>, <span style="color:#e6db74">&#39;main.py&#39;</span>])  
+  
+ch <span style="color:#f92672">=</span> ascii_letters <span style="color:#f92672">+</span> digits <span style="color:#f92672">+</span> punctuation  
+flag <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;KosenCTF{&#39;</span>  
+  
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt</span>(message):  
+    s<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;message: &#39;</span>)  
+    s<span style="color:#f92672">.</span>sendline(message)  
+    encrypted <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span>recvline()<span style="color:#f92672">.</span>split(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;:&#39;</span>)[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>strip()  
+    encrypted <span style="color:#f92672">=</span> b64decode(encrypted)  
+    <span style="color:#66d9ef">return</span> encrypted  
+  
+<span style="color:#66d9ef">while</span> True:  
+    candidate <span style="color:#f92672">=</span> None  
+    shortest, longest <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>  
+    <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> ch:  
+        check <span style="color:#f92672">=</span> flag <span style="color:#f92672">+</span> c  
+        length <span style="color:#f92672">=</span> len(encrypt(check))  
+        <span style="color:#66d9ef">if</span> length <span style="color:#f92672">&lt;</span> shortest:  
+            shortest <span style="color:#f92672">=</span> length  
+            candidate <span style="color:#f92672">=</span> c  
+        longest <span style="color:#f92672">=</span> max(longest, length)  
+    <span style="color:#66d9ef">if</span> shortest <span style="color:#f92672">==</span> longest:  
+        <span style="color:#66d9ef">break</span>  
+    flag <span style="color:#f92672">+=</span> candidate  
+    <span style="color:#66d9ef">print</span>(flag)  
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Result: &#39;</span>, flag)  
+</code></pre></div><p>動かした様子は以下の通り(手元なのでdummy flagです)</p>
+<pre><code>$ poetry run python3 pwny.py   
+[+] Starting local process '/home/uta8a/.poetry/bin/poetry': pid 22642  
+KosenCTF{h  
+KosenCTF{ho  
+KosenCTF{hog  
+KosenCTF{hoge  
+KosenCTF{hoge_  
+KosenCTF{hoge_p  
+KosenCTF{hoge_pi  
+KosenCTF{hoge_piy  
+KosenCTF{hoge_piyo  
+KosenCTF{hoge_piyo_  
+KosenCTF{hoge_piyo_f  
+KosenCTF{hoge_piyo_fu  
+KosenCTF{hoge_piyo_fug  
+KosenCTF{hoge_piyo_fuga  
+KosenCTF{hoge_piyo_fuga}  
+KosenCTF{hoge_piyo_fuga}K  
+KosenCTF{hoge_piyo_fuga}Ko  
+KosenCTF{hoge_piyo_fuga}Kos  
+KosenCTF{hoge_piyo_fuga}Kose  
+KosenCTF{hoge_piyo_fuga}Kosen  
+KosenCTF{hoge_piyo_fuga}KosenC  
+KosenCTF{hoge_piyo_fuga}KosenCT  
+KosenCTF{hoge_piyo_fuga}KosenCTF  
+</code></pre><p>手元での確認なのでflagはなし。</p>
 <h1 id="stratum">stratum</h1>
 <h1 id="tip-toe">Tip Toe</h1>
 <h1 id="miniblog">miniblog</h1>

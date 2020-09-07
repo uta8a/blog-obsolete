@@ -15,3 +15,4 @@ date: 2019-08-13T06:48:42+09:00
 - 後ろスペース二個以上で改行っぽいのでreplaceを最後にかける  
 - `cp -r public/* docs/`  
 - CNAMEを忘れずに
+- TOCははじめに対象を書いて、HTMLを見てそのidがXXXなら`[title](#XXX)`とすればOK

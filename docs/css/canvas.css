@@ -49,7 +49,7 @@ body {
     max-width: 800px;
     padding: 1em;
     line-height: 1.6;
-    font-family: 'Gentium Book Basic', 'Noto Sans JP','游明朝', 'ヒラギノ明朝 Pro W3', 'Hiragino Mincho ProN', 'MS P 明朝', 'MS PMincho', serif;
+    font-family: "Segoe UI", "Segoe UI Symbol", "Segoe UI Emoji", "Apple Color Emoji", Roboto, Helvetica, Arial, sans-serif;
 }
 
 h1, h2, h3 {

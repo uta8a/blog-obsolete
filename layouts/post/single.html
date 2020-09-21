@@ -1,7 +1,7 @@
 {{ partial "head.html" . }}
 
 <main>
-<section class="text-gray-700 lg:container lg:mx-auto">
+<section class="text-gray-700 container mx-auto sm:text-2xl">
     <header>
     <h1 class="text-5xl text-center">{{.Title}}</h1>
     </header>
@@ -17,7 +17,7 @@
             </ul>
     </footer>
 </section>
-<aside class="py-5 lg:container lg:mx-auto">
+<aside class="py-5 container mx-auto">
     <ul>
     <li><a href="{{ .Site.BaseURL }}">Home</a></p>
     <li><a href="{{ "posts/" | absURL }}">Posts</a></p>

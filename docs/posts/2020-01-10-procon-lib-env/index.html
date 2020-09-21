@@ -23,7 +23,7 @@
     <article>
     <p><a href="https://github.com/uta8a/uta8alib">uta8alib</a>という競技プログラミング用ライブラリの環境構築について書きます。<br>
 今回環境を作るに当たって、<a href="https://github.com/ngtkana">ngtkanaさん</a>の<a href="https://github.com/ngtkana/ngtlib">ngtlib</a>を参考にした部分が大きいです。ありがとうございました。</p>
-<h1 class="font-bold text-3xl" id="やりたいこと">やりたいこと</h1>
+<h1 class="font-bold text-3xl pt-2" id="やりたいこと">やりたいこと</h1>
 <ul>
 <li>C++とRustで競プロをする</li>
 <li><code>example/main.rs</code>のように、ファイル名を<code>main.[rs|cpp|hpp]</code>で統一したい</li>
@@ -40,7 +40,7 @@
 <li>snippetの導入。コードからコメントを抜いたものをsnippetファイルとして自動生成したい。(VSCode, neovim(dein.vim, UltiSnip))</li>
 <li>ライブラリの種類を増やす(たくさん問題を解きましょう)</li>
 </ul>
-<h1 class="font-bold text-3xl" id="開発の流れ">開発の流れ</h1>
+<h1 class="font-bold text-3xl pt-2" id="開発の流れ">開発の流れ</h1>
 <ul>
 <li><a href="#%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E6%A7%8B%E6%88%90%E3%82%92%E6%B1%BA%E3%82%81%E3%82%8B">ディレクトリ構成を決める</a></li>
 <li><a href="#%E8%87%AA%E5%88%86%E7%94%A8%E3%81%AE%E7%AB%B6%E3%83%97%E3%83%ADcli%E3%83%84%E3%83%BC%E3%83%AB-chan%E3%82%92%E4%BD%BF%E3%81%86">自分用の競プロCLIツール、chanを使う</a></li>
@@ -50,7 +50,7 @@
 <li><a href="#git%E3%81%AE%E9%96%8B%E7%99%BA%E6%89%8B%E9%A0%86%E3%82%92%E8%A6%8B%E7%9B%B4%E3%81%99">Gitの開発手順を見直す</a></li>
 <li><a href="#ci%E3%81%A7%E3%83%86%E3%82%B9%E3%83%88%E3%82%92%E5%9B%9E%E3%81%99">CIでテストを回す</a></li>
 </ul>
-<h2 class="font-bold text-2xl" id="ディレクトリ構成を決める">ディレクトリ構成を決める</h2>
+<h2 class="font-bold text-2xl pt-2" id="ディレクトリ構成を決める">ディレクトリ構成を決める</h2>
 <p>ディレクトリ構成は以下のようになっています。<br>
 srcの下にcppとrustがあり、その下にディレクトリが存在していて<code>example</code>などがライブラリの名前になります。コードはそのディレクトリの中の<code>main.[rs|hpp]</code>に書きます。<br>
 testはテストコードです。srcと同様の構成になっています。</p>
@@ -81,14 +81,14 @@ testはテストコードです。srcと同様の構成になっています。<
 └── todo.md  
 </code></pre><p>重視したことは、少しくらい深さのある構成になっても自分が好きな方を選ぶということです。<code>lib-name.hpp</code>というような名前のファイルをフラットに<code>src</code>直下に置く方も多いですが、僕は<code>lib-name/main.hpp</code>の方が好きなのでこうしました。好みの問題ですね。<br>
 深さができてGitHubで見るには面倒、という弱点のために、documentを自動生成してブラウザで見る、というようにしたいです。コードブロックの右上にコピペボタンを用意すれば捗りそうです。</p>
-<h2 class="font-bold text-2xl" id="自分用の競プロcliツールchanを使う">自分用の競プロCLIツール、chanを使う</h2>
+<h2 class="font-bold text-2xl pt-2" id="自分用の競プロcliツールchanを使う">自分用の競プロCLIツール、chanを使う</h2>
 <p>競プロをするときは焦りがちなので、使うコマンドは最小限にしたいです。あと、打ちやすいほうがいい。僕は<code>chan</code>というコマンドでコンパイルして実行ファイル生成を行っていましたが、このコマンドにライブラリのテンプレート作成機能をもたせることにしました。</p>
 <pre><code>chan main.rs # rustc main.rsが走る  
 chan main.cpp # g++ が走る  
 /path/to/uta8alib$ chan generate cpp example # exampleという名前のフォルダで、C++のsrcとtestのテンプレートファイル作成。C++の場合、include/lib.hppにパスを追加する。  
 </code></pre><p>引数の数で判別しています。単純な機能ですが、Rustで4時間くらいかけて書いて、Python3とかの方がこういうのは向いてるなぁと感じました。外部crateは使いませんでしたが、<a href="https://github.com/clap-rs/clap"><code>clap-rs</code></a>を使うと高機能にできそうです。ソースコードの本体は<a href="https://github.com/uta8a/chan/blob/171f0719af55ed7542cee27fb2ae4b11e98483d8/src/main.rs">こちら</a>です。<br>
 重視したことは、色付きで出力させることです。はじめOptionなしでは色がなく、読みづらく感じていました。調べたところ、強制的にcoloringをONにするOptionをつければよいと分かりました。Rustは <code>rustc --color=always</code> を、C++は <code>g++ -fdiagnostics-color=always</code> を指定しています。</p>
-<h2 class="font-bold text-2xl" id="git-submoduleを使う">git submoduleを使う</h2>
+<h2 class="font-bold text-2xl pt-2" id="git-submoduleを使う">git submoduleを使う</h2>
 <p><a href="https://github.com/ngtkana/ngtlib">ngtlib</a>を見てgit submoduleに興味が湧いていました。また、競プロに関わることは普段はなるべくひとつにまとめておきたいものです。というわけでchanをsubmoduleとしてuta8alibに取り込みます。</p>
 <p><strong>やること</strong></p>
 <ul>
@@ -125,11 +125,11 @@ chan main.cpp # g++ が走る
 <ul>
 <li><code>.gitmodules</code>を書いて<code>git submodule pull</code>みたいなことをやりたいが、それはできない。<code>add</code>で追加して、<code>.gitmodules</code>は生成物と捉えたほうがよい。</li>
 </ul>
-<h2 class="font-bold text-2xl" id="rustのテスト方法を考える">Rustのテスト方法を考える</h2>
+<h2 class="font-bold text-2xl pt-2" id="rustのテスト方法を考える">Rustのテスト方法を考える</h2>
 <p>今回、cargoで外部crateを入れるつもりはなかったので、cargoを使わないディレクトリ構成をしていました。しかしテストをするにはcargoがよいです。そこで、テストのときに<code>cargo new</code>して<code>cargo test</code>するという方法に決めました。<br>
 <a href="https://github.com/uta8a/uta8alib/blob/master/libtest.sh"><code>libtest.sh</code></a>の <code># rust test</code> の箇所を見ると分かるのですが、catでsrcとtestのファイルを結合したものを<code>cargo new</code>で生成したディレクトリの中に入れて、<code>lib.rs</code>に追記しています。<br>
 <code>cargo</code>を完全にテストツールとして使っていて強引な気がしますがうまく行っています。一つのファイルにまとめているのでprivate method testができ、わざわざ <code>pub</code> をつけずにライブラリを書くことが出来ます。</p>
-<h2 class="font-bold text-2xl" id="cのテスト方法を考える">C++のテスト方法を考える</h2>
+<h2 class="font-bold text-2xl pt-2" id="cのテスト方法を考える">C++のテスト方法を考える</h2>
 <p><a href="#git-submodule%E3%82%92%E4%BD%BF%E3%81%86">git submoduleを使う</a>と同じ手順で<a href="https://github.com/catchorg/Catch2">Catch2</a>を導入しました。</p>
 <p><strong>やること</strong></p>
 <ul>
@@ -165,13 +165,13 @@ CMakeLists.tstについては<a href="https://github.com/ngtkana/ngtlib">ngtlib<
 </li>
 </ul>
 <p>makeが通った時は嬉しかったです。</p>
-<h2 class="font-bold text-2xl" id="gitの開発手順を見直す">Gitの開発手順を見直す</h2>
+<h2 class="font-bold text-2xl pt-2" id="gitの開発手順を見直す">Gitの開発手順を見直す</h2>
 <p>ここまでずっとmasterにpushしてきましたが、そろそろCIを導入するとなると、masterにプルリク送ったときのみCIが回るようにしたいです。現在はdevelopとmasterの2つですが、ライブラリを作る時は<code>feature-xxx</code>というブランチを作り、RustとC++が揃った段階でdevelopに取り込み、masterへマージしてCI回すという形にしたいです。</p>
 <p><strong>参考</strong></p>
 <ul>
 <li><a href="https://qiita.com/KosukeSone/items/514dd24828b485c69a05">Git-flowって何？</a></li>
 </ul>
-<h2 class="font-bold text-2xl" id="ciでテストを回す">CIでテストを回す</h2>
+<h2 class="font-bold text-2xl pt-2" id="ciでテストを回す">CIでテストを回す</h2>
 <p>以前GitHub Actionsを使ったことがあったので、今回はCircle CIを使ってみました。結論の<code>config.yml</code>は<a href="https://github.com/uta8a/uta8alib/blob/master/.circleci/config.yml">こちら</a>です。</p>
 <pre><code>version: 2.0  
   
@@ -211,20 +211,20 @@ workflows:
 <li>workflowsのversionは、全体のversionが2.1のときは記述がいらないのですが、2.0では必須です。</li>
 <li>circleciのデバッグ作業はローカルのCLIツールを用いましょう。<code>circleci config validate</code>でyamlが正しいかどうか判定でき、<code>circleci local execute --job build_and_test</code>で特定のjobを実際に回せます(dockerを使います)</li>
 </ul>
-<h2 class="font-bold text-2xl" id="status-badgeをgithubにつける">status badgeをGitHubにつける</h2>
+<h2 class="font-bold text-2xl pt-2" id="status-badgeをgithubにつける">status badgeをGitHubにつける</h2>
 <p><a href="https://circleci.com/docs/2.0/status-badges/">公式のdocument</a>を読むと簡単に導入できます。Different Styleの方が好みだったのでそうしました。</p>
-<h2 class="font-bold text-2xl" id="licenseを加える">LICENSEを加える</h2>
+<h2 class="font-bold text-2xl pt-2" id="licenseを加える">LICENSEを加える</h2>
 <p>加えました。MIT。</p>
-<h1 class="font-bold text-3xl" id="今後の展望">今後の展望</h1>
-<h2 class="font-bold text-2xl" id="logoを作ってやる気を高める">Logoを作ってやる気を高める</h2>
-<h2 class="font-bold text-2xl" id="verifyしてみる">Verifyしてみる</h2>
-<h2 class="font-bold text-2xl" id="snippetの導入">snippetの導入</h2>
-<h2 class="font-bold text-2xl" id="競プロで使うエディタの選定">競プロで使うエディタの選定</h2>
-<h2 class="font-bold text-2xl" id="どこでも競プロできるようにシェルスクリプトを書く">どこでも競プロできるようにシェルスクリプトを書く</h2>
-<h2 class="font-bold text-2xl" id="ライブラリの種類をどうやって増やすかアルゴリズムを学ぶ">ライブラリの種類をどうやって増やすか(アルゴリズムを学ぶ)</h2>
-<h1 class="font-bold text-3xl" id="この記事を書くに当たって">この記事を書くに当たって</h1>
+<h1 class="font-bold text-3xl pt-2" id="今後の展望">今後の展望</h1>
+<h2 class="font-bold text-2xl pt-2" id="logoを作ってやる気を高める">Logoを作ってやる気を高める</h2>
+<h2 class="font-bold text-2xl pt-2" id="verifyしてみる">Verifyしてみる</h2>
+<h2 class="font-bold text-2xl pt-2" id="snippetの導入">snippetの導入</h2>
+<h2 class="font-bold text-2xl pt-2" id="競プロで使うエディタの選定">競プロで使うエディタの選定</h2>
+<h2 class="font-bold text-2xl pt-2" id="どこでも競プロできるようにシェルスクリプトを書く">どこでも競プロできるようにシェルスクリプトを書く</h2>
+<h2 class="font-bold text-2xl pt-2" id="ライブラリの種類をどうやって増やすかアルゴリズムを学ぶ">ライブラリの種類をどうやって増やすか(アルゴリズムを学ぶ)</h2>
+<h1 class="font-bold text-3xl pt-2" id="この記事を書くに当たって">この記事を書くに当たって</h1>
 <p><code>[article](#toc)</code> で見出しへのanchor linkが張れるのですが、これは一癖あって、hugoで生成されたもののidをみながらそれと一致するようにやっていくとよいです。例えば、 <code>##C++でのテスト方法を考える</code> は <code>#c--でのテスト方法を考える</code> に変化します。</p>
-<h1 class="font-bold text-3xl" id="終わりに">終わりに</h1>
+<h1 class="font-bold text-3xl pt-2" id="終わりに">終わりに</h1>
 <p>今回環境構築がメインでもう力尽きそうですがここからがスタートラインです。今年は競プロのレートに興味を持たずに、アルゴリズムに興味を持つことを目標にしていきたいです。</p>
 
     </article>

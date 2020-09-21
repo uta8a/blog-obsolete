@@ -3,12 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.blog.uta8a.net/posts/2020-09-07-interkosenctf2020/</loc>
-    <lastmod>2020-09-06T16:30:26-07:00</lastmod>
+    <loc>https://www.blog.uta8a.net/posts/</loc>
+    <lastmod>2020-09-21T11:50:39+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.blog.uta8a.net/posts/</loc>
+    <loc>https://www.blog.uta8a.net/posts/2020-09-21-jissen-rust/</loc>
+    <lastmod>2020-09-21T11:50:39+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.blog.uta8a.net/posts/2020-09-07-interkosenctf2020/</loc>
     <lastmod>2020-09-06T16:30:26-07:00</lastmod>
   </url>
   

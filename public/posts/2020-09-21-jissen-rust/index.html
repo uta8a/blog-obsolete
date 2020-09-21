@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>diaryです</title>
+
+
+<link href="https://unpkg.com/tailwindcss@^1.5/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="lg:container lg:mx-auto">
+        <a href="https://www.blog.uta8a.net">
+            <h1 class="text-center text-5xl">diaryです</h1>
+        </a>
+    </div>
+
+<main>
+<section class="text-gray-700 lg:container lg:mx-auto">
+    <header>
+    <h1 class="text-5xl text-center">実践Rustプログラミング入門を読みました</h1>
+    </header>
+
+    <article>
+    <ul>
+<li><a href="https://www.shuwasystem.co.jp/book/9784798061702.html">実践Rustプログラミング入門</a> を読んだので感想を書きます。</li>
+<li><a href="https://www.shuwasystem.co.jp/support/7980html/6170.html">サポートページ</a> からソースコードをダウンロードしたり、正誤表を確認できます。</li>
+</ul>
+<h1 class="font-bold text-3xl pt-2" id="全体を通しての感想">全体を通しての感想</h1>
+<ul>
+<li>技術書は今しか読めない部分(サポートがあるとはいえ、徐々に古くなってしまう)と後で読んでも嬉しい部分があると思います。Rustを昔少し触ってThe Rust Programming Bookを途中で投げ出してしまったレベル感の自分には、とてもちょうどよく最近の情報がまとめられていて、読んでよかったと思いました。</li>
+<li>そのような、最近のRustの様々なTopicを一望できる本だからこそ、今読むべき要素が強く、時間が立つ前に読むべきだとも思います。今読みましょう。</li>
+<li>個人的に、4章でコマンドラインツールを作るところでエラー処理を丁寧に紹介してあるのがよかったです。6章のWasmは一度少しやったことのある人にとっては物足りない気がしました。7章のGUIは僕が手を出しづらいと感じていた分野という理由もありますが一番勉強になりました。</li>
+<li>実践が見れて、Rustでこういうことができるんだ！とイメージが広がったのがよかったです。ありがとうございます。</li>
+</ul>
+<h1 class="font-bold text-3xl pt-2" id="今後">今後</h1>
+<ul>
+<li>Web周りはWasm, Actix-webともに触ったことがあるので別のことがしたいです。</li>
+<li>僕は中規模のソフトウェアをRustで作りたいという気持ちがあります。しかし一方でエラーハンドリングやファイル分割、設計がよくわからず手が出せないことも多く諦めていました。今回の本の4章でエラーハンドリングなど、だんだん組み立てていく感覚を得たので、その感覚をもとに7章のGUIで使われていたicedを用いてアプリケーションを作ってみたいです。</li>
+<li>組み込みの章は飛ばしてしまったので、秋月電子で部品を買ってみます。</li>
+</ul>
+<h1 class="font-bold text-3xl pt-2" id="ただの感想">ただの感想</h1>
+<h2 class="font-bold text-2xl pt-2" id="1章-rustの紹介">1章 Rustの紹介</h2>
+<ul>
+<li>コラム「機械語とはなにか」で触れられている <code>55 8B EC 81</code> とは何を指すのでしょう？ちらっと例えばで出てくるのでこれは知っている人にしかわからないネタなのかと思って調べましたが、わかりませんでした。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="2章-環境構築">2章 環境構築</h2>
+<ul>
+<li>ここはRust周りの環境を整えたいとき(OSを新しくインストールし直したときなど)に読むとよさそうです。</li>
+<li>rlsが賢くてびっくりしたのですが、rust-analyzerに移っていくとのことで、今後が気になります。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="3章-文法やツール">3章 文法やツール</h2>
+<ul>
+<li><a href="https://doc.rust-lang.org/book/">The Rust Programming Language</a> を少し読んだことがあったのですいすい読めました。</li>
+<li>Traitやiteratorなど、いままで僕の中で曖昧に覚えていた概念がわかりやすい言葉で説明されていたので、しっくり納得しました。</li>
+<li>新しく知ったこと
+<ul>
+<li>for, loop, whileにラベルをつけられる</li>
+<li>macroなので、<code>vec![]</code>だけでなく<code>vec!()</code>という表記も可能</li>
+</ul>
+</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="4章-rpn電卓">4章 RPN電卓</h2>
+<ul>
+<li>エラーライブラリについて触れられていたのがよかった。個人的にはthiserrorのほうがエラーとそのメッセージをまとめて管理できそうなので好み。</li>
+<li><a href="https://blog.rust-lang.org/inside-rust/2020/09/18/error-handling-wg-announcement.html">Rust BlogのAnnouncing the Error Handling Project Group</a>によると、これらエラーライブラリの整理が入りそう？な気がするので今後の動向に注目</li>
+<li>実行パスへのインストールが楽なこと知らなかった。RustでCLI toolを気軽にかけるのは覚えておこう。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="5章-actix-web">5章 Actix-web</h2>
+<ul>
+<li>Actix-webのexampleを試したことがあったのですいすい読めた。</li>
+<li>Dockerに触れられているのが嬉しくて、実際ビルド周りのテクニックは知らなかったので勉強になりました。</li>
+<li>musl+MySQLを試して失敗したことがあるので、muslに詳しくなりたいです。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="6章-wasm">6章 Wasm</h2>
+<ul>
+<li>これはほぼ似たようなことをしたことがあるのでコードを読むまでにとどめました。</li>
+<li>ただ、後半のwasmが優位なのは計算量が大きいタスクのときという話は面白くて、実際webで計算量が大きいタスクって何があるだろうと思ったのですが思い浮かびませんでした。もしかして、ブラウザで走る競技プログラミング向けのSandboxとかがあると面白いのかな</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="7章-gui">7章 GUI</h2>
+<ul>
+<li>ここが一番おもしろかったです。</li>
+<li>icedは以前友人から聞いて気になっていましたが、Elmの思想など学習コストが高そうだなと感じていたのですが、Vue.jsなどでStateとその更新という概念は知っていたのですぐに馴染めました。</li>
+<li>はじめはWindows10に入れているVMware上のUbuntu20.04で環境構築しようと奮闘していて、Vulkanがどうやっても難しいことに気づきデスクトップマシンにUbuntu20.04を直接入れました。やはりドライバがからむとホストでLinuxが最強という気持ちです。</li>
+<li>個人的にはexampleのつくりがよいと感じていて、機能がいろいろあってこういう関数が存在しているのかと頭にとどめておけて、これから開発するときに変に詰まったりするのをふせげそうな気がします。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="8章-組み込みシステム">8章 組み込みシステム</h2>
+<ul>
+<li>組み込み初心者が読んでも、ある程度メモリとかのイメージがついていればわかりやすい構成になっていて、入門としてとてもよさそうです。</li>
+<li>僕は組み込みを知らないので、とりあえず読んでから秋月電子でボードを注文しようと思います。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="9章-cargo">9章 cargo</h2>
+<ul>
+<li>cargoって思ったよりもたくさん機能があるんですね&hellip;ベンチマークなどはたくさん出ていてこれから収束していくのかなと思いました。</li>
+<li>ディレクトリ構造の例が示されていて嬉しい。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="10章-プロダクト">10章 プロダクト</h2>
+<ul>
+<li>僕は学生なので仕事でそもそも必要なことがイメージしづらいのですが、却ってこういうことが必要とされているんだ、という知識を獲得できてよかったです。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="11章-tips">11章 Tips</h2>
+<ul>
+<li>マクロ、賢い人が作ってくれているんだなと感じました。いやほんとよくできてる。</li>
+<li>パーサーなどの話から、もしかしてmacroを用いて言語を作ったりすると簡単に作れたりするんだろうかと感じた。</li>
+<li>panic, unsafe, コミュニティなどの話はすでに知っていることが多かった。</li>
+</ul>
+
+    </article>
+
+    <footer class="py-5">
+            <ul>
+                <li><a href="https://www.blog.uta8a.net/posts/2020-09-07-interkosenctf2020/">&laquo; InterKosenCTF 2020 writeup &amp; 後追い</a></li>
+                
+            </ul>
+    </footer>
+</section>
+<aside class="py-5 lg:container lg:mx-auto">
+    <ul>
+    <li><a href="https://www.blog.uta8a.net">Home</a></p>
+    <li><a href="https://www.blog.uta8a.net/posts/">Posts</a></p>
+    </ul>
+</aside>
+</main>
+
+<footer class="lg:container lg:mx-auto">
+    
+</footer>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+</script>
+<script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+
+</html>

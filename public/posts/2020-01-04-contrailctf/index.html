@@ -24,7 +24,7 @@
     <p>チームStarrySkyは正の点数を得た78チーム中、2126点を獲得して4位でした。うち僕は504点を獲得しました。<br>
 僕が解いたLets_Connct、Persistence、alice&rsquo;s passwordについてのWriteupです。</p>
 <p><img src="./p-1.png" alt=""></p>
-<h1 class="font-bold text-3xl" id="lets_connctmisc">Lets_Connct[misc]</h1>
+<h1 class="font-bold text-3xl pt-2" id="lets_connctmisc">Lets_Connct[misc]</h1>
 <p>ncでつなぐよう指示があるのでつなぎ、flagの中身を見ます。</p>
 <pre><code>❯ nc &lt;問題サーバ&gt; 2999  
 bash: cannot set terminal process group (-1): Inappropriate ioctl for device  
@@ -61,10 +61,10 @@ donewhile read -t 5 line &lt;&amp;3; do
 done  
 ctrctf{b4sh_1s_a_mul7ifuncti0n_sh3ll}  
 </code></pre><p>flag: <code>ctrctf{b4sh_1s_a_mul7ifuncti0n_sh3ll}</code></p>
-<h1 class="font-bold text-3xl" id="persistenceforensics">Persistence[forensics]</h1>
+<h1 class="font-bold text-3xl pt-2" id="persistenceforensics">Persistence[forensics]</h1>
 <p>forensics_persistence.arnというファイルが渡されます。mitsuさんからAutorunで開けると聞いたのでこれはハッキングラボの作り方という本でやったやつだ！！(進研ゼミ感)でテンションを上げました。VMで動かしているWindows10で<a href="https://docs.microsoft.com/ja-jp/sysinternals/downloads/sysinternals-suite">Sysinternals Suite</a>をダウンロードして、Autorun64.exeを使っていきます。今回は、素の状態で一度Autorunを動かしorigin.arnを生成してからforensics_persistence.arnと比較を行いました。<a href="https://www.atmarkit.co.jp/ait/articles/1407/28/news021.html">こちらの記事</a>が参考になります。比較すると緑色のところが差分になるので、そこを見ていくとEvilという項目があり、flagが書いてありました。<br>
 flag: <code>ctrctf{P3rs1st3nc3_5ch3dul3d_Ta3ks}</code></p>
-<h1 class="font-bold text-3xl" id="alices-passwordforensics">alice&rsquo;s password[forensics]</h1>
+<h1 class="font-bold text-3xl pt-2" id="alices-passwordforensics">alice&rsquo;s password[forensics]</h1>
 <p>Volatilityの使い方が試されます。そもそもインストールチャレンジで失敗したのでインストール方法を書いておきます。<br>
 <a href="https://github.com/volatilityfoundation/volatility">https://github.com/volatilityfoundation/volatility</a> にアクセスしてダウンロードします。vol.pyが本体なので、<code>python path/to/vol.py -f &lt;file&gt; imageinfo</code>のように使うことができます。mimikatzのような外部プラグインのダウンロードの仕方が分からなかった&hellip;(plugins/以下に入れればいけるやろと思ったらうまくいかない)<br>
 <code>python path/to/vol.py</code>を<code>vol</code>とaliasした状態で以下のようにコマンドを打ちました。参考にしたのは<a href="https://www.andreafortuna.org/2017/11/15/how-to-retrieve-users-passwords-from-a-windows-memory-dump-using-volatility/">この記事</a>と<a href="https://github.com/volatilityfoundation/volatility/wiki/Command-Reference">公式のWiki</a>です</p>
@@ -81,11 +81,11 @@ Aqua:1000:aad3b435b51404eeaad3b435b51404ee:813ea107eccdab91a1b9c15b67693cb4:::
 Alice:1001:aad3b435b51404eeaad3b435b51404ee:19bf8c07d19ea196464115e443854654:::  
 </code></pre><p><code>19bf8c07d19ea196464115e443854654</code>を<a href="https://crackstation.net/">https://crackstation.net/</a>にかけると<code>i&lt;3orange.</code>と解読されるので、これのmd5hashがZIPのパスワードになります。(うまくいかなかったので最後のmd5からmitsuさんにやってもらった)<br>
 flag: <code>ctrctf{Y0u_c4n_dump_4nd_cr4ck_hash!}</code></p>
-<h1 class="font-bold text-3xl" id="解けなかった問題">解けなかった問題</h1>
-<h1 class="font-bold text-3xl" id="once_again">once_again</h1>
-<h1 class="font-bold text-3xl" id="hacking-battler">Hacking Battler</h1>
-<h1 class="font-bold text-3xl" id="legacyblog">LegacyBlog</h1>
-<h1 class="font-bold text-3xl" id="終わりに">終わりに</h1>
+<h1 class="font-bold text-3xl pt-2" id="解けなかった問題">解けなかった問題</h1>
+<h1 class="font-bold text-3xl pt-2" id="once_again">once_again</h1>
+<h1 class="font-bold text-3xl pt-2" id="hacking-battler">Hacking Battler</h1>
+<h1 class="font-bold text-3xl pt-2" id="legacyblog">LegacyBlog</h1>
+<h1 class="font-bold text-3xl pt-2" id="終わりに">終わりに</h1>
 <p>毎度思うけど段階が一個しかない簡単なものしか解けてない。2020年は勉強して本質が解けるようになりたいです。あと毎回そうだけど今回もmitsuさんが無双していた。<br>
 Contrailの皆さん、年末年始お疲れさまでした。楽しかったです。</p>
 

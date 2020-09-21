@@ -23,17 +23,17 @@
     <article>
     <p>2019/10/19(土)15:00-2019/10/20(日)15:00まで開催されていた、SECCON CTF 2019 qualにチームStarrySkyで参加していました。今回はmitsuさんが基本情報を受けるのでお休みで、一人チームでの参加となりました。<br>
 結果はWelcome, Thank you for playing!, coffee_break, Sandstorm, ZKPayの5問を解いて743ポイントを獲得し102位(正の得点を取った人数は799人)でした。以下、解いたもののWriteupを書きます。</p>
-<h1 class="font-bold text-3xl" id="welcome">Welcome</h1>
+<h1 class="font-bold text-3xl pt-2" id="welcome">Welcome</h1>
 <pre><code>Welcome to the SECCON CTF.  
   
 Read rules and check the IRC topic.  
 </code></pre><p>IRCに行くとflagが書かれています。<br>
 <code>SECCON{Welcome to the SECCON 2019 Online CTF}</code></p>
-<h1 class="font-bold text-3xl" id="thank-you-for-playing">Thank you for playing!</h1>
+<h1 class="font-bold text-3xl pt-2" id="thank-you-for-playing">Thank you for playing!</h1>
 <pre><code>SECCON{We have done all the challenges. Thank you!}  
 </code></pre><p>そのままです<br>
 <code>SECCON{We have done all the challenges. Thank you!}</code></p>
-<h1 class="font-bold text-3xl" id="coffee_break">coffee_break</h1>
+<h1 class="font-bold text-3xl pt-2" id="coffee_break">coffee_break</h1>
 <pre><code>The program &quot;encrypt.py&quot; gets one string argument and outputs ciphertext.  
   
 Example:  
@@ -47,7 +47,7 @@ FyRyZNBO2MG6ncd3hEkC/yeYKUseI/CxYoZiIeV2fe/Jmtwx+WbWmU1gtMX9m905
 Please download &quot;encrypt.py&quot; from the following url.  
   
 encrypt.py  
-</code></pre><h1 class="font-bold text-3xl" id="sandstorm">Sandstorm</h1>
+</code></pre><h1 class="font-bold text-3xl pt-2" id="sandstorm">Sandstorm</h1>
 <pre><code>I've received a letter... Uh, Mr. Smith?  
 </code></pre><p>最初はいつものようにfile, foremost, stegsolve, exiftoolをかけて調べました。<br>
 exiftoolで妙なものを見つけます。<br>
@@ -65,7 +65,7 @@ Adamと画像に書いてあるし関係ありそうです。調べてみると�
 </code></pre><p><img src="./p-4.png" alt="p-4.png"></p>
 <p>QRコードが出てきました。これを読み取るとflagが表示されます。なんというか、とりあえず試してみるとできたみたいな感じでした。<br>
 <code>SECCON{p0nlMpzlCQ5AHol6}</code></p>
-<h1 class="font-bold text-3xl" id="zkpay">ZKPay</h1>
+<h1 class="font-bold text-3xl pt-2" id="zkpay">ZKPay</h1>
 <pre><code>http://153.120.18.131/  
   
 status solve  
@@ -86,7 +86,7 @@ http://133.242.17.50/ (Mirror #3) status solve
 <p><img src="./p-6.png" alt="p-6.png"></p>
 <p>これでflagが得られました。<br>
 <code>SECCON{y0u_know_n07h1ng_3xcep7_7he_f4ct_th47_1_kn0w}</code></p>
-<h1 class="font-bold text-3xl" id="終わりに">終わりに</h1>
+<h1 class="font-bold text-3xl pt-2" id="終わりに">終わりに</h1>
 <p>ギャグみたいな解き方しかできてないのでもっと本質的な解き方ができるようになりたい。Pwn勉強やるぞやるぞ。</p>
 
     </article>

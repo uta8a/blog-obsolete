@@ -7,10 +7,25 @@
 <link rel="stylesheet" href="{{.Site.BaseURL}}/css/foot.css" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap" rel="stylesheet"> -->
 <!-- <link rel="stylesheet" href="{{.Site.BaseURL}}/css/tailwind.css" type="text/css"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="{{ .Site.Params.Description }}">
+    <!-- <link rel="icon" type="image/png" sizes="32x32" href="{{ "images/favicon-32x32.png" | relURL }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ "images/favicon-16x16.png" | relURL }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ "images/apple-touch-icon.png" | relURL }}"> -->
 <link href="https://unpkg.com/tailwindcss@^1.5/dist/tailwind.min.css" rel="stylesheet">
+<meta property="og:title" content="{{.Site.Title}}" />
+<meta property="og:type" content="image/png" />
+<meta property="og:url" content="{{.Site.BaseURL}}" />
+<meta name="og:description" content="{{.Site.Params.Description}}" />
+<meta property="og:image" content="{{.Site.BaseURL}}/assets/uta8a.png" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="{{.Site.Title}}" />
+<meta name="twitter:description" content="{{.Site.Params.Description}}" />
+<meta name="twitter:image" content="{{.Site.BaseURL}}/assets/uta8a.png" />
 </head>
 <body>
-    <div class="lg:container lg:mx-auto">
+    <div class="container mx-auto">
         <a href="{{.Site.BaseURL}}">
             <h1 class="text-center text-5xl">{{.Site.Title}}</h1>
         </a>

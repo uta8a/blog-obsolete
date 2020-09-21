@@ -3,6 +3,7 @@ date: "2020-09-21T11:50:39+09:00"
 title: "実践Rustプログラミング入門を読みました"
 type: "post"
 draft: false
+ogp: "p-1.png"
 ---
 
 - [実践Rustプログラミング入門](https://www.shuwasystem.co.jp/book/9784798061702.html) を読んだので感想を書きます。

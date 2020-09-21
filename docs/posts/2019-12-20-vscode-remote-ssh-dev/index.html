@@ -2,20 +2,22 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>kaito_tateyama's blog</title>
-<link rel="stylesheet" href="https://www.blog.uta8a.net/css/canvas.css" type="text/css">
-<link rel="stylesheet" href="https://www.blog.uta8a.net/css/foot.css" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap" rel="stylesheet">
+<title>diaryです</title>
+
+
+<link href="https://unpkg.com/tailwindcss@^1.5/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-    <a class="no-style" href="https://www.blog.uta8a.net">
-        <h2>kaito_tateyama's blog</h2>
-    </a>
+    <div class="lg:container lg:mx-auto">
+        <a href="https://www.blog.uta8a.net">
+            <h1 class="text-center text-5xl">diaryです</h1>
+        </a>
+    </div>
 
 <main>
-<section>
+<section class="text-gray-700 lg:container lg:mx-auto">
     <header>
-    <h1>開発環境メモ: VSCodeでローカルの仮想環境にRemote SSH</h1>
+    <h1 class="text-5xl text-center">開発環境メモ: VSCodeでローカルの仮想環境にRemote SSH</h1>
     </header>
 
     <article>
@@ -23,11 +25,11 @@
 私は大学にWindows機とLinux(Ubuntu)機の2台のlaptopを持っていっています。空きコマにさあコード書くぞ〜！と思ったときに開くのはいつもUbuntu。Linux機の方が貧弱なスペックなのですが、コード書くまでにかかる時間はWindowsよりLinuxの方が速いのです。(私はWindowsでは仮想環境でUbuntuを立ち上げてその中で開発するのでそれはそう)<br>
 しかしWindowsでも快適に開発したい！というわけで、自分なりに快適だと思った環境をメモしておきます。
 <a href="https://code.visualstudio.com/docs/remote/ssh">Remote Development using SSH</a>を見ると詳しくちゃんとしたことが書いてあるので、こちらも参考にしてください。</p>
-<h1 id="目標">目標</h1>
+<h1 class="font-bold text-3xl" id="目標">目標</h1>
 <ul>
 <li>仮想環境でSVGをwgetして、それをVSCodeからファイルクリックすると見れる！という環境を構築する(なぜこれが目標なのかというと、<a href="https://twitter.com/es__135">@imiko</a> さんが仮想環境で生成したsvgを楽に見たいと言っていたので)</li>
 </ul>
-<h1 id="環境">環境</h1>
+<h1 class="font-bold text-3xl" id="環境">環境</h1>
 <p>以下の環境で確認しています。</p>
 <pre><code>Windows 10 Home  
 Vagrant 2.2.6  
@@ -47,7 +49,7 @@ VSCode 1.41.0
 <li>Remote-SSH<br>
 <img src="./p-1.png" alt="Remote-SSH"></li>
 </ul>
-<h1 id="手順">手順</h1>
+<h1 class="font-bold text-3xl" id="手順">手順</h1>
 <p><strong>Vagrantから仮想環境の立ち上げ</strong><br>
 VSCodeを立ち上げます。<br>
 <img src="./p-2.png" alt="File"><br>
@@ -83,7 +85,7 @@ VSCodeのExtensionを入れます。<a href="https://marketplace.visualstudio.co
 これでファイルを開いてからsvg viewerの機能を使えばSVGが見れるようになりました。VSCodeのファイル上で右クリックしてSVG Viewerの機能を選択すればよいです。</p>
 <p><strong>終了時</strong><br>
 終わる時はSSH接続を切って、<code>vagrant halt</code>を忘れずに。</p>
-<h1 id="tips">Tips</h1>
+<h1 class="font-bold text-3xl" id="tips">Tips</h1>
 <p><strong>ファイル管理はどうする？</strong><br>
 Windowsでは共有フォルダを作ってやるとnpm installとかでうまくいかないことが多かったので、今は共有フォルダは作っているけどそこはほしいファイルを<code>mv ./hoge ../host_directory/</code>して移すために使っています。開発は共有フォルダではやらずに、gitで管理するという感じです。</p>
 <p><strong>ブラウザとかどうする？</strong><br>
@@ -91,21 +93,21 @@ vagrantfileで<code>config.vm.network</code>あたりを設定してあげると
 あと、Nuxt.jsで開発しているとき<code>localhost:3000</code>で立ち上げてLinuxターミナルのリンクをクリックしたら自動でホスト側のリンクに変換されてchromeで開いたのですがこの機能はなんですか&hellip;</p>
 <p><strong>ホスト→仮想環境上にファイルを送りたい！</strong><br>
 エクスプローラを開いてVSCodeのEXPLORERにドラッグアンドドロップでファイルを送信できます。なんだこの便利機能&hellip;</p>
-<h1 id="終わりに">終わりに</h1>
+<h1 class="font-bold text-3xl" id="終わりに">終わりに</h1>
 <p>以上です。便利なのでVSCodeを使いましょう！<br>
 何か間違いや指摘などあれば、お手数ですがTwitter: <a href="https://twitter.com/kaito_tateyama">@kaito_tateyama</a>までお願いします。</p>
 <!-- raw HTML omitted -->
 
     </article>
 
-    <footer>
+    <footer class="py-5">
             <ul>
                 <li><a href="https://www.blog.uta8a.net/posts/2019-12-02-wakatime-starting/">&laquo; waka-boxを使ってみる 広島大学ITエンジニアアドベントカレンダー</a></li>
                 <li><a href="https://www.blog.uta8a.net/posts/2020-01-04-contrailctf/">ContrailCTF Writeup &raquo;</a></li>
             </ul>
     </footer>
 </section>
-<aside>
+<aside class="py-5 lg:container lg:mx-auto">
     <ul>
     <li><a href="https://www.blog.uta8a.net">Home</a></p>
     <li><a href="https://www.blog.uta8a.net/posts/">Posts</a></p>
@@ -113,20 +115,10 @@ vagrantfileで<code>config.vm.network</code>あたりを設定してあげると
 </aside>
 </main>
 
-<footer>
-    <div id="icons">
-        <div class="wrapper github">
-            <a href="https://github.com/uta8a">
-                <img src="https://www.blog.uta8a.net/assets/github.svg" alt="github-icon">
-            </a>
-        </div>
-        <div class="wrapper twitter">
-            <a href="https://twitter.com/kaito_tateyama">
-                <img src="https://www.blog.uta8a.net/assets/twitter.svg" alt="twitter-icon" href="">
-            </a>
-        </div>
-    </div>
+<footer class="lg:container lg:mx-auto">
+    
 </footer>
+
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}

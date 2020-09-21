@@ -2,12 +2,16 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>kaito_tateyama's blog</title>
-<link rel="stylesheet" href="{{.Site.BaseURL}}/css/canvas.css" type="text/css">
+<title>{{.Site.Title}}</title>
+<!-- <link rel="stylesheet" href="{{.Site.BaseURL}}/css/canvas.css" type="text/css">
 <link rel="stylesheet" href="{{.Site.BaseURL}}/css/foot.css" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap" rel="stylesheet"> -->
+<!-- <link rel="stylesheet" href="{{.Site.BaseURL}}/css/tailwind.css" type="text/css"> -->
+<link href="https://unpkg.com/tailwindcss@^1.5/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-    <a class="no-style" href="{{.Site.BaseURL}}">
-        <h2>kaito_tateyama's blog</h2>
-    </a>
+    <div class="lg:container lg:mx-auto">
+        <a href="{{.Site.BaseURL}}">
+            <h1 class="text-center text-5xl">{{.Site.Title}}</h1>
+        </a>
+    </div>

@@ -2,25 +2,27 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>kaito_tateyama's blog</title>
-<link rel="stylesheet" href="https://www.blog.uta8a.net/css/canvas.css" type="text/css">
-<link rel="stylesheet" href="https://www.blog.uta8a.net/css/foot.css" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap" rel="stylesheet">
+<title>diaryです</title>
+
+
+<link href="https://unpkg.com/tailwindcss@^1.5/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-    <a class="no-style" href="https://www.blog.uta8a.net">
-        <h2>kaito_tateyama's blog</h2>
-    </a>
+    <div class="lg:container lg:mx-auto">
+        <a href="https://www.blog.uta8a.net">
+            <h1 class="text-center text-5xl">diaryです</h1>
+        </a>
+    </div>
 
 <main>
-<section>
+<section class="text-gray-700 lg:container lg:mx-auto">
     <header>
-    <h1>技育祭2020参加記</h1>
+    <h1 class="text-5xl text-center">技育祭2020参加記</h1>
     </header>
 
     <article>
-    <h1 id="day1">Day1</h1>
-<h2 id="1110-1210-roomc-青山さんオープンな技術力の伸ばし方と私がkubernetesに惹かれている理由">11:10-12:10 RoomC 青山さん「オープンな技術力の伸ばし方と「私がKubernetesに惹かれている理由」」</h2>
+    <h1 class="font-bold text-3xl" id="day1">Day1</h1>
+<h2 class="font-bold text-2xl" id="1110-1210-roomc-青山さんオープンな技術力の伸ばし方と私がkubernetesに惹かれている理由">11:10-12:10 RoomC 青山さん「オープンな技術力の伸ばし方と「私がKubernetesに惹かれている理由」」</h2>
 <p>はじめはRoomAをみていたのですが、Twitterで <a href="https://twitter.com/search?q=%23%E6%8A%80%E8%82%B2%E7%A5%AD&amp;src=typed_query">#技育祭</a> を追っていたら技術よりの話をしていそうだったので聞きに行きました。<br>
 自分なりにまとめると、<strong>コミュニティやOSSに貢献することに対する意味</strong>についての話でした。<br>
 OSSへの貢献の仕方は<code>Code</code>と<code>Non-code</code>の2種類があり、<code>Non-code</code>としてのドキュメントやブログでの発信、ベストプラクティスの共有も大切。<code>Code</code>での貢献はとくに、アップストリームへの貢献を積極的にしていくべきであること、CLA(Contribution Lisence Agreement), CI/CD, review体制, Issue PR ProposalなどそのOSSの決まりごとに従う。次のContributorのためにドキュメントを整備するのもよい。<br>
@@ -29,51 +31,51 @@ OSSへの貢献の仕方は<code>Code</code>と<code>Non-code</code>の2種類�
 <p><strong>感想</strong><br>
 自分自身、勉強会やサークルでの学習の場を考えて提供するときに、「これ僕にはなんの意味があるのだろう？」と思っていた。一般にこういうのは手伝ってくれる人が少なく一人に負荷が集中するので、負荷分散を考えないとすぐにつぶれてしまうことが多かった。今回の講演で、「自分の興味のあることしかやらない」「コミュニティに貢献する意味は、個人の力で組織をスケールさせることでより大きく動けるようになるから」という2つを学んだ。このあたりを意識して動いていきたい。<br>
 あと、少しではあったがkubernetesの話、特にプラグインでデータベースなどを自動で管理してくれる話が夢があった。調べてみたい。</p>
-<h2 id="お昼-ランチlt">お昼 ランチLT</h2>
+<h2 class="font-bold text-2xl" id="お昼-ランチlt">お昼 ランチLT</h2>
 <p>FIXERがよかった。Microsoftのイベント de:codeのアバターとか3d空間の制作を行ったらしい。技術力高い。</p>
-<h2 id="1330-1430-roomb-和田さん質とスピードソフトウェア開発の典型的な誤解を解く">13:30-14:30 RoomB 和田さん「質とスピード〜ソフトウェア開発の典型的な誤解を解く〜」</h2>
+<h2 class="font-bold text-2xl" id="1330-1430-roomb-和田さん質とスピードソフトウェア開発の典型的な誤解を解く">13:30-14:30 RoomB 和田さん「質とスピード〜ソフトウェア開発の典型的な誤解を解く〜」</h2>
 <p>自分なりにまとめると、 <strong>内部品質を犠牲にして速度をとるのはごく短期でみたときのみ得であり、その後致命傷となるため、スピードがとりたいならスコープを絞るべき。</strong> そもそも質とスピードはトレードオフではなく、質とスピードとトレードオフになるものは、次世代への教育、新技術の調査、多様性の確保といった教育部分である。<br>
 品質を高めることでリリースが高速になることが多い。ソフトウェア開発組織の生産性は、<strong>リードタイム、デプロイ頻度、MTTR、変更失敗率</strong>の4つのキーメトリクスで計測できる。それぞれ、リードタイムはコミットがリリースに含まれ世に出るまでの時間、デプロイ頻度はリリースの頻度(CI/CD)、MTTRは不具合が出てから治るまでの時間、変更失敗率はrevertされたリリースの数を指す。</p>
 <p><strong>感想</strong><br>
 特につらかったのは、<strong>クソコードを書くやつは時間があってもクソコードを書く。技術力がなければ、時間をかけてもその人の技術力以上の品質のコードは書けない</strong>というところでした。これどうすればええねん。とにかく品質の悪いコードは時間が経てば致命傷になるから、普段から品質を意識してたくさんコードを書こうと思いました。<br>
 あと、ソフトウェア開発組織の生産性は自分の生産性の指標としても参考になりそう。コード書いて作るぞ〜っていっていつまでもprivate repositoryの中に眠っていることとかよくあるし(リードタイム)、継続の指標にデプロイ頻度は参考になりそう。</p>
-<h2 id="1440-1540-roomd-宮原さんイケてるコードがかけるitコンサル最強説">14:40-15:40 RoomD 宮原さん「イケてるコードがかけるITコンサル最強説」</h2>
+<h2 class="font-bold text-2xl" id="1440-1540-roomd-宮原さんイケてるコードがかけるitコンサル最強説">14:40-15:40 RoomD 宮原さん「イケてるコードがかけるITコンサル最強説」</h2>
 <p>特に学ぶというより話が面白くてFutureの中で実際にやっている仕事がよくわかるという感じだった。就活のときにFutureも検討したいと思った。</p>
-<h2 id="1550-1650-roomc-成田さんあるエンジニアがctoになるまでとそれからクックパッド10年の変化">15:50-16:50 RoomC 成田さん「あるエンジニアがCTOになるまでとそれから〜クックパッド10年の変化〜」</h2>
+<h2 class="font-bold text-2xl" id="1550-1650-roomc-成田さんあるエンジニアがctoになるまでとそれからクックパッド10年の変化">15:50-16:50 RoomC 成田さん「あるエンジニアがCTOになるまでとそれから〜クックパッド10年の変化〜」</h2>
 <p>成田さんのフランクな感じがゆるくて面白かった。Cookpadも興味を持ったので就活のときに検討したい。<br>
 自分なりにまとめると、<strong>CTOは入社して3年立っても「CTOになりたい」と言っているやつがなれる。大きくなった組織でも小さな組織のときのよさを残すにはどうしたらいいか考える</strong>の2点だった。<br>
 やりたい、得意、やるべき が一致しているときにパフォーマンスが最大になる。<br>
 大企業のYahooからCookpadに移ったので、大企業のつまらなさに対し、Cookpadもそうならないようにするのが使命だと感じていた。</p>
 <p><strong>感想</strong><br>
 どうやらCTOは社に対する情熱が強い人で、かつなんでもやってみる人がなれそうという直感を得た。成田さんは料理とRubyが好きで、Cookpadにジャストフィットしたというのもあるし、一番始めはフロント寄りなのに、サーバのチューニングといった仕事にも手を出す広さが強いからCTOになったのかなと聞いていて感じた。</p>
-<h2 id="talk-room-セキュリティやってますの部屋">Talk Room セキュリティやってますの部屋</h2>
+<h2 class="font-bold text-2xl" id="talk-room-セキュリティやってますの部屋">Talk Room セキュリティやってますの部屋</h2>
 <p>Twitterでよく知っている京都勢の2人と僕の3人だった。個人的にさんぽしさんはお話してみたかったので嬉しかった。<br>
 HackTheBox(HTB)は個人的にどのくらい月に費やすなら契約すべきかなという観点だった(完全にd-アニメかなにかだと思っている)けど、さんぽしさんによるともうHTBはじめるならVIP契約してOKくらいの勢いのようだった。さんぽしさんは毎日2-3時間はHTBに費やしていて、でもほとんどがgobusterなどのツールを回している待ち時間、privilege escalationでは時間を使うという感じで正確に費やした時間は計測が難しいようだった。<br>
 京都勢、KUDoS CTF頑張ってください。楽しみにしてます。</p>
-<h2 id="懇親会">懇親会</h2>
+<h2 class="font-bold text-2xl" id="懇親会">懇親会</h2>
 <p>NLPやっている人が多いなという印象。ロボットやっている人がいてかっけ〜ってなったり、RustやWasmの話,それもサーバーサイドwasmの話がでてきてびっくり。休学して進路変更してエンジニア目指している人がいたり、はじめて3ヶ月です！(3ヶ月のうちに技育祭にたどり着くのすごくないか)な人がいたり、いろいろな人がいて面白かった。<br>
 インターンで仲間を作るとかに憧れがあるので、どこかで御縁があるといいなと思っています。</p>
-<h1 id="day2">Day2</h1>
-<h2 id="1110-1210-roomd-松本さんテックカンパニーって結局なんだろう">11:10-12:10 RoomD 松本さん「テックカンパニーって結局なんだろう？」</h2>
+<h1 class="font-bold text-3xl" id="day2">Day2</h1>
+<h2 class="font-bold text-2xl" id="1110-1210-roomd-松本さんテックカンパニーって結局なんだろう">11:10-12:10 RoomD 松本さん「テックカンパニーって結局なんだろう？」</h2>
 <p>自分なりにまとめると、 <strong>問題空間を探索して不確実性を減らしながら前に進もう。扱える問題空間の大きさが、職位と関わってくる</strong> という感じ。<br>
 方向、継続、失敗のコントロール の3点を大事にする。失敗のコントロールができていると、安心して挑戦できる。</p>
 <p><strong>感想</strong><br>
 Agilityとは、一定の方向付けを持ちながら、細かく継続的に挑戦すること。これはアジャイル開発の文脈に近くてすぐ理解できた。<br>
 社内文化とか、空気感のようなものがほんわか思っていたことがきれいに言語化されていてやはりCTOすげぇ〜と思った。</p>
-<h2 id="cookpad-企業交流room">Cookpad 企業交流Room</h2>
+<h2 class="font-bold text-2xl" id="cookpad-企業交流room">Cookpad 企業交流Room</h2>
 <p>10人の学生でほとんど企業紹介だったのであまり話ができる感じではなかった。悲しい。<br>
 コーディングの問題が出されたので取り組んでみようと思う。</p>
 
     </article>
 
-    <footer>
+    <footer class="py-5">
             <ul>
                 <li><a href="https://www.blog.uta8a.net/posts/2020-05-04-ictsc-container/">&laquo; ICTSC 2019 一次予選 コンテナが作れない 復習</a></li>
                 <li><a href="https://www.blog.uta8a.net/posts/2020-09-07-interkosenctf2020/">InterKosenCTF 2020 writeup &amp; 後追い &raquo;</a></li>
             </ul>
     </footer>
 </section>
-<aside>
+<aside class="py-5 lg:container lg:mx-auto">
     <ul>
     <li><a href="https://www.blog.uta8a.net">Home</a></p>
     <li><a href="https://www.blog.uta8a.net/posts/">Posts</a></p>
@@ -81,20 +83,10 @@ Agilityとは、一定の方向付けを持ちながら、細かく継続的に�
 </aside>
 </main>
 
-<footer>
-    <div id="icons">
-        <div class="wrapper github">
-            <a href="https://github.com/uta8a">
-                <img src="https://www.blog.uta8a.net/assets/github.svg" alt="github-icon">
-            </a>
-        </div>
-        <div class="wrapper twitter">
-            <a href="https://twitter.com/kaito_tateyama">
-                <img src="https://www.blog.uta8a.net/assets/twitter.svg" alt="twitter-icon" href="">
-            </a>
-        </div>
-    </div>
+<footer class="lg:container lg:mx-auto">
+    
 </footer>
+
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}

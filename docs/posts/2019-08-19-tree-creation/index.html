@@ -2,27 +2,29 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>kaito_tateyama's blog</title>
-<link rel="stylesheet" href="https://www.blog.uta8a.net/css/canvas.css" type="text/css">
-<link rel="stylesheet" href="https://www.blog.uta8a.net/css/foot.css" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap" rel="stylesheet">
+<title>diaryです</title>
+
+
+<link href="https://unpkg.com/tailwindcss@^1.5/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-    <a class="no-style" href="https://www.blog.uta8a.net">
-        <h2>kaito_tateyama's blog</h2>
-    </a>
+    <div class="lg:container lg:mx-auto">
+        <a href="https://www.blog.uta8a.net">
+            <h1 class="text-center text-5xl">diaryです</h1>
+        </a>
+    </div>
 
 <main>
-<section>
+<section class="text-gray-700 lg:container lg:mx-auto">
     <header>
-    <h1>木の作り方</h1>
+    <h1 class="text-5xl text-center">木の作り方</h1>
     </header>
 
     <article>
     <p>ABC138D Kiを本番で嘘解法で通してしまった(after_contestで気づいた)ので、ACコードと自分のコードにランダムにケースを入れてHackケースを探そう！と思いました。このとき、木のテストケースの作り方が分からなかったのでTwitterで教えてもらいました。以下、それらをまとめておきます。意見をくださった方、ありがとうございます。</p>
-<h1 id="便利なツール">便利なツール</h1>
+<h1 class="font-bold text-3xl" id="便利なツール">便利なツール</h1>
 <p>グラフの可視化には<a href="https://hello-world-494ec.firebaseapp.com/about.html">GRAPH×GRAPH</a> が便利です。</p>
-<h1 id="木を順に構成する">木を順に構成する</h1>
+<h1 class="font-bold text-3xl" id="木を順に構成する">木を順に構成する</h1>
 <p>Python3で書きました。</p>
 <pre><code>import itertools, random  
 N = 11  
@@ -61,25 +63,25 @@ $1$から$N$までの順列からランダムにひとつとってきて<code>se
 以降、<code>seed[i]</code>がとれなくなるまで手順2,3を繰り返す。<br>
 手順2で連結かつ閉路が存在しないことが確認できるので、これは木になります。</p>
 <p>注意点としては、このコードでは<code>itertools.permutations</code>に時間がかかっているので、適当に順列を指定してあげればよいです。</p>
-<h1 id="unionfindを使う">UnionFindを使う</h1>
+<h1 class="font-bold text-3xl" id="unionfindを使う">UnionFindを使う</h1>
 <p>これたぶん次の完全グラフを間引く方法と似ている気がします。(よく分からなかった)<br>
 おそらくKruscalがUnionFindをつかうので、それと近い…？</p>
-<h1 id="完全グラフを間引いて全域木を作る">完全グラフを間引いて全域木を作る</h1>
+<h1 class="font-bold text-3xl" id="完全グラフを間引いて全域木を作る">完全グラフを間引いて全域木を作る</h1>
 <p>(後でやる)</p>
-<h1 id="prufer-sequence">Prufer Sequence</h1>
+<h1 class="font-bold text-3xl" id="prufer-sequence">Prufer Sequence</h1>
 <p><a href="https://en.wikipedia.org/wiki/Pr%C3%BCfer_sequence">https://en.wikipedia.org/wiki/Pr%C3%BCfer_sequence</a><br>
 (後でやる)</p>
 
     </article>
 
-    <footer>
+    <footer class="py-5">
             <ul>
                 <li><a href="https://www.blog.uta8a.net/posts/2019-08-13-interkosenctf2019/">&laquo; InterKosenCTF 2019 Writeup</a></li>
                 <li><a href="https://www.blog.uta8a.net/posts/2019-08-25-lt/">LTに向けた資料たち &raquo;</a></li>
             </ul>
     </footer>
 </section>
-<aside>
+<aside class="py-5 lg:container lg:mx-auto">
     <ul>
     <li><a href="https://www.blog.uta8a.net">Home</a></p>
     <li><a href="https://www.blog.uta8a.net/posts/">Posts</a></p>
@@ -87,20 +89,10 @@ $1$から$N$までの順列からランダムにひとつとってきて<code>se
 </aside>
 </main>
 
-<footer>
-    <div id="icons">
-        <div class="wrapper github">
-            <a href="https://github.com/uta8a">
-                <img src="https://www.blog.uta8a.net/assets/github.svg" alt="github-icon">
-            </a>
-        </div>
-        <div class="wrapper twitter">
-            <a href="https://twitter.com/kaito_tateyama">
-                <img src="https://www.blog.uta8a.net/assets/twitter.svg" alt="twitter-icon" href="">
-            </a>
-        </div>
-    </div>
+<footer class="lg:container lg:mx-auto">
+    
 </footer>
+
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}

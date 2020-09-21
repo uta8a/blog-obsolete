@@ -7,8 +7,11 @@
 <link rel="stylesheet" href="{{.Site.BaseURL}}/css/foot.css" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap" rel="stylesheet"> -->
 <!-- <link rel="stylesheet" href="{{.Site.BaseURL}}/css/tailwind.css" type="text/css"> -->
+<link href="https://unpkg.com/tailwindcss@^1.5/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-    <a class="no-style" href="{{.Site.BaseURL}}">
-        <h2>{{.Site.Title}}</h2>
-    </a>
+    <div class="lg:container lg:mx-auto">
+        <a href="{{.Site.BaseURL}}">
+            <h1 class="text-center text-5xl">{{.Site.Title}}</h1>
+        </a>
+    </div>

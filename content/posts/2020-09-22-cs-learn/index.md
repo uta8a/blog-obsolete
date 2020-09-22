@@ -35,7 +35,7 @@ draft: false
 - その他
 - Webサービス周り
 - インターンに通らないことには自信のなさを打開できないと考えて、この一年は、学生の勉強を「研究」と「開発」と分けるなら開発に振っていました。
-- 触った技術を雑に挙げると、Rust(Actix-web, wasm), golang(GRPC), クラウド(AWS, terraform), TypeScript(React, Vue, tailwindcss, styled-components), インフラ(ネットワークの勉強, VPSでセキュリティ周りを担保する方法の調査, Docker, rootless dockerの調査) みたいな感じです。思ったよりしょぼくて悲しい。
+- 触った技術を雑に挙げると、Rust(Actix-web, wasm), golang(gRPC), クラウド(AWS, terraform), TypeScript(React, Vue, tailwindcss, styled-components), インフラ(ネットワークの勉強, VPSでセキュリティ周りを担保する方法の調査, Docker, rootless dockerの調査) みたいな感じです。思ったよりしょぼくて悲しい。
 
 ## これからやりたいこと
 - 少し余裕が出てきたので、Twitterから離れて自分の時間を大切にしたいです。ひとりで考えて、周りに感情を左右されずに淡々とこなす場面にきているのだと思うので。

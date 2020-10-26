@@ -7,9 +7,9 @@
         </header>
 
         <article>
-            <ul class="list-disc">
+            <ul class="list-none">
                 {{ range where .Pages.ByPublishDate.Reverse "Section" "posts" }}
-                <li><a class="text-xl hover:text-indigo-400 visited:text-red-600" href="{{ .RelPermalink }}">{{ .Title }} - <time
+                <li><a class="text-xl hover:text-indigo-400 visited:text-red-600" href="{{ .RelPermalink }}">- {{ .Title }} - <time
                             datetime="{{.Date}}">{{ .Date.Format "2006/01/02 15:04:05" }}</time></a></li>
                 {{ end }}
             </ul>

@@ -1,8 +1,28 @@
 {{ partial "head.html" . }}
 
+<main  class="lg:container lg:mx-auto"> 
+    <section>
+        <header>
+            <h1  class="font-bold text-3xl">All Posts</h1>
+        </header>
+
+        <article>
+            <ul class="list-none">
+                {{ range (where .Pages.ByPublishDate.Reverse "Section" "posts") }}
+                    {{ range .Pages }}
+                        <li><a class="text-xl hover:text-indigo-400 visited:text-red-600" href="{{ .RelPermalink }}">- {{ .Title }} - <time datetime="{{.Date}}">{{ .Date.Format "2006/01/02 15:04:05" }}</time></a></li>
+                    {{ end }}
+                {{ end }}
+            </ul>
+        </article>
+    </section>
+</main>
+
+{{ partial "foot.html" .}}
+<!--{{ partial "head.html" . }}
+
 <main class="lg:container lg:mx-auto">
 <section>
-    <!-- this section is populated from content/_index.md -->
     <header>
     <h1>{{.Title}}</h1>
     </header>
@@ -12,7 +32,6 @@
     </article>
 
     <footer>
-    <!-- Note that .Pages is the same as .Site.RegularPages on the homepage template. -->
     {{ range first 10 .Pages }}
         {{ .Render "summary"}}
     {{ end }}
@@ -20,7 +39,6 @@
 </section>
 
 <section>
-    <!-- this section is populated by pulling posts from the site -->
     {{ range first 1 (where .Pages.ByPublishDate.Reverse "Section" "posts") }}
         <article>
             <header>
@@ -41,7 +59,6 @@
 </section>
 
 <section>
-    <!-- this section is populated by pulling articles from the site -->
     {{ range first 1 (where .Pages.ByPublishDate.Reverse "Section" "diaries") }}
         <article>
             <header>
@@ -62,4 +79,4 @@
 </section>
 </main>
 
-{{ partial "foot.html" .}}
+{{ partial "foot.html" .}} -->

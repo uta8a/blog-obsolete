@@ -19,6 +19,10 @@
 <meta name="twitter:title" content="diaryです" />
 <meta name="twitter:description" content="diaryです" />
 <meta name="twitter:image" content="https://www.blog.uta8a.net/assets/uta8a.png" />
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
     <div class="container mx-auto">
@@ -37,31 +41,31 @@
     <h1 class="font-bold text-3xl pt-2" id="note">note</h1>
 <p>まずは解いたやつを書いておく。</p>
 <h1 class="font-bold text-3xl pt-2" id="目次">目次</h1>
-<p><a href="#welcome">Welcome</a><br>
-<a href="#survey">Survey</a><br>
-<a href="#matsushima2">matsushima2</a><br>
-<a href="#limited">limited</a><br>
-<a href="#babysort">babysort</a><br>
-<a href="#harmagedon">harmagedon</a><br>
-<a href="#in-question">in question</a><br>
-<a href="#ciphertexts">ciphertexts</a><br>
-<a href="#trilemma">trilemma</a><br>
-<a href="#authme">authme</a><br>
-<a href="#bitcrypto">bitcrypto</a><br>
-<a href="#padding-oracle">padding oracle</a><br>
-<a href="#fables-of-aesop">Fables of aeSOP</a><br>
-<a href="#no-pressure">No pressure</a><br>
-<a href="#stratum">stratum</a><br>
-<a href="#tip-toe">Tip Toe</a><br>
-<a href="#miniblog">miniblog</a><br>
-<a href="#readme">readme</a><br>
-<a href="#pash">pash</a><br>
-<a href="#just-sqli">just sqli</a><br>
-<a href="#ochazuke">ochazuke</a><br>
-<a href="#confusing">confusing</a><br>
-<a href="#padrsa">padrsa</a><br>
-<a href="#graphviz">graphviz++</a><br>
-<a href="#mazeu">maze</a></p>
+<p><a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#welcome">Welcome</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#survey">Survey</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#matsushima2">matsushima2</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#limited">limited</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#babysort">babysort</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#harmagedon">harmagedon</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#in-question">in question</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#ciphertexts">ciphertexts</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#trilemma">trilemma</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#authme">authme</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#bitcrypto">bitcrypto</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#padding-oracle">padding oracle</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#fables-of-aesop">Fables of aeSOP</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#no-pressure">No pressure</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#stratum">stratum</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#tip-toe">Tip Toe</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#miniblog">miniblog</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#readme">readme</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#pash">pash</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#just-sqli">just sqli</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#ochazuke">ochazuke</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#confusing">confusing</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#padrsa">padrsa</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#graphviz">graphviz++</a><br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#mazeu">maze</a></p>
 <p>(解いたもの)</p>
 <h1 class="font-bold text-3xl pt-2" id="welcome">Welcome</h1>
 <pre><code>Welcome to InterKosenCTF 2020! All announcement, support, and the welcome flag are available in our Discord.  
@@ -78,7 +82,7 @@
 matsushima2_a8f90b2a9cff5f0aa8d62010385ffc0c.tar.gz  
 </code></pre><p><img src="./p-2.png" alt="matsushima2"></p>
 <p>blackjackで遊べる。カードがふるつきさん、ptr-yudaiさん、yoshikingさんになっていてかわいい。<br>
-おそらくmatsushima2の意味は SECCON 2018 国内決勝 で出題された松島が元になってそう。<a href="https://st98.github.io/diary/posts/2018-12-24-seccon-2018-domestic-finals.html#%E6%9D%BE%E5%B3%B6">参考</a></p>
+おそらくmatsushima2の意味は SECCON 2018 国内決勝 で出題された松島が元になってそう。<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://st98.github.io/diary/posts/2018-12-24-seccon-2018-domestic-finals.html#%E6%9D%BE%E5%B3%B6">参考</a></p>
 <p>サーバ側のソースコード(main.py)</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask, send_file, request, make_response, jsonify, abort  
 <span style="color:#f92672">import</span> random  
@@ -349,7 +353,7 @@ key <span style="color:#f92672">=</span> secret<span style="color:#f92672">.</sp
   
 limited_2a6f6c5f14589179b1ce3e73937cae45.tar.gz  
 </code></pre><p>pcapファイルが渡されて、それを見ていく問題。こういうのって、pcapファイルのみで完結する場合と、その中で指定されたIPのサーバが生きててそこと通信する場合の2つがあると思うんだけど、今回はpcapファイルのみで完結するものだった。<br>
-Network問はHTTP Streamを抜き出して、どんなやりとりがなされたかが分かればあとはプログラミングコンテストになりがちな気がするので工夫が大変そう。かといって、CTFではないけど<a href="https://jovi0608.hatenablog.com/entry/2020/06/13/104905">求む！TLS1.3の再接続を完全に理解した方(Challenge CVE-2020-13777)</a>みたいなやつだとえげつなくて解けないのでうーんという感じ。でもNetwork問でこれからもHTTP Stream抜き出してホイみたいな問題が出続けるとも限らないので、ちゃんと暗号化された通信の勉強もしないとなぁ&hellip;うう<br>
+Network問はHTTP Streamを抜き出して、どんなやりとりがなされたかが分かればあとはプログラミングコンテストになりがちな気がするので工夫が大変そう。かといって、CTFではないけど<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://jovi0608.hatenablog.com/entry/2020/06/13/104905">求む！TLS1.3の再接続を完全に理解した方(Challenge CVE-2020-13777)</a>みたいなやつだとえげつなくて解けないのでうーんという感じ。でもNetwork問でこれからもHTTP Stream抜き出してホイみたいな問題が出続けるとも限らないので、ちゃんと暗号化された通信の勉強もしないとなぁ&hellip;うう<br>
 本題に入ります。<br>
 wiresharkを用いていくつかのパケットでfollow HTTP streamして中身をみていくと、 <code>GET /search.php?keyword=&amp;search_max=%28SELECT+unicode%28substr%28secret%2C+1%2C+1%29%29+FROM+account+WHERE+name%3D%22admin%22%29+%25+13 HTTP/1.1</code> みたいなクエリがたくさんみつかります。これはSQL injectionをしているなと思ったので、これらを個別に処理したくなり、wiresharkの左上の方のボタンを押して、それぞれのHTTP Streamをすべてファイルにしました。</p>
 <p><img src="./p-4.png" alt="limited"></p>
@@ -444,9 +448,9 @@ nonce <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span
     <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;encrypted! :&#34;</span>, b64encode(c)<span style="color:#f92672">.</span>decode())  
 </code></pre></div><p>&hellip;Crypto?とりあえずpoetryでpycryptoをいれるなどしました。ARC4ってなんだろうと思って調べてみたところ、RC4だと商標にひっかかる？らしく、Alleged-RC4ということで、実質RC4です。<br>
 さて、RC4はストリーム暗号なので、padding oracle系のが刺さるのかな、2文字目は特定できるという話を聞いたこともあるな、といろいろやっていたが全く当たらないので、zlibになにか仕掛けがあるんじゃないか、特にLZ77,ハフマン符号だとflagと似た文字列をmessageに置けば短くなるはずなので&hellip;と思いましたが特にわからなかったです。<br>
-答えを見ます。 <a href="https://yoshiking.hatenablog.jp/entry/2020/09/07/101829">yoshikingさんの作問者writeup</a><br>
+答えを見ます。 <a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://yoshiking.hatenablog.jp/entry/2020/09/07/101829">yoshikingさんの作問者writeup</a><br>
 zlibでした。ストリーム暗号なので暗号前と後で長さが不変、それはそう&hellip;解けたじゃんつらい&hellip;<br>
-<a href="https://blog.albina.cc/2020/09/interkosenctf-2020-writeup.html">LaikaさんのWriteup</a> を参考に書いた(というかほぼコピー)<br>
+<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://blog.albina.cc/2020/09/interkosenctf-2020-writeup.html">LaikaさんのWriteup</a> を参考に書いた(というかほぼコピー)<br>
 どんな処理をしているかというと、encryptが帰ってきたらb64decodeして比較できるようにしておいて、短い長さが来たらありうる文字を更新するという感じ。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>  
 <span style="color:#f92672">from</span> base64 <span style="color:#f92672">import</span> b64decode  

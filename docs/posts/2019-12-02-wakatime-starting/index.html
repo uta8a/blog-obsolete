@@ -19,6 +19,10 @@
 <meta name="twitter:title" content="diaryです" />
 <meta name="twitter:description" content="diaryです" />
 <meta name="twitter:image" content="https://www.blog.uta8a.net/assets/uta8a.png" />
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
     <div class="container mx-auto">
@@ -34,18 +38,18 @@
     </header>
 
     <article>
-    <p>この記事は <a href="https://adventar.org/calendars/4481">広島大学ITエンジニアアドベントカレンダー</a> の4日目です。<br>
+    <p>この記事は <a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://adventar.org/calendars/4481">広島大学ITエンジニアアドベントカレンダー</a> の4日目です。<br>
 僕はOSS界隈で活躍している人のGitHubを見るのが好きです。contributionの数も、有名なOSSへ送ったissueやpull requestの数も僕とは桁違いで、こうなれたらなあと思います。また、そういった方々は中規模のプロジェクトを作っていることが多いので、プロジェクトのディレクトリ構成とか、どのツールを使っているのか？といった状況を学べます。また、コードを書いて生活する人にとって、GitHubは仕事場のひとつのようなものだと思います。その人の仕事場へのこだわりのようなものをpinnedやprofile, 所属団体から感じるのは楽しいことで、眺めるだけで時間があっという間に過ぎていきます。<br>
-さて、そんな感じでフロントエンド周りの方々を調べていると (<a href="https://github.com/egoist">egoistさん</a>) のpinnedに不思議なものを見つけました。</p>
+さて、そんな感じでフロントエンド周りの方々を調べていると (<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://github.com/egoist">egoistさん</a>) のpinnedに不思議なものを見つけました。</p>
 <p><img src="./p-1.png" alt=""></p>
 <p>(写真は2019-12-02時点のもの)<br>
 Weekly development breakdownという項目で、どうやら1週間に書いたコードの時間となんの言語で書いたかが示されているようです。<br>
 僕もこれやってみたい！というわけで、この記事では、この表をpinnedに表示することを目標としてやっていきましょう。</p>
 <h1 class="font-bold text-3xl pt-2" id="仕組み">仕組み</h1>
-<p>この表は <a href="https://github.com/matchai/waka-box">waka-box</a> を使っています。自分のエディタにプラグインを入れておくと一週間のうち何時間コードを書いたか、を示してくれる、&ldquo;WakaTime&quot;というWebサービスがあり、そのAPIを利用して、gistに表を作っています。<br>
-例えば僕の場合、VSCodeにExtensionで <a href="https://wakatime.com/vs-code">WakaTime</a> を入れています。APIを利用するためのsecret keyを入れたら後は何もせずコードを書けば大丈夫です。</p>
-<h1 class="font-bold text-3xl pt-2" id="waka-box-の導入"><a href="https://github.com/matchai/waka-box">waka-box</a> の導入</h1>
-<p>基本的に <a href="https://github.com/matchai/waka-box">waka-box</a> のREADMEに従えばできます。自分が詰まったところを捕捉しながら書きます。</p>
+<p>この表は <a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://github.com/matchai/waka-box">waka-box</a> を使っています。自分のエディタにプラグインを入れておくと一週間のうち何時間コードを書いたか、を示してくれる、&ldquo;WakaTime&quot;というWebサービスがあり、そのAPIを利用して、gistに表を作っています。<br>
+例えば僕の場合、VSCodeにExtensionで <a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://wakatime.com/vs-code">WakaTime</a> を入れています。APIを利用するためのsecret keyを入れたら後は何もせずコードを書けば大丈夫です。</p>
+<h1 class="font-bold text-3xl pt-2" id="waka-box-の導入"><a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://github.com/matchai/waka-box">waka-box</a> の導入</h1>
+<p>基本的に <a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://github.com/matchai/waka-box">waka-box</a> のREADMEに従えばできます。自分が詰まったところを捕捉しながら書きます。</p>
 <h2 class="font-bold text-2xl pt-2" id="準備">準備</h2>
 <ol>
 <li>gistを作る(GitHub) -&gt; gistのURLをメモしておく このときのgistはdescription以外上書きされるので、gistの中身はなんでもよいです。</li>
@@ -54,8 +58,8 @@ Weekly development breakdownという項目で、どうやら1週間に書いた
 <li>wakatimeのsecret keyを手に入れる -&gt; メモしておく<br>
 今3つメモしたと思います。1のgistのURLは公開してもよく、**2,4は公開してはいけません！**取り扱いに注意しましょう。</li>
 </ol>
-<h2 class="font-bold text-2xl pt-2" id="waka-box-を入れる"><a href="https://github.com/matchai/waka-box">waka-box</a> を入れる</h2>
-<p><a href="https://github.com/matchai/waka-box">https://github.com/matchai/waka-box</a> を自分のGitHubへとforkします。<br>
+<h2 class="font-bold text-2xl pt-2" id="waka-box-を入れる"><a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://github.com/matchai/waka-box">waka-box</a> を入れる</h2>
+<p><a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://github.com/matchai/waka-box">https://github.com/matchai/waka-box</a> を自分のGitHubへとforkします。<br>
 準備で手に入れた3つの値を入れていきます。gistのidは <code>.github/workflows/schedule.yml</code> にすでにある値を書き換えます。<br>
 gist tokenとwakatime secret keyは</p>
 <p><img src="./p-2.png" alt=""></p>
@@ -73,8 +77,8 @@ gist tokenとwakatime secret keyは</p>
 <h3 id="actionが動かない">Actionが動かない！</h3>
 <p>2019/12/20時点では、waka-boxをcloneした後に、<code>.github/workflows/schedule.yml</code> を一旦削除し、commitしてgithubへpushした後に再度同じ内容の <code>.github/workflows/schedule.yml</code> を作り直さないとActionが動かないようです。</p>
 <p>参考(私のcommit logです)<br>
-delete <a href="https://github.com/uta8a/waka-box/commit/64e351d872941cca0b92245929e10a5b20fb2f34">https://github.com/uta8a/waka-box/commit/64e351d872941cca0b92245929e10a5b20fb2f34</a><br>
-re-add <a href="https://github.com/uta8a/waka-box/commit/079eb1d7d425b4f45b5cfc7aca89c6e1ac4e2a66">https://github.com/uta8a/waka-box/commit/079eb1d7d425b4f45b5cfc7aca89c6e1ac4e2a66</a></p>
+delete <a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://github.com/uta8a/waka-box/commit/64e351d872941cca0b92245929e10a5b20fb2f34">https://github.com/uta8a/waka-box/commit/64e351d872941cca0b92245929e10a5b20fb2f34</a><br>
+re-add <a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://github.com/uta8a/waka-box/commit/079eb1d7d425b4f45b5cfc7aca89c6e1ac4e2a66">https://github.com/uta8a/waka-box/commit/079eb1d7d425b4f45b5cfc7aca89c6e1ac4e2a66</a></p>
 <h1 class="font-bold text-3xl pt-2" id="終わりに">終わりに</h1>
 <p>以上です！意外とコードを書いているつもりでも書いていなかったりするので、目安にして精進していきたい&hellip;！</p>
 <p><img src="./p-5.png" alt=""></p>

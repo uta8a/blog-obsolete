@@ -19,6 +19,10 @@
 <meta name="twitter:title" content="diaryです" />
 <meta name="twitter:description" content="diaryです" />
 <meta name="twitter:image" content="https://www.blog.uta8a.net/assets/uta8a.png" />
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
     <div class="container mx-auto">
@@ -58,7 +62,7 @@ for (k=1;k&lt;=n;k++){
 </code></pre><p>注意としては、サイズkのframed segmentの数を求める時のoverflowである。一つ掛けるごとにMODをとらなければ違う答えになってしまった。<br>
 計算量は前計算$O(N)$, resに足し合わせて$O(N)$で全体で$O(N)$である。</p>
 <p><strong>コード</strong></p>
-<p><a href="https://codeforces.com/contest/1284/submission/68567949">https://codeforces.com/contest/1284/submission/68567949</a></p>
+<p><a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://codeforces.com/contest/1284/submission/68567949">https://codeforces.com/contest/1284/submission/68567949</a></p>
 <p><strong>感想</strong></p>
 <p>はじめはMODが関わるライブラリゲーだと思ってmod_factorialなる関数を作ったが意味なかった。でもまた同じ思考になるかもしれないので、ライブラリのコメント欄に書いておいた。<br>
 ModInt理解したい。</p>

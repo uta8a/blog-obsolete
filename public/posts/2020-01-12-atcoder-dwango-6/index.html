@@ -19,6 +19,10 @@
 <meta name="twitter:title" content="diaryです" />
 <meta name="twitter:description" content="diaryです" />
 <meta name="twitter:image" content="https://www.blog.uta8a.net/assets/uta8a.png" />
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
     <div class="container mx-auto">
@@ -36,10 +40,10 @@
     <article>
     <p>B問題のみ書きます。</p>
 <h1 class="font-bold text-3xl pt-2" id="ドワンゴからの挑戦状-予選-b-fusing-slimes">ドワンゴからの挑戦状 予選 B Fusing Slimes</h1>
-<p><strong><a href="https://atcoder.jp/contests/dwacon6th-prelims/tasks/dwacon6th_prelims_b">問題</a></strong></p>
+<p><strong><a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://atcoder.jp/contests/dwacon6th-prelims/tasks/dwacon6th_prelims_b">問題</a></strong></p>
 <p>スライムが規則に従い左から右に流れるので、スライムが移動した距離の期待値に$(N-1)!$を掛けたものを求めよ。</p>
 <p><strong>解法</strong></p>
-<p>こういう問題では、区間に注目するのが典型らしい。(<a href="http://drken1215.hatenablog.com/entry/2020/01/12/014200">けんちょんさんのブログ</a>)<br>
+<p>こういう問題では、区間に注目するのが典型らしい。(<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="http://drken1215.hatenablog.com/entry/2020/01/12/014200">けんちょんさんのブログ</a>)<br>
 確かに、$O(N)$で解こうと思うと<code>[xi,xi+1)</code>に注目して$O(N)$が妥当な気がする。</p>
 <p><code>[xi,xi+1)</code>を通るスライムの数を$c_i$とおく。このとき、<code>i+1</code>の位置にあるスライムより左側の<code>i</code>個のスライムのみ考えればよい。<br>
 <code>i</code>の位置にあるスライムが選ばれた場合、選ばれる確率は$\frac{1}{i}$である。この後は$c_{i-1}$個のスライムが通るのと、<code>i</code>の位置にあるスライムが通るのを考えて期待値は$\frac{1}{i} (1 + c_{i-1})$になる。<br>
@@ -49,7 +53,7 @@
 <p>区間ごとの足し合わせで計算量は$O(N)$である。MODでの逆数テーブル、factorialテーブルを前計算して持っておけば区間に対し$O(1)$で求まる。<br>
 前計算$O(N)$で全体で$O(N)$になる。</p>
 <p><strong>コード</strong></p>
-<p><a href="https://atcoder.jp/contests/dwacon6th-prelims/submissions/9431284">https://atcoder.jp/contests/dwacon6th-prelims/submissions/9431284</a></p>
+<p><a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://atcoder.jp/contests/dwacon6th-prelims/submissions/9431284">https://atcoder.jp/contests/dwacon6th-prelims/submissions/9431284</a></p>
 <p><strong>感想</strong></p>
 <p>競技中は$x_j - x_i$について考えていて、$O(N^2)$の解法が浮かんだのでそこから計算量を落とそうとしていた。区間について考える。覚えておきます。<br>
 ModIntほしい。あとModInvもほしい。</p>

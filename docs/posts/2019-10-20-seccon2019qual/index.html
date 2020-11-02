@@ -19,6 +19,10 @@
 <meta name="twitter:title" content="diaryです" />
 <meta name="twitter:description" content="diaryです" />
 <meta name="twitter:image" content="https://www.blog.uta8a.net/assets/uta8a.png" />
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
     <div class="container mx-auto">
@@ -68,7 +72,7 @@ exiftoolで妙なものを見つけます。<br>
 Adamと画像に書いてあるし関係ありそうです。調べてみると、先に画像の一部を送り、徐々に後から追加情報を送ることで、解像度が低くともおおまかな情報を伝えられるみたいなアルゴリズムだと理解しました。<br>
 では手元の画像で試してみましょう。(これは僕が所属している、広島でセキュリティ勉強会を開こうとしている団体のロゴです。)ImageMagickを使いました。</p>
 <p><img src="./p-1.png" alt="p-1.png"></p>
-<p>この画像に補完なしのAdam7と、補完ありのAdam7をかけてみました。<a href="https://blog.awm.jp/2016/01/26/png/">ImageMagick で PNG の形式を変換 2016 awm-Tech</a>を参考にしています。</p>
+<p>この画像に補完なしのAdam7と、補完ありのAdam7をかけてみました。<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://blog.awm.jp/2016/01/26/png/">ImageMagick で PNG の形式を変換 2016 awm-Tech</a>を参考にしています。</p>
 <pre><code>convert p-1.png -filter Point -fx &quot;!(i%8)*!(j%8)*u&quot; p-2.png  
 </code></pre><p><img src="./p-2.png" alt="p-2.png"></p>
 <pre><code>convert p-1.png -filter Point -fx &quot;p{i-i%8,j-j%8}&quot; p-3.png  
@@ -88,7 +92,7 @@ http://133.242.52.44/ (Mirror #2) status solve
 http://133.242.17.50/ (Mirror #3) status solve  
 </code></pre><p>QRコードでamount 100を指定して読み取ってみると、以下のようになっていました。</p>
 <pre><code>username=k&amp;amount=100&amp;proof=MAINjzgVW2vP/wK3J2/a4WRajXpVfS3YSwCQfI00ltkSMSAwvNW5djnZ/RXhkZKRuwMk735s2ktsoHTWppBPm8sRZycwCjCXFnZPpYgC2XLWSeVqJ7A60jyCSuf0Hx7SbMhUxRf0IUHthi/20cbMOa0jreheM1k8Kc2aL4nISx276bO7HIMBMCAwk6ErCRZ2hx9k4zTQtX6Eu3QVU/4UJXtt3D92iepCqxwxCjDw48/TCc3BFznqVcImZBAsr1261pHFLgTac/1ZivV6AjEgMGlQT08rlUPoSQhG2p6oP6SYD30jVoO3MAyHJgZ7pKcTMQowPVt5bRI6qc6nO4lnZI6BDoszMzituoRSxFpY35b9uAcwCjBFDuUef4/weG2bRAiMhljPN3s+6gURwOq4p8VgX/xxDTEK&amp;hash=e403dfc2abe5f320bbf6d92a20b834d36143b89a1da7200dc225fd5c7504a22a  
-</code></pre><p>試してみると、amountが変化してもproofは変わらず、usernameとhashが対応しているようです。また、amountに負の数を指定して <a href="https://www.the-qrcode-generator.com/">online QR generateサービス</a> でQRを作るとエラーなく読み込まれます。<br>
+</code></pre><p>試してみると、amountが変化してもproofは変わらず、usernameとhashが対応しているようです。また、amountに負の数を指定して <a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://www.the-qrcode-generator.com/">online QR generateサービス</a> でQRを作るとエラーなく読み込まれます。<br>
 そこで2つユーザを作り以下のようにしました。</p>
 <ul>
 <li>まず、<code>username=k&amp;amount=-1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&amp;proof=MAINjzgVW2vP/wK3J2/a4WRajXpVfS3YSwCQfI00ltkSMSAwvNW5djnZ/RXhkZKRuwMk735s2ktsoHTWppBPm8sRZycwCjCXFnZPpYgC2XLWSeVqJ7A60jyCSuf0Hx7SbMhUxRf0IUHthi/20cbMOa0jreheM1k8Kc2aL4nISx276bO7HIMBMCAwk6ErCRZ2hx9k4zTQtX6Eu3QVU/4UJXtt3D92iepCqxwxCjDw48/TCc3BFznqVcImZBAsr1261pHFLgTac/1ZivV6AjEgMGlQT08rlUPoSQhG2p6oP6SYD30jVoO3MAyHJgZ7pKcTMQowPVt5bRI6qc6nO4lnZI6BDoszMzituoRSxFpY35b9uAcwCjBFDuUef4/weG2bRAiMhljPN3s+6gURwOq4p8VgX/xxDTEK&amp;hash=e403dfc2abe5f320bbf6d92a20b834d36143b89a1da7200dc225fd5c7504a22a</code>でQRを作る。</li>

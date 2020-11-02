@@ -19,6 +19,10 @@
 <meta name="twitter:title" content="diaryです" />
 <meta name="twitter:description" content="diaryです" />
 <meta name="twitter:image" content="https://www.blog.uta8a.net/assets/uta8a.png" />
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
     <div class="container mx-auto">
@@ -167,14 +171,14 @@ print(ans)
 </code></pre><p>得られた結果は以下の通りです。gcdは高速なのでそれほど時間はかかりませんでした。</p>
 <pre><code>b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00KosenCTF{Th15_15_t00_we4k_p41ll1er_crypt05y5tem}'      
 </code></pre><p>flagが得られました。   <br>
-flagから推察するに、<a href="https://ja.wikipedia.org/wiki/Paillier%E6%9A%97%E5%8F%B7">Paillier暗号</a>なるものがあるそうです。flagを得る前に、mitsuさんが問題で扱われている暗号に加法準同型性があることを指摘していました。流石mitsuさんだ&hellip;   <br>
+flagから推察するに、<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://ja.wikipedia.org/wiki/Paillier%E6%9A%97%E5%8F%B7">Paillier暗号</a>なるものがあるそうです。flagを得る前に、mitsuさんが問題で扱われている暗号に加法準同型性があることを指摘していました。流石mitsuさんだ&hellip;   <br>
 <code>KosenCTF{Th15_15_t00_we4k_p41ll1er_crypt05y5tem}</code></p>
 <h3 id="saferm">saferm</h3>
 <p>[434pts, 13solved, medium, forensics, reversing]       <br>
 ディスクイメージが与えられるので、調べてみます</p>
 <pre><code>$ file disk.img  
 disk.img: DOS/MBR boot sector; partition 1 : ID=0x83, start-CHS (0x0,0,2), end-CHS (0x1,70,5), startsector 1, 20479 sectors  
-</code></pre><p>USBデバイスとのことなので、ファイルシステムがFATかな？と思って <a href="https://github.com/Gregwar/fatcat">fatcat</a> を試しましたがうまく行かず。<br>
+</code></pre><p>USBデバイスとのことなので、ファイルシステムがFATかな？と思って <a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://github.com/Gregwar/fatcat">fatcat</a> を試しましたがうまく行かず。<br>
 そこで、7zipで無理やり解凍してみました。</p>
 <pre><code>$ 7z x disk.img  
   
@@ -217,7 +221,7 @@ Alternate Streams Size: 262428
 Size:       2319696  
 Compressed: 10485760  
 </code></pre><p><code>File System = NTFS 3.1</code>が見えますね。どうやらNTFSのようなので、別のツールを探します。<br>
-探してみると、<a href="https://github.com/Lazza/RecuperaBit">RecuperaBit</a>が見つかりました。このツールを使って、<code>document.zip</code>というファイルが復元できました。<br>
+探してみると、<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://github.com/Lazza/RecuperaBit">RecuperaBit</a>が見つかりました。このツールを使って、<code>document.zip</code>というファイルが復元できました。<br>
 しかし、zipは開けません。7zipで展開した時の<code>saferm</code>というファイルに注目します。ためしに適当に<code>a.txt</code>というファイルを作って<code>saferm</code>を使ってみます。</p>
 <pre><code>$ ltrace ./saferm a.txt  
 fopen(&quot;a.txt&quot;, &quot;rb+&quot;)                                      = 0x5653ddbd4260  
@@ -228,7 +232,7 @@ fread(0x7fff8571acd8, 1, 8, 0x5653ddbd4260)                = 0
 fclose(0x5653ddbd4260)                                     = 0  
 unlink(&quot;a.txt&quot;)                                            = 0  
 +++ exited (status 0) +++  
-</code></pre><p>unlink(削除処理)の前になにかしているようです。どうなっているのか知るために、<a href="https://github.com/radare/radare2">radare2</a>を用いてunlink部分を<code>ff</code>で潰します。safermを実行するとSEGVしますが、unlink以降の流れは無視して良いのでOKです。ltraceを見るに、8byte区切りで何かが行われてそうなので、8文字区切りでわかりやすくなるようa.txtを作り、<code>$ ./saferm a.txt</code>します。</p>
+</code></pre><p>unlink(削除処理)の前になにかしているようです。どうなっているのか知るために、<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://github.com/radare/radare2">radare2</a>を用いてunlink部分を<code>ff</code>で潰します。safermを実行するとSEGVしますが、unlink以降の流れは無視して良いのでOKです。ltraceを見るに、8byte区切りで何かが行われてそうなので、8文字区切りでわかりやすくなるようa.txtを作り、<code>$ ./saferm a.txt</code>します。</p>
 <pre><code>12345678876543219  
 </code></pre><p>が、</p>
 <pre><code>����7,)����2) 9  
@@ -326,7 +330,7 @@ Surveyが時間によらないとアナウンスされていたので、ゆっ�
 次に、与えられたソースコードをよく眺めます。</p>
 <pre><code>$pattern = '/(\s|UNION|OR|=|TRUE|FALSE|&gt;|&lt;|IS|LIKE|BETWEEN|REGEXP|--|#|;|\/|\*|\|)/i';  
 </code></pre><p>ここで禁止される単語がわかりますね。ORが潰されているのでpassw&quot;or&quot;dもダメです。というわけで、1.の方針はやばそうです。<br>
-passwordだけでなんとかしてみます。<a href="https://medium.com/@gregIT/ringzer0team-ctf-sqli-challenges-part-1-6ceff556f4a8">SQLiについての記事</a>を見ると、比較系は以下のようになっています</p>
+passwordだけでなんとかしてみます。<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://medium.com/@gregIT/ringzer0team-ctf-sqli-challenges-part-1-6ceff556f4a8">SQLiについての記事</a>を見ると、比較系は以下のようになっています</p>
 <pre><code>= (comparison), &lt;=&gt;, &gt;=, &gt;, &lt;=, &lt;, &lt;&gt;, !=, IS, LIKE, REGEXP, IN  
 BETWEEN, CASE, WHEN, THEN, ELSE  
 NOT  

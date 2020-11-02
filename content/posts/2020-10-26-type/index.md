@@ -2,7 +2,7 @@
 date: "2020-10-26T14:56:27+09:00"
 title: "プログラミング意味論の基礎を読みました"
 type: "post"
-draft: false
+draft: true
 ---
 
 - また読んでいる途中です。

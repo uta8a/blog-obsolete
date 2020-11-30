@@ -72,3 +72,21 @@ minilang/
 <!-- ファイル読み込みと、エラーを出して確認 -->
 
 # test?そろそろテスト駆動にしたい
+- ここでテストのためのパッケージを入れる必要があるので、Makefileを見直して、テストが入っているプロジェクトが生成されるようにしようと思います。
+
+# その他
+- Ionide
+```
+$ code --install-extension ionide.ionide-fsharp
+```
+- https://github.com/OmniSharp/omnisharp-vscode/issues/3077#issuecomment-498880626
+```
+$ sudo ln -sv /snap/dotnet-sdk/current/dotnet /usr/local/bin/dotnet
+```
+- もしaptで3.1入れてたらそれは消す。
+- 上2つでdotnetコマンド(dotnet5.0)をionideが認識できるようになり、補完や静的チェックが効くようになる。
+- paket
+```shell
+dotnet-sdk.dotnet tool -g install paket
+```
+- paketは今回はだめだった。

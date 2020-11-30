@@ -8,6 +8,15 @@
     <language>ja</language>
     <lastBuildDate>Tue, 13 Aug 2019 06:48:42 +0900</lastBuildDate><atom:link href="https://www.blog.uta8a.net/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>[ansible&#43;goss] PCの初期セットアップで学ぶサーバー設定テスト</title>
+      <link>https://www.blog.uta8a.net/posts/2020-11-30-dotfiles/</link>
+      <pubDate>Mon, 30 Nov 2020 18:32:14 +0900</pubDate>
+      
+      <guid>https://www.blog.uta8a.net/posts/2020-11-30-dotfiles/</guid>
+      <description>この記事は 広島大学ITエンジニア Advent Calendar 2020 の1日目です。新しいPCを買ってvimを入れてgitを入れて&amp;hellip;とか、VirtualBoxで新しくVM立ち上げて設定して&amp;hellip;と何度も同じことをしていると自動化したくなります。テストを含めてやってしまいましょう！ [使用技術、キーワード] ansible, goss, Docker, dotfiles, GitHub Actions なにか間違いや感想ありましたら Twitter: @kaito_tateyama か マシュマロ にお願いします。  # 目次  まず、目標、環境、概要、やってみる でざっくりとPCの初期セットアップする流れを見ていきます。 後半は、用語説明、ディレクトリ構成の説明、ansibleについて、gossについて、GitHub Actionsについてを通して、セットアップのために使うツールとしてansible、セットアップの事前に行うテストツールとしてgossとGitHub Actionsを説明します。 そしてその他で細かい話やなぜansibleなのかを述べます。  # 目標  neovimを新PCに入れる作業を自動化する。そのとき、スクリプトがちゃんと動くことを保証するためにGitHub ActionsでCIを回してテストを行う。  # 環境  使用するコードは https://github.com/uta8a/dotfiles で公開しています。 以下の環境で確認しています。(2020/11/30現在)  OS: Ubuntu20.04 ansible: 2.9.6 goss: v0.3.15 Docker: version 19.03.8, build afacb8b7f0 docker-compose: version 1.25.0, build unknown # 概要  以下のような手順でPCの初期セットアップをしていきます。  1. PCを買う - OSを入れる。(Ubuntu 20.</description>
+    </item>
+    
+    <item>
       <title>勉強するぞ！ 2020年9月版</title>
       <link>https://www.blog.uta8a.net/posts/2020-09-22-cs-learn/</link>
       <pubDate>Tue, 22 Sep 2020 14:49:24 +0900</pubDate>

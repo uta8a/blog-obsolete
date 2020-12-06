@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>diaryです</title>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="diaryです">
+    
+<link href="https://unpkg.com/tailwindcss@^1.5/dist/tailwind.min.css" rel="stylesheet">
+<meta property="og:title" content="diaryです" />
+<meta property="og:type" content="image/png" />
+<meta property="og:url" content="https://www.blog.uta8a.net" />
+<meta name="og:description" content="diaryです" />
+<meta property="og:image" content="https://www.blog.uta8a.net/assets/uta8a.png" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="diaryです" />
+<meta name="twitter:description" content="diaryです" />
+<meta name="twitter:image" content="https://www.blog.uta8a.net/assets/uta8a.png" />
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/styles/zenburn.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+    <div class="container mx-auto">
+        <a href="https://www.blog.uta8a.net">
+            <h1 class="text-center text-5xl">diaryです</h1>
+        </a>
+    </div>
+
+<main>
+<section class="text-gray-700 container mx-auto sm:text-2xl lg:text-base">
+    <header>
+    <h1 class="text-5xl text-center">ゲームAIプログラミング codingameのTronをやってみる</h1>
+    </header>
+
+    <article>
+    <ul>
+<li>この記事は、<a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://adventar.org/calendars/5209">広島大学ITエンジニア Advent Calendar 2020</a> の8日目です。みんな間に合わせていてえらい。</li>
+<li>今回は、ゲームAIプログラミングができるサイト <a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://www.codingame.com/home">CodinGame</a> にチャレンジしてみました。僕はbfsを実装してヤッター！な初心者なので、お手柔らかにお願いします。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-codingameってなに"># CodinGameってなに？</h2>
+<ul>
+<li>CodinGame, 通称「こどげ」はプログラミングでゲームをして遊べるサイトのようです。よく分かっていませんが、今回紹介するゲームAI Botを作って戦わせるタイプの他にも、最適化部門もあるようです。今回は <a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://www.codingame.com/multiplayer/bot-programming/tron-battle">TRON</a> というbotプログラミング部門の入門的な立ち位置のゲームで遊んでいきます。</li>
+<li>使える言語は <a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://www.codingame.com/faq">こちらのFAQ</a> にまとまっています。僕はRustを使うので、</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Rust: 1.38.0
+Includes chrono 0.4.9, itertools 0.8.0, libc 0.2.62, rand 0.7.2, regex 1.3.0, time 0.1.42
+</code></pre></div><ul>
+<li>今確認して知ったんですが <code>rand</code> crateあるやんけ！線形合同法のコードを引っ張ってきてしまった。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-やってみる"># やってみる</h2>
+<ul>
+<li>2年ほど前にちょっと触った(サンプル動かした程度)ので、アカウントは作っていました。</li>
+</ul>
+<p><img src="./p-1.png" alt="p-1"></p>
+<ul>
+<li><code>JOIN</code> ボタンを押すと以下のような画面に行きます。</li>
+</ul>
+<p><img src="./p-2.png" alt="p-2"></p>
+<ul>
+<li>左上の <code>Wood 2 League</code> が自分がいるリーグです。TRONでは、 <code>Wood 2</code> -&gt; <code>Wood 1</code> -&gt; <code>Bronze</code> -&gt; <code>Silver</code> -&gt; <code>Gold</code> -&gt; <code>Legend</code> とリーグが上がっていきます。上のリーグに行くには、各リーグの「ボス」に勝利する必要があります。一ケタ順位をとっても上にいけないな〜と思った、そこのお方！(僕のことです) ボスに勝ちにいきましょう。</li>
+</ul>
+<p><img src="./p-3.png" alt="p-3"></p>
+<ul>
+<li>画面の詳しい説明は <a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://qiita.com/javacommons/items/b178c924199d1a6d524d">CodinGame はBOT(AIプログラム)でバトルするのが正しい楽しみ方かもしれません</a> を見るとよいです。</li>
+<li>基本的には、コードの画面にコードを書いて、<code>PLAY MY CODE</code> を押してテストプレイ、<code>TEST IN ARENA</code>を押して実戦、です。</li>
+</ul>
+<p><img src="./p-4.png" alt="p-4"></p>
+<h2 class="font-bold text-2xl pt-2" id="-ゲームのルール"># ゲームのルール</h2>
+<ul>
+<li>光をできるだけ長く伸ばす(長い時間生き残る)と勝ちです。壁や、相手の光に当たると消滅してしまい、負けになります。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-とりあえずサンプルを動かす"># とりあえずサンプルを動かす</h2>
+<ul>
+<li>書いてあるものをそのままテストプレイすると、毎回左に動くのでそのまま壁に激突してTRON人生が終了します。</li>
+<li>これではいけません。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-改良の前にコードを書くときのフレームを考える"># 改良の前に、コードを書くときのフレームを考える</h2>
+<ul>
+<li>いろいろ書き直したり調べていると、以下のように考えるとよいことに気づきました。</li>
+</ul>
+<p><img src="./p-5.png" alt="p-5"></p>
+<ul>
+<li>まず、ありうる手として上下右左があります(Possible Move)</li>
+<li>次に、例えばいまきた道には引き返せない、壁は無理、といった制約から合法な手が決まります(Legal Move)</li>
+<li>最後に、Legal Moveの中から一番よさげな手を選びます(Best Move)</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-最初の改良"># 最初の改良</h2>
+<ul>
+<li>まずはLegal Moveを実装して、Best Moveのところではランダムに選んでしまうことにしました。</li>
+<li>codeは長いので <a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#code-1">うしろ</a> に置きました。線形合同法は Linux Programming お気楽 Rust プログラミング超入門 さんのコードを参考にしました。ありがとうございます。</li>
+<li>本質的に Best Move を選択するパートは以下になります</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">let</span> best_move <span style="color:#f92672">=</span> legal_move[rng.rand(legal_move.len() <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">u32</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>];
+</code></pre></div><ul>
+<li>このコードでWood 1でちょっと勝てるようになりました。</li>
+<li>しかしボスを倒すにはまだまだ足りないようです。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-次の改良-bfsをしてみる"># 次の改良 bfsをしてみる</h2>
+<ul>
+<li>少し考えて、「もしかしてその場でlegal moveそれぞれに対しdfs/bfsを行い、一番遠くに行けるような手を選べば勝てるのでは？」と思いつきました。やってみましょう。</li>
+<li>codeは <a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="#code-2">こちら</a> です。</li>
+<li>Best Moveを選ぶ部分は以下のようになります。bfsっぽいことをしています。</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">// choose best_move
+</span><span style="color:#75715e">// update this part
+</span><span style="color:#75715e"></span>eprintln<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, legal_move);
+<span style="color:#66d9ef">if</span> legal_move.len() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;UP&#34;</span>);
+    <span style="color:#66d9ef">break</span>;
+}
+<span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> max_mv <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+<span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> _best_move <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>); <span style="color:#75715e">// invalid initial value
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> mv <span style="color:#66d9ef">in</span> <span style="color:#f92672">&amp;</span>legal_move {
+    <span style="color:#75715e">// value = bfs(mv.2, mv.3)
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// if max_mv &lt; value { update(_best_move) }
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> tmp_game_field <span style="color:#f92672">=</span> game_field.clone();
+    tmp_game_field[mv.<span style="color:#ae81ff">3</span> <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>][mv.<span style="color:#ae81ff">2</span> <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> now <span style="color:#f92672">=</span> (mv.<span style="color:#ae81ff">2</span>, mv.<span style="color:#ae81ff">3</span>); <span style="color:#75715e">// x,y
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> q <span style="color:#f92672">=</span> VecDeque::new();
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> tmp_max_mv <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    q.push_back(now);
+    <span style="color:#66d9ef">while</span> q.is_empty() <span style="color:#f92672">==</span> <span style="color:#66d9ef">false</span> {
+        <span style="color:#66d9ef">let</span> tmp <span style="color:#f92672">=</span> q.pop_front().unwrap();
+        tmp_max_mv <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+        <span style="color:#66d9ef">for</span> t_mv <span style="color:#66d9ef">in</span> <span style="color:#f92672">&amp;</span>possible_move {
+            <span style="color:#66d9ef">let</span> (x,y) <span style="color:#f92672">=</span> (tmp.<span style="color:#ae81ff">0</span><span style="color:#f92672">+</span>t_mv.<span style="color:#ae81ff">0</span>, tmp.<span style="color:#ae81ff">1</span><span style="color:#f92672">+</span>t_mv.<span style="color:#ae81ff">1</span>);
+            <span style="color:#66d9ef">if</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;=</span> x <span style="color:#f92672">&amp;&amp;</span> x <span style="color:#f92672">&lt;</span>len_x <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">i32</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;=</span> y <span style="color:#f92672">&amp;&amp;</span> y<span style="color:#f92672">&lt;</span>len_y <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">i32</span> {
+                <span style="color:#66d9ef">if</span> tmp_game_field[y <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>][x <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>] {
+                    <span style="color:#75715e">// valid
+</span><span style="color:#75715e"></span>                    tmp_game_field[y <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>][x <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+                    q.push_back((x,y));
+                }
+            }
+        }
+    }
+    <span style="color:#66d9ef">if</span> max_mv <span style="color:#f92672">&lt;</span> tmp_max_mv {
+        _best_move <span style="color:#f92672">=</span> (mv.<span style="color:#ae81ff">0</span>, mv.<span style="color:#ae81ff">1</span>);
+        max_mv <span style="color:#f92672">=</span> tmp_max_mv;
+    }
+}
+
+<span style="color:#66d9ef">let</span> best_move <span style="color:#f92672">=</span> _best_move;
+
+</code></pre></div><ul>
+<li>これでボスを倒すことができました！やったーー！次はBronzeリーグです！</li>
+</ul>
+<p><img src="./p-6.png" alt="p-6"></p>
+<h2 class="font-bold text-2xl pt-2" id="-終わりに"># 終わりに</h2>
+<ul>
+<li>めっちゃビジュアライザが楽しいので対戦中の動画ずーっと眺めてしまいますね。</li>
+<li>次の目標はsilverですが、Minimax法とか勉強しないと無理そう感あるので(ただbronzeレベルだとまだ大丈夫らしい？)勉強していかんとなあ。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="code-1">code-1</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">use</span> std::io;
+
+macro_rules<span style="color:#f92672">!</span> parse_input {
+    (<span style="color:#75715e">$x</span>:<span style="color:#a6e22e">expr</span>, <span style="color:#75715e">$t</span>:<span style="color:#a6e22e">ident</span>) <span style="color:#f92672">=&gt;</span> (<span style="color:#75715e">$x</span>.trim().parse::<span style="color:#f92672">&lt;</span><span style="color:#75715e">$t</span><span style="color:#f92672">&gt;</span>().unwrap())
+}
+
+<span style="color:#75715e">// http://www.nct9.ne.jp/m_hiroi/linux/rust02.html
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Rand</span> {
+    seed: <span style="color:#66d9ef">u32</span>
+}
+
+<span style="color:#75715e">// メソッドの実装
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">impl</span> Rand {
+    <span style="color:#75715e">// 生成
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">new</span>(x: <span style="color:#66d9ef">u32</span>) -&gt; <span style="color:#a6e22e">Rand</span> {
+        Rand { seed: <span style="color:#a6e22e">x</span> }
+    }
+
+    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">rand</span>(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> self, rand_max: <span style="color:#66d9ef">u32</span>) -&gt; <span style="color:#66d9ef">u32</span> {
+        <span style="color:#66d9ef">let</span> x <span style="color:#f92672">=</span> self.seed <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">u64</span>;
+        self.seed <span style="color:#f92672">=</span> ((<span style="color:#ae81ff">69069</span> <span style="color:#f92672">*</span> x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;</span> rand_max <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">u64</span>) <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">u32</span>;
+        self.seed
+    }
+}
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">convert_output</span>(mv: (<span style="color:#66d9ef">i32</span>,<span style="color:#66d9ef">i32</span>)) -&gt; String{
+    <span style="color:#66d9ef">let</span> output <span style="color:#f92672">=</span> <span style="color:#66d9ef">match</span> mv {
+        (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;RIGHT&#34;</span>,
+        (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;LEFT&#34;</span>,
+        (<span style="color:#ae81ff">0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;UP&#34;</span>,
+        (<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;DOWN&#34;</span>,
+        _ <span style="color:#f92672">=&gt;</span> unreachable<span style="color:#f92672">!</span>(),
+    };
+    output.to_string()
+}
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * Auto-generated code below aims at helping you parse
+</span><span style="color:#e6db74"> * the standard input according to the problem statement.
+</span><span style="color:#e6db74"> **/</span>
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#66d9ef">let</span> len_x <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>;
+    <span style="color:#66d9ef">let</span> len_y <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> game_field <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[vec<span style="color:#f92672">!</span>[<span style="color:#66d9ef">true</span>;len_x];len_y];
+    <span style="color:#66d9ef">let</span> possible_move <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>), (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)];
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> rng <span style="color:#f92672">=</span> Rand::new(<span style="color:#ae81ff">1</span>);
+    <span style="color:#75715e">// game loop
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">loop</span> {
+        <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> input_line <span style="color:#f92672">=</span> String::new();
+        io::stdin().read_line(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> input_line).unwrap();
+        <span style="color:#66d9ef">let</span> inputs <span style="color:#f92672">=</span> input_line.split(<span style="color:#e6db74">&#34; &#34;</span>).collect::<span style="color:#f92672">&lt;</span>Vec<span style="color:#f92672">&lt;</span>_<span style="color:#f92672">&gt;&gt;</span>();
+        <span style="color:#66d9ef">let</span> n <span style="color:#f92672">=</span> parse_input<span style="color:#f92672">!</span>(inputs[<span style="color:#ae81ff">0</span>], <span style="color:#66d9ef">i32</span>); <span style="color:#75715e">// total number of players (2 to 4).
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> p <span style="color:#f92672">=</span> parse_input<span style="color:#f92672">!</span>(inputs[<span style="color:#ae81ff">1</span>], <span style="color:#66d9ef">usize</span>); <span style="color:#75715e">// your player number (0 to 3).
+</span><span style="color:#75715e"></span>
+        <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> legal_move <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[];
+
+        <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">0</span>..n <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span> {
+            <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> input_line <span style="color:#f92672">=</span> String::new();
+            io::stdin().read_line(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> input_line).unwrap();
+            <span style="color:#66d9ef">let</span> inputs <span style="color:#f92672">=</span> input_line.split(<span style="color:#e6db74">&#34; &#34;</span>).collect::<span style="color:#f92672">&lt;</span>Vec<span style="color:#f92672">&lt;</span>_<span style="color:#f92672">&gt;&gt;</span>();
+            <span style="color:#66d9ef">let</span> _x0 <span style="color:#f92672">=</span> parse_input<span style="color:#f92672">!</span>(inputs[<span style="color:#ae81ff">0</span>], <span style="color:#66d9ef">i32</span>); <span style="color:#75715e">// starting X coordinate of lightcycle (or -1)
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> _x0 <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> {
+                <span style="color:#66d9ef">break</span>;
+            }
+            <span style="color:#66d9ef">let</span> x0 <span style="color:#f92672">=</span> _x0 <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>;
+            
+            <span style="color:#66d9ef">let</span> y0 <span style="color:#f92672">=</span> parse_input<span style="color:#f92672">!</span>(inputs[<span style="color:#ae81ff">1</span>], <span style="color:#66d9ef">usize</span>); <span style="color:#75715e">// starting Y coordinate of lightcycle (or -1)
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">let</span> x1 <span style="color:#f92672">=</span> parse_input<span style="color:#f92672">!</span>(inputs[<span style="color:#ae81ff">2</span>], <span style="color:#66d9ef">usize</span>); <span style="color:#75715e">// starting X coordinate of lightcycle (can be the same as X0 if you play before this player)
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">let</span> y1 <span style="color:#f92672">=</span> parse_input<span style="color:#f92672">!</span>(inputs[<span style="color:#ae81ff">3</span>], <span style="color:#66d9ef">usize</span>); <span style="color:#75715e">// starting Y coordinate of lightcycle (can be the same as Y0 if you play before this player)
+</span><span style="color:#75715e"></span>            game_field[y0][x0] <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+            game_field[y1][x1] <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+            <span style="color:#75715e">// now: i==p, x1,y1 to longest path
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">// make regal_move
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> i<span style="color:#f92672">==</span>p {
+                <span style="color:#66d9ef">for</span> mv <span style="color:#66d9ef">in</span> <span style="color:#f92672">&amp;</span>possible_move {
+                    <span style="color:#66d9ef">let</span> x <span style="color:#f92672">=</span> x1 <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">i32</span> <span style="color:#f92672">+</span> mv.<span style="color:#ae81ff">0</span>;
+                    <span style="color:#66d9ef">let</span> y <span style="color:#f92672">=</span> y1 <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">i32</span> <span style="color:#f92672">+</span> mv.<span style="color:#ae81ff">1</span>;
+                    <span style="color:#66d9ef">if</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;=</span> x <span style="color:#f92672">&amp;&amp;</span> x <span style="color:#f92672">&lt;</span>len_x <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">i32</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;=</span> y <span style="color:#f92672">&amp;&amp;</span> y<span style="color:#f92672">&lt;</span>len_y <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">i32</span> {
+                        <span style="color:#66d9ef">if</span> game_field[y <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>][x <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>] {
+                            <span style="color:#75715e">// for u in 0..len_y {
+</span><span style="color:#75715e"></span>                            <span style="color:#75715e">//     eprintln!(&#34;{:?}&#34;, game_field[u]);
+</span><span style="color:#75715e"></span>                            <span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>                            eprintln<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;x: {:?} y: {:?}&#34;</span>, x, y);
+                            legal_move.push((mv.<span style="color:#ae81ff">0</span>,mv.<span style="color:#ae81ff">1</span>));
+                        }
+                    }
+                }
+            }
+        }
+
+        <span style="color:#75715e">// choose best_move
+</span><span style="color:#75715e"></span>        eprintln<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, legal_move);
+        <span style="color:#66d9ef">let</span> best_move <span style="color:#f92672">=</span> legal_move[rng.rand(legal_move.len() <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">u32</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>];
+        <span style="color:#75715e">// Write an action using println!(&#34;message...&#34;);
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// To debug: eprintln!(&#34;Debug message...&#34;);
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// eprintln!(&#34;P: {}&#34;, p);
+</span><span style="color:#75715e"></span>        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, convert_output(best_move)); <span style="color:#75715e">// A single line with UP, DOWN, LEFT or RIGHT
+</span><span style="color:#75715e"></span>    }
+}
+
+</code></pre></div><h2 class="font-bold text-2xl pt-2" id="code-2">code-2</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">use</span> std::io;
+<span style="color:#66d9ef">use</span> std::collections::VecDeque;
+macro_rules<span style="color:#f92672">!</span> parse_input {
+    (<span style="color:#75715e">$x</span>:<span style="color:#a6e22e">expr</span>, <span style="color:#75715e">$t</span>:<span style="color:#a6e22e">ident</span>) <span style="color:#f92672">=&gt;</span> (<span style="color:#75715e">$x</span>.trim().parse::<span style="color:#f92672">&lt;</span><span style="color:#75715e">$t</span><span style="color:#f92672">&gt;</span>().unwrap())
+}
+
+<span style="color:#75715e">// http://www.nct9.ne.jp/m_hiroi/linux/rust02.html
+</span><span style="color:#75715e">// struct Rand {
+</span><span style="color:#75715e">//     seed: u32
+</span><span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// // メソッドの実装
+</span><span style="color:#75715e">// impl Rand {
+</span><span style="color:#75715e">//     // 生成
+</span><span style="color:#75715e">//     fn new(x: u32) -&gt; Rand {
+</span><span style="color:#75715e">//         Rand { seed: x }
+</span><span style="color:#75715e">//     }
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">//     fn rand(&amp;mut self, rand_max: u32) -&gt; u32 {
+</span><span style="color:#75715e">//         let x = self.seed as u64;
+</span><span style="color:#75715e">//         self.seed = ((69069 * x + 1) &amp; rand_max as u64) as u32;
+</span><span style="color:#75715e">//         self.seed
+</span><span style="color:#75715e">//     }
+</span><span style="color:#75715e">// }
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">convert_output</span>(mv: (<span style="color:#66d9ef">i32</span>,<span style="color:#66d9ef">i32</span>)) -&gt; String{
+    <span style="color:#66d9ef">let</span> output <span style="color:#f92672">=</span> <span style="color:#66d9ef">match</span> mv {
+        (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;RIGHT&#34;</span>,
+        (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;LEFT&#34;</span>,
+        (<span style="color:#ae81ff">0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;UP&#34;</span>,
+        (<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;DOWN&#34;</span>,
+        _ <span style="color:#f92672">=&gt;</span> unreachable<span style="color:#f92672">!</span>(),
+    };
+    output.to_string()
+}
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * Auto-generated code below aims at helping you parse
+</span><span style="color:#e6db74"> * the standard input according to the problem statement.
+</span><span style="color:#e6db74"> **/</span>
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#66d9ef">let</span> len_x <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>;
+    <span style="color:#66d9ef">let</span> len_y <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> game_field <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[vec<span style="color:#f92672">!</span>[<span style="color:#66d9ef">true</span>;len_x];len_y];
+    <span style="color:#66d9ef">let</span> possible_move <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>), (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)];
+    <span style="color:#75715e">// let mut rng = Rand::new(1);
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// game loop
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">loop</span> {
+        <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> input_line <span style="color:#f92672">=</span> String::new();
+        io::stdin().read_line(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> input_line).unwrap();
+        <span style="color:#66d9ef">let</span> inputs <span style="color:#f92672">=</span> input_line.split(<span style="color:#e6db74">&#34; &#34;</span>).collect::<span style="color:#f92672">&lt;</span>Vec<span style="color:#f92672">&lt;</span>_<span style="color:#f92672">&gt;&gt;</span>();
+        <span style="color:#66d9ef">let</span> n <span style="color:#f92672">=</span> parse_input<span style="color:#f92672">!</span>(inputs[<span style="color:#ae81ff">0</span>], <span style="color:#66d9ef">i32</span>); <span style="color:#75715e">// total number of players (2 to 4).
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> p <span style="color:#f92672">=</span> parse_input<span style="color:#f92672">!</span>(inputs[<span style="color:#ae81ff">1</span>], <span style="color:#66d9ef">usize</span>); <span style="color:#75715e">// your player number (0 to 3).
+</span><span style="color:#75715e"></span>
+        <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> legal_move <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[];
+
+        <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">0</span>..n <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span> {
+            <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> input_line <span style="color:#f92672">=</span> String::new();
+            io::stdin().read_line(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> input_line).unwrap();
+            <span style="color:#66d9ef">let</span> inputs <span style="color:#f92672">=</span> input_line.split(<span style="color:#e6db74">&#34; &#34;</span>).collect::<span style="color:#f92672">&lt;</span>Vec<span style="color:#f92672">&lt;</span>_<span style="color:#f92672">&gt;&gt;</span>();
+            <span style="color:#66d9ef">let</span> _x0 <span style="color:#f92672">=</span> parse_input<span style="color:#f92672">!</span>(inputs[<span style="color:#ae81ff">0</span>], <span style="color:#66d9ef">i32</span>); <span style="color:#75715e">// starting X coordinate of lightcycle (or -1)
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> _x0 <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> {
+                <span style="color:#66d9ef">break</span>;
+            }
+            <span style="color:#66d9ef">let</span> x0 <span style="color:#f92672">=</span> _x0 <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>;
+            
+            <span style="color:#66d9ef">let</span> y0 <span style="color:#f92672">=</span> parse_input<span style="color:#f92672">!</span>(inputs[<span style="color:#ae81ff">1</span>], <span style="color:#66d9ef">usize</span>); <span style="color:#75715e">// starting Y coordinate of lightcycle (or -1)
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">let</span> x1 <span style="color:#f92672">=</span> parse_input<span style="color:#f92672">!</span>(inputs[<span style="color:#ae81ff">2</span>], <span style="color:#66d9ef">usize</span>); <span style="color:#75715e">// starting X coordinate of lightcycle (can be the same as X0 if you play before this player)
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">let</span> y1 <span style="color:#f92672">=</span> parse_input<span style="color:#f92672">!</span>(inputs[<span style="color:#ae81ff">3</span>], <span style="color:#66d9ef">usize</span>); <span style="color:#75715e">// starting Y coordinate of lightcycle (can be the same as Y0 if you play before this player)
+</span><span style="color:#75715e"></span>            game_field[y0][x0] <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+            game_field[y1][x1] <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+            <span style="color:#75715e">// now: i==p, x1,y1 to longest path
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">// make regal_move
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> i<span style="color:#f92672">==</span>p {
+                <span style="color:#66d9ef">for</span> mv <span style="color:#66d9ef">in</span> <span style="color:#f92672">&amp;</span>possible_move {
+                    <span style="color:#66d9ef">let</span> x <span style="color:#f92672">=</span> x1 <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">i32</span> <span style="color:#f92672">+</span> mv.<span style="color:#ae81ff">0</span>;
+                    <span style="color:#66d9ef">let</span> y <span style="color:#f92672">=</span> y1 <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">i32</span> <span style="color:#f92672">+</span> mv.<span style="color:#ae81ff">1</span>;
+                    <span style="color:#66d9ef">if</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;=</span> x <span style="color:#f92672">&amp;&amp;</span> x <span style="color:#f92672">&lt;</span>len_x <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">i32</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;=</span> y <span style="color:#f92672">&amp;&amp;</span> y<span style="color:#f92672">&lt;</span>len_y <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">i32</span> {
+                        <span style="color:#66d9ef">if</span> game_field[y <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>][x <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>] {
+                            <span style="color:#75715e">// for u in 0..len_y {
+</span><span style="color:#75715e"></span>                            <span style="color:#75715e">//     eprintln!(&#34;{:?}&#34;, game_field[u]);
+</span><span style="color:#75715e"></span>                            <span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>                            eprintln<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;x: {:?} y: {:?}&#34;</span>, x, y);
+                            legal_move.push((mv.<span style="color:#ae81ff">0</span>,mv.<span style="color:#ae81ff">1</span>,x,y));
+                        }
+                    }
+                }
+            }
+        }
+
+        <span style="color:#75715e">// choose best_move
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// update this part
+</span><span style="color:#75715e"></span>        eprintln<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{:?}&#34;</span>, legal_move);
+        <span style="color:#66d9ef">if</span> legal_move.len() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+            println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;UP&#34;</span>);
+            <span style="color:#66d9ef">break</span>;
+        }
+        <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> max_mv <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> _best_move <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>); <span style="color:#75715e">// invalid initial value
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span> mv <span style="color:#66d9ef">in</span> <span style="color:#f92672">&amp;</span>legal_move {
+            <span style="color:#75715e">// value = bfs(mv.2, mv.3)
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">// if max_mv &lt; value { update(_best_move) }
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> tmp_game_field <span style="color:#f92672">=</span> game_field.clone();
+            tmp_game_field[mv.<span style="color:#ae81ff">3</span> <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>][mv.<span style="color:#ae81ff">2</span> <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+            <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> now <span style="color:#f92672">=</span> (mv.<span style="color:#ae81ff">2</span>, mv.<span style="color:#ae81ff">3</span>); <span style="color:#75715e">// x,y
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> q <span style="color:#f92672">=</span> VecDeque::new();
+            <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> tmp_max_mv <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+            q.push_back(now);
+            <span style="color:#66d9ef">while</span> q.is_empty() <span style="color:#f92672">==</span> <span style="color:#66d9ef">false</span> {
+                <span style="color:#66d9ef">let</span> tmp <span style="color:#f92672">=</span> q.pop_front().unwrap();
+                tmp_max_mv <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+                <span style="color:#66d9ef">for</span> t_mv <span style="color:#66d9ef">in</span> <span style="color:#f92672">&amp;</span>possible_move {
+                    <span style="color:#66d9ef">let</span> (x,y) <span style="color:#f92672">=</span> (tmp.<span style="color:#ae81ff">0</span><span style="color:#f92672">+</span>t_mv.<span style="color:#ae81ff">0</span>, tmp.<span style="color:#ae81ff">1</span><span style="color:#f92672">+</span>t_mv.<span style="color:#ae81ff">1</span>);
+                    <span style="color:#66d9ef">if</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;=</span> x <span style="color:#f92672">&amp;&amp;</span> x <span style="color:#f92672">&lt;</span>len_x <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">i32</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;=</span> y <span style="color:#f92672">&amp;&amp;</span> y<span style="color:#f92672">&lt;</span>len_y <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">i32</span> {
+                        <span style="color:#66d9ef">if</span> tmp_game_field[y <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>][x <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>] {
+                            <span style="color:#75715e">// valid
+</span><span style="color:#75715e"></span>                            tmp_game_field[y <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>][x <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+                            q.push_back((x,y));
+                        }
+                    }
+                }
+            }
+            <span style="color:#66d9ef">if</span> max_mv <span style="color:#f92672">&lt;</span> tmp_max_mv {
+                _best_move <span style="color:#f92672">=</span> (mv.<span style="color:#ae81ff">0</span>, mv.<span style="color:#ae81ff">1</span>);
+                max_mv <span style="color:#f92672">=</span> tmp_max_mv;
+            }
+        }
+
+        <span style="color:#66d9ef">let</span> best_move <span style="color:#f92672">=</span> _best_move;
+        <span style="color:#75715e">// Write an action using println!(&#34;message...&#34;);
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// To debug: eprintln!(&#34;Debug message...&#34;);
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// eprintln!(&#34;P: {}&#34;, p);
+</span><span style="color:#75715e"></span>
+        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}&#34;</span>, convert_output(best_move)); <span style="color:#75715e">// A single line with UP, DOWN, LEFT or RIGHT
+</span><span style="color:#75715e"></span>    }
+}
+</code></pre></div>
+    </article>
+
+    <footer class="py-5">
+            <ul>
+                <li><a href="https://www.blog.uta8a.net/posts/2020-11-30-dotfiles/">&laquo; [ansible&#43;goss] PCの初期セットアップで学ぶサーバー設定テスト</a></li>
+                
+            </ul>
+    </footer>
+</section>
+<aside class="py-5 container mx-auto">
+    <ul>
+    <li><a href="https://www.blog.uta8a.net">Home</a></p>
+    <li><a href="https://www.blog.uta8a.net/posts/">Posts</a></p>
+    </ul>
+</aside>
+</main>
+
+<footer class="lg:container lg:mx-auto">
+    
+</footer>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+</script>
+<script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+
+</html>

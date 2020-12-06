@@ -3,12 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.blog.uta8a.net/posts/2020-11-30-dotfiles/</loc>
-    <lastmod>2020-11-30T18:32:14+09:00</lastmod>
+    <loc>https://www.blog.uta8a.net/posts/</loc>
+    <lastmod>2020-12-06T17:58:48+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.blog.uta8a.net/posts/</loc>
+    <loc>https://www.blog.uta8a.net/posts/2020-12-06-tron/</loc>
+    <lastmod>2020-12-06T17:58:48+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.blog.uta8a.net/posts/2020-11-30-dotfiles/</loc>
     <lastmod>2020-11-30T18:32:14+09:00</lastmod>
   </url>
   

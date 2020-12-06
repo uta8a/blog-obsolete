@@ -8,6 +8,15 @@
     <language>ja</language>
     <lastBuildDate>Tue, 13 Aug 2019 06:48:42 +0900</lastBuildDate><atom:link href="https://www.blog.uta8a.net/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>taskctf2020 writeup</title>
+      <link>https://www.blog.uta8a.net/posts/2020-12-06-taskctf-2020-happy-birthday/</link>
+      <pubDate>Sun, 06 Dec 2020 23:57:56 +0900</pubDate>
+      
+      <guid>https://www.blog.uta8a.net/posts/2020-12-06-taskctf-2020-happy-birthday/</guid>
+      <description>この記事は 広島大学ITエンジニア Advent Calendar 2020 の15日目です。 今回は、12/6に行われた taskctf の writeupを書いていきます。  # taskctf 概要  Taskerさん が誕生日に開いたCTFです。誕生日は12月5日のようですが、諸用により一日遅れでの開催となったようです。去年も開催されていて、Amazon Wish Listにflagをひそませるなど面白い工夫が見られる、クイズ寄りのCTFです。 僕は KasumiSensei として出て終了20分前にようやく全完しました。CTFで全部解けるのはどんなCTFでも楽しいですし、僕は初めてなのかな？とにかくこの成功した感覚を忘れないようにしよう！と思ってwriteupを書きます。 以下、問題をそれぞれ解説します。  # Welcome  taskctf{g00d_luck_h4ve_fun}  # アンケート  taskctf{Th4nk_u_f0r_pl4ying!}  # guess `?v=` ?v=t1zPpBwRbAw 何やら見覚えのあるパラメータな気がするな  vをqueryに含むやつが思い浮かびそうで思い浮かばなかった。こんなときはgoogle inurl: v= でyoutubeがヒットした。 限定公開の動画にたどり着き、その概要欄にFlagがあった。 taskctf{h0w_w4s_it?}  # social hacking  guess `?v=`の動画でパスワードがむにゃむにゃと言っていて、最初聞こえなかったがその後言い直している。onigirtに誕生日をつける。 お誕生日CTFだけど1日遅れているので、onigiri1205 をパスワードとしてzipが開けた。 taskctf{n0t1ce_soci4l_h4ck1ng}  # OSINT 3 友人が奇抜なTシャツを着てきた。 そもそもこれってどこで売られてるんだ......? 調べて教えて欲しい！ フラグの形式: taskctf{ショップ名} 2020-12-06 12:00 追記: 理不尽が過ぎる問題だったので, 画像を1枚追加しました。 ショップ名は漢字とカタカナのみで構成されています。 2020-12-06 15:48 追記: Max Attemptsを増やしました。  これは追加された写真 むずかしくて最初は誰も解けていなかった。ヒントが追加されて答えにたどり着けた。 試したやつ  - taskctf{SUZURI} だめ - taskctf{ヤマニ} だめ - taskctf{グラニフ} だめ - taskctf{ClubT} taskctf{clubt} だめ - taskctf{スクリーン印刷} だめ - taskctf{SHALEMON} だめ  いやこういう手作り感あふれるTシャツはSUZURIやろ！(SUZURIはショップではなくプラットフォームだと思うぞ ヒントが追加されて、Tシャツ 広場で検索すると https://harajukust-parisien.</description>
+    </item>
+    
+    <item>
       <title>ゲームAIプログラミング codingameのTronをやってみる</title>
       <link>https://www.blog.uta8a.net/posts/2020-12-06-tron/</link>
       <pubDate>Sun, 06 Dec 2020 17:58:48 +0900</pubDate>

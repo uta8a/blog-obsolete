@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>diaryです</title>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="diaryです">
+    
+<link href="https://unpkg.com/tailwindcss@^1.5/dist/tailwind.min.css" rel="stylesheet">
+<meta property="og:title" content="diaryです" />
+<meta property="og:type" content="image/png" />
+<meta property="og:url" content="https://www.blog.uta8a.net" />
+<meta name="og:description" content="diaryです" />
+<meta property="og:image" content="https://www.blog.uta8a.net/assets/uta8a.png" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="diaryです" />
+<meta name="twitter:description" content="diaryです" />
+<meta name="twitter:image" content="https://www.blog.uta8a.net/assets/uta8a.png" />
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/styles/zenburn.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+    <div class="container mx-auto">
+        <a href="https://www.blog.uta8a.net">
+            <h1 class="text-center text-5xl">diaryです</h1>
+        </a>
+    </div>
+
+<main>
+<section class="text-gray-700 container mx-auto sm:text-2xl lg:text-base">
+    <header>
+    <h1 class="text-5xl text-center">taskctf2020 writeup</h1>
+    </header>
+
+    <article>
+    <ul>
+<li>この記事は <a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://adventar.org/calendars/5209">広島大学ITエンジニア Advent Calendar 2020</a> の15日目です。</li>
+<li>今回は、12/6に行われた taskctf の writeupを書いていきます。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-taskctf-概要"># taskctf 概要</h2>
+<ul>
+<li><a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://twitter.com/task4233">Taskerさん</a> が誕生日に開いたCTFです。誕生日は12月5日のようですが、諸用により一日遅れでの開催となったようです。去年も開催されていて、Amazon Wish Listにflagをひそませるなど面白い工夫が見られる、クイズ寄りのCTFです。</li>
+<li>僕は <code>KasumiSensei</code> として出て終了20分前にようやく全完しました。CTFで全部解けるのはどんなCTFでも楽しいですし、僕は初めてなのかな？とにかくこの成功した感覚を忘れないようにしよう！と思ってwriteupを書きます。</li>
+<li>以下、問題をそれぞれ解説します。</li>
+</ul>
+<p><img src="./p-1.png" alt="p-1.png"></p>
+<p><img src="./p-2.png" alt="p-2"></p>
+<h2 class="font-bold text-2xl pt-2" id="-welcome"># Welcome</h2>
+<ul>
+<li><code>taskctf{g00d_luck_h4ve_fun}</code></li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-アンケート"># アンケート</h2>
+<ul>
+<li><code>taskctf{Th4nk_u_f0r_pl4ying!}</code></li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-guess--v-"># guess <code>`?v=`</code></h2>
+<pre><code>?v=t1zPpBwRbAw
+
+何やら見覚えのあるパラメータな気がするな
+</code></pre><ul>
+<li>vをqueryに含むやつが思い浮かびそうで思い浮かばなかった。こんなときはgoogle</li>
+<li><code>inurl: v=</code> でyoutubeがヒットした。</li>
+<li>限定公開の動画にたどり着き、その概要欄にFlagがあった。</li>
+<li><code>taskctf{h0w_w4s_it?}</code></li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-social-hacking"># social hacking</h2>
+<ul>
+<li><code>guess `?v=`</code>の動画でパスワードがむにゃむにゃと言っていて、最初聞こえなかったがその後言い直している。onigirtに誕生日をつける。</li>
+<li>お誕生日CTFだけど1日遅れているので、<code>onigiri1205</code> をパスワードとしてzipが開けた。</li>
+<li><code>taskctf{n0t1ce_soci4l_h4ck1ng}</code></li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-osint-3"># OSINT 3</h2>
+<pre><code>友人が奇抜なTシャツを着てきた。
+そもそもこれってどこで売られてるんだ......?
+調べて教えて欲しい！
+
+フラグの形式: taskctf{ショップ名}
+2020-12-06 12:00 追記:
+理不尽が過ぎる問題だったので, 画像を1枚追加しました。
+ショップ名は漢字とカタカナのみで構成されています。
+
+2020-12-06 15:48 追記: Max Attemptsを増やしました。
+</code></pre><p><img src="./osint3-2.jpg" alt="osint"></p>
+<ul>
+<li>これは追加された写真</li>
+<li>むずかしくて最初は誰も解けていなかった。ヒントが追加されて答えにたどり着けた。</li>
+<li>試したやつ</li>
+</ul>
+<pre><code>- taskctf{SUZURI} だめ
+- taskctf{ヤマニ} だめ
+- taskctf{グラニフ} だめ
+- taskctf{ClubT} taskctf{clubt} だめ
+- taskctf{スクリーン印刷} だめ
+- taskctf{SHALEMON} だめ
+</code></pre><ul>
+<li>いやこういう手作り感あふれるTシャツはSUZURIやろ！(SUZURIはショップではなくプラットフォームだと思うぞ</li>
+<li>ヒントが追加されて、<code>Tシャツ 広場</code>で検索すると <a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://harajukust-parisien.com/?page_id=123">https://harajukust-parisien.com/?page_id=123</a> にたどりついた。</li>
+<li><code>taskctf{原宿パリジャン}</code> 正解</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="osint-2">OSINT 2</h2>
+<pre><code>友人が迷ってよく分からない駅で下車してしまったらしい。 駅前の画像を送ってくれたから, どこの駅前か特定してほしい。 駅名は全て漢字です。
+
+フラグの形式: taskctf{駅名}
+
+2020-12-06 12:43追記: 駅名は「駅」という文字までを含みます。
+
+</code></pre><p><img src="./osint2.jpg" alt="osint"></p>
+<ul>
+<li>これは簡単。「駅 大仏」でググって画像検索を順に見ていくとあった。</li>
+<li><code>taskctf{大船駅}</code></li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-grass-flag"># grass flag</h2>
+<pre><code>interesting contributions
+checksum(sha256): 72c84c2a356c321b76718fca311995b51d3c8155fd2c743172911222a366ec9a
+</code></pre><ul>
+<li>これめっちゃ悩んだ。空コミットがめっちゃ(135こ)あって、<code>git cat-file -p XXX</code>しても無、特に修正コミットみたいなものもないし&hellip;と悩んでhashに意味があるのか？とか思っていた。残るは日付。2002年？これは&hellip;</li>
+<li>ここで<code>grass git</code>で検索してそういやGitHubのコミットの草ってあったなと思いだした。一旦日付のみを <code>git log --pretty=format:&quot;%ad&quot;</code> で書き出して、以下のコードで可視化した。</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#e6db74">&#34;&#34;&#34;Date
+</span><span style="color:#e6db74">Wed Mar 12 03:31:14 2003 +0900
+</span><span style="color:#e6db74">Fri Mar 7 03:31:14 2003 +0900
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">con</span>(m):
+    <span style="color:#66d9ef">if</span> m <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Jan&#34;</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">if</span> m <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Feb&#34;</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2</span>
+    <span style="color:#66d9ef">if</span> m <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Mar&#34;</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">3</span>
+    <span style="color:#66d9ef">if</span> m <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Apr&#34;</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">4</span>
+    <span style="color:#66d9ef">if</span> m <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;May&#34;</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">5</span>
+    <span style="color:#66d9ef">if</span> m <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Jun&#34;</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">6</span>
+    <span style="color:#66d9ef">if</span> m <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Jul&#34;</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">7</span>
+    <span style="color:#66d9ef">if</span> m <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Aug&#34;</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">8</span>
+    <span style="color:#66d9ef">if</span> m <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Sep&#34;</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">9</span>
+    <span style="color:#66d9ef">if</span> m <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Oct&#34;</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">10</span>
+    <span style="color:#66d9ef">if</span> m <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Nov&#34;</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">11</span>
+    <span style="color:#66d9ef">if</span> m <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Dec&#34;</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">12</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">vert</span>(s):
+    days2002 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">31</span>,<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">31</span>,<span style="color:#ae81ff">30</span>,<span style="color:#ae81ff">31</span>,<span style="color:#ae81ff">30</span>,<span style="color:#ae81ff">31</span>,<span style="color:#ae81ff">31</span>,<span style="color:#ae81ff">30</span>,<span style="color:#ae81ff">31</span>,<span style="color:#ae81ff">30</span>,<span style="color:#ae81ff">31</span>]
+    days <span style="color:#f92672">=</span> [<span style="color:#ae81ff">31</span>,<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">31</span>,<span style="color:#ae81ff">30</span>,<span style="color:#ae81ff">31</span>,<span style="color:#ae81ff">30</span>,<span style="color:#ae81ff">31</span>,<span style="color:#ae81ff">31</span>,<span style="color:#ae81ff">30</span>,<span style="color:#ae81ff">31</span>,<span style="color:#ae81ff">30</span>,<span style="color:#ae81ff">31</span>]
+    <span style="color:#75715e"># s[0] s[1] s[2]</span>
+    d <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">if</span> s[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">2002</span>:
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(s[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+            d <span style="color:#f92672">+=</span> days[i]
+        d <span style="color:#f92672">+=</span> s[<span style="color:#ae81ff">2</span>]
+        <span style="color:#66d9ef">return</span> d
+    <span style="color:#66d9ef">if</span> s[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">2003</span>:
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(s[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+            d <span style="color:#f92672">+=</span> days[i]
+        d <span style="color:#f92672">+=</span> s[<span style="color:#ae81ff">2</span>]
+        d <span style="color:#f92672">+=</span> sum(days)
+        <span style="color:#66d9ef">print</span>(sum(days))
+        <span style="color:#66d9ef">return</span> d
+    
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;./Date&#34;</span>, <span style="color:#e6db74">&#34;r&#34;</span>) <span style="color:#66d9ef">as</span> f:
+    s <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
+    ss <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+    <span style="color:#75715e"># print(ss)</span>
+    al <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> iss <span style="color:#f92672">in</span> ss:
+        m <span style="color:#f92672">=</span> iss<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34; &#34;</span>)[<span style="color:#ae81ff">1</span>]
+        d <span style="color:#f92672">=</span> iss<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34; &#34;</span>)[<span style="color:#ae81ff">2</span>]
+        y <span style="color:#f92672">=</span> iss<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34; &#34;</span>)[<span style="color:#ae81ff">4</span>]
+        al<span style="color:#f92672">.</span>append([int(y),con(m),int(d)])
+    <span style="color:#66d9ef">print</span>(al)
+    ans <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;x&#34;</span>]<span style="color:#f92672">*</span><span style="color:#ae81ff">365</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>
+    <span style="color:#66d9ef">print</span>(ans)
+    <span style="color:#66d9ef">for</span> eac <span style="color:#f92672">in</span> al:
+        ans[vert(eac)] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#&#34;</span>
+    <span style="color:#66d9ef">print</span>(ans)
+    <span style="color:#66d9ef">for</span> h <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">7</span>):
+        <span style="color:#66d9ef">for</span> w <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">365</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span><span style="color:#f92672">//</span><span style="color:#ae81ff">7</span>):
+            <span style="color:#66d9ef">if</span> ans[<span style="color:#ae81ff">7</span><span style="color:#f92672">*</span>w<span style="color:#f92672">+</span>h] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;#&#34;</span>:
+                <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;#&#34;</span>, end<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)
+            <span style="color:#66d9ef">else</span>:
+                <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34; &#34;</span>, end<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;&#34;</span>)
+</code></pre></div><ul>
+<li>結果</li>
+</ul>
+<pre><code> #             #          #    #    #    #                   #                                          
+####  ##   ### #  #  ##  #### ###   #    # ####   ##   ##    #                                          
+ #      # #    # #  #  #  #    #   #     # # # #    # #  #    #                                         
+ #    ###  ##  ##   #     #    #    #    # # # #  ### #  #   #                                          
+ #   #  #    # # #  #  #  #    #    #    # # # # #  # #  #   #                                          
+  ##  ### ###  #  #  ##    ##  #     ##  # # # #  ###  ##  ##                                           
+              #                ##   ## ##                 ## 
+</code></pre><ul>
+<li>なんかコードバグらせている気もするが、<code>taskctf{lmao}</code>でOK</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-caesar-cipher-translator"># Caesar Cipher Translator</h2>
+<ul>
+<li>難読化jsをじっと眺めると、<code>alert</code>でなにかできそうだと分かる。その後で<code>old_alert</code>が発火している。</li>
+<li><code>alert()</code>をconsoleに貼って、アラートが出るのを確認して、consoleにもう一度<code>alert(&quot;injected&quot;)</code>を貼ると、Flagが出てきた。</li>
+<li><code>taskctf{n1ce_inject10n!}</code></li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-gacha"># Gacha</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;context&#34;</span>
+	<span style="color:#e6db74">&#34;encoding/json&#34;</span>
+	<span style="color:#e6db74">&#34;log&#34;</span>
+	<span style="color:#e6db74">&#34;net/http&#34;</span>
+	<span style="color:#e6db74">&#34;os&#34;</span>
+	<span style="color:#e6db74">&#34;os/signal&#34;</span>
+	<span style="color:#e6db74">&#34;strconv&#34;</span>
+	<span style="color:#e6db74">&#34;syscall&#34;</span>
+	<span style="color:#e6db74">&#34;time&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">srv</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Server</span>{<span style="color:#a6e22e">Addr</span>: <span style="color:#e6db74">&#34;:3334&#34;</span>}
+	<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/&#34;</span>, <span style="color:#a6e22e">gachaHandler</span>)
+
+	<span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">srv</span>.<span style="color:#a6e22e">ListenAndServe</span>(); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;shutdown the server with error: %+v\n&#34;</span>, <span style="color:#a6e22e">err</span>)
+		}
+	}()
+
+	<span style="color:#a6e22e">quit</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Signal</span>, <span style="color:#ae81ff">1</span>)
+	<span style="color:#a6e22e">signal</span>.<span style="color:#a6e22e">Notify</span>(<span style="color:#a6e22e">quit</span>, <span style="color:#a6e22e">syscall</span>.<span style="color:#a6e22e">SIGTERM</span>)
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;SIGNAL %d received, then shutting down...\n&#34;</span>, <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">quit</span>)
+
+	<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">cancel</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">WithTimeout</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>(), <span style="color:#ae81ff">5</span><span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>)
+	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">cancel</span>()
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">srv</span>.<span style="color:#a6e22e">Shutdown</span>(<span style="color:#a6e22e">ctx</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;failed to shutdown: %+v&#34;</span>, <span style="color:#a6e22e">err</span>)
+		<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Exit</span>(<span style="color:#ae81ff">1</span>)
+	}
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">gachaHandler</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+	<span style="color:#a6e22e">seed</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">FormValue</span>(<span style="color:#e6db74">&#34;seed&#34;</span>)
+	<span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">seed</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+		<span style="color:#a6e22e">seed</span> = <span style="color:#e6db74">&#34;1&#34;</span>
+	}
+	<span style="color:#a6e22e">seedInt</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">Atoi</span>(<span style="color:#a6e22e">seed</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>(), <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusInternalServerError</span>)
+		<span style="color:#66d9ef">return</span>
+	}
+
+	<span style="color:#75715e">// get current time(HHmmss)
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">jst</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">FixedZone</span>(<span style="color:#e6db74">&#34;Asia/Tokyo&#34;</span>, <span style="color:#ae81ff">9</span><span style="color:#f92672">*</span><span style="color:#ae81ff">60</span><span style="color:#f92672">*</span><span style="color:#ae81ff">60</span>)
+	<span style="color:#a6e22e">nowStr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">In</span>(<span style="color:#a6e22e">jst</span>).<span style="color:#a6e22e">Format</span>(<span style="color:#e6db74">&#34;150405&#34;</span>)
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">nowStr</span>)
+	<span style="color:#a6e22e">nowInt</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">Atoi</span>(<span style="color:#a6e22e">nowStr</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>(), <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusInternalServerError</span>)
+		<span style="color:#66d9ef">return</span>
+	}
+
+	<span style="color:#a6e22e">sm</span> <span style="color:#f92672">:=</span> (<span style="color:#a6e22e">seedInt</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">nowInt</span>) <span style="color:#f92672">%</span> <span style="color:#ae81ff">100000</span>
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">sm</span>)
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">flag</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span>
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">sm</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1337</span> {
+		<span style="color:#a6e22e">flag</span> = <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span>{
+			<span style="color:#e6db74">&#34;flag&#34;</span>: <span style="color:#e6db74">&#34;taskctf{this_is_dummy_flag}&#34;</span>,
+		}
+	} <span style="color:#66d9ef">else</span> {
+		<span style="color:#a6e22e">flag</span> = <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span>{
+			<span style="color:#e6db74">&#34;flag&#34;</span>: <span style="color:#e6db74">&#34;You might not have a luck...&#34;</span>,
+			<span style="color:#e6db74">&#34;sum&#34;</span>:  <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">Itoa</span>(<span style="color:#a6e22e">sm</span>),
+		}
+	}
+	<span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">flag</span>)
+	<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">WriteHeader</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>)
+	<span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>(<span style="color:#a6e22e">res</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>(), <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusInternalServerError</span>)
+		<span style="color:#66d9ef">return</span>
+	}
+}
+</code></pre></div><ul>
+<li>1secごとに増えていくので、適当な数値を入れてリロードを繰り返す。</li>
+<li><code>http://34.82.49.144:3334/?seed=80205</code></li>
+</ul>
+<pre><code>{&quot;flag&quot;:&quot;taskctf{Y0u_h4ve_4_gre4t_luck}&quot;}
+</code></pre><h2 class="font-bold text-2xl pt-2" id="-evil-eval"># Evil Eval</h2>
+<pre><code>シーザー暗号の次は, base64をデコードするページを実装したらしい。
+とはいえ, この実装ってあまり良くないんじゃ......
+
+flag.txtが同じディレクトリにあるらしいから, それを読みだしてこの実装の危険性を教えてあげて。
+</code></pre><ul>
+<li><code>exec(&quot;cat ./flag.txt&quot;)</code>がしたいなあと思ってうまくいかない。よく考えるとresultに値を入れる必要がある。</li>
+<li><code>file_get_contents(\&quot;./flag.txt\&quot;)</code>これをbase64 encodeしたものを入れるとflagが出てきた。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-終わりに"># 終わりに</h2>
+<ul>
+<li>お誕生日おめでとうございます。僕もCTF開きたいな(作問&hellip;)</li>
+</ul>
+
+    </article>
+
+    <footer class="py-5">
+            <ul>
+                <li><a href="https://www.blog.uta8a.net/posts/2020-12-06-tron/">&laquo; ゲームAIプログラミング codingameのTronをやってみる</a></li>
+                
+            </ul>
+    </footer>
+</section>
+<aside class="py-5 container mx-auto">
+    <ul>
+    <li><a href="https://www.blog.uta8a.net">Home</a></p>
+    <li><a href="https://www.blog.uta8a.net/posts/">Posts</a></p>
+    </ul>
+</aside>
+</main>
+
+<footer class="lg:container lg:mx-auto">
+    
+</footer>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+</script>
+<script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+
+</html>

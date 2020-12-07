@@ -5,6 +5,7 @@ type: "post"
 draft: false
 ---
 
+= **2020/12/08 修正** codingameのソース全公開は運営から注意を受けることがあるそうなので、部分公開に変更しました。
 - この記事は、[広島大学ITエンジニア Advent Calendar 2020](https://adventar.org/calendars/5209) の8日目です。みんな間に合わせていてえらい。
 - 今回は、ゲームAIプログラミングができるサイト [CodinGame](https://www.codingame.com/home) にチャレンジしてみました。僕はbfsを実装してヤッター！な初心者なので、お手柔らかにお願いします。
 

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>diaryです</title>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="diaryです">
+    
+<link href="https://unpkg.com/tailwindcss@^1.5/dist/tailwind.min.css" rel="stylesheet">
+<meta property="og:title" content="diaryです" />
+<meta property="og:type" content="image/png" />
+<meta property="og:url" content="https://www.blog.uta8a.net" />
+<meta name="og:description" content="diaryです" />
+<meta property="og:image" content="https://www.blog.uta8a.net/assets/uta8a.png" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="diaryです" />
+<meta name="twitter:description" content="diaryです" />
+<meta name="twitter:image" content="https://www.blog.uta8a.net/assets/uta8a.png" />
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/styles/zenburn.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+    <div class="container mx-auto">
+        <a href="https://www.blog.uta8a.net">
+            <h1 class="text-center text-5xl">diaryです</h1>
+        </a>
+    </div>
+
+<main>
+<section class="text-gray-700 container mx-auto sm:text-2xl lg:text-base">
+    <header>
+    <h1 class="text-5xl text-center">goでAPIサーバを書いた</h1>
+    </header>
+
+    <article>
+    <ul>
+<li>goで1週間くらいかけてAPIサーバを書きました。go以外にも学ぶことが多かったので学んだことを書きます。</li>
+<li>作ったアプリは公開範囲が指定できるwikiみたいなものです。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-気をつけたこと"># 気をつけたこと</h2>
+<ul>
+<li>以前goでAPIサーバを書いたときはEchoやGormといったライブラリをふんだんに使用したため、何がなにかわからなくなって途中で挫折しました。それから時がたって、goの界隈の方々の記事、特にmercari周辺の方々の記事を読み、goのnet/httpは単体で十分フレームワークなしでいけるという確信を得たので今回以下のようにしばりを決めました。</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">- できるだけ標準ライブラリでなんとかする
+(作っていくうちに、DB接続のためpostgresのドライバを、セッション管理のためcrypto/mathの2つだけは使うことにしました)
+</code></pre></div><ul>
+<li>また、どうしてもAPIを生やす作業は終わりが見えなくなるので、仕様書を書いてみることにしました。今回は <a target="_blank" rel="noopener noreferrer" class="underline text-blue-500"href="https://swagger.io/specification/">OpenAPI</a> を使うことにしました。</li>
+<li>まずOpenAPIで一部のAPIを決める → goを書く → フロントを書く(場合によってはOpenAPIに修正を入れる)というサイクルで徐々にAPIの定義書とAPIサーバとフロントを書いていきました。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-分かったこと"># 分かったこと</h2>
+<h2 class="font-bold text-2xl pt-2" id="-openapiでapi定義を先に書くとフロントエンド部分を高速に実装できる">## OpenAPIでAPI定義を先に書くと、フロントエンド部分を高速に実装できる</h2>
+<ul>
+<li>API定義ってどう書くのかというと、こう書きます</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">  <span style="color:#f92672">&#39;/groups&#39;</span>:
+    <span style="color:#f92672">get</span>:
+      <span style="color:#f92672">responses</span>:
+        <span style="color:#f92672">&#39;200&#39;</span>:
+          <span style="color:#f92672">description</span>: <span style="color:#e6db74">&#39;userの入っているgroupを返却する&#39;</span>
+          <span style="color:#f92672">content</span>:
+            <span style="color:#f92672">application/json</span>:
+              <span style="color:#f92672">schema</span>:
+                <span style="color:#f92672">$ref</span>: <span style="color:#e6db74">&#39;#/components/schemas/UserGroups&#39;</span>
+              <span style="color:#f92672">example</span>:
+                <span style="color:#f92672">user_groups</span>:
+                  - <span style="color:#e6db74">&#39;public&#39;</span>
+                  - <span style="color:#e6db74">&#39;myPrivate&#39;</span>
+      <span style="color:#f92672">security</span>:
+        - <span style="color:#f92672">cookieAuth</span>: []
+</code></pre></div><ul>
+<li>これは <code>/groups</code> というパスに対してgetでリクエストを送ったときのAPIサーバの挙動を決めています。</li>
+<li>getなので通常パラメータはなく、responseだけを定義していること、またsecurtyの項目に決めてあるようにcookieがvalidでないとresponseを返さないことを決めています。返却する型はschemaとして別で記述しています。</li>
+<li>こういうものを書いておくと、フロントエンドとバックエンドを別々に実装できます。多くのやり取りをjsonで統一しておいたので、フロント側でうけとって書く処理も高速に書くことができました。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-goに慣れてなくて戸惑ったポイント">## goに慣れてなくて戸惑ったポイント</h2>
+<ul>
+<li>TrimLeftの挙動がTrimPrefixのようなものを期待していたので戸惑いました。</li>
+<li><code>http.HandleFunc</code>に<code>/route/</code>を渡すと<code>/route/a</code>もこれにマッチするので<code>/group/:group_name</code>みたいな可変ルーティングに対応できます。これ知らなくてかなりはまりました。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-権限回りは設計が難しい">## 権限回りは設計が難しい</h2>
+<ul>
+<li>自分が作ったバグを述べます。コードを書きながら最終段階でつじつまの合わない箇所をたくさん発見して困りました。</li>
+<li>グループという概念を実装して、グループに記事が属していることでそのグループの人だけ記事を見られるという仕組みにしました。</li>
+<li>バグ1: グループの名前だけチェックしている。</li>
+<li>これにより、別グループでもそのグループ名がDBに登録されていれば記事を更新できるので、自分が所属していないグループの記事を荒らすことが可能になります。idをチェックすることで解決しました。</li>
+<li>バグ2: グループの名前とidだけチェックしている。</li>
+<li>別のグループの名前を指定すると、自分が所属していないグループに無限に記事を送り込むことができます。これも解決しました。</li>
+<li>このように、権限回り、閲覧可能範囲回りで大量にヤバが発生したのでQAって大事なんだなあと感じました。</li>
+</ul>
+<h2 class="font-bold text-2xl pt-2" id="-終わりに"># 終わりに</h2>
+<ul>
+<li>とりあえず気合でいってベストプラクティスを気にしなければそれなりの速度でwebサービスは作れる。大事なのはリリースしてからバグを取る、脆弱な部分があるかもしれないという不安と戦いながら見切ってリリースして継続的に修正とデプロイを繰り返す心！</li>
+<li>まだ怖い部分があるので、デプロイできてないです。直してリリースまで持っていきたい。</li>
+</ul>
+
+    </article>
+
+    <footer class="py-5">
+            <ul>
+                <li><a href="https://www.blog.uta8a.net/posts/2020-12-06-taskctf-2020-happy-birthday/">&laquo; taskctf2020 writeup</a></li>
+                
+            </ul>
+    </footer>
+</section>
+<aside class="py-5 container mx-auto">
+    <ul>
+    <li><a href="https://www.blog.uta8a.net">Home</a></p>
+    <li><a href="https://www.blog.uta8a.net/posts/">Posts</a></p>
+    </ul>
+</aside>
+</main>
+
+<footer class="lg:container lg:mx-auto">
+    
+</footer>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+</script>
+<script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+
+</html>

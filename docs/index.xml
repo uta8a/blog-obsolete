@@ -8,6 +8,15 @@
     <language>ja</language>
     <lastBuildDate>Tue, 13 Aug 2019 06:48:42 +0900</lastBuildDate><atom:link href="https://www.blog.uta8a.net/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>goでAPIサーバを書いた</title>
+      <link>https://www.blog.uta8a.net/posts/2020-12-20-gowiki/</link>
+      <pubDate>Sun, 20 Dec 2020 23:45:05 +0900</pubDate>
+      
+      <guid>https://www.blog.uta8a.net/posts/2020-12-20-gowiki/</guid>
+      <description> goで1週間くらいかけてAPIサーバを書きました。go以外にも学ぶことが多かったので学んだことを書きます。 作ったアプリは公開範囲が指定できるwikiみたいなものです。  # 気をつけたこと  以前goでAPIサーバを書いたときはEchoやGormといったライブラリをふんだんに使用したため、何がなにかわからなくなって途中で挫折しました。それから時がたって、goの界隈の方々の記事、特にmercari周辺の方々の記事を読み、goのnet/httpは単体で十分フレームワークなしでいけるという確信を得たので今回以下のようにしばりを決めました。  - できるだけ標準ライブラリでなんとかする (作っていくうちに、DB接続のためpostgresのドライバを、セッション管理のためcrypto/mathの2つだけは使うことにしました)  また、どうしてもAPIを生やす作業は終わりが見えなくなるので、仕様書を書いてみることにしました。今回は OpenAPI を使うことにしました。 まずOpenAPIで一部のAPIを決める → goを書く → フロントを書く(場合によってはOpenAPIに修正を入れる)というサイクルで徐々にAPIの定義書とAPIサーバとフロントを書いていきました。  # 分かったこと ## OpenAPIでAPI定義を先に書くと、フロントエンド部分を高速に実装できる  API定義ってどう書くのかというと、こう書きます  &amp;#39;/groups&amp;#39;: get: responses: &amp;#39;200&amp;#39;: description: &amp;#39;userの入っているgroupを返却する&amp;#39; content: application/json: schema: $ref: &amp;#39;#/components/schemas/UserGroups&amp;#39; example: user_groups: - &amp;#39;public&amp;#39; - &amp;#39;myPrivate&amp;#39; security: - cookieAuth: []  これは /groups というパスに対してgetでリクエストを送ったときのAPIサーバの挙動を決めています。 getなので通常パラメータはなく、responseだけを定義していること、またsecurtyの項目に決めてあるようにcookieがvalidでないとresponseを返さないことを決めています。返却する型はschemaとして別で記述しています。 こういうものを書いておくと、フロントエンドとバックエンドを別々に実装できます。多くのやり取りをjsonで統一しておいたので、フロント側でうけとって書く処理も高速に書くことができました。  ## goに慣れてなくて戸惑ったポイント  TrimLeftの挙動がTrimPrefixのようなものを期待していたので戸惑いました。 http.HandleFuncに/route/を渡すと/route/aもこれにマッチするので/group/:group_nameみたいな可変ルーティングに対応できます。これ知らなくてかなりはまりました。  ## 権限回りは設計が難しい  自分が作ったバグを述べます。コードを書きながら最終段階でつじつまの合わない箇所をたくさん発見して困りました。 グループという概念を実装して、グループに記事が属していることでそのグループの人だけ記事を見られるという仕組みにしました。 バグ1: グループの名前だけチェックしている。 これにより、別グループでもそのグループ名がDBに登録されていれば記事を更新できるので、自分が所属していないグループの記事を荒らすことが可能になります。idをチェックすることで解決しました。 バグ2: グループの名前とidだけチェックしている。 別のグループの名前を指定すると、自分が所属していないグループに無限に記事を送り込むことができます。これも解決しました。 このように、権限回り、閲覧可能範囲回りで大量にヤバが発生したのでQAって大事なんだなあと感じました。  # 終わりに  とりあえず気合でいってベストプラクティスを気にしなければそれなりの速度でwebサービスは作れる。大事なのはリリースしてからバグを取る、脆弱な部分があるかもしれないという不安と戦いながら見切ってリリースして継続的に修正とデプロイを繰り返す心！ まだ怖い部分があるので、デプロイできてないです。直してリリースまで持っていきたい。  </description>
+    </item>
+    
+    <item>
       <title>taskctf2020 writeup</title>
       <link>https://www.blog.uta8a.net/posts/2020-12-06-taskctf-2020-happy-birthday/</link>
       <pubDate>Sun, 06 Dec 2020 23:57:56 +0900</pubDate>

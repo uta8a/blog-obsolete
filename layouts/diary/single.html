@@ -1,26 +1,25 @@
 {{ partial "head.html" . }}
 
 <main>
-<section>
+<section class="text-gray-700 container mx-auto sm:text-2xl lg:text-base">
     <header>
-    <h1>{{.Title}}</h1>
+    <h1 class="text-5xl text-center">{{.Title}}</h1>
     </header>
 
-    <article>
-    {{.Content}}
+    <article class="leading-relaxed">
+        {{.Content  | replaceRE "<h2" "<h2 class=\"font-bold text-2xl pt-2\"" | replaceRE "<h1" "<h1 class=\"font-bold text-3xl pt-2\"" | replaceRE "<p " "<p class=\"break-all text-base\"" | replaceRE "<a " "<a target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline text-blue-500\"" | safeHTML }}
     </article>
 
-    <footer>
+    <footer class="py-5">
             <ul>
                 {{ with .PrevInSection }}<li><a href="{{ .Permalink }}">&laquo; {{ .Title }}</a></li>{{ end }}
                 {{ with .NextInSection }}<li><a href="{{ .Permalink }}">{{ .Title }} &raquo;</a></li>{{ end }}
             </ul>
     </footer>
 </section>
-<aside>
+<aside class="py-5 container mx-auto">
     <ul>
     <li><a href="{{ .Site.BaseURL }}">Home</a></p>
-    <li><a href="{{ "posts/" | absURL }}">Posts</a></p>
     <li><a href="{{ "diaries/" | absURL }}">Diaries</a></p>
     </ul>
 </aside>

@@ -6,7 +6,7 @@
     <h1 class="text-5xl text-center">{{.Title}}</h1>
     </header>
 
-    <article>
+    <article class="leading-relaxed">
     {{.Content  | replaceRE "<h2" "<h2 class=\"font-bold text-2xl pt-2\"" | replaceRE "<h1" "<h1 class=\"font-bold text-3xl pt-2\"" | replaceRE "<p " "<p class=\"break-all text-base\"" | replaceRE "<a " "<a target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline text-blue-500\"" | safeHTML }}
     </article>
 

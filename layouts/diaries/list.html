@@ -1,27 +1,20 @@
 {{ partial "head.html" . }}
 
-<main>
-<section>
-    <header>
-    <h1>All Articles</h1>
-    </header>
+<main class="lg:container lg:mx-auto">
+    <section>
+        <header>
+            <h1 class="font-bold text-3xl">All Diaries</h1>
+        </header>
 
-    <article>
-    <ul>
-        {{ range where .Pages.ByPublishDate.Reverse "Section" "diaries" }}
-        <li><a href="{{ .RelPermalink }}">{{ .Title }} - <time datetime="{{.Date}}">{{ .Date.Format "2006/01/02 15:04:05" }}</time></a></li>
-        {{ end }}
-    </ul>
-    </article>
-</section>
-
-<aside>
-    <ul>
-    <li><a href="{{ .Site.BaseURL }}">Home</a></p>
-    <li><a href="{{ "posts/" | absURL }}">Posts</a></p>
-    <li><a href="{{ "diaries/" | absURL }}">Diaries</a></p>
-    </ul>
-</aside>
+        <article>
+        <ul class="list-none">
+            {{ range where .Pages.ByPublishDate.Reverse "Section" "diaries" }}
+            <li><a class="text-xl hover:text-indigo-400 visited:text-red-600" href="{{ .RelPermalink }}">- {{ .Title }} - <time
+                datetime="{{.Date}}">{{ .Date.Format "2006/01/02 15:04:05" }}</time></a></li>
+            {{ end }}
+        </ul>
+        </article>
+    </section>
 </main>
 
 {{ partial "foot.html" .}}

@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.blog.uta8a.net/diaries/2020-12-28-goodbye/</loc>
+    <lastmod>2020-12-28T20:51:57+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.blog.uta8a.net/diaries/</loc>
+    <lastmod>2020-12-28T20:51:57+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.blog.uta8a.net/posts/2020-12-20-gowiki/</loc>
     <lastmod>2020-12-20T23:45:05+09:00</lastmod>
   </url>
@@ -74,11 +84,6 @@
   
   <url>
     <loc>https://www.blog.uta8a.net/diaries/2020-01-01-new-year/</loc>
-    <lastmod>2020-01-01T08:08:01+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.blog.uta8a.net/diaries/</loc>
     <lastmod>2020-01-01T08:08:01+09:00</lastmod>
   </url>
   

@@ -7,7 +7,7 @@
     </header>
 
     <article class="leading-relaxed">
-        {{.Content  | replaceRE "<h2" "<h2 class=\"font-bold text-2xl pt-2\"" | replaceRE "<h1" "<h1 class=\"font-bold text-3xl pt-2\"" | replaceRE "<p " "<p class=\"break-all text-base\"" | replaceRE "<a " "<a target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline text-blue-500\"" | replaceRE "<li>" "<li>　" | safeHTML }}
+        {{.Content  | replaceRE "<h2" "<h2 class=\"font-bold text-2xl pt-2\"" | replaceRE "<h1" "<h1 class=\"font-bold text-3xl pt-2\"" | replaceRE "<p " "<p class=\"break-all text-base\"" | replaceRE "<a " "<a target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline text-blue-500\"" | replaceRE "<li>" "<li>　" | replaceRE "<blockquote>" "<blockquote class=\"p-2 mx-6 bg-gray-100 mb-4 border-l-4 border-green-300\">" | safeHTML }}
     </article>
 
     <footer class="py-5">

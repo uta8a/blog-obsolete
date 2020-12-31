@@ -6,7 +6,24 @@
     <description>Recent content in Diaries on diaryです</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 29 Dec 2020 15:38:56 +0900</lastBuildDate><atom:link href="https://www.blog.uta8a.net/diaries/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Dec 2020 19:17:54 +0900</lastBuildDate><atom:link href="https://www.blog.uta8a.net/diaries/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2021年の目標リスト</title>
+      <link>https://www.blog.uta8a.net/diaries/2020-12-30-goals/</link>
+      <pubDate>Wed, 30 Dec 2020 19:17:54 +0900</pubDate>
+      
+      <guid>https://www.blog.uta8a.net/diaries/2020-12-30-goals/</guid>
+      <description>2021年は手を動かしていきたいので、漠然とするより具体的に手が動く範囲に目標を小さく分割したいと思いました。宣言すると後に引けなくなるので日記帳に書いてみます。 今まで書き溜めていた日記ややりたいことリストを結合したものになります。  2021年の目標  #1 SNS作る。   Misskeyを使ううちに非中央集権的なSNSに興味が湧いて、ActivityPubというプロトコルに対応したSNSを作りたいなと思った。IIJの分散SNSを使って技術を覚えるという記事を見て、インフラと分散SNSというテーマでやると、僕が将来働きたいSREのようなレイヤに求められる知識もつくのではないかと思っている。あと、昔から好きだったサマーウォーズという映画で出てくるOZという仮想世界への憧れが未だにあって、SNSと格闘ゲームは作ってみたいとずっと思っている。
+  #2 CTF開催する   2020年は国内で多くの初心者向けのよいCTFが開催された。僕は競技(競技プログラミング、CTF、ICTSC、ISUCON&amp;hellip;)のインフラがどうなっているのか、どうやってリクエストをさばいているのかに関心があるので、開催してみることで裏側が分かるかもしれないと思っている。しかし、2020年の初心者向けCTFの多くが非常に問題の質がよかったと思っているので、もう少し僕自身が強くなければ満足の行くCTFは開催できないだろうと感じた。したがって、サークル内など内輪向けにCTFを開催することを2021年の目標にしたい。
+  #3 ハリネズミ本を読む   ハリネズミ本は内容が古くなっているので修正しながら読んでいる。気になったところをすべて追いかけているのでだいぶ進みが遅いけど、そろそろ読み終わりそう。
+  #4 Kindleバイナリ本を読む   この本→はじめて学ぶバイナリ解析さらっと目を通しただけなので、ハリネズミ本を読んで現代版に修正した知識が合っているか答え合わせの感覚で読む。
+  #5 Car hackers handbook (humble)を読む   Humble Bundleのセールの時にたくさん購入したセキュリティ系の洋書、読めてないです&amp;hellip;(:D)|￣|＿ なかでも一番関心のある車のハッキングについて読みたい、読みたいと思っております。
+  #6 cs-eduを充実させる   cs-eduは自分が書いているメモのことです。もっと充実させたい。最近はVimとgolangに力を入れている。漠然としているので、東大の理学部情報科学科のシラバスを見て内容を推測して教材を決めているやつを3年生終わり分までやること、にします。
+  #7 codereviewシステム作ってHiCoder内で運用   codereviewというか、もっと気軽にソースコードを公開しそれについて話をする文化をサークル内に生やしたい。
+  #8 Neovimに習熟する   kurenaifさんの動画、実践Vim、mercariのYoutube channelの高速にVimを操る動画を見て自分なりの高速なテキスト編集のやり方を身につける。Thinkpad X240をGUIなしでTextConsoleのみにして、マウスを使わずキーボードもchoco60で矢印を使わずにテキスト編集する練習ができるようにしたので、ここで英文やソースコードの写経をしてトレーニングする。
+  #9 やりきったログにやりきったことを書く。主に本と読み切ったら対応するブログをセットで書く。   やりきったことが大事なので、手を動かして本を読み切ることを大事にする。セットで外向けの形にして出力する癖をつける。kusuwadaさんのブログを見習う。</description>
+    </item>
+    
     <item>
       <title>今年見て勇気づけられたアニメの感想</title>
       <link>https://www.blog.uta8a.net/diaries/2020-12-29-anime/</link>

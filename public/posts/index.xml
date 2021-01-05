@@ -6,7 +6,16 @@
     <description>Recent content in Posts on diaryです</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 20 Dec 2020 23:45:05 +0900</lastBuildDate><atom:link href="https://www.blog.uta8a.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Jan 2021 22:12:10 +0900</lastBuildDate><atom:link href="https://www.blog.uta8a.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>世界一やさしい圏論勉強会 #0 (Open β) を受けた</title>
+      <link>https://www.blog.uta8a.net/posts/2021-01-05-category/</link>
+      <pubDate>Tue, 05 Jan 2021 22:12:10 +0900</pubDate>
+      
+      <guid>https://www.blog.uta8a.net/posts/2021-01-05-category/</guid>
+      <description>Chatworkの 高瀬 和之さん による 世界一やさしい圏論勉強会 に行ってきました(オンライン) connpassへのリンク を見ると分かるように、授業ではなく対話を通じて理解を深めるスタイルで、実際に単純な例やこれはどうなの？という素朴な疑問に答えていて質問しやすい雰囲気でした。 内容はスライドを見れば分かるので、なるべく素朴な疑問を中心に書いていきます。  # 概要  Scala初心者が米田の補題をScalaで考えてみたのスライドのp.15の途中まで行きました。  ## 軽いまとめ  圏論は、点と矢印に意味を持たせて話を展開する。点: 対象、矢印: 射 と呼ぶ。(有向グラフをイメージするとわかりやすい。) 圏となる条件: 合成射の存在 (これは公理) 合成射の存在から、Hom(A,B)の要素fが一つでも存在するならば、Hom(X,A)の任意の要素aについて、Hom(X,B)のある要素bが存在して、b=f○aとなる。 矢印ではなく集合として扱えるのは大事で、集合の考え方が米田の補題の理解で重要な役割を果たす。  ## 登場した質問たち  Q. A -&amp;gt; Bへ複数やじるしがあってもいいのか？  A. OK。なくてもいい。A-&amp;gt;Bへの矢印の集まりをHom集合と呼び、Hom(A,B)と表現する。矢印がない場合、Hom(A,B)は空集合になる   Q. Hom集合は集合で制限されるのか？  A. 集合以外も考えられて圏を作れるかもしれないが解析は困難になるので、今回は集合とする。locally smallという専門用語が登場した。 自分で調べてみたら、locally smallは圏の大きさを表す言葉で、要はHom集合として集合で制限する場合、圏の種類を局所的に小さいと分類付けているみたいだった(自信なし)   Q. 可換はイメージ的に結合じゃないの？  A. 可換図式という圏論の言葉があって、確かに結合っぽく見えるけど言葉的にはこれは可換です。結合もまた別の概念として圏論の世界に存在する。   Q. ,って意味的にはどうなるの？  A. 日本語の文の区切りと同じ捉えでよい。ただ、順番を入れ替えると意味が変わる例があり、全称量化と存在量化で調べてみよう！   Q. ScalaのFunction1[A,B]がHom(A,B)に対応するの？  A. 正しい。ただ、数学の話とプログラムの世界の話で埋め込めるかどうかは数学的に強い条件なので注意が必要。 自分で考えると、プログラムの世界で表現可能な関数の集合より数学の世界の集合の方がやばい例が作れそうな気がして、広い世界から狭い世界への適用という意味で埋め込みという言葉を使っているのかなと思った(ここでの埋め込みは専門用語っぽい)   Q.</description>
+    </item>
+    
     <item>
       <title>goでAPIサーバを書いた</title>
       <link>https://www.blog.uta8a.net/posts/2020-12-20-gowiki/</link>

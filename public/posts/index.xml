@@ -6,7 +6,16 @@
     <description>Recent content in Posts on diaryです</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 16 Jan 2021 17:07:46 +0900</lastBuildDate><atom:link href="https://www.blog.uta8a.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 Feb 2021 10:57:25 +0900</lastBuildDate><atom:link href="https://www.blog.uta8a.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>入門インフラリンク集を読んで、今後の方針を固めました</title>
+      <link>https://www.blog.uta8a.net/posts/2021-02-18-infra-links/</link>
+      <pubDate>Thu, 18 Feb 2021 10:57:25 +0900</pubDate>
+      
+      <guid>https://www.blog.uta8a.net/posts/2021-02-18-infra-links/</guid>
+      <description>【入門】インフラやるなら知っておきたいトピックのリンク集 でおすすめされていたリンクを一通り目を通し、疑問に思ったことや、さらに読みたいことをメモしたものになります。 awesome-xなどのリンク集は、雑多に集められていて読み切る時間が無理で詰んでしまいがちですが、このリンク集は初心者向けに軽いものが多く、概観を掴んだり、インフラの聞いたことあるけど&amp;hellip;みたいなトピックを勉強する手がかりが得られたので、全体量がちょうどよいまとめだと思います。 それでは、各トピックについて僕の感想とかこれから勉強したいことを書きます。  # HTTP ## まとめ  ブラウザでURLを打ち込んでからページがレンダリングされてユーザに届くまで何が起きているか、ネットワーク視点での話 HTTP/2.0の最終ドラフトが2015年に承認されたの最近だなと感じた。  ## これから  CSP周り、ブラウザの挙動: Webブラウザセキュリティ ― Webアプリケーションの安全性を支える仕組みを整理する Keep-AliveなどのHTTP Headerについて知りたい: MDN HTTP Headers とRFCを適宜読みに行くとよさそう サーバプッシュの現在の主なやり方、仕組みの理解(WebSocketだろうか？) HTTP/3って今どうなっているんだろう: flano-yuki/my-quic-spec-translation や flano-yuki/http3-note Burp や Zap を入れてOWASPなどのやられアプリで遊ぶ websecacademy でWebセキュリティ学ぶ  # REST ## まとめ  URLとURIの違いってなに https://tools.ietf.org/html/rfc3986#section-1.1.3 RFC3986によると、URIはでかい概念で、URL(location)と、URN(name)を含む大きな集合。 また、スキームhttpはURLに含まれる(RFC1738 3.1 https://tools.ietf.org/html/rfc1738#section-3.1 ) urlは変更されても良くて、urnは名前なので一意で変更されないことを前提としている。 個人的な感想として、時代的にはURLも変更されてほしくない感じがあるけど&amp;hellip;  ## これから  よむ: Roy Fieldingの論文 RESTについても触れられている https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm  # キャッシュ/KVS ## まとめ  RDBに比べてシンプルで、高い性能とスケーラビリティを実現するためにKVS KVS、単なるMapだと思っていたがそうでもなかった。複雑で面白い。 記事ではKVSがFacebookやAmazonのもののような印象を受けたが、現在ではRedisが普通に使われている気がするので、大規模データでなくてもKVSが嬉しい理由がある気がする。  ## これから  Redisを触ってみる KVSは大量のサーバに分散させたほうが力技ができるということは、大量データがなければ嬉しさがあまりないのだろうか？つまり、小さな規模ではRDBで十分なのか？(それとも小さくてもKVSが嬉しい時があるのか)  # CDN ## まとめ  規模が大きくてネットワーク周りわからないことが多かった。  ## これから  サーバを介すという点でproxyとCDNサーバは似ているが決定的に違う気がする。これに明確な説明を与えたい。 NetflixのCDNがSoTAらしいので、調べてみる 専門用語調べる(ショートセッション、ラウンドロビン、BGP) やる: Linuxで動かしながら学ぶTCP/IPネットワーク入門 Kindle版 よむ: マスタリングTCP/IP シリーズ ルーター実機で通信したりパケットの中身を見て遊ぶ やる: trap インターネットを作ってみよう やる: Ciscoの資格本  # ネットワーク ## まとめ  トラブルシューティングができるようになって、ネットワークを知っておけば問題の切り分けができるようになる Dockerで始めるネットワーク実験入門 2020-5-30 C-4 がよかった。  ## これから  よむ: BGP in the data center https://foobaron.</description>
+    </item>
+    
     <item>
       <title>読書: やってみようGoでISUCONパフォーマンスチューニングーISUCON7の予想問題を試してみる本ー</title>
       <link>https://www.blog.uta8a.net/posts/2021-01-16-go-isucon-perf/</link>

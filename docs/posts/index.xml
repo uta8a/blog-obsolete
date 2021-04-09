@@ -2,98 +2,98 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on diaryです</title>
-    <link>https://www.blog.uta8a.net/posts/</link>
+    <link>https://blog.uta8a.net/posts/</link>
     <description>Recent content in Posts on diaryです</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 18 Feb 2021 10:57:25 +0900</lastBuildDate><atom:link href="https://www.blog.uta8a.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 Feb 2021 10:57:25 +0900</lastBuildDate><atom:link href="https://blog.uta8a.net/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>入門インフラリンク集を読んで、今後の方針を固めました</title>
-      <link>https://www.blog.uta8a.net/posts/2021-02-18-infra-links/</link>
+      <link>https://blog.uta8a.net/posts/2021-02-18-infra-links/</link>
       <pubDate>Thu, 18 Feb 2021 10:57:25 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2021-02-18-infra-links/</guid>
+      <guid>https://blog.uta8a.net/posts/2021-02-18-infra-links/</guid>
       <description>【入門】インフラやるなら知っておきたいトピックのリンク集 でおすすめされていたリンクを一通り目を通し、疑問に思ったことや、さらに読みたいことをメモしたものになります。 awesome-xなどのリンク集は、雑多に集められていて読み切る時間が無理で詰んでしまいがちですが、このリンク集は初心者向けに軽いものが多く、概観を掴んだり、インフラの聞いたことあるけど&amp;hellip;みたいなトピックを勉強する手がかりが得られたので、全体量がちょうどよいまとめだと思います。 それでは、各トピックについて僕の感想とかこれから勉強したいことを書きます。  # HTTP ## まとめ  ブラウザでURLを打ち込んでからページがレンダリングされてユーザに届くまで何が起きているか、ネットワーク視点での話 HTTP/2.0の最終ドラフトが2015年に承認されたの最近だなと感じた。  ## これから  CSP周り、ブラウザの挙動: Webブラウザセキュリティ ― Webアプリケーションの安全性を支える仕組みを整理する Keep-AliveなどのHTTP Headerについて知りたい: MDN HTTP Headers とRFCを適宜読みに行くとよさそう サーバプッシュの現在の主なやり方、仕組みの理解(WebSocketだろうか？) HTTP/3って今どうなっているんだろう: flano-yuki/my-quic-spec-translation や flano-yuki/http3-note Burp や Zap を入れてOWASPなどのやられアプリで遊ぶ websecacademy でWebセキュリティ学ぶ  # REST ## まとめ  URLとURIの違いってなに https://tools.ietf.org/html/rfc3986#section-1.1.3 RFC3986によると、URIはでかい概念で、URL(location)と、URN(name)を含む大きな集合。 また、スキームhttpはURLに含まれる(RFC1738 3.1 https://tools.ietf.org/html/rfc1738#section-3.1 ) urlは変更されても良くて、urnは名前なので一意で変更されないことを前提としている。 個人的な感想として、時代的にはURLも変更されてほしくない感じがあるけど&amp;hellip;  ## これから  よむ: Roy Fieldingの論文 RESTについても触れられている https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm  # キャッシュ/KVS ## まとめ  RDBに比べてシンプルで、高い性能とスケーラビリティを実現するためにKVS KVS、単なるMapだと思っていたがそうでもなかった。複雑で面白い。 記事ではKVSがFacebookやAmazonのもののような印象を受けたが、現在ではRedisが普通に使われている気がするので、大規模データでなくてもKVSが嬉しい理由がある気がする。  ## これから  Redisを触ってみる KVSは大量のサーバに分散させたほうが力技ができるということは、大量データがなければ嬉しさがあまりないのだろうか？つまり、小さな規模ではRDBで十分なのか？(それとも小さくてもKVSが嬉しい時があるのか)  # CDN ## まとめ  規模が大きくてネットワーク周りわからないことが多かった。  ## これから  サーバを介すという点でproxyとCDNサーバは似ているが決定的に違う気がする。これに明確な説明を与えたい。 NetflixのCDNがSoTAらしいので、調べてみる 専門用語調べる(ショートセッション、ラウンドロビン、BGP) やる: Linuxで動かしながら学ぶTCP/IPネットワーク入門 Kindle版 よむ: マスタリングTCP/IP シリーズ ルーター実機で通信したりパケットの中身を見て遊ぶ やる: trap インターネットを作ってみよう やる: Ciscoの資格本  # ネットワーク ## まとめ  トラブルシューティングができるようになって、ネットワークを知っておけば問題の切り分けができるようになる Dockerで始めるネットワーク実験入門 2020-5-30 C-4 がよかった。  ## これから  よむ: BGP in the data center https://foobaron.</description>
     </item>
     
     <item>
       <title>読書: やってみようGoでISUCONパフォーマンスチューニングーISUCON7の予想問題を試してみる本ー</title>
-      <link>https://www.blog.uta8a.net/posts/2021-01-16-go-isucon-perf/</link>
+      <link>https://blog.uta8a.net/posts/2021-01-16-go-isucon-perf/</link>
       <pubDate>Sat, 16 Jan 2021 17:07:46 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2021-01-16-go-isucon-perf/</guid>
+      <guid>https://blog.uta8a.net/posts/2021-01-16-go-isucon-perf/</guid>
       <description>読んだ本: https://booth.pm/ja/items/1035782 以前りゅーそうさんという方の はじめてのUIデザインの教科書をフロントエンジニアの方と読んだ という記事を読み、誰かこれやりませんかと積読リストを公開したところ、 あいのざさん からリプライ頂いたので読んで感想を通話で話しました。 アイデアの元になったりゅーそうさん、もやし丸さん、そして乗ってきてくださたあいのざさん、ありがとうございます。  # 積読解消会の進め方  読む本を決めて、DMで進捗を報告しながら読み進める(今回は30ページほどの本だったが、環境構築など、手を動かす必要があった) 報告はこんな感じ: 今日は15ページまで進めました。環境構築で詰まったところはgistに置きました(gistのリンク) だいたいお互い終了したところで通話する日程を決める こんな感じ: discordで土曜日の14:00-15:00にやる(実際は14:30-16:30になった) (りゅーそうさんのブログには2時間とあったが、初めて話す相手なので1時間とっておいて、後ろは予定を入れず延長可能にしておいた) お話する 終わり  # まとめと感想  goならalpとpprof 本体のソースコードの他に、nginxなどミドルウェアにも詳しくなる必要がある。 最初にISUCONに挑戦しても分からないと思うので、この本のようなチュートリアルはありがたい。得点も10倍になって簡単な修正で一気に点数が上がってとても楽しい 普段ゼロからWebアプリを書くと自分で書いたので勝手が分かるが、ISUCONのように他の人の書いたものだと勝手が分からない。経験値が必要。 ISUCONの典型が知りたい。パフォーマンスチューニングのまずこれを疑え！的な典型集が欲しい。  # 本書を現在(2021/01/16)やると遭遇するトラブルシューティング ## xbuild go-installが動かない  Conohaでは気にしなくてよいです。 vagrantでやる場合、 https://github.com/matsuu/vagrant-isucon を使うとxbuildが失敗する。 goの公式ページに従ってバイナリをwget/curlしてインストールする  ## pprofを実行するときにtauが必要  pprofを入れると、tauがないと言われる 以下のように対応し、go toolから実行する  sudo apt-get install tau go tool pprof localhost:8080 ~/isubata/webapp/go/src/isubata http://localhost:6060/debug/pprof/profile?seconds=60 ## go-sql-driverが使えない  go v1.9で go get go-sql-driver すると、Builder周りのv1.10の機能をつかっているためにgoのビルドが通らない 以下のように、ライブラリ部分でgit checkoutして過去のタグがつけられたcommitに戻ると使えるようになる。  go get github.</description>
     </item>
     
     <item>
       <title>世界一やさしい圏論勉強会 #0 (Open β) を受けた</title>
-      <link>https://www.blog.uta8a.net/posts/2021-01-05-category/</link>
+      <link>https://blog.uta8a.net/posts/2021-01-05-category/</link>
       <pubDate>Tue, 05 Jan 2021 22:12:10 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2021-01-05-category/</guid>
+      <guid>https://blog.uta8a.net/posts/2021-01-05-category/</guid>
       <description>Chatworkの 高瀬 和之さん による 世界一やさしい圏論勉強会 に行ってきました(オンライン) connpassへのリンク を見ると分かるように、授業ではなく対話を通じて理解を深めるスタイルで、実際に単純な例やこれはどうなの？という素朴な疑問に答えていて質問しやすい雰囲気でした。 内容はスライドを見れば分かるので、なるべく素朴な疑問を中心に書いていきます。  # 概要  Scala初心者が米田の補題をScalaで考えてみたのスライドのp.15の途中まで行きました。  ## 軽いまとめ  圏論は、点と矢印に意味を持たせて話を展開する。点: 対象、矢印: 射 と呼ぶ。(有向グラフをイメージするとわかりやすい。) 圏となる条件: 合成射の存在 (これは公理) 合成射の存在から、Hom(A,B)の要素fが一つでも存在するならば、Hom(X,A)の任意の要素aについて、Hom(X,B)のある要素bが存在して、b=f○aとなる。 矢印ではなく集合として扱えるのは大事で、集合の考え方が米田の補題の理解で重要な役割を果たす。  ## 登場した質問たち  Q. A -&amp;gt; Bへ複数やじるしがあってもいいのか？  A. OK。なくてもいい。A-&amp;gt;Bへの矢印の集まりをHom集合と呼び、Hom(A,B)と表現する。矢印がない場合、Hom(A,B)は空集合になる   Q. Hom集合は集合で制限されるのか？  A. 集合以外も考えられて圏を作れるかもしれないが解析は困難になるので、今回は集合とする。locally smallという専門用語が登場した。 自分で調べてみたら、locally smallは圏の大きさを表す言葉で、要はHom集合として集合で制限する場合、圏の種類を局所的に小さいと分類付けているみたいだった(自信なし)   Q. 可換はイメージ的に結合じゃないの？  A. 可換図式という圏論の言葉があって、確かに結合っぽく見えるけど言葉的にはこれは可換です。結合もまた別の概念として圏論の世界に存在する。   Q. ,って意味的にはどうなるの？  A. 日本語の文の区切りと同じ捉えでよい。ただ、順番を入れ替えると意味が変わる例があり、全称量化と存在量化で調べてみよう！   Q. ScalaのFunction1[A,B]がHom(A,B)に対応するの？  A. 正しい。ただ、数学の話とプログラムの世界の話で埋め込めるかどうかは数学的に強い条件なので注意が必要。 自分で考えると、プログラムの世界で表現可能な関数の集合より数学の世界の集合の方がやばい例が作れそうな気がして、広い世界から狭い世界への適用という意味で埋め込みという言葉を使っているのかなと思った(ここでの埋め込みは専門用語っぽい)   Q.</description>
     </item>
     
     <item>
       <title>goでAPIサーバを書いた</title>
-      <link>https://www.blog.uta8a.net/posts/2020-12-20-gowiki/</link>
+      <link>https://blog.uta8a.net/posts/2020-12-20-gowiki/</link>
       <pubDate>Sun, 20 Dec 2020 23:45:05 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2020-12-20-gowiki/</guid>
+      <guid>https://blog.uta8a.net/posts/2020-12-20-gowiki/</guid>
       <description> goで1週間くらいかけてAPIサーバを書きました。go以外にも学ぶことが多かったので学んだことを書きます。 作ったアプリは公開範囲が指定できるwikiみたいなものです。  # 気をつけたこと  以前goでAPIサーバを書いたときはEchoやGormといったライブラリをふんだんに使用したため、何がなにかわからなくなって途中で挫折しました。それから時がたって、goの界隈の方々の記事、特にmercari周辺の方々の記事を読み、goのnet/httpは単体で十分フレームワークなしでいけるという確信を得たので今回以下のようにしばりを決めました。  - できるだけ標準ライブラリでなんとかする (作っていくうちに、DB接続のためpostgresのドライバを、セッション管理のためcrypto/mathの2つだけは使うことにしました)  また、どうしてもAPIを生やす作業は終わりが見えなくなるので、仕様書を書いてみることにしました。今回は OpenAPI を使うことにしました。 まずOpenAPIで一部のAPIを決める → goを書く → フロントを書く(場合によってはOpenAPIに修正を入れる)というサイクルで徐々にAPIの定義書とAPIサーバとフロントを書いていきました。  # 分かったこと ## OpenAPIでAPI定義を先に書くと、フロントエンド部分を高速に実装できる  API定義ってどう書くのかというと、こう書きます  &amp;#39;/groups&amp;#39;: get: responses: &amp;#39;200&amp;#39;: description: &amp;#39;userの入っているgroupを返却する&amp;#39; content: application/json: schema: $ref: &amp;#39;#/components/schemas/UserGroups&amp;#39; example: user_groups: - &amp;#39;public&amp;#39; - &amp;#39;myPrivate&amp;#39; security: - cookieAuth: []  これは /groups というパスに対してgetでリクエストを送ったときのAPIサーバの挙動を決めています。 getなので通常パラメータはなく、responseだけを定義していること、またsecurtyの項目に決めてあるようにcookieがvalidでないとresponseを返さないことを決めています。返却する型はschemaとして別で記述しています。 こういうものを書いておくと、フロントエンドとバックエンドを別々に実装できます。多くのやり取りをjsonで統一しておいたので、フロント側でうけとって書く処理も高速に書くことができました。  ## goに慣れてなくて戸惑ったポイント  TrimLeftの挙動がTrimPrefixのようなものを期待していたので戸惑いました。 http.HandleFuncに/route/を渡すと/route/aもこれにマッチするので/group/:group_nameみたいな可変ルーティングに対応できます。これ知らなくてかなりはまりました。  ## 権限回りは設計が難しい  自分が作ったバグを述べます。コードを書きながら最終段階でつじつまの合わない箇所をたくさん発見して困りました。 グループという概念を実装して、グループに記事が属していることでそのグループの人だけ記事を見られるという仕組みにしました。 バグ1: グループの名前だけチェックしている。 これにより、別グループでもそのグループ名がDBに登録されていれば記事を更新できるので、自分が所属していないグループの記事を荒らすことが可能になります。idをチェックすることで解決しました。 バグ2: グループの名前とidだけチェックしている。 別のグループの名前を指定すると、自分が所属していないグループに無限に記事を送り込むことができます。これも解決しました。 このように、権限回り、閲覧可能範囲回りで大量にヤバが発生したのでQAって大事なんだなあと感じました。  # 終わりに  とりあえず気合でいってベストプラクティスを気にしなければそれなりの速度でwebサービスは作れる。大事なのはリリースしてからバグを取る、脆弱な部分があるかもしれないという不安と戦いながら見切ってリリースして継続的に修正とデプロイを繰り返す心！ まだ怖い部分があるので、デプロイできてないです。直してリリースまで持っていきたい。  </description>
     </item>
     
     <item>
       <title>taskctf2020 writeup</title>
-      <link>https://www.blog.uta8a.net/posts/2020-12-06-taskctf-2020-happy-birthday/</link>
+      <link>https://blog.uta8a.net/posts/2020-12-06-taskctf-2020-happy-birthday/</link>
       <pubDate>Sun, 06 Dec 2020 23:57:56 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2020-12-06-taskctf-2020-happy-birthday/</guid>
+      <guid>https://blog.uta8a.net/posts/2020-12-06-taskctf-2020-happy-birthday/</guid>
       <description>この記事は 広島大学ITエンジニア Advent Calendar 2020 の15日目です。 今回は、12/6に行われた taskctf の writeupを書いていきます。  # taskctf 概要  Taskerさん が誕生日に開いたCTFです。誕生日は12月5日のようですが、諸用により一日遅れでの開催となったようです。去年も開催されていて、Amazon Wish Listにflagをひそませるなど面白い工夫が見られる、クイズ寄りのCTFです。 僕は KasumiSensei として出て終了20分前にようやく全完しました。CTFで全部解けるのはどんなCTFでも楽しいですし、僕は初めてなのかな？とにかくこの成功した感覚を忘れないようにしよう！と思ってwriteupを書きます。 以下、問題をそれぞれ解説します。  # Welcome  taskctf{g00d_luck_h4ve_fun}  # アンケート  taskctf{Th4nk_u_f0r_pl4ying!}  # guess `?v=` ?v=t1zPpBwRbAw 何やら見覚えのあるパラメータな気がするな  vをqueryに含むやつが思い浮かびそうで思い浮かばなかった。こんなときはgoogle inurl: v= でyoutubeがヒットした。 限定公開の動画にたどり着き、その概要欄にFlagがあった。 taskctf{h0w_w4s_it?}  # social hacking  guess `?v=`の動画でパスワードがむにゃむにゃと言っていて、最初聞こえなかったがその後言い直している。onigirtに誕生日をつける。 お誕生日CTFだけど1日遅れているので、onigiri1205 をパスワードとしてzipが開けた。 taskctf{n0t1ce_soci4l_h4ck1ng}  # OSINT 3 友人が奇抜なTシャツを着てきた。 そもそもこれってどこで売られてるんだ......? 調べて教えて欲しい！ フラグの形式: taskctf{ショップ名} 2020-12-06 12:00 追記: 理不尽が過ぎる問題だったので, 画像を1枚追加しました。 ショップ名は漢字とカタカナのみで構成されています。 2020-12-06 15:48 追記: Max Attemptsを増やしました。  これは追加された写真 むずかしくて最初は誰も解けていなかった。ヒントが追加されて答えにたどり着けた。 試したやつ  - taskctf{SUZURI} だめ - taskctf{ヤマニ} だめ - taskctf{グラニフ} だめ - taskctf{ClubT} taskctf{clubt} だめ - taskctf{スクリーン印刷} だめ - taskctf{SHALEMON} だめ  いやこういう手作り感あふれるTシャツはSUZURIやろ！(SUZURIはショップではなくプラットフォームだと思うぞ ヒントが追加されて、Tシャツ 広場で検索すると https://harajukust-parisien.</description>
     </item>
     
     <item>
       <title>ゲームAIプログラミング codingameのTronをやってみる</title>
-      <link>https://www.blog.uta8a.net/posts/2020-12-06-tron/</link>
+      <link>https://blog.uta8a.net/posts/2020-12-06-tron/</link>
       <pubDate>Sun, 06 Dec 2020 17:58:48 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2020-12-06-tron/</guid>
+      <guid>https://blog.uta8a.net/posts/2020-12-06-tron/</guid>
       <description>2020/12/08 修正 codingameのソース全公開は運営から注意を受けることがあるそうなので、部分公開に変更しました。 この記事は、広島大学ITエンジニア Advent Calendar 2020 の8日目です。みんな間に合わせていてえらい。 今回は、ゲームAIプログラミングができるサイト CodinGame にチャレンジしてみました。僕はbfsを実装してヤッター！な初心者なので、お手柔らかにお願いします。  # CodinGameってなに？  CodinGame, 通称「こどげ」はプログラミングでゲームをして遊べるサイトのようです。よく分かっていませんが、今回紹介するゲームAI Botを作って戦わせるタイプの他にも、最適化部門もあるようです。今回は TRON というbotプログラミング部門の入門的な立ち位置のゲームで遊んでいきます。 使える言語は こちらのFAQ にまとまっています。僕はRustを使うので、  Rust: 1.38.0 Includes chrono 0.4.9, itertools 0.8.0, libc 0.2.62, rand 0.7.2, regex 1.3.0, time 0.1.42  今確認して知ったんですが rand crateあるやんけ！線形合同法のコードを引っ張ってきてしまった。  # やってみる  2年ほど前にちょっと触った(サンプル動かした程度)ので、アカウントは作っていました。   JOIN ボタンを押すと以下のような画面に行きます。   左上の Wood 2 League が自分がいるリーグです。TRONでは、 Wood 2 -&amp;gt; Wood 1 -&amp;gt; Bronze -&amp;gt; Silver -&amp;gt; Gold -&amp;gt; Legend とリーグが上がっていきます。上のリーグに行くには、各リーグの「ボス」に勝利する必要があります。一ケタ順位をとっても上にいけないな〜と思った、そこのお方！(僕のことです) ボスに勝ちにいきましょう。   画面の詳しい説明は CodinGame はBOT(AIプログラム)でバトルするのが正しい楽しみ方かもしれません を見るとよいです。 基本的には、コードの画面にコードを書いて、PLAY MY CODE を押してテストプレイ、TEST IN ARENAを押して実戦、です。  # ゲームのルール  光をできるだけ長く伸ばす(長い時間生き残る)と勝ちです。壁や、相手の光に当たると消滅してしまい、負けになります。  # とりあえずサンプルを動かす  書いてあるものをそのままテストプレイすると、毎回左に動くのでそのまま壁に激突してTRON人生が終了します。 これではいけません。  # 改良の前に、コードを書くときのフレームを考える  いろいろ書き直したり調べていると、以下のように考えるとよいことに気づきました。   まず、ありうる手として上下右左があります(Possible Move) 次に、例えばいまきた道には引き返せない、壁は無理、といった制約から合法な手が決まります(Legal Move) 最後に、Legal Moveの中から一番よさげな手を選びます(Best Move)  # 最初の改良  まずはLegal Moveを実装して、Best Moveのところではランダムに選んでしまうことにしました。 線形合同法は Linux Programming お気楽 Rust プログラミング超入門 さんのコードを参考にしました。ありがとうございます。 本質的に Best Move を選択するパートは以下になります  let best_move = legal_move[rng.</description>
     </item>
     
     <item>
       <title>[ansible&#43;goss] PCの初期セットアップで学ぶサーバー設定テスト</title>
-      <link>https://www.blog.uta8a.net/posts/2020-11-30-dotfiles/</link>
+      <link>https://blog.uta8a.net/posts/2020-11-30-dotfiles/</link>
       <pubDate>Mon, 30 Nov 2020 18:32:14 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2020-11-30-dotfiles/</guid>
+      <guid>https://blog.uta8a.net/posts/2020-11-30-dotfiles/</guid>
       <description>この記事は 広島大学ITエンジニア Advent Calendar 2020 の1日目です。新しいPCを買ってvimを入れてgitを入れて&amp;hellip;とか、VirtualBoxで新しくVM立ち上げて設定して&amp;hellip;と何度も同じことをしていると自動化したくなります。テストを含めてやってしまいましょう！ [使用技術、キーワード] ansible, goss, Docker, dotfiles, GitHub Actions なにか間違いや感想ありましたら Twitter: @kaito_tateyama か マシュマロ にお願いします。  # 目次  まず、目標、環境、概要、やってみる でざっくりとPCの初期セットアップする流れを見ていきます。 後半は、用語説明、ディレクトリ構成の説明、ansibleについて、gossについて、GitHub Actionsについてを通して、セットアップのために使うツールとしてansible、セットアップの事前に行うテストツールとしてgossとGitHub Actionsを説明します。 そしてその他で細かい話やなぜansibleなのかを述べます。  # 目標  neovimを新PCに入れる作業を自動化する。そのとき、スクリプトがちゃんと動くことを保証するためにGitHub ActionsでCIを回してテストを行う。  # 環境  使用するコードは https://github.com/uta8a/dotfiles で公開しています。 以下の環境で確認しています。(2020/11/30現在)  OS: Ubuntu20.04 ansible: 2.9.6 goss: v0.3.15 Docker: version 19.03.8, build afacb8b7f0 docker-compose: version 1.25.0, build unknown # 概要  以下のような手順でPCの初期セットアップをしていきます。  1. PCを買う - OSを入れる。(Ubuntu 20.</description>
     </item>
     
     <item>
       <title>勉強するぞ！ 2020年9月版</title>
-      <link>https://www.blog.uta8a.net/posts/2020-09-22-cs-learn/</link>
+      <link>https://blog.uta8a.net/posts/2020-09-22-cs-learn/</link>
       <pubDate>Tue, 22 Sep 2020 14:49:24 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2020-09-22-cs-learn/</guid>
+      <guid>https://blog.uta8a.net/posts/2020-09-22-cs-learn/</guid>
       <description> 1年ほど前に友人から「コンピュータサイエンスの勉強は独学でどうやってするのでしょうか？」と質問されたことがあり、またその友人に「1年たってなにか変化ありましたか？」と聞かれたのでいい機会だと思って振り返ることにします。 ここでのコンピュータサイエンスとは、離散数学や物理レイヤ、言語処理も含み、かつインターンや就活で尋ねられるような成果物的な、サイエンスではないものも広く含みます。要は、学生のうちにやっておきたい！と僕が思うこと全般です。(全部を学ぶことはできませんが&amp;hellip;。)  2019年に考えていたこと  こちらのgist に書いてあります。当時の僕は絶対に就職できないし、インターンにもいくことはできないと悩んでいたので非常に追い詰められた文章を書いています。あと東大を退学したというのもまだひきずっているみたいですね。 内容としては、東京大学のWebで公開されているシラバスと、理学部情報科学科の方々のブログを探しに探して構成した「僕が考える最強の独学 for 2A」みたいな感じです。東京大学は2年生の後期から専門課程が始まるのですが、こんな内容やるんだ。広島大学のカリキュラムじゃ絶対に追いつけないぞと目の前が真っ暗になったのを覚えています。  やったこと  結果としてこのカリキュラム通りに進めることはできませんでした。 情報数学 ✅ 暗号技術のすべてはコードがなく読み物として面白いですがもう少し深く知りたくて、Nigel Smart / Cryptography: An Introduction (3rd Edition)を前半読み進めました。結果的に数学って一人でやると楽しいなということを再確認できたのでよかったです。ところどころかいつまんで読んだので、一部は大学のレポートを書くときも役に立ちました。 ⛔ Nigel Smart本があまり進んでいないことです。初等整数論を学ぶために寄り道したので仕方ない。雪江先生の代数もまだ読めてないです。 形式言語 ✅ オートマトンの講義が2年前期にありました。正規表現の裏側のようなものを知って楽しい。 ⛔ たぶんここに入るのでここに入れますが、TaPLチャレンジして爆発したのが悲しい。僕には言語処理系周りを勉強するときの吸収速度が低いみたい。(信じられないほど時間かけてもだめだった)でも、最近プログラム意味論の基礎という本が出たのでそれを読みたいと思います。僕の中では優しい順に 意味論の基礎 → CoPL → TaPL なのかなと思っている。 計算機システム ✅ CTFとArch LinuxなどのいろいろなLinuxを自分のパソコンに入れたらだいたいカバーできた気がします。Arch Wikiを読んでトラブルシューティングの過程で知識を身につけるとよい。 ⛔ OS周り弱いです。自作OS本やります&amp;hellip;blog_osやります&amp;hellip; ハードウェア構成法 ✅ 進捗ないです ⛔ 本が重い。あと理論によっているのでわかったかどうかわからないのがつらい。(独学だと、計測する指標を自分以外に求める必要がある。例えば友人と質問しあってあやふやなところを認識するなど) アルゴリズム ✅ だめですね&amp;hellip; ⛔ 競技プログラミングをしましょう。Library Checker埋める過程で、データ構造のエッセンスを身につけるといいんだろうなと思いつつ時間取れてない。 基礎実験 ✅ アセンブリとCはいける。Schemeは少しやっただけなので微妙 ⛔ 処理系の実装をしたいが、レギュレーションがわかってない(どこまで行ったら、の目安) その他 Webサービス周り インターンに通らないことには自信のなさを打開できないと考えて、この一年は、学生の勉強を「研究」と「開発」と分けるなら開発に振っていました。 触った技術を雑に挙げると、Rust(Actix-web, wasm), golang(gRPC), クラウド(AWS, terraform), TypeScript(React, Vue, tailwindcss, styled-components), インフラ(ネットワークの勉強, VPSでセキュリティ周りを担保する方法の調査, Docker, rootless dockerの調査) みたいな感じです。思ったよりしょぼくて悲しい。  これからやりたいこと  少し余裕が出てきたので、Twitterから離れて自分の時間を大切にしたいです。ひとりで考えて、周りに感情を左右されずに淡々とこなす場面にきているのだと思うので。 🌟 本を読み切る。 今まで買った本、Boothで買った技術書典の積み残し、Kindle、達人出版、ラムダノートの本を一冊ずつ読み切りたい。めちゃくちゃ積んでしまっている。実践Rustプログラミング入門を読み切ってみて、やはり一冊読むとインデックスが完全に頭の中にできて、内容を忘れてもすぐに引けるのがいいと感じた。それに、一冊読み切ったというのは案外大きな自信になる。 🌟 中規模のソースコードを書く Webはなんだか今は飽きが来ていて、低レイヤは勉強段階なので、なにか新しい分野で中規模のソースコードを書きたい。今まで軽いサンプルとか、軽いソルバとかしか書いてこなかったので、エラー処理やファイル分割といった設計の初歩すらできない。これはまずい。 題材としては、インフラ周りのツールか、GUIソフトウェアあたりが新鮮でよさそうと思っている。 🌟 競技に出る余裕を身につける やはりCTFも競技プログラミングも自分の力を飛躍的に押し上げてくれるのは間違いない。でも競技なのでメンタルにも影響がでるし、簡単なのばかり解くところに落ち着いてしまうとつらくなる。周りを気にせず、CTFなら問題ファイル一式が残っているものでwriteupも出回っているものをじっくり時間をかけてなるべくすべて攻略する方式がよいと思ってきた。なので、競技にはあまり出ずに時間をかけて取り組む方針がよさそう。いずれは競技に出てメンタル影響受けても大丈夫な余裕を持ちたい。  終わりに  去年考えていたことは今でも正しいと思っているので特に勉強する題材に変わりはない。でも、もう少しこれからはCS寄り、開発から離れたところを意識したいと思います。  </description>
     </item>
     
     <item>
       <title>実践Rustプログラミング入門を読みました</title>
-      <link>https://www.blog.uta8a.net/posts/2020-09-21-jissen-rust/</link>
+      <link>https://blog.uta8a.net/posts/2020-09-21-jissen-rust/</link>
       <pubDate>Mon, 21 Sep 2020 11:50:39 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2020-09-21-jissen-rust/</guid>
+      <guid>https://blog.uta8a.net/posts/2020-09-21-jissen-rust/</guid>
       <description>実践Rustプログラミング入門 を読んだので感想を書きます。 サポートページ からソースコードをダウンロードしたり、正誤表を確認できます。  全体を通しての感想  技術書は今しか読めない部分(サポートがあるとはいえ、徐々に古くなってしまう)と後で読んでも嬉しい部分があると思います。Rustを昔少し触ってThe Rust Programming Bookを途中で投げ出してしまったレベル感の自分には、とてもちょうどよく最近の情報がまとめられていて、読んでよかったと思いました。 そのような、最近のRustの様々なTopicを一望できる本だからこそ、今読むべき要素が強く、時間が立つ前に読むべきだとも思います。今読みましょう。 個人的に、4章でコマンドラインツールを作るところでエラー処理を丁寧に紹介してあるのがよかったです。6章のWasmは一度少しやったことのある人にとっては物足りない気がしました。7章のGUIは僕が手を出しづらいと感じていた分野という理由もありますが一番勉強になりました。 実践が見れて、Rustでこういうことができるんだ！とイメージが広がったのがよかったです。ありがとうございます。  今後  Web周りはWasm, Actix-webともに触ったことがあるので別のことがしたいです。 僕は中規模のソフトウェアをRustで作りたいという気持ちがあります。しかし一方でエラーハンドリングやファイル分割、設計がよくわからず手が出せないことも多く諦めていました。今回の本の4章でエラーハンドリングなど、だんだん組み立てていく感覚を得たので、その感覚をもとに7章のGUIで使われていたicedを用いてアプリケーションを作ってみたいです。 組み込みの章は飛ばしてしまったので、秋月電子で部品を買ってみます。  ただの感想 1章 Rustの紹介  コラム「機械語とはなにか」で触れられている 55 8B EC 81 とは何を指すのでしょう？ちらっと例えばで出てくるのでこれは知っている人にしかわからないネタなのかと思って調べましたが、わかりませんでした。  2章 環境構築  ここはRust周りの環境を整えたいとき(OSを新しくインストールし直したときなど)に読むとよさそうです。 rlsが賢くてびっくりしたのですが、rust-analyzerに移っていくとのことで、今後が気になります。  3章 文法やツール  The Rust Programming Language を少し読んだことがあったのですいすい読めました。 Traitやiteratorなど、いままで僕の中で曖昧に覚えていた概念がわかりやすい言葉で説明されていたので、しっくり納得しました。 新しく知ったこと  for, loop, whileにラベルをつけられる macroなので、vec![]だけでなくvec!()という表記も可能    4章 RPN電卓  エラーライブラリについて触れられていたのがよかった。個人的にはthiserrorのほうがエラーとそのメッセージをまとめて管理できそうなので好み。 Rust BlogのAnnouncing the Error Handling Project Groupによると、これらエラーライブラリの整理が入りそう？な気がするので今後の動向に注目 実行パスへのインストールが楽なこと知らなかった。RustでCLI toolを気軽にかけるのは覚えておこう。  5章 Actix-web  Actix-webのexampleを試したことがあったのですいすい読めた。 Dockerに触れられているのが嬉しくて、実際ビルド周りのテクニックは知らなかったので勉強になりました。 musl+MySQLを試して失敗したことがあるので、muslに詳しくなりたいです。  6章 Wasm  これはほぼ似たようなことをしたことがあるのでコードを読むまでにとどめました。 ただ、後半のwasmが優位なのは計算量が大きいタスクのときという話は面白くて、実際webで計算量が大きいタスクって何があるだろうと思ったのですが思い浮かびませんでした。もしかして、ブラウザで走る競技プログラミング向けのSandboxとかがあると面白いのかな  7章 GUI  ここが一番おもしろかったです。 icedは以前友人から聞いて気になっていましたが、Elmの思想など学習コストが高そうだなと感じていたのですが、Vue.</description>
     </item>
     
     <item>
       <title>InterKosenCTF 2020 writeup &amp; 後追い</title>
-      <link>https://www.blog.uta8a.net/posts/2020-09-07-interkosenctf2020/</link>
+      <link>https://blog.uta8a.net/posts/2020-09-07-interkosenctf2020/</link>
       <pubDate>Sun, 06 Sep 2020 16:30:26 -0700</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2020-09-07-interkosenctf2020/</guid>
+      <guid>https://blog.uta8a.net/posts/2020-09-07-interkosenctf2020/</guid>
       <description>note まずは解いたやつを書いておく。
 目次 Welcome
 Survey
@@ -128,10 +128,10 @@ KosenCTF{w4s_th1s_ch4ll3ng3_h4rd_4_u?} matsushima2 Do you like poker? I like bla
     
     <item>
       <title>技育祭2020参加記</title>
-      <link>https://www.blog.uta8a.net/posts/2020-07-05-geeksai/</link>
+      <link>https://blog.uta8a.net/posts/2020-07-05-geeksai/</link>
       <pubDate>Sun, 05 Jul 2020 19:18:36 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2020-07-05-geeksai/</guid>
+      <guid>https://blog.uta8a.net/posts/2020-07-05-geeksai/</guid>
       <description>Day1 11:10-12:10 RoomC 青山さん「オープンな技術力の伸ばし方と「私がKubernetesに惹かれている理由」」 はじめはRoomAをみていたのですが、Twitterで #技育祭 を追っていたら技術よりの話をしていそうだったので聞きに行きました。
 自分なりにまとめると、コミュニティやOSSに貢献することに対する意味についての話でした。
 OSSへの貢献の仕方はCodeとNon-codeの2種類があり、Non-codeとしてのドキュメントやブログでの発信、ベストプラクティスの共有も大切。Codeでの貢献はとくに、アップストリームへの貢献を積極的にしていくべきであること、CLA(Contribution Lisence Agreement), CI/CD, review体制, Issue PR ProposalなどそのOSSの決まりごとに従う。次のContributorのためにドキュメントを整備するのもよい。
@@ -164,10 +164,10 @@ Day2 11:10-12:10 RoomD 松本さん「テックカンパニーって結局なん
     
     <item>
       <title>ICTSC 2019 一次予選 コンテナが作れない 復習</title>
-      <link>https://www.blog.uta8a.net/posts/2020-05-04-ictsc-container/</link>
+      <link>https://blog.uta8a.net/posts/2020-05-04-ictsc-container/</link>
       <pubDate>Sun, 03 May 2020 23:42:39 +0000</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2020-05-04-ictsc-container/</guid>
+      <guid>https://blog.uta8a.net/posts/2020-05-04-ictsc-container/</guid>
       <description>復習する問題は コンテナがつくれない です。
 目標 本質的に、Dockerfileの修正が求められているので、以下のような問題を作りました。
  問題 https://github.com/uta8a/ictsc/tree/master/repo-2019-pre-1/container-1 Dockerfileを変更して、ホストPCからhttp://192.168.33.10/indexにアクセスしてテーブルが以下のように表示されればOK  環境  ブラウザ: Chrome - nginx/index.htmlでhtml templateを使っています VirtualBox Vagrant - Ubuntu18.04を動かして、その上でDockerなどを動かしています  遊び方 ホストからUbuntu18.04環境に入る まず、git clone https://github.com/uta8a/ictscで問題リポジトリを持ってきます。
@@ -182,10 +182,10 @@ sudo docker-compose build sudo docker-compose up -d sudo docker-compose exec bac
     
     <item>
       <title>AtCoder ドワンゴからの挑戦状 予選</title>
-      <link>https://www.blog.uta8a.net/posts/2020-01-12-atcoder-dwango-6/</link>
+      <link>https://blog.uta8a.net/posts/2020-01-12-atcoder-dwango-6/</link>
       <pubDate>Sun, 12 Jan 2020 08:33:49 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2020-01-12-atcoder-dwango-6/</guid>
+      <guid>https://blog.uta8a.net/posts/2020-01-12-atcoder-dwango-6/</guid>
       <description>B問題のみ書きます。
 ドワンゴからの挑戦状 予選 B Fusing Slimes 問題
 スライムが規則に従い左から右に流れるので、スライムが移動した距離の期待値に$(N-1)!$を掛けたものを求めよ。
@@ -208,10 +208,10 @@ ModIntほしい。あとModInvもほしい。</description>
     
     <item>
       <title>Codeforces Hello 2020 Writeup</title>
-      <link>https://www.blog.uta8a.net/posts/2020-01-12-codeforces-hello-2020/</link>
+      <link>https://blog.uta8a.net/posts/2020-01-12-codeforces-hello-2020/</link>
       <pubDate>Sun, 12 Jan 2020 06:44:01 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2020-01-12-codeforces-hello-2020/</guid>
+      <guid>https://blog.uta8a.net/posts/2020-01-12-codeforces-hello-2020/</guid>
       <description>C問題についてのみ書きます。
 Hello 2020 C New Year and Permutation 問題
 順列$p_1, p_2, &amp;hellip;, p_n$が与えられる。このとき、部分列$[l,r]$であって$max(p_l,..,p_r) - min(p_l,..,p_r) = r - l$が成り立つものをframed segmentと呼ぶことにする。すべての長さ$N$の順列に対して、framed segmentの数を数え上げてその和を素数$M$で割った値を求めよ。
@@ -234,10 +234,10 @@ https://codeforces.com/contest/1284/submission/68567949
     
     <item>
       <title>競プロ用ライブラリuta8alibの環境構築</title>
-      <link>https://www.blog.uta8a.net/posts/2020-01-10-procon-lib-env/</link>
+      <link>https://blog.uta8a.net/posts/2020-01-10-procon-lib-env/</link>
       <pubDate>Fri, 10 Jan 2020 08:13:00 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2020-01-10-procon-lib-env/</guid>
+      <guid>https://blog.uta8a.net/posts/2020-01-10-procon-lib-env/</guid>
       <description>uta8alibという競技プログラミング用ライブラリの環境構築について書きます。
 今回環境を作るに当たって、ngtkanaさんのngtlibを参考にした部分が大きいです。ありがとうございました。
 やりたいこと  C++とRustで競プロをする example/main.rsのように、ファイル名をmain.[rs|cpp|hpp]で統一したい testを行い、CIでcheckする ライブラリのコピペを行いたいので、コードとテストは別ファイルにしたい(特にRust) あとでdocument(html)を生成することを考えて、コメントを各ファイルとテストに書けるようにしておく git submoduleを使ってみる(C++テストフレームワークCatch2の使用)  今後の展望
@@ -249,10 +249,10 @@ testはテストコードです。srcと同様の構成になっています。
     
     <item>
       <title>ContrailCTF Writeup</title>
-      <link>https://www.blog.uta8a.net/posts/2020-01-04-contrailctf/</link>
+      <link>https://blog.uta8a.net/posts/2020-01-04-contrailctf/</link>
       <pubDate>Sat, 04 Jan 2020 01:08:12 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2020-01-04-contrailctf/</guid>
+      <guid>https://blog.uta8a.net/posts/2020-01-04-contrailctf/</guid>
       <description>チームStarrySkyは正の点数を得た78チーム中、2126点を獲得して4位でした。うち僕は504点を獲得しました。
 僕が解いたLets_Connct、Persistence、alice&amp;rsquo;s passwordについてのWriteupです。
 Lets_Connct[misc] ncでつなぐよう指示があるのでつなぎ、flagの中身を見ます。
@@ -266,10 +266,10 @@ bash-4.4$ exec 3&amp;lt;&amp;gt;/dev/tcp/172.</description>
     
     <item>
       <title>開発環境メモ: VSCodeでローカルの仮想環境にRemote SSH</title>
-      <link>https://www.blog.uta8a.net/posts/2019-12-20-vscode-remote-ssh-dev/</link>
+      <link>https://blog.uta8a.net/posts/2019-12-20-vscode-remote-ssh-dev/</link>
       <pubDate>Fri, 20 Dec 2019 12:04:56 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2019-12-20-vscode-remote-ssh-dev/</guid>
+      <guid>https://blog.uta8a.net/posts/2019-12-20-vscode-remote-ssh-dev/</guid>
       <description>この記事は 広島大学ITエンジニアアドベントカレンダー の9日目です。
 私は大学にWindows機とLinux(Ubuntu)機の2台のlaptopを持っていっています。空きコマにさあコード書くぞ〜！と思ったときに開くのはいつもUbuntu。Linux機の方が貧弱なスペックなのですが、コード書くまでにかかる時間はWindowsよりLinuxの方が速いのです。(私はWindowsでは仮想環境でUbuntuを立ち上げてその中で開発するのでそれはそう)
 しかしWindowsでも快適に開発したい！というわけで、自分なりに快適だと思った環境をメモしておきます。 Remote Development using SSHを見ると詳しくちゃんとしたことが書いてあるので、こちらも参考にしてください。
@@ -296,10 +296,10 @@ sandboxを選択したときに出現する、右のアイコンをクリック�
     
     <item>
       <title>waka-boxを使ってみる 広島大学ITエンジニアアドベントカレンダー</title>
-      <link>https://www.blog.uta8a.net/posts/2019-12-02-wakatime-starting/</link>
+      <link>https://blog.uta8a.net/posts/2019-12-02-wakatime-starting/</link>
       <pubDate>Mon, 02 Dec 2019 04:38:30 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2019-12-02-wakatime-starting/</guid>
+      <guid>https://blog.uta8a.net/posts/2019-12-02-wakatime-starting/</guid>
       <description>この記事は 広島大学ITエンジニアアドベントカレンダー の4日目です。
 僕はOSS界隈で活躍している人のGitHubを見るのが好きです。contributionの数も、有名なOSSへ送ったissueやpull requestの数も僕とは桁違いで、こうなれたらなあと思います。また、そういった方々は中規模のプロジェクトを作っていることが多いので、プロジェクトのディレクトリ構成とか、どのツールを使っているのか？といった状況を学べます。また、コードを書いて生活する人にとって、GitHubは仕事場のひとつのようなものだと思います。その人の仕事場へのこだわりのようなものをpinnedやprofile, 所属団体から感じるのは楽しいことで、眺めるだけで時間があっという間に過ぎていきます。
 さて、そんな感じでフロントエンド周りの方々を調べていると (egoistさん) のpinnedに不思議なものを見つけました。
@@ -324,10 +324,10 @@ Actionが動かない！ 2019/12/20時点では、waka-boxをcloneした後に�
     
     <item>
       <title>SECCON CTF 2019 qual Writeup</title>
-      <link>https://www.blog.uta8a.net/posts/2019-10-20-seccon2019qual/</link>
+      <link>https://blog.uta8a.net/posts/2019-10-20-seccon2019qual/</link>
       <pubDate>Sun, 20 Oct 2019 15:32:17 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2019-10-20-seccon2019qual/</guid>
+      <guid>https://blog.uta8a.net/posts/2019-10-20-seccon2019qual/</guid>
       <description>2019/10/19(土)15:00-2019/10/20(日)15:00まで開催されていた、SECCON CTF 2019 qualにチームStarrySkyで参加していました。今回はmitsuさんが基本情報を受けるのでお休みで、一人チームでの参加となりました。
 結果はWelcome, Thank you for playing!, coffee_break, Sandstorm, ZKPayの5問を解いて743ポイントを獲得し102位(正の得点を取った人数は799人)でした。以下、解いたもののWriteupを書きます。
 Welcome Welcome to the SECCON CTF. Read rules and check the IRC topic. IRCに行くとflagが書かれています。
@@ -339,10 +339,10 @@ coffee_break The program &amp;quot;encrypt.py&amp;quot; gets one string argument
     
     <item>
       <title>セキュリティ・ミニキャンプ in 山梨 2019 専門講座 参加記</title>
-      <link>https://www.blog.uta8a.net/posts/2019-10-07-yamanashi-minicamp/</link>
+      <link>https://blog.uta8a.net/posts/2019-10-07-yamanashi-minicamp/</link>
       <pubDate>Mon, 07 Oct 2019 03:27:50 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2019-10-07-yamanashi-minicamp/</guid>
+      <guid>https://blog.uta8a.net/posts/2019-10-07-yamanashi-minicamp/</guid>
       <description>2019/9/29(日)に開催された、セキュリティ・ミニキャンプ in 山梨 2019 専門講座 に参加してきました。これから、応募するまでの流れと選考課題に対する僕なりの回答、参加して僕がどう変化したのかという話を書きます。技術的な内容は薄く、気持ちの話がメインになります。
 以下の結論が言いたいことで、後は自分の備忘録みたいなものです。
 結論: 22歳未満の方はセキュリティ・キャンプ全国へ、25歳以下の方はセキュリティ・ミニキャンプ地方へ行きましょう。
@@ -381,10 +381,10 @@ UEFIの方はかなり時間を費やして苦戦しました。低レイヤ特�
     
     <item>
       <title>LTに向けた資料たち</title>
-      <link>https://www.blog.uta8a.net/posts/2019-08-25-lt/</link>
+      <link>https://blog.uta8a.net/posts/2019-08-25-lt/</link>
       <pubDate>Sun, 25 Aug 2019 21:51:45 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2019-08-25-lt/</guid>
+      <guid>https://blog.uta8a.net/posts/2019-08-25-lt/</guid>
       <description>そろそろブログの整理をしないといけない
 今回は、PowerPointでいい感じのスライドを作ろうとしたお話
 デザイン デザイン能力がないので、シンプルでいい感じのテンプレートを探した -&amp;gt; AZUSA COLORS
@@ -400,10 +400,10 @@ AZUSA COLORS 改
     
     <item>
       <title>木の作り方</title>
-      <link>https://www.blog.uta8a.net/posts/2019-08-19-tree-creation/</link>
+      <link>https://blog.uta8a.net/posts/2019-08-19-tree-creation/</link>
       <pubDate>Mon, 19 Aug 2019 17:44:24 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2019-08-19-tree-creation/</guid>
+      <guid>https://blog.uta8a.net/posts/2019-08-19-tree-creation/</guid>
       <description>ABC138D Kiを本番で嘘解法で通してしまった(after_contestで気づいた)ので、ACコードと自分のコードにランダムにケースを入れてHackケースを探そう！と思いました。このとき、木のテストケースの作り方が分からなかったのでTwitterで教えてもらいました。以下、それらをまとめておきます。意見をくださった方、ありがとうございます。
 便利なツール グラフの可視化にはGRAPH×GRAPH が便利です。
 木を順に構成する Python3で書きました。
@@ -413,10 +413,10 @@ import itertools, random N = 11 R = 10 l = list(range(1,N)) h = list(itertools.p
     
     <item>
       <title>InterKosenCTF 2019 Writeup</title>
-      <link>https://www.blog.uta8a.net/posts/2019-08-13-interkosenctf2019/</link>
+      <link>https://blog.uta8a.net/posts/2019-08-13-interkosenctf2019/</link>
       <pubDate>Tue, 13 Aug 2019 07:12:48 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2019-08-13-interkosenctf2019/</guid>
+      <guid>https://blog.uta8a.net/posts/2019-08-13-interkosenctf2019/</guid>
       <description>InterKosenCTF2019にmitsuさんと二人で、チーム StarrySky として参加しました。成績はチームで13位/91人が正の得点、個人では12位でした。得点は、4332ptsのうち2944ptsを入れました。 勝手にライバルだと思っている おたまこうせん, Wani Hackase, 生活習慣崩壊ズ, Contrailには完敗です。今回Contrail強かったですね&amp;hellip; PwnとWebが課題ですね safermとE-Sequel-Injectionが通せたのは嬉しかったです うごくペンギンさんかわいいです
 Writeup Welcome [200pts, 77solved, warmup, welcome] Slackでflagがアナウンスされました KosenCTF{g3t_r34dy_f0r_InterKosenCTF_2019}
 Kurukuru Shuffle [200pts, 53solved, easy, crypto] shuffle.pyを見ると、ランダムに0からL-1の数字を3つ作り、それをもとにしてflagの2つの文字のswapをL回繰り返しています。ランダムが出てきたときは、全探索するか、ランダムな数値をいっぱいとってきて次が予測できないか、結果からのエスパーのどれかを考えるとよさそうなので、全探索を考えます。 L=53とsecret.pyから分かるので、$O(L^3)$をしても大丈夫です。a, b,kの値を全探索していきましょう。 また、iの値はk-&amp;gt;2k-&amp;gt;3k-&amp;gt;...-&amp;gt;(L+1)k(mod L)と変化し、最後の(L+1)kは使われないので、Lkからこれを逆順にたどればよいと分かります。
@@ -425,10 +425,10 @@ for k in range(1,L): for a in range(0,L): for b in range(0,L): e = list(&amp;quo
     
     <item>
       <title>My First Post</title>
-      <link>https://www.blog.uta8a.net/posts/2019-08-14-test/my-first-post/</link>
+      <link>https://blog.uta8a.net/posts/2019-08-14-test/my-first-post/</link>
       <pubDate>Tue, 13 Aug 2019 06:46:09 +0900</pubDate>
       
-      <guid>https://www.blog.uta8a.net/posts/2019-08-14-test/my-first-post/</guid>
+      <guid>https://blog.uta8a.net/posts/2019-08-14-test/my-first-post/</guid>
       <description>post
 $$ O(N^3) $$
 $1+1=2$</description>

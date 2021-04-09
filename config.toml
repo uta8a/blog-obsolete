@@ -1,4 +1,4 @@
-baseURL = "https://www.blog.uta8a.net"
+baseURL = "https://blog.uta8a.net"
 languageCode = "ja"
 title = "diaryです"
 [params]

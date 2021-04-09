@@ -16,3 +16,8 @@
 - `cp -r public/* docs/`  
 - CNAMEを忘れずに
 - TOCははじめに対象を書いて、HTMLを見てそのidがXXXなら`[title](#XXX)`とすればOK
+
+```
+NODE_ENV=production hugo
+rm -rf docs && mv public docs
+```

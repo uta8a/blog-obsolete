@@ -19,5 +19,6 @@
 
 ```
 NODE_ENV=production hugo
+cp -r public/* docs
 rm -rf docs && mv public docs
 ```
